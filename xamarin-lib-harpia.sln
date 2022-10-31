@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xamarin-lib-harpia.Android", "xamarin-lib-harpia.Android\xamarin-lib-harpia.Android.csproj", "{FBE992EE-13BE-4A1A-BE6B-8C1D878F1D91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xamarin-lib-harpia", "xamarin-lib-harpia\xamarin-lib-harpia.csproj", "{A2D375CC-0D84-4514-98E7-C6063900C021}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBE992EE-13BE-4A1A-BE6B-8C1D878F1D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE992EE-13BE-4A1A-BE6B-8C1D878F1D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE992EE-13BE-4A1A-BE6B-8C1D878F1D91}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FBE992EE-13BE-4A1A-BE6B-8C1D878F1D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE992EE-13BE-4A1A-BE6B-8C1D878F1D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE992EE-13BE-4A1A-BE6B-8C1D878F1D91}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A2D375CC-0D84-4514-98E7-C6063900C021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D375CC-0D84-4514-98E7-C6063900C021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D375CC-0D84-4514-98E7-C6063900C021}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A2D375CC-0D84-4514-98E7-C6063900C021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D375CC-0D84-4514-98E7-C6063900C021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2D375CC-0D84-4514-98E7-C6063900C021}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1184701-1FAC-4286-AB52-CACBF7BA0A3E}
+	EndGlobalSection
+EndGlobal
