@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="xamarin_lib_harpia.BarcodePage">
+    <ContentPage.Content>
+        
+        <FlexLayout 
+            BackgroundColor="#181A26" 
+            Direction="Column"
+            JustifyContent="SpaceBetween"
+        >
+            <StackLayout Padding="16" Orientation="Horizontal" >
+                <ImageButton Source="back.png" BackgroundColor="#181A26" />
+                <StackLayout Orientation="Vertical">
+                    <Label Text="BarCode" TextColor="#FFF" FontSize="Large" FontAttributes="Bold"/>
+                    <Label Text="Sem impressora" TextColor="#FFF" Opacity=".5"/>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" FlexLayout.Grow="2">
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+                <FlexLayout 
+                    AlignContent="Center" 
+                    Padding="16" 
+                    JustifyContent="SpaceBetween"
+                >
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="OnBarcodeChange"
+                        />
+                    </FlexLayout.GestureRecognizers>
+                        
+                    <Label Text="BarCode" TextColor="#FFF"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="BarcodeLabel" TextColor="#FFFFFF" Opacity=".5"/>
+                        <Image 
+                            WidthRequest="20" 
+                            RotationY="180"
+                            Source="back.png" 
+                            BackgroundColor="#181A26" 
+                        />
+                    </StackLayout>
+                </FlexLayout>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+                <FlexLayout 
+                    AlignContent="Center" 
+                    Padding="16" 
+                    JustifyContent="SpaceBetween"
+                >
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="OnModelChange"
+                        />
+                    </FlexLayout.GestureRecognizers>
+                    <Label x:Name="Model" Text="Modelo de BarCode" TextColor="#FFF"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="ModelLabel" TextColor="#FFFFFF" Opacity=".5"/>
+                        <Image 
+                            WidthRequest="20" 
+                            RotationY="180"
+                            Source="back.png" 
+                            BackgroundColor="#181A26" 
+                        />
+                    </StackLayout>
+                </FlexLayout>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+                <FlexLayout 
+                    AlignContent="Center" 
+                    Padding="16" 
+                    JustifyContent="SpaceBetween"
+                >
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="OnHRIChange"
+                        />
+                    </FlexLayout.GestureRecognizers>
+                    <Label Text="HRI posição" TextColor="#FFF"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="HRILabel" TextColor="#FFFFFF" Opacity=".5"/>
+                        <Image
+                            WidthRequest="20" 
+                            RotationY="180"
+                            Source="back.png" 
+                            BackgroundColor="#181A26" 
+                        />
+                    </StackLayout>
+                </FlexLayout>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+                <StackLayout Padding="16">
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <Label Text="Altura" TextColor="#FFF"/>
+                        <Label 
+                            x:Name="HeightLabel" 
+                            Text="1" 
+                            TextColor="#FFFFFF" 
+                            Opacity=".5"
+                        />
+                    </FlexLayout>
+                    <Slider 
+                        ThumbColor="#E6e6e6"
+                        Maximum="255"
+                        Minimum="1" 
+                        Value="1"
+                        ValueChanged="OnHeightChange"
+                    />
+                </StackLayout>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+                <StackLayout Padding="16">
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <Label Text="Largura" TextColor="#FFF"/>
+                        <Label x:Name="WidthLabel" Text="2" TextColor="#FFFFFF" Opacity=".5"/>
+                    </FlexLayout>
+                    <Slider 
+                        ThumbColor="#E6e6e6"
+                        Maximum="5"
+                        Minimum="2"
+                        Value="2"
+                        ValueChanged="OnWidthChange"
+                    />
+                </StackLayout>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+                <FlexLayout 
+                    AlignContent="Center" 
+                    Padding="16" 
+                    JustifyContent="SpaceBetween"
+                >
+                    <Label Text="Cortar Papel" TextColor="#FFF"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Switch ThumbColor="#E6e6e6" OnColor="#969696" />
+                    </StackLayout>
+                </FlexLayout>
+            </StackLayout>
+
+            <Image Source="" FlexLayout.Grow="1"/>
+
+            <Button 
+                Text="Imprimir" 
+                TextColor="#FFF" 
+                FontAttributes="Bold" 
+                BackgroundColor="#F00"
+            />
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>
