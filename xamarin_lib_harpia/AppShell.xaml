@@ -16,5 +16,15 @@
             <ShellContent Title="Printer Info"
                           ContentTemplate="{DataTemplate views:PrinterInfoPage}"/>
         </Tab>
+
+        <ShellContent Title="Barcode"
+                      ContentTemplate="{DataTemplate views:BarcodePage}" />
+
+        <ShellContent Title="QRCode"
+                      ContentTemplate="{DataTemplate views:QrcodePage}" />
+
+        <ShellContent Title="Text"
+                      ContentTemplate="{DataTemplate views:TextPage}" />
+
     </TabBar>
 </Shell>
