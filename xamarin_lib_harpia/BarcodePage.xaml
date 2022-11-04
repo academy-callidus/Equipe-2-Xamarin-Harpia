@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxingcommon="clr-namespace:ZXing.Common;assembly=zxing"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              x:Class="xamarin_lib_harpia.BarcodePage">
     <ContentPage.Content>
         
@@ -155,12 +157,32 @@
                 </FlexLayout>
             </StackLayout>
 
-            <Image Source="" FlexLayout.Grow="1"/>
+            <FlexLayout FlexLayout.Grow="1" AlignContent="Center" JustifyContent="Center">
+                <zxing:ZXingBarcodeImageView
+                    x:Name="BarcodeImageView"
+                    BarcodeValue="Exeaamplo"
+                    HorizontalOptions="FillAndExpand"  
+                    VerticalOptions="FillAndExpand" 
+                    BarcodeFormat="CODE_93"
+                    HeightRequest="200"
+                    WidthRequest="200"
+                    FlexLayout.Grow="1"
+                >
+                    <zxing:ZXingBarcodeImageView.BarcodeOptions>
+                        <zxingcommon:EncodingOptions 
+                            Height="200"
+                            Width="200"
+                            PureBarcode="True"
+                        />
+                    </zxing:ZXingBarcodeImageView.BarcodeOptions>
+                </zxing:ZXingBarcodeImageView>
+            </FlexLayout>
 
             <Button 
                 Text="Imprimir" 
                 TextColor="#FFF" 
                 FontAttributes="Bold" 
+                Clicked="OnPrint"
                 BackgroundColor="#F00"
             />
         </FlexLayout>

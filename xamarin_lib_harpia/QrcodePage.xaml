@@ -193,7 +193,7 @@
 
             <Button 
                 Text="Imprimir" 
-                TextColor="#FFF" 
+                TextColor="#FFF"
                 FontAttributes="Bold" 
                 BackgroundColor="#F00"
             />
