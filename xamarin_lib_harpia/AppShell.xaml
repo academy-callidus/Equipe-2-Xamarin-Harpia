@@ -4,8 +4,9 @@
        xmlns:views="clr-namespace:xamarin_lib_harpia.Views"
        x:Class="xamarin_lib_harpia.AppShell"
        Shell.TabBarIsVisible="False"
-       BackgroundColor="{StaticResource backgroundColor}">
-    
+       Shell.BackgroundColor="{StaticResource backgroundColor}"
+       Shell.ForegroundColor="{StaticResource foregroundColor}">
+
     <TabBar>
         <ShellContent Title="Main"
                       ContentTemplate="{DataTemplate views:HomePage}" />
@@ -15,5 +16,15 @@
             <ShellContent Title="Printer Info"
                           ContentTemplate="{DataTemplate views:PrinterInfoPage}"/>
         </Tab>
+
+        <ShellContent Title="Barcode"
+                      ContentTemplate="{DataTemplate views:BarcodePage}" />
+
+        <ShellContent Title="QRCode"
+                      ContentTemplate="{DataTemplate views:QrcodePage}" />
+
+        <ShellContent Title="Text"
+                      ContentTemplate="{DataTemplate views:TextPage}" />
+
     </TabBar>
 </Shell>

@@ -1,60 +1,128 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:xamarin_lib_harpia.ViewModels"
              x:Class="xamarin_lib_harpia.Views.PrinterInfoPage"
              Title="Informação da impressora">
 
     <Shell.TitleView>
         <StackLayout Spacing="0">
             <Label x:Name="NavTitle"
-                   Text="Title"
-                   FontSize="20"
+                   FontAttributes="Bold"
+                   FontSize="Large"
                    VerticalOptions="FillAndExpand"
                    VerticalTextAlignment="End"/>
             <Label x:Name="NavSubtitle"
-                   Text="Subtitle"
+                   FontSize="Small"
                    VerticalOptions="End"
                    VerticalTextAlignment="Start"/>
         </StackLayout>
     </Shell.TitleView>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Grid RowDefinitions="54,54,54,54,54,54,54,54,54"
+        <FlexLayout Direction="Column"
+                    JustifyContent="SpaceBetween"
+                    BackgroundColor="{StaticResource backgroundColor}">
+            <FlexLayout.BindingContext>
+                <local:InfoViewModel/>
+            </FlexLayout.BindingContext>
+            <Grid RowDefinitions="54,54,54,54,54,54,0.5,54,54,0.5,54"
                   ColumnDefinitions="auto,*"
-                  BindingContext="printerInfo">
-                <Label Grid.Row="0" Text="Número de série"/>
-                <Label Grid.Row="0" Grid.Column="1" Text="{Binding serialNo}"/>
-            
-                <Label Grid.Row="1" Text="Modelo da impressora"/>            
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding printerInfo.deviceModel}"/>
+                  Padding="8,0">
+                <Label Grid.Row="0"
+                       Text="Número de série"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Text="{Binding PrinterInfo.serialNo}"
+                       VerticalOptions="CenterAndExpand"/>
 
-                <Label Grid.Row="2" Text="Cabeça de impressão"/>
-                <Label Grid.Row="2" Grid.Column="1" Text="{Binding printerInfo.head}"/>
-            
-                <Label Grid.Row="3" Text="Versão do firmware"/>
-                <Label Grid.Row="3" Grid.Column="1" Text="{Binding printerInfo.firmwareVersion}"/>
-            
-                <Label Grid.Row="4" Text="Tamanho da impressão"/>
-                <Label Grid.Row="4" Grid.Column="1" Text="{Binding printerInfo.paper}"/>
-            
-                <Label Grid.Row="5" Text="Distância impressa"/>
-                <Label Grid.Row="5" Grid.Column="1" Text="{Binding printerInfo.printedDistance}"/>
+                <Label Grid.Row="1" 
+                       Text="Modelo da impressora"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Grid.Row="1" 
+                       Grid.Column="1" 
+                       Text="{Binding PrinterInfo.deviceModel}"
+                       VerticalOptions="CenterAndExpand"/>
+
+                <Label Grid.Row="2" 
+                       Text="Cabeça de impressão"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Grid.Row="2" 
+                       Grid.Column="1" 
+                       Text="{Binding PrinterInfo.head}"
+                       VerticalOptions="CenterAndExpand"/>
+
+                <Label Grid.Row="3" 
+                       Text="Versão do firmware"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Grid.Row="3" 
+                       Grid.Column="1" 
+                       Text="{Binding PrinterInfo.firmwareVersion}"
+                       VerticalOptions="CenterAndExpand"/>
+
+                <Label Grid.Row="4" 
+                       Text="Tamanho da impressão"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Grid.Row="4" 
+                       Grid.Column="1" 
+                       Text="{Binding PrinterInfo.paper}"
+                       VerticalOptions="CenterAndExpand"/>
+
+                <Label Grid.Row="5" 
+                       Text="Distância impressa"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Grid.Row="5" 
+                       Grid.Column="1" 
+                       Text="{Binding PrinterInfo.printedDistance}"
+                       VerticalOptions="CenterAndExpand"/>
+
+                <BoxView Grid.Row="6"
+                         Grid.ColumnSpan="2"
+                         BackgroundColor="{StaticResource foregroundColor}"
+                         Opacity="0.1"/>
+                
+                <Label Grid.Row="7" 
+                       Text="Versão do serviço"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Grid.Row="7" 
+                       Grid.Column="1" 
+                       Text="{Binding PackageInfo.versionName}"
+                       VerticalOptions="CenterAndExpand"/>
+
+
+                <Label Grid.Row="8" 
+                       Text="Versão de desenvolvimento"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Grid.Row="8" 
+                       Grid.Column="1" 
+                       Text="{Binding PackageInfo.versionCode}"
+                       VerticalOptions="CenterAndExpand"/>
+
+                <BoxView Grid.Row="9"
+                         Grid.ColumnSpan="2"
+                         BackgroundColor="{StaticResource foregroundColor}"
+                         Opacity="0.1"/>
+                
+                <Label Grid.Row="10" 
+                       Text="Versão do assistente de impressão"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"/>
+                <Label Grid.Row="10" 
+                       Grid.Column="1"
+                       Text="1.0"
+                       HorizontalOptions="End"
+                       VerticalOptions="CenterAndExpand"/>
             </Grid>
-            <Grid RowDefinitions="54,54"
-                  ColumnDefinitions="auto,*">
-                <Label Grid.Row="0" Text="Versão do serviço"/>
-                <Label Grid.Row="0" Grid.Column="1" Text="{Binding packageInfo.versionName}"/>
-            
-                <Label Grid.Row="1" Text="Versão de desenvolvimento"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding packageInfo.versionCode}"/>
-            </Grid>
-            <Grid RowDefinitions="54"
-                   ColumnDefinitions="auto,*">
-                <Label Grid.Row="8" Text="Versão do assistente de impressão"/>
-                <Label Grid.Row="8" Grid.Column="1" Text="1.0"/>
-            </Grid>
-        </StackLayout>
+        </FlexLayout>
     </ContentPage.Content>
     
 </ContentPage>

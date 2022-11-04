@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 
 
 using xamarin_lib_harpia.Models;
+using xamarin_lib_harpia.ViewModels;
 
 namespace xamarin_lib_harpia.Views
 {
@@ -16,7 +17,6 @@ namespace xamarin_lib_harpia.Views
     {
 
         public string Subtitle { get; }
-        private PrinterInfo printerInfo;
 
         public PrinterInfoPage()
         {
