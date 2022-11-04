@@ -84,13 +84,16 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
+    <AndroidResource Include="Resources\Drawable\setting.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xamarin-lib-harpia\xamarin-lib-harpia.csproj">
-      <Project>{FB7C283B-587F-4DCC-8110-506CC19F01A1}</Project>
-      <Name>xamarin-lib-harpia</Name>
+    <ProjectReference Include="..\xamarin-lib-harpia\xamarin_lib_harpia.csproj">
+      <Project>{A2D375CC-0D84-4514-98E7-C6063900C021}</Project>
+      <Name>xamarin_lib_harpia</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\setting_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
