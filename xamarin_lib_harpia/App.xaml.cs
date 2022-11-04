@@ -9,7 +9,7 @@ namespace xamarin_lib_harpia
         public App()
         {
             InitializeComponent();
-            MainPage = new TextPage();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
