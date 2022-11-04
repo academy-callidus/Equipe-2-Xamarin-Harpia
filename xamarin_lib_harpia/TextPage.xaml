@@ -6,14 +6,7 @@
     <ContentPage.Content>
 
         <StackLayout Orientation="Vertical" BackgroundColor="#181A26">
-            
-            <StackLayout Padding="10, 10, 10, 5" Orientation="Horizontal" BackgroundColor="#181A26">
-                <ImageButton Source="back.png" BackgroundColor="#181A26" />
-                <StackLayout Orientation="Vertical">
-                    <Label Text="Impressão de Texto" TextColor="#FFF" FontSize="Large" FontAttributes="Bold"/>
-                    <Label Text="Sem impressora" TextColor="#FFF" Opacity=".5"/>
-                </StackLayout>
-            </StackLayout>
+           
             
             <FlexLayout 
                 JustifyContent="SpaceBetween"

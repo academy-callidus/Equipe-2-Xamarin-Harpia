@@ -16,7 +16,6 @@ namespace xamarin_lib_harpia.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        public IList<DemoDetails> Demos { get; set; }
         
 
         public HomePage()
@@ -36,20 +35,12 @@ namespace xamarin_lib_harpia.Views
         {
             int itens = Pages.Children.Count();
             int row;
-            int col = itens % 2 == 0 ? 0 : 1;
+            int col = itens % 2 == 0 ? 1 : 0;
 
-            if (itens % 2 != 0)
-            {
-                row = itens > 3 ? itens / 3 - 1 : 0;
-            }
-            else
-            {
-                row = itens > 3 ? itens / 3 - 2 : 0;
-            }
 
-            /*if(itens % 2 == 0)
+            if (itens % 2 == 0)
             {
-                row = itens > 1 ? itens - 1 : 0;  
+                row = itens > 1 ? itens - 1 : 0;
             }
             else
             {
@@ -57,52 +48,44 @@ namespace xamarin_lib_harpia.Views
             }
 
 
-
-            Button pageButton = new Button
-        {
-            ImageSource = path,
-            Text = nome,
-            TextColor = (Color)Application.Current.Resources["homepageTextColor"],
-            BackgroundColor = (Color)Application.Current.Resources["backgroundColor"],
-
-        };
-        pageButton.Clicked += async (sender, args) => await Shell.Current.GoToAsync($"//{nameof(BarcodePage)}");*/
-
             FlexLayout flexLayout = new FlexLayout
             {
-                Direction=FlexDirection.Column,
-                BackgroundColor=(Color)Application.Current.Resources["backgroundColor"],
-                AlignItems=FlexAlignItems.Center
+                Direction = FlexDirection.Column,
+                BackgroundColor = (Color)Application.Current.Resources["backgroundColor"],
+                AlignItems = FlexAlignItems.Center
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += async (s, e) => {
-                await Shell.Current.GoToAsync(nameof(BarcodePage));
+                await Shell.Current.GoToAsync(navigateTo);
             };
 
             flexLayout.GestureRecognizers.Add(tapGestureRecognizer);
-
-            flexLayout.Children.Add(new Image
+            Image image = new Image
             {
                 Source = path,
-                WidthRequest = 90,
-                HeightRequest = 90,
-            });
+                WidthRequest = 110,
+                HeightRequest = 110
+            };
+            flexLayout.Children.Add(image);
 
             flexLayout.Children.Add(new Label
             {
-                Text=nome,
-                TextColor= (Color)Application.Current.Resources["homepageTextColor"]
-            });
+                Text = itens.ToString(),
+                TextColor = Color.Red
+            }) ;
 
             Pages.Children.Add(flexLayout, col, row);
         }
 
         public void LoadDemoDetails()
         {
-            AddDemo("Teste", "teste.png", "PageTeste");
-            AddDemo("BarCode", "teste.png", "PageTeste");
-  
+            Pages.Children.Clear();
+            AddDemo("Teste", "tesImg.png", nameof(QrcodePage));
+            AddDemo("QrCode", "function_qr.png", nameof(QrcodePage));
+            AddDemo("BarCode", "function_barcode.png", nameof(BarcodePage));
+            AddDemo("Text", "function_text.png", nameof(TextPage));
+
 
         }
     }

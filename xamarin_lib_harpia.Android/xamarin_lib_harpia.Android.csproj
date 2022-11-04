@@ -68,12 +68,10 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\styles.xml">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\values\colors.xml">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
     <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-hdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
@@ -86,41 +84,25 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-
-    <AndroidResource Include="Resources\Drawable\setting.png" />
+    <AndroidResource Include="Resources\drawable\function_barcode.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xamarin-lib-harpia\xamarin_lib_harpia.csproj">
-      <Project>{A2D375CC-0D84-4514-98E7-C6063900C021}</Project>
+    <ProjectReference Include="..\xamarin_lib_harpia\xamarin_lib_harpia.csproj">
+      <Project>{1FF9B82E-8909-4BAE-9CF8-71AAA7C77469}</Project>
       <Name>xamarin_lib_harpia</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\teste.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\function_barcode.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\function_multi.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\function_pic.png" />
+    <AndroidResource Include="Resources\drawable\back.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\function_qr.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
+    <AndroidResource Include="Resources\drawable\function_text.png" />
   </ItemGroup>
   <ItemGroup>
-        <AndroidResource Include="Resources\drawable\back.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
-    </ItemGroup>
-<ItemGroup>
-    <AndroidResource Include="Resources\Drawable\setting_1.png" />
+    <AndroidResource Include="Resources\drawable\tesImg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
