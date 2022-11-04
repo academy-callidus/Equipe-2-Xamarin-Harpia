@@ -11,13 +11,7 @@
             Direction="Column"
             JustifyContent="SpaceBetween"
         >
-            <StackLayout Padding="16" Orientation="Horizontal" >
-                <ImageButton Source="back.png" BackgroundColor="#181A26" />
-                <StackLayout Orientation="Vertical">
-                    <Label Text="BarCode" TextColor="#FFF" FontSize="Large" FontAttributes="Bold"/>
-                    <Label Text="Sem impressora" TextColor="#FFF" Opacity=".5"/>
-                </StackLayout>
-            </StackLayout>
+            
 
             <StackLayout Orientation="Vertical" FlexLayout.Grow="2">
                 

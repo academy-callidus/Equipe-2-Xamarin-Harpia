@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="xamarin_lib_harpia.App">
     <Application.Resources>
-        <Color x:Key="foregroundColor">#FFF</Color>
-        <Color x:Key="backgroundColor">#181A26</Color>
-        
-        <Color x:Key="homepageBackground">#2E303C</Color>
-        <Color x:Key="homepageTextColor">#D81E05</Color>
+        <ResourceDictionary>
+            <Color x:Key="foregroundColor">#FFF</Color>
+            <Color x:Key="backgroundColor">#181A26</Color>
+            
+            <Color x:Key="homepageBackground">#2E303C</Color>
+            <Color x:Key="homepageTextColor">#D81E05</Color>
 
-        <Color x:Key="SettingsButton">#FF1B1B</Color>
-        <Color x:Key="foregroundColorDisabled">#3FFF</Color>
-
+            <Color x:Key="SettingsButton">#FF1B1B</Color>
+            <Color x:Key="foregroundColorDisabled">#3FFF</Color>
+        </ResourceDictionary>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource foregroundColor}"/>
         </Style>

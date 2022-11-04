@@ -8,11 +8,15 @@
         <ToolbarItem IconImageSource="setting.png"
                      Clicked="OnSettingsClicked" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="TELA INICIAL" FontSize="Title" Padding="30,10,30,10"/>
-        </StackLayout>
+        <Grid x:Name="Pages" BackgroundColor="{StaticResource homepageBackground}" Padding="0.3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140" />
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="140" />
+            </Grid.RowDefinitions>
+        </Grid>
     </ContentPage.Content>
 
 </ContentPage>
