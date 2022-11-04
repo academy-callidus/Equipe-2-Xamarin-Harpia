@@ -27,7 +27,7 @@
 
                 <StackLayout Orientation="Horizontal" Padding="4">
                     <Label 
-                        Text="Type namespace" 
+                        Text="Type monospace" 
                         TextColor="Gray"
                         FontSize="15"
                         ></Label>
