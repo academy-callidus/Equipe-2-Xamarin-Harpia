@@ -9,7 +9,7 @@ namespace xamarin_lib_harpia
         public App()
         {
             InitializeComponent();
-            MainPage = new QrcodePage();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
