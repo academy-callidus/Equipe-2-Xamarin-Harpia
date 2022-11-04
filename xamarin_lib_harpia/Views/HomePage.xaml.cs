@@ -71,7 +71,7 @@ namespace xamarin_lib_harpia.Views
 
             flexLayout.Children.Add(new Label
             {
-                Text = itens.ToString(),
+                Text = nome,
                 TextColor = Color.Red
             }) ;
 
