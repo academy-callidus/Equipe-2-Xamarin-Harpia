@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="xamarin_lib_harpia.Views.SettingsPage"
+             Title="Configuração">
+
+    <Shell.TitleView>
+        <StackLayout Spacing="0">
+            <Label x:Name="NavTitle"
+                   FontAttributes="Bold"
+                   FontSize="Large"
+                   VerticalOptions="FillAndExpand"
+                   VerticalTextAlignment="End"/>
+            <Label x:Name="NavSubtitle"
+                   FontSize="Small"
+                   VerticalOptions="End"
+                   VerticalTextAlignment="Start"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <FlexLayout Direction="Column"
+                    JustifyContent="SpaceBetween"
+                    BackgroundColor="{StaticResource backgroundColor}">
+            <Grid RowDefinitions="54,0.5,54"
+                  ColumnDefinitions="*,auto"
+                  Padding="8,0">
+                <Label Text="Método de conexão"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+                <StackLayout Orientation="Horizontal"
+                             Grid.Column="1"
+                             Spacing="0"
+                             Opacity="0.5"
+                             Margin="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnConnectionClicked"/>
+                    </StackLayout.GestureRecognizers>
+                    <Label Text="API"
+                           FontSize="Caption"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Padding="0,0,-10,0"/>
+                    <Image Source="forward.png"
+                           VerticalOptions="Center"
+                           Scale="0.5"/>
+                </StackLayout>
+
+                <BoxView Grid.Row="1"
+                         Grid.ColumnSpan="2"
+                         BackgroundColor="{StaticResource foregroundColor}"
+                         Opacity="0.1"/>
+
+                <Label Text="Informação da impressora"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                       Grid.Row="2"/>
+                <Image Source="forward.png"
+                       VerticalOptions="Center"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       HorizontalOptions="End"
+                       Opacity="0.5"
+                       Scale="0.5">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnInfoClicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+            </Grid>
+            <Grid RowDefinitions="45"
+                  ColumnDefinitions="*,*"
+                  VerticalOptions="EndAndExpand"
+                  ColumnSpacing="1"
+                  >
+                <Label Text="Conectar"
+                       FontSize="Medium"
+                       BackgroundColor="{StaticResource SettingsButton}"
+                       TextColor="{StaticResource foregroundColorDisabled}"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"/>
+                <Label Text="Desconectar"
+                       FontSize="Medium"
+                       TextColor="{StaticResource foregroundColorDisabled}"
+                       BackgroundColor="{StaticResource SettingsButton}"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       Grid.Column="1"/>
+            </Grid>
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>

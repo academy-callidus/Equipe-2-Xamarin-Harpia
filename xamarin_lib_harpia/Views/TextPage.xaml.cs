@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace xamarin_lib_harpia
+namespace xamarin_lib_harpia.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TextPage : ContentPage

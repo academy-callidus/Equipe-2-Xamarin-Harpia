@@ -1,12 +1,9 @@
 ﻿using System;
-using ZXing;
 using ZXing.Net.Mobile.Forms;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace xamarin_lib_harpia
+namespace xamarin_lib_harpia.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class QrcodePage : ContentPage
     {
         private string[] QrcodeQtd = { "QrCode", "Dois QrCode"};

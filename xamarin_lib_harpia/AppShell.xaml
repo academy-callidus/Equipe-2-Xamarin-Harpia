@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:xamarin_lib_harpia.Views"
+       x:Class="xamarin_lib_harpia.AppShell"
+       Shell.TabBarIsVisible="False"
+       Shell.BackgroundColor="{StaticResource backgroundColor}"
+       Shell.ForegroundColor="{StaticResource foregroundColor}">
+
+    <TabBar>
+        <ShellContent Title="Main"
+                      ContentTemplate="{DataTemplate views:MainPage}" />
+        <Tab>
+            <ShellContent Title="Settings"
+                          ContentTemplate="{DataTemplate views:SettingsPage}" />
+            <ShellContent Title="Printer Info"
+                          ContentTemplate="{DataTemplate views:PrinterInfoPage}"/>
+        </Tab>
+
+        <ShellContent Title="Barcode"
+                      ContentTemplate="{DataTemplate views:BarcodePage}" />
+
+        <ShellContent Title="QRCode"
+                      ContentTemplate="{DataTemplate views:QrcodePage}" />
+
+        <ShellContent Title="Text"
+                      ContentTemplate="{DataTemplate views:TextPage}" />
+
+    </TabBar>
+</Shell>

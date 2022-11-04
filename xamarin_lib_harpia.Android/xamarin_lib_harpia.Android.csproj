@@ -85,10 +85,22 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\xamarin_lib_harpia\xamarin_lib_harpia.csproj">
       <Project>{1FF9B82E-8909-4BAE-9CF8-71AAA7C77469}</Project>
       <Name>xamarin_lib_harpia</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\setting_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\forward.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back.png" />
