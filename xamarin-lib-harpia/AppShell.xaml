@@ -3,8 +3,10 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:xamarin_lib_harpia.Views"
        x:Class="xamarin_lib_harpia.AppShell"
-       Shell.TabBarIsVisible="False">
-    
+       Shell.TabBarIsVisible="False"
+       Shell.BackgroundColor="{StaticResource backgroundColor}"
+       Shell.ForegroundColor="{StaticResource foregroundColor}">
+
     <TabBar>
         <ShellContent Title="Main"
                       ContentTemplate="{DataTemplate views:MainPage}" />
