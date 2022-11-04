@@ -7,7 +7,7 @@
 
         <StackLayout Orientation="Vertical" BackgroundColor="#181A26">
             
-            <StackLayout Padding="16" Orientation="Horizontal" BackgroundColor="#181A26">
+            <StackLayout Padding="10, 10, 10, 5" Orientation="Horizontal" BackgroundColor="#181A26">
                 <ImageButton Source="back.png" BackgroundColor="#181A26" />
                 <StackLayout Orientation="Vertical">
                     <Label Text="Impressão de Texto" TextColor="#FFF" FontSize="Large" FontAttributes="Bold"/>
@@ -17,7 +17,7 @@
             
             <FlexLayout 
                 JustifyContent="SpaceBetween"
-                Padding="10"
+                Padding="10, 0 , 10, 5"
                 >
                 <Label 
                     Text="text typeface" 
@@ -36,7 +36,7 @@
 
             <FlexLayout 
                 JustifyContent="SpaceBetween"
-                Padding="10"
+                Padding="10, 0 ,10, 5"
                 >
                 <FlexLayout.GestureRecognizers>
                     <TapGestureRecognizer 
@@ -68,7 +68,7 @@
             </FlexLayout>
 
             <StackLayout
-                Padding="10"
+                Padding="10, 0, 10, 5"
                 >
                 <FlexLayout
                     JustifyContent="SpaceBetween"
@@ -95,7 +95,7 @@
 
             </StackLayout>
 
-            <StackLayout Padding="10">
+            <StackLayout Padding="10, 0, 10, 5">
                 <FlexLayout 
                 BackgroundColor="#464851"
                 JustifyContent="Center"
@@ -126,14 +126,14 @@
                 </FlexLayout>
             </StackLayout>
 
-            <StackLayout Padding="10">
+            <StackLayout Padding="10, 0, 10, 5">
                 <Editor 
                 x:Name="Editor"
                 TextColor="Black"
                 BackgroundColor="White"
                 IsSpellCheckEnabled="True"
                 IsTextPredictionEnabled="True"
-                HeightRequest="300"
+                HeightRequest="250"
                 ></Editor>
             </StackLayout>
 
