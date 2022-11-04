@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="xamarin_lib_harpia.TextPage">
+
+    <ContentPage.Content>
+
+        <StackLayout Orientation="Vertical" BackgroundColor="#181A26">
+            
+            <StackLayout Padding="16" Orientation="Horizontal" BackgroundColor="#181A26">
+                <ImageButton Source="back.png" BackgroundColor="#181A26" />
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Impressão de Texto" TextColor="#FFF" FontSize="Large" FontAttributes="Bold"/>
+                    <Label Text="Sem impressora" TextColor="#FFF" Opacity=".5"/>
+                </StackLayout>
+            </StackLayout>
+            
+            <FlexLayout 
+                JustifyContent="SpaceBetween"
+                Padding="10"
+                >
+                <Label 
+                    Text="text typeface" 
+                    TextColor="White" 
+                    FontSize="18"
+                    ></Label>
+
+                <StackLayout Orientation="Horizontal" Padding="4">
+                    <Label 
+                        Text="Type namespace" 
+                        TextColor="Gray"
+                        FontSize="15"
+                        ></Label>
+                </StackLayout>
+            </FlexLayout>
+
+            <FlexLayout 
+                JustifyContent="SpaceBetween"
+                Padding="10"
+                >
+                <FlexLayout.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Tapped="OnClickCharSet"
+                        ></TapGestureRecognizer>
+                </FlexLayout.GestureRecognizers>
+
+                <Label 
+                    Text="char set" 
+                    TextColor="White" 
+                    FontSize="18"
+                    ></Label>
+
+                <StackLayout Orientation="Horizontal" Padding="4">
+                    <Label 
+                        x:Name="CharSetText" 
+                        TextColor="Gray"
+                        FontSize="15"
+                        ></Label>
+
+                    <Image
+                        Source="back.png" 
+                        Rotation="180"
+                        WidthRequest="30"
+                        BackgroundColor="#181A26"
+                        
+                        ></Image>
+                </StackLayout>
+            </FlexLayout>
+
+            <StackLayout
+                Padding="10"
+                >
+                <FlexLayout
+                    JustifyContent="SpaceBetween"
+                    >
+                    <Label
+                        Text="Tamanho texto"
+                        TextColor="White"
+                        FontSize="18"
+                        ></Label>
+
+                    <Label
+                        x:Name="TextSizeLabel"
+                        TextColor="Gray"
+                        ></Label>
+
+                </FlexLayout>
+                <Slider 
+                    x:Name="Slider" 
+                    Maximum="36" 
+                    Minimum="12" 
+                    Value="24" 
+                    ValueChanged="SliderChanged" 
+                    ></Slider>
+
+            </StackLayout>
+
+            <StackLayout Padding="10">
+                <FlexLayout 
+                BackgroundColor="#464851"
+                JustifyContent="Center"
+                Padding="10"
+                >
+                    <Label
+                    Text="bold"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="15"
+                    ></Label>
+                    <CheckBox 
+                    Color="White" 
+                    IsChecked="False"
+                    CheckedChanged="BoldChanged"
+                    ></CheckBox>
+                    <Label
+                    Text="underline"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="15"
+                    ></Label>
+                    <CheckBox 
+                    Color="White"
+                    IsChecked="False"
+                    CheckedChanged="UnderlineChanged"
+                    ></CheckBox>
+                </FlexLayout>
+            </StackLayout>
+
+            <StackLayout Padding="10">
+                <Editor 
+                x:Name="Editor"
+                TextColor="Black"
+                BackgroundColor="White"
+                IsSpellCheckEnabled="True"
+                IsTextPredictionEnabled="True"
+                HeightRequest="300"
+                ></Editor>
+            </StackLayout>
+
+            <Button Text="Imprimir" TextColor="White" BackgroundColor="Red"></Button>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
