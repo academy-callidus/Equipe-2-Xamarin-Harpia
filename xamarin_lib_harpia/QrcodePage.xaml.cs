@@ -27,8 +27,8 @@ namespace xamarin_lib_harpia
             var SizeLabel = this.FindByName<Label>("SizeLabel");
             var LevelLabel = this.FindByName<Label>("LevelLabel");
             var AlignLabel = this.FindByName<Label>("AlignLabel");
-            QrcodeLabelZxing.BarcodeValue = "Exemplo";
-            QrcodeLabel.Text = "Exemplo";
+            QrcodeLabelZxing.BarcodeValue = "www.tectoySunmi.com.br";
+            QrcodeLabel.Text = "www.tectoySunmi.com.br";
             QtdLabel.Text = QrcodeQtd[0];
             SizeLabel.Text = QrcodeSize[0];
             LevelLabel.Text = QrcodeLevel[0];
@@ -52,7 +52,7 @@ namespace xamarin_lib_harpia
         {
             var qrcodeLabel = this.FindByName<Label>("QrcodeLabel");
             var qrcodeLabelZxing = this.FindByName<ZXingBarcodeImageView>("BarcodeImageView");
-            var qrcodeContent = await DisplayPromptAsync(null, "Digite o conteúdo do Qrcode", initialValue: qrcodeLabel.Text);
+            var qrcodeContent = await DisplayPromptAsync(null, "Digite o conteúdo do Qrcode", placeholder:"www.tectoySunmi.com.br");
             if (qrcodeContent != null && qrcodeContent != "")
             {
                 qrcodeLabelZxing.BarcodeValue = qrcodeContent;
