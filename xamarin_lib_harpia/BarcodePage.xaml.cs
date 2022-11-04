@@ -35,6 +35,9 @@ namespace xamarin_lib_harpia
     {
         private List<BarcodeModel> BarcodeModels;
         private string[] BarcodeHRIs = { "Acima do QRCode", "Abaixo do QRCode", "Acima e abaixo do QRCode" };
+        private string CANCEL_OPTION_TEXT = "Cancelar";
+        private string DEFAULT_BARCODE_VALUE = "201705070507";
+
         public BarcodePage()
         {
             InitializeComponent();
@@ -60,12 +63,16 @@ namespace xamarin_lib_harpia
 
         private void InitializeValues()
         {
+            var barcodePreview = this.FindByName<ZXingBarcodeImageView>("BarcodeImageView");
             var barcodeLabel = this.FindByName<Label>("BarcodeLabel");
             var modelLabel = this.FindByName<Label>("ModelLabel");
             var HRILabel = this.FindByName<Label>("HRILabel");
-            barcodeLabel.Text = "Exemplo";
+            barcodeLabel.Text = DEFAULT_BARCODE_VALUE;
             modelLabel.Text = BarcodeModels[0].Model;
             HRILabel.Text = BarcodeHRIs[0];
+
+            barcodePreview.BarcodeFormat = BarcodeModels[0].Format;
+            barcodePreview.BarcodeValue = DEFAULT_BARCODE_VALUE;
         }
 
         private void OnWidthChange(object sender, ValueChangedEventArgs e)
@@ -91,6 +98,7 @@ namespace xamarin_lib_harpia
             );
             if (barcodeContent == null || barcodeContent == "") return;
             barcodeLabel.Text = barcodeContent;
+            if (barcodePreview == null) return;
             barcodePreview.BarcodeValue = barcodeContent;
         }
 
@@ -99,12 +107,12 @@ namespace xamarin_lib_harpia
             var modelLabel = this.FindByName<Label>("ModelLabel");
             var barcodePreview = this.FindByName<ZXingBarcodeImageView>("BarcodeImageView");
             var barcodeModel = await DisplayActionSheet(
-                "Modelos de Barcode", 
-                null, 
+                "Modelos de Barcode",
+                CANCEL_OPTION_TEXT,
                 null, 
                 BarcodeModel.ToOptions(BarcodeModels)
             );
-            if (barcodeModel == null || barcodeModel == "") return;
+            if (barcodeModel == null || barcodeModel == "" || barcodeModel == CANCEL_OPTION_TEXT) return;
             modelLabel.Text = barcodeModel;
             var barcodeFormat = BarcodeModels.Find(model => model.Model == barcodeModel);
             if(barcodeFormat == null) return;
@@ -114,8 +122,13 @@ namespace xamarin_lib_harpia
         private async void OnHRIChange(object sender, EventArgs e)
         {
             var HRILabel = this.FindByName<Label>("HRILabel");
-            var barcodeHRI = await DisplayActionSheet("HRI posição", null, null, BarcodeHRIs);
-            if (barcodeHRI == null || barcodeHRI == "") return;
+            var barcodeHRI = await DisplayActionSheet(
+                "HRI posição", 
+                CANCEL_OPTION_TEXT, 
+                null, 
+                BarcodeHRIs
+            );
+            if (barcodeHRI == null || barcodeHRI == "" || barcodeHRI == CANCEL_OPTION_TEXT) return;
             HRILabel.Text = barcodeHRI;
         }
 

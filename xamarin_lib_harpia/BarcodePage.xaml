@@ -38,7 +38,7 @@
                         
                     <Label Text="BarCode" TextColor="#FFF"/>
                     <StackLayout Orientation="Horizontal">
-                        <Label x:Name="BarcodeLabel" TextColor="#FFFFFF" Opacity=".5"/>
+                        <Label x:Name="BarcodeLabel" Text="201705070507" TextColor="#FFFFFF" Opacity=".5"/>
                         <Image 
                             WidthRequest="20" 
                             RotationY="180"
@@ -134,7 +134,7 @@
                     </FlexLayout>
                     <Slider 
                         ThumbColor="#E6e6e6"
-                        Maximum="5"
+                        Maximum="6"
                         Minimum="2"
                         Value="2"
                         ValueChanged="OnWidthChange"
@@ -160,19 +160,17 @@
             <FlexLayout FlexLayout.Grow="1" AlignContent="Center" JustifyContent="Center">
                 <zxing:ZXingBarcodeImageView
                     x:Name="BarcodeImageView"
-                    BarcodeValue="Exeaamplo"
                     HorizontalOptions="FillAndExpand"  
-                    VerticalOptions="FillAndExpand" 
-                    BarcodeFormat="CODE_93"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="400"
                     HeightRequest="200"
-                    WidthRequest="200"
                     FlexLayout.Grow="1"
                 >
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
                         <zxingcommon:EncodingOptions 
                             Height="200"
                             Width="200"
-                            PureBarcode="True"
+                            Margin="0"
                         />
                     </zxing:ZXingBarcodeImageView.BarcodeOptions>
                 </zxing:ZXingBarcodeImageView>
