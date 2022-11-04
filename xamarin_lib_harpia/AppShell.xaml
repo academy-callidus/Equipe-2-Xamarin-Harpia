@@ -9,7 +9,7 @@
 
     <TabBar>
         <ShellContent Title="Main"
-                      ContentTemplate="{DataTemplate views:HomePage}" />
+                      ContentTemplate="{DataTemplate views:MainPage}" />
         <Tab>
             <ShellContent Title="Settings"
                           ContentTemplate="{DataTemplate views:SettingsPage}" />
