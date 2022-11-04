@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="xamarin_lib_harpia.Views.PrinterInfoPage"
+             Title="Informação da impressora">
+
+    <Shell.TitleView>
+        <StackLayout Spacing="0">
+            <Label x:Name="NavTitle"
+                   Text="Title"
+                   FontSize="20"
+                   VerticalOptions="FillAndExpand"
+                   VerticalTextAlignment="End"/>
+            <Label x:Name="NavSubtitle"
+                   Text="Subtitle"
+                   VerticalOptions="End"
+                   VerticalTextAlignment="Start"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowDefinitions="54,54,54,54,54,54,54,54,54"
+                  ColumnDefinitions="auto,*"
+                  BindingContext="printerInfo">
+                <Label Grid.Row="0" Text="Número de série"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding serialNo}"/>
+            
+                <Label Grid.Row="1" Text="Modelo da impressora"/>            
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding printerInfo.deviceModel}"/>
+
+                <Label Grid.Row="2" Text="Cabeça de impressão"/>
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding printerInfo.head}"/>
+            
+                <Label Grid.Row="3" Text="Versão do firmware"/>
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding printerInfo.firmwareVersion}"/>
+            
+                <Label Grid.Row="4" Text="Tamanho da impressão"/>
+                <Label Grid.Row="4" Grid.Column="1" Text="{Binding printerInfo.paper}"/>
+            
+                <Label Grid.Row="5" Text="Distância impressa"/>
+                <Label Grid.Row="5" Grid.Column="1" Text="{Binding printerInfo.printedDistance}"/>
+            </Grid>
+            <Grid RowDefinitions="54,54"
+                  ColumnDefinitions="auto,*">
+                <Label Grid.Row="0" Text="Versão do serviço"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding packageInfo.versionName}"/>
+            
+                <Label Grid.Row="1" Text="Versão de desenvolvimento"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding packageInfo.versionCode}"/>
+            </Grid>
+            <Grid RowDefinitions="54"
+                   ColumnDefinitions="auto,*">
+                <Label Grid.Row="8" Text="Versão do assistente de impressão"/>
+                <Label Grid.Row="8" Grid.Column="1" Text="1.0"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

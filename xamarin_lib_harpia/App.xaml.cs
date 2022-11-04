@@ -12,8 +12,7 @@ namespace xamarin_lib_harpia
         {
             InitializeComponent();
 
-            MainPage = new HomePage();
-
+            MainPage = new AppShell();
         }
 
         protected override void OnStart()

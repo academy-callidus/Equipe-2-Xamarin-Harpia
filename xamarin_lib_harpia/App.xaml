@@ -9,4 +9,4 @@
             <Color x:Key="homepageTextColor">#D81E05</Color>
         </ResourceDictionary>
     </Application.Resources>
-</Application>
+</Application>  

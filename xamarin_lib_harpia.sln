@@ -1,11 +1,10 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xamarin_lib_harpia.Android", "xamarin_lib_harpia.Android\xamarin_lib_harpia.Android.csproj", "{87D53E80-242B-464C-8E64-D4627ADB5970}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xamarin_lib_harpia", "xamarin_lib_harpia\xamarin_lib_harpia.csproj", "{5AD5E27C-39DF-4D35-85A5-CD50ACBD2A42}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xamarin_lib_harpia", "xamarin_lib_harpia\xamarin_lib_harpia.csproj", "{5AD5E27C-39DF-4D35-85A5-CD50ACBD2A42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

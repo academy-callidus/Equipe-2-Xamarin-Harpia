@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="xamarin_lib_harpia.Views.SettingsPage"
+             Title="Configuração">
+
+    <Shell.TitleView>
+        <StackLayout Spacing="0">
+            <Label x:Name="NavTitle"
+                   FontSize="Large"
+                   VerticalOptions="FillAndExpand"
+                   VerticalTextAlignment="End"/>
+            <Label x:Name="NavSubtitle"
+                   FontSize="Small"
+                   VerticalOptions="End"
+                   VerticalTextAlignment="Start"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+
+    <ContentPage.Content>
+        <StackLayout
+                     Padding="0">
+            <Grid RowDefinitions="54,54"
+              ColumnDefinitions="*,auto"
+              Padding="16,0">
+                <Label Text="Método de conexão"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                       BackgroundColor="Aqua"/>
+                <Label Text="API"
+                       FontSize="18"
+                       HorizontalOptions="End"
+                       Grid.Column="1"
+                       BackgroundColor="Bisque"/>
+
+                <Label Text="Informação da impressora"
+                   FontSize="Medium"
+                   VerticalTextAlignment="Center"
+                   Grid.Row="1" 
+                   BackgroundColor="PaleVioletRed"/>
+                <Label Text=""
+                   FontSize="Medium"
+                   Grid.Row="1" 
+                   Grid.Column="1"
+                   BackgroundColor="RosyBrown"/>
+            </Grid>
+            <Grid RowDefinitions="45"
+                  ColumnDefinitions="*,*"
+                  VerticalOptions="End"
+                  BackgroundColor="Red">
+                <Button/>
+                <Button Grid.Column="1"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
