@@ -57,8 +57,8 @@ namespace xamarin_lib_harpia
             BarcodeModels.Add(new BarcodeModel("CODABAR", BarcodeFormat.CODABAR));
             BarcodeModels.Add(new BarcodeModel("CODE93", BarcodeFormat.CODE_93));
             BarcodeModels.Add(new BarcodeModel("CODE128A", BarcodeFormat.CODE_128));
-            BarcodeModels.Add(new BarcodeModel("CODE128B", BarcodeFormat.QR_CODE));
-            BarcodeModels.Add(new BarcodeModel("CODE128C", BarcodeFormat.QR_CODE));
+            BarcodeModels.Add(new BarcodeModel("CODE128B", BarcodeFormat.CODE_128));
+            BarcodeModels.Add(new BarcodeModel("CODE128C", BarcodeFormat.CODE_128));
         }
 
         private void InitializeValues()

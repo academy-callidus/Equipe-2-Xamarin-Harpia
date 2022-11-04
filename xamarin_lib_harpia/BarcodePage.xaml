@@ -5,7 +5,7 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              x:Class="xamarin_lib_harpia.BarcodePage">
     <ContentPage.Content>
-        
+
         <FlexLayout 
             BackgroundColor="#181A26" 
             Direction="Column"
