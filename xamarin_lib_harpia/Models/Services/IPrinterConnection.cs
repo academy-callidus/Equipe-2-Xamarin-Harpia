@@ -12,8 +12,9 @@ namespace xamarin_lib_harpia.Models.Services
         // PrinterInfo getStatus();
         bool IsConnected();
         bool PrintBarcode(Barcode barcode);
-        //bool PrintQRCode(QRCode qrcode);
-        //bool PrintDoubleQRCode(QRCode qrcode);
+        bool PrintQRCode(QRcode qrcode);
+        bool PrintDoubleQRCode(QRcode qrcode);
+
         //bool PrintText(Text text);
         void SetAlignment(AlignmentEnum alignment);
         //bool PrintBoldText(Text text);
