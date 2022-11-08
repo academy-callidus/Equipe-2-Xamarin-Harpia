@@ -24,9 +24,6 @@
     <Compile Update="AppShell.xaml.cs">
       <DependentUpon>AppShell.xaml</DependentUpon>
     </Compile>
-    <Compile Update="BarcodePage.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="Views\PrinterInfoPage.xaml.cs">
       <DependentUpon>PrinterInfoPage.xaml</DependentUpon>
     </Compile>
