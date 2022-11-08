@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Utils
 {
@@ -18,7 +19,7 @@ namespace xamarin_lib_harpia.Utils
 
         }
 
-        public void SetAlign(int align)
+        public void SetAlign(AlignmentEnum align)
         {
             
         }

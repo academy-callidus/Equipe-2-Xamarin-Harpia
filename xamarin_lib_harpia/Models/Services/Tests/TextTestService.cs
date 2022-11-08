@@ -2,35 +2,37 @@
 using System.Collections.Generic;
 using System.Text;
 using xamarin_lib_harpia.Utils;
+using xamarin_lib_harpia.Models.Entities;
 
-namespace xamarin_lib_harpia.Models.Services
+namespace xamarin_lib_harpia.Models.Services.Tests
 {
     internal class TextTestService
     {
         readonly TectoySunmiPrint printerInstance = TectoySunmiPrint.getInstance();
-        //Tamanho da font
 
         private void PrintDivisor()
         {
-            printerInstance.PrintText("----------------------------"); 
+            printerInstance.PrintText("----------------------------");
         }
+
+        //Tamanho da font
         private void SetFontSize(int fontSize)
         {
             printerInstance.SetSize(fontSize);
         }
-        
+
 
         // Alinhamento do texto
-        public void AlignText() 
+        public void AlignText()
         {
-            printerInstance.SetAlign(1); // alinhar center
+            printerInstance.SetAlign(AlignmentEnum.CENTER);
             printerInstance.PrintText("ALINHAMENTO \n");
             PrintDivisor();
-            printerInstance.SetAlign(2); // alinhar left
+            printerInstance.SetAlign(AlignmentEnum.LEFT);
             printerInstance.PrintText("EQUIPE HARPIA - CALLIDUS ACADEMY");
-            printerInstance.SetAlign(1); // alinhar center
+            printerInstance.SetAlign(AlignmentEnum.CENTER) ;
             printerInstance.PrintText("EQUIPE HARPIA - CALLIDUS ACADEMY");
-            printerInstance.SetAlign(3); // alinhar right
+            printerInstance.SetAlign(AlignmentEnum.RIGHT);
             printerInstance.PrintText("EQUIPE HARPIA - CALLIDUS ACADEMY");
 
 
@@ -44,6 +46,6 @@ namespace xamarin_lib_harpia.Models.Services
         }
 
 
-    
+
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using xamarin_lib_harpia.Models.Entities;
 
-namespace xamarin_lib_harpia.Models.Services
+namespace xamarin_lib_harpia.Models.Services.Tests
 {
 
     internal class QRCodeTestService
@@ -16,7 +17,7 @@ namespace xamarin_lib_harpia.Models.Services
             ErrorLevel = errorLevel;
         }
 
-        public void PrintQRCode(int align, string dataContent_1, string data_Content_2) // enum de alinhamento
+        public void PrintQRCode(AlignmentEnum align, string dataContent_1, string data_Content_2)
         {
 
         }
