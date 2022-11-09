@@ -1,15 +1,26 @@
 ﻿using System;
 using ZXing.Net.Mobile.Forms;
 using Xamarin.Forms;
+using xamarin_lib_harpia.Utils;
+using xamarin_lib_harpia.Models.Entities;
+using System.Collections.Generic;
+using Xamarin.Forms.Internals;
+using xamarin_lib_harpia.Models.Services;
 
 namespace xamarin_lib_harpia.Views
 {
     public partial class QrcodePage : ContentPage
     {
         private string[] QrcodeQtd = { "QrCode", "Dois QrCode"};
-        private string[] QrcodeSize = { "1", "2", "3", "4"};
+        private string[] QrcodeSize = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
         private string[] QrcodeLevel = { "Correção L (7%)", "Correção M (15%)", "Correção Q (25%)", "Correção H (30%)"};
         private string[] QrcodeAlign = { "Esquerda", "Centro", "Direita" };
+        private bool HasCut;
+        private int print_num = 0;
+        private int print_size = 8;
+        private int error_level = 3;
+
+        //QRcode qrcode = new QRcode("www.tectoySunmi.com.br", 0, 8, 3, CORRECTION_H, CENTER);
 
         public QrcodePage()
         {
@@ -34,6 +45,7 @@ namespace xamarin_lib_harpia.Views
 
         private void OnWidthChange(object sender, ValueChangedEventArgs e)
         {
+
             var label = this.FindByName<Label>("WidthLabel");
             label.Text = Math.Round(e.NewValue).ToString();
         }
@@ -74,6 +86,7 @@ namespace xamarin_lib_harpia.Views
             var qrcodeSize = await DisplayActionSheet("QR-Code tamanho", "Cancelar", null, QrcodeSize);
             if (qrcodeSize!= "Cancelar")
             {
+                print_size = QrcodeSize.IndexOf(qrcodeSize);
                 sizeLabel.Text = qrcodeSize;
             }
         }
@@ -81,8 +94,9 @@ namespace xamarin_lib_harpia.Views
         {
             var levelLabel = this.FindByName<Label>("LevelLabel");
             var qrcodeLevel = await DisplayActionSheet("Nível de correção", "Cancelar", null, QrcodeLevel);
-            if(qrcodeLevel != "Cancelar")
+            if (qrcodeLevel != "Cancelar")
             {
+                error_level = QrcodeLevel.IndexOf(qrcodeLevel);
                 levelLabel.Text = qrcodeLevel;
             }
         }
@@ -93,6 +107,59 @@ namespace xamarin_lib_harpia.Views
             if(qrcodeAlign != "Cancelar")
             {
                 alignLabel.Text = qrcodeAlign;
+            }
+        }
+
+        private void OnCutPaper(object sender, ToggledEventArgs e)
+        {
+            if(HasCut) HasCut = false;
+            else HasCut = true;
+
+        }
+
+        private void OnPrint(object sender, EventArgs e)
+        {
+
+            if (HasCut)
+            {
+                if (true /*isK1 = true && height > 1856*/)
+                {
+                    //QRCodeService QRService = new QRCodeService();
+                    //QRService.setAlign(1);
+                    //QRService.text("QrCode\n");
+                    //QRService.text("--------------------------------\n");
+                    //QRService.printQr(mTextView1.getText().toString(), print_size, error_level);
+                    //QRService.print3Line();
+                    //QRService.cutpaper(KTectoySunmiPrinter.HALF_CUTTING, 10);
+                }
+                else
+                {
+                    //TectoySunmiPrint.getInstance().setAlign(TectoySunmiPrint.Alignment_CENTER);
+                    //TectoySunmiPrint.getInstance().printText("QrCode\n");
+                    //TectoySunmiPrint.getInstance().printText("--------------------------------\n");
+                    //TectoySunmiPrint.getInstance().printQr(mTextView1.getText().toString(), print_size, error_level);
+                    //TectoySunmiPrint.getInstance().print3Line();
+                }
+            } else
+            {
+                if (true /*isK1 = true && height > 1856*/)
+                {
+                    //kPrinterPresenter.setAlign(1);
+                    //kPrinterPresenter.text("QrCode\n");
+                    //kPrinterPresenter.text("--------------------------------\n");
+                    //kPrinterPresenter.printQr(mTextView1.getText().toString(), print_size, error_level);
+                    //kPrinterPresenter.print3Line();
+                    //kPrinterPresenter.cutpaper(KTectoySunmiPrinter.HALF_CUTTING, 10);
+                }
+                else
+                {
+                    //TectoySunmiPrint.getInstance().setAlign(TectoySunmiPrint.Alignment_CENTER);
+                    //TectoySunmiPrint.getInstance().printText("QrCode\n");
+                    //TectoySunmiPrint.getInstance().printText("--------------------------------\n");
+                    //TectoySunmiPrint.getInstance().printQr(mTextView1.getText().toString(), print_size, error_level);
+                    //TectoySunmiPrint.getInstance().print3Line();
+                    //TectoySunmiPrint.getInstance().cutpaper();
+                }
             }
         }
     }
