@@ -2,11 +2,18 @@
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
+using System.Threading.Tasks;
+using xamarin_lib_harpia.Views;
+using BluetoothPrinter;
 
 namespace xamarin_lib_harpia.Views
 {
     public partial class MainPage : ContentPage
     {
+
         public MainPage()
         {
             InitializeComponent();
@@ -19,6 +26,17 @@ namespace xamarin_lib_harpia.Views
 
         }
 
+        public string BluetoothConnection()
+        {
+            var devices = DependencyService.Get<IBluetoothPrinterService>().GetAvailableDevices();
+            string action = "";
+            if (devices != null && devices.Count > 0)
+            {
+                var choices = devices.Select(d => d.Title).ToArray();
+                action = choices[0];
+            }
+            return action;
+        }
 
         private void AddDemo(string nome, string path, string navigateTo)
         {
@@ -70,6 +88,8 @@ namespace xamarin_lib_harpia.Views
             Pages.Children.Add(flexLayout, col, row);
         }
 
+
+
         public void LoadDemoDetails()
         {
             Pages.Children.Clear();
@@ -77,13 +97,14 @@ namespace xamarin_lib_harpia.Views
             AddDemo("QrCode", "function_qr.png", nameof(QrcodePage));
             AddDemo("BarCode", "function_barcode.png", nameof(BarcodePage));
             AddDemo("Text", "function_text.png", nameof(TextPage));
-
-
+            AddDemo("Blutest", "bluPrinter.png", nameof(TestConnection));
         }
 
         async void OnSettingsClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
+
+
     }
 }
