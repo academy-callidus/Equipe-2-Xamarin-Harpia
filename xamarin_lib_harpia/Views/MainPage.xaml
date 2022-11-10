@@ -11,6 +11,7 @@
 
     <ContentPage.Content>
         <Grid x:Name="Pages" BackgroundColor="{StaticResource homepageBackground}" Padding="0.3">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="140" />
                 <RowDefinition Height="140"/>
@@ -18,5 +19,4 @@
             </Grid.RowDefinitions>
         </Grid>
     </ContentPage.Content>
-
 </ContentPage>

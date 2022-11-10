@@ -4,6 +4,9 @@ using Xamarin.Forms;
 using ZXing;
 using ZXing.Net.Mobile.Forms;
 
+using xamarin_lib_harpia.Models;
+using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Models.Services;
 namespace xamarin_lib_harpia.Views
 
 {

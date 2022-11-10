@@ -3,4 +3,6 @@
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="31" />
     <application android:label="xamarin_lib_harpia.Android" android:theme="@style/MainTheme"></application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 </manifest>
