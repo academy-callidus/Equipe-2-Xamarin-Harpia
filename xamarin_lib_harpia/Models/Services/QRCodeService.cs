@@ -25,47 +25,9 @@ namespace xamarin_lib_harpia.Models.Services
             catch(Exception exception)
             {
                 Console.WriteLine(exception.Message);
-            }
-        }
-
-        /*public async Task<bool> PrintQRCode(QRcode qrcode) 
-        {
-            if (!IsConnected()) return false;
-            InitConnection();
-            byte[] qrcodeCommands = CommandUtils.GetQrcodeBytes(qrcode);
-            try
-            {
-                await SendRawData(qrcodeCommands);
-                CloseConnection();
-                return true;
-            }
-            catch(Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-                CloseConnection();
                 return false;
             }
-            
         }
-        public bool PrintDoubleQRCode(QRcode qrcode)
-        {
-            return true;
-        }
-
-        public void SetAlignment(AlignmentEnum alignment)
-        {
-
-        }
-
-        public bool CutPaper()
-        {
-            return true;
-        }
-        public bool Print3Line()
-        {
-            return true;
-        }
-        */
     }
 
 }

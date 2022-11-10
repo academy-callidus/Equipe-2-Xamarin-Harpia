@@ -1,10 +1,10 @@
 ﻿using System;
-using ZXing.Net.Mobile.Forms;
-using Xamarin.Forms;
-using xamarin_lib_harpia.Utils;
-using xamarin_lib_harpia.Models.Entities;
 using System.Collections.Generic;
+using Xamarin.Forms;
+using ZXing.Net.Mobile.Forms;
+using xamarin_lib_harpia.Utils;
 using Xamarin.Forms.Internals;
+using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Models.Services;
 
 namespace xamarin_lib_harpia.Views

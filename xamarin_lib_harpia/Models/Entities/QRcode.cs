@@ -28,11 +28,12 @@ namespace xamarin_lib_harpia.Models.Entities
         public bool IsValid()
         {
             if(Content == null) return false;
+            return true;
         }
 
         public override string ToString()
         {
-            return $"Qrcode[Content={Content}, Imp. Quantity={ImpQuant}, Imp. Size={ImpSize}, Correction Level={Correction}, Alignment={Alignment}, CutPaper={CutPaper}"
+            return $"Qrcode[Content={Content}, Imp. Quantity={ImpQuant}, Imp. Size={ImpSize}, Correction Level={Correction}, Alignment={Alignment}, CutPaper={CutPaper}]";
         }
 
     }
