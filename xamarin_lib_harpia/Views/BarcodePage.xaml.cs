@@ -137,7 +137,6 @@ namespace xamarin_lib_harpia.Views
             
             var wasSuccessful = BarcodeService.Execute(GetBarcodeEntity());
             if (!wasSuccessful) await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
-            Console.WriteLine(GetBarcodeEntity());
         }
     }
 }
