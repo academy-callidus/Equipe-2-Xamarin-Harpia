@@ -7,8 +7,8 @@ namespace xamarin_lib_harpia.Models.Entities
 {
     public class Barcode
     {
-        private string Content { get; set; }
-        private string HRIPosition { get; set; }
+        public string Content { get; set; }
+        public string HRIPosition { get; set; }
         private BarcodeModelEnum Model { get; set; }
         private float Width { get; set; }
         private float Height { get; set; }
