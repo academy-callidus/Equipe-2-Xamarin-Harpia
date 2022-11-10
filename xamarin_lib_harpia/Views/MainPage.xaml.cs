@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Views;
-using BluetoothPrinter;
+using xamarin_lib_harpia.Models.Services;
 
 namespace xamarin_lib_harpia.Views
 {
@@ -28,7 +28,7 @@ namespace xamarin_lib_harpia.Views
 
         public string BluetoothConnection()
         {
-            var devices = DependencyService.Get<IBluetoothPrinterService>().GetAvailableDevices();
+            var devices = DependencyService.Get<IPrinterConnection>().GetAvailableDevices();
             string action = "";
             if (devices != null && devices.Count > 0)
             {

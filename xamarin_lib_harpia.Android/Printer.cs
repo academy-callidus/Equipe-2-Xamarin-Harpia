@@ -55,5 +55,9 @@ namespace xamarin_lib_harpia.Droid
                 throw ex;
             }
         }
+
+
+
+
     }
 }

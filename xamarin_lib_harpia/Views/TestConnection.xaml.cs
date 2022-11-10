@@ -1,5 +1,4 @@
-﻿using BluetoothPrinter;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using xamarin_lib_harpia.Models;
+using xamarin_lib_harpia.Models.Services;
 
 namespace xamarin_lib_harpia.Views
 {
@@ -25,14 +25,14 @@ namespace xamarin_lib_harpia.Views
 
         private void printTextButton_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IBluetoothPrinterService>().PrintText(printBox.Text);
+            DependencyService.Get<IPrinterConnection>().PrintText(printBox.Text);
         }
 
         void SelectDevice(string printerName)
         {
-            if (DependencyService.Get<IBluetoothPrinterService>().SetCurrentDevice(printerName))
+            if (DependencyService.Get<IPrinterConnection>().SetCurrentDevice(printerName))
             {
-                var current = DependencyService.Get<IBluetoothPrinterService>().GetCurrentDevice();
+                var current = DependencyService.Get<IPrinterConnection>().GetCurrentDevice();
                 if (current != null)
                 {
                     printTextButton.IsEnabled = true;

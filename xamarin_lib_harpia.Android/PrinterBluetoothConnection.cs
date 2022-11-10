@@ -10,15 +10,36 @@ using xamarin_lib_harpia.Droid;
 using xamarin_lib_harpia.Models;
 using xamarin_lib_harpia.Models.Services;
 using BluetoothPrinter.Droid;
+using xamarin_lib_harpia.Models.Entities;
+using Java.Util;
+using Java.Net;
+using System.Net.Sockets;
+using System.Linq;
 
-[assembly: Xamarin.Forms.Dependency(typeof(PrinterService))]
+[assembly: Xamarin.Forms.Dependency(typeof(PrinterBluetoothConnection))]
 namespace BluetoothPrinter.Droid
 {
-    public class PrinterService : IBluetoothPrinterService
+    public class PrinterBluetoothConnection : IPrinterConnection
     {
         private BluetoothDevice _connectedDevice;
-        public PrinterService()
+        public PrinterBluetoothConnection()
         {
+        }
+
+        // método através do qual uma lista de bytes será utilizada para enviar comandos à impressora
+        public async void sendRawData(byte[] data, BluetoothDevice device)
+        {
+            BluetoothSocket socket = device.CreateRfcommSocketToServiceRecord(UUID.FromString("00001101-0000-1000-8000-00805f9b34fb"));
+            try
+            { 
+             await socket.ConnectAsync();
+             await socket.OutputStream.WriteAsync(data.ToArray(), 0, data.Length);
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DeviceInfo> GetAvailableDevices()
@@ -90,6 +111,36 @@ namespace BluetoothPrinter.Droid
             {
                 throw new Exception("No selected device.");
             }
+        }
+
+        public bool InitConnection()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsConnected()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool PrintBarcode(Barcode barcode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetAlignment(AlignmentEnum alignment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CutPaper()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Print3Line()
+        {
+            throw new NotImplementedException();
         }
     }
 }
