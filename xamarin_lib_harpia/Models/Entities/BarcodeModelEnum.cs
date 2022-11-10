@@ -18,4 +18,5 @@ namespace xamarin_lib_harpia.Models.Entities
         CODE128B,
         CODE128C
     }
+
 }
