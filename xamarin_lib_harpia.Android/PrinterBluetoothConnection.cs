@@ -6,10 +6,12 @@ using xamarin_lib_harpia.Models;
 using xamarin_lib_harpia.Models.Services;
 using BluetoothPrinter.Droid;
 using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Utils;
 using Java.Util;
 using Java.Net;
 using System.Net.Sockets;
 using System.Linq;
+using System.Threading.Tasks;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterBluetoothConnection))]
 namespace BluetoothPrinter.Droid
@@ -23,7 +25,7 @@ namespace BluetoothPrinter.Droid
         }
 
         // método através do qual uma lista de bytes será utilizada para enviar comandos à impressora
-        public async void SendRawData(byte[] data)
+        public async Task SendRawData(byte[] data)
         {
             var socket = _connectedDevice.CreateRfcommSocketToServiceRecord(
                 UUID.FromString("00001101-0000-1000-8000-00805f9b34fb")
@@ -74,6 +76,7 @@ namespace BluetoothPrinter.Droid
 
         public bool SetCurrentDevice(string printerName)
         {
+            // TODO Change deprecated methods to connect with bluetooth
             if (BluetoothAdapter.DefaultAdapter != null && BluetoothAdapter.DefaultAdapter.IsEnabled)
             {
                 foreach (var pairedDevice in BluetoothAdapter.DefaultAdapter.BondedDevices)
@@ -151,9 +154,23 @@ namespace BluetoothPrinter.Droid
             return _connectedDevice != null;
         }
 
-        public bool PrintBarcode(Barcode barcode)
+        public async Task<bool> PrintBarcode(Barcode barcode)
         {
-            throw new NotImplementedException();
+            InitConnection();
+            if(!IsConnected()) return false;
+            byte[] barcodeCommands = CommandUtils.GetBarcodeBytes(barcode);
+            try
+            {
+                await SendRawData(barcodeCommands);
+                CloseConnection();
+                return true;
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                CloseConnection();
+                return false;
+            }
         }
 
         public void SetAlignment(AlignmentEnum alignment)

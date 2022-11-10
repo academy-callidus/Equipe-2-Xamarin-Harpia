@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using ZXing;
 
-namespace xamarin_lib_harpia.Models.Services.BarcodeModels
+namespace xamarin_lib_harpia.Models.BarcodeModels
 {
     internal abstract class NumericalOnlyBarcodeModel : BarcodeModel
     {
-        public NumericalOnlyBarcodeModel(string name) : base(name)
+        public NumericalOnlyBarcodeModel(int id, string name, BarcodeFormat format) : base(id, name, format)
         {
         }
 

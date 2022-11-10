@@ -1,8 +1,10 @@
-﻿namespace xamarin_lib_harpia.Models.Services.BarcodeModels
+﻿using ZXing;
+
+namespace xamarin_lib_harpia.Models.BarcodeModels
 {
     internal class UPCE : NumericalOnlyBarcodeModel
     {
-        public UPCE() : base("UPC-E")
+        public UPCE() : base(1, "UPC-E", BarcodeFormat.UPC_E)
         {
         }
 

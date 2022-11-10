@@ -1,11 +1,12 @@
 ﻿
 using System.Text.RegularExpressions;
+using ZXing;
 
-namespace xamarin_lib_harpia.Models.Services.BarcodeModels
+namespace xamarin_lib_harpia.Models.BarcodeModels
 {
     internal class CODABAR : BarcodeModel
     {
-        public CODABAR() : base("CODABAR")
+        public CODABAR() : base(6, "CODABAR", BarcodeFormat.CODABAR)
         {
         }
 

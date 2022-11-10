@@ -1,10 +1,11 @@
 ﻿using System.Text.RegularExpressions;
+using ZXing;
 
-namespace xamarin_lib_harpia.Models.Services.BarcodeModels
+namespace xamarin_lib_harpia.Models.BarcodeModels
 {
     internal class CODE39 : BarcodeModel
     {
-        public CODE39() : base("CODE39")
+        public CODE39() : base(4, "CODE39", BarcodeFormat.CODE_39)
         {
         }
 

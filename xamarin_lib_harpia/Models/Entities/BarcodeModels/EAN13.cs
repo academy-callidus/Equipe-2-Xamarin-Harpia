@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZXing;
 
-namespace xamarin_lib_harpia.Models.Services.BarcodeModels
+namespace xamarin_lib_harpia.Models.BarcodeModels
 {
     internal class EAN13 : NumericalOnlyBarcodeModel
     {
-        public EAN13() : base("EAN13")
+        public EAN13() : base(2, "EAN13", BarcodeFormat.EAN_13)
         {
         }
 
