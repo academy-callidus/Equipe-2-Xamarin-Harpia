@@ -14,9 +14,9 @@ namespace xamarin_lib_harpia.Models.Services
             Connection = connection;
         }
 
-        public bool execute(Barcode barcode)
+        public bool Execute(Barcode barcode)
         {
-    
+            Connection.PrintBarcode(barcode);
             return true;
         }
     }
