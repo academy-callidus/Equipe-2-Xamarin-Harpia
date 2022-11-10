@@ -1,9 +1,4 @@
 ﻿using Android.Bluetooth;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using System;
 using System.Collections.Generic;
 using xamarin_lib_harpia.Droid;
@@ -24,26 +19,30 @@ namespace BluetoothPrinter.Droid
         private BluetoothDevice _connectedDevice;
         public PrinterBluetoothConnection()
         {
+            _connectedDevice = null;
         }
 
         // método através do qual uma lista de bytes será utilizada para enviar comandos à impressora
-        public async void sendRawData(byte[] data, BluetoothDevice device)
+        public async void SendRawData(byte[] data)
         {
-            BluetoothSocket socket = device.CreateRfcommSocketToServiceRecord(UUID.FromString("00001101-0000-1000-8000-00805f9b34fb"));
+            var socket = _connectedDevice.CreateRfcommSocketToServiceRecord(
+                UUID.FromString("00001101-0000-1000-8000-00805f9b34fb")
+            );
             try
             { 
-             await socket.ConnectAsync();
-             await socket.OutputStream.WriteAsync(data.ToArray(), 0, data.Length);
+                await socket.ConnectAsync();
+                await socket.OutputStream.WriteAsync(data.ToArray(), 0, data.Length);
+                socket.Close();
             }
-
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw ex;
+                throw exception;
             }
         }
 
         public List<DeviceInfo> GetAvailableDevices()
         {
+            // TODO Change deprecated methods to connect with bluetooth
             if (BluetoothAdapter.DefaultAdapter != null && BluetoothAdapter.DefaultAdapter.IsEnabled)
             {
                 List<DeviceInfo> result = new List<DeviceInfo>();
@@ -89,16 +88,19 @@ namespace BluetoothPrinter.Droid
             return false;
         }
 
+        // TODO Remove after sprint 2
         public void PrintQR(string content)
         {
             SendCommandToPrinter("qr", content, _connectedDevice);
         }
 
+        // TODO Remove after sprint 2
         public void PrintText(string content)
         {
             SendCommandToPrinter("plain", content, _connectedDevice);
         }
 
+        // TODO Remove after sprint 2
         async void SendCommandToPrinter(string type, string content, BluetoothDevice device)
         {
             if (string.IsNullOrEmpty(content)) return;
@@ -115,12 +117,38 @@ namespace BluetoothPrinter.Droid
 
         public bool InitConnection()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if(IsConnected()) return true;
+                var availableDevices = GetAvailableDevices();
+                if (availableDevices.Count == 0) return false;
+                var device = availableDevices[0];
+                SetCurrentDevice(device.Title);
+                return true;
+            }catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return false;
+            }
+        }
+        
+        public bool CloseConnection()
+        {
+            try
+            {
+                if (!IsConnected()) return false;
+                _connectedDevice = null;
+                return true;
+            }catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return false;
+            }
         }
 
         public bool IsConnected()
         {
-            throw new NotImplementedException();
+            return _connectedDevice != null;
         }
 
         public bool PrintBarcode(Barcode barcode)

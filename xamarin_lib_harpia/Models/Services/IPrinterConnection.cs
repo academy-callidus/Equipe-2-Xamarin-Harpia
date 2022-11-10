@@ -14,12 +14,15 @@ namespace xamarin_lib_harpia.Models.Services
 
         List<DeviceInfo> GetAvailableDevices();
 
+        void SendRawData(byte[] data);
+
         bool SetCurrentDevice(string printerName);
 
         void PrintText(string content);
 
         void PrintQR(string content);
         bool InitConnection();
+        bool CloseConnection();
         // PrinterInfo getStatus();
         bool IsConnected();
         bool PrintBarcode(Barcode barcode);
