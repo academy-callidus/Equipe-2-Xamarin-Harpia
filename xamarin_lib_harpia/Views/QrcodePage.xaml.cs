@@ -116,9 +116,17 @@ namespace xamarin_lib_harpia.Views
                 cutPaper: HasCut);
         }
 
-        private void OnPrint(object sender, EventArgs e)
+        private async void OnPrint(object sender, EventArgs e)
         {
-            //TODO dijeidji
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            var wasSuccessful = await new QRCodeService(connection).Execute(GetQrcodeEntity());
+
+            if (!wasSuccessful)
+            {
+                await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
+            }
+
+            Console.WriteLine(GetQrcodeEntity());
         }
     }
 }
