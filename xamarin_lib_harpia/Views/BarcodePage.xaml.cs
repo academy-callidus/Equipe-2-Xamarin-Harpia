@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
-using ZXing;
 using ZXing.Net.Mobile.Forms;
 
-using xamarin_lib_harpia.Models;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Models.Services;
+using xamarin_lib_harpia.Models.BarcodeModels;
 
 namespace xamarin_lib_harpia.Views
 
@@ -14,31 +13,36 @@ namespace xamarin_lib_harpia.Views
     public partial class BarcodePage : ContentPage
     {
         private List<BarcodeModel> BarcodeModels;
-        private string[] BarcodeHRIs = { "Acima do QRCode", "Abaixo do QRCode", "Acima e abaixo do QRCode" };
-        private string CANCEL_OPTION_TEXT = "Cancelar";
-        private string DEFAULT_BARCODE_VALUE = "201705070507";
+        private BarcodeService BarcodeService;
+        private readonly string[] BarcodeHRIs = { "Acima do QRCode", "Abaixo do QRCode", "Acima e abaixo do QRCode" };
+        private readonly string CANCEL_OPTION_TEXT = "Cancelar";
+        private readonly string DEFAULT_BARCODE_VALUE = "201705070507";
 
         public BarcodePage()
         {
             InitializeComponent();
             InitializeModels();
             InitializeValues();
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            BarcodeService = new BarcodeService(connection);
         }
 
         private void InitializeModels()
         {
-            BarcodeModels = new List<BarcodeModel>();
-            BarcodeModels.Add(new BarcodeModel("UPC-A", BarcodeFormat.UPC_A));
-            BarcodeModels.Add(new BarcodeModel("UPC-E", BarcodeFormat.UPC_E));
-            BarcodeModels.Add(new BarcodeModel("EAN13", BarcodeFormat.EAN_13));
-            BarcodeModels.Add(new BarcodeModel("EAN8", BarcodeFormat.EAN_8));
-            BarcodeModels.Add(new BarcodeModel("CODE39", BarcodeFormat.CODE_39));
-            BarcodeModels.Add(new BarcodeModel("ITF", BarcodeFormat.ITF));
-            BarcodeModels.Add(new BarcodeModel("CODABAR", BarcodeFormat.CODABAR));
-            BarcodeModels.Add(new BarcodeModel("CODE93", BarcodeFormat.CODE_93));
-            BarcodeModels.Add(new BarcodeModel("CODE128A", BarcodeFormat.CODE_128));
-            BarcodeModels.Add(new BarcodeModel("CODE128B", BarcodeFormat.CODE_128));
-            BarcodeModels.Add(new BarcodeModel("CODE128C", BarcodeFormat.CODE_128));
+            BarcodeModels = new List<BarcodeModel>
+            {
+                new UPCA(),
+                new UPCE(),
+                new EAN13(),
+                new EAN8(),
+                new CODE39(),
+                new ITF(),
+                new CODABAR(),
+                new CODE93(),
+                new CODE128A(),
+                new CODE128B(),
+                new CODE128C()
+            };
         }
 
         private void InitializeValues()
@@ -48,7 +52,7 @@ namespace xamarin_lib_harpia.Views
             var modelLabel = this.FindByName<Label>("ModelLabel");
             var HRILabel = this.FindByName<Label>("HRILabel");
             barcodeLabel.Text = DEFAULT_BARCODE_VALUE;
-            modelLabel.Text = BarcodeModels[0].Model;
+            modelLabel.Text = BarcodeModels[0].Name;
             HRILabel.Text = BarcodeHRIs[0];
 
             barcodePreview.BarcodeFormat = BarcodeModels[0].Format;
@@ -94,7 +98,7 @@ namespace xamarin_lib_harpia.Views
             );
             if (barcodeModel == null || barcodeModel == "" || barcodeModel == CANCEL_OPTION_TEXT) return;
             modelLabel.Text = barcodeModel;
-            var barcodeFormat = BarcodeModels.Find(model => model.Model == barcodeModel);
+            var barcodeFormat = BarcodeModels.Find(model => model.Name == barcodeModel);
             if (barcodeFormat == null) return;
             barcodePreview.BarcodeFormat = barcodeFormat.Format;
         }
@@ -112,9 +116,27 @@ namespace xamarin_lib_harpia.Views
             HRILabel.Text = barcodeHRI;
         }
 
-        private void OnPrint(object sender, EventArgs e)
+        private Barcode GetBarcodeEntity()
         {
-            // TODO Print barcode
+            var contentLabel = this.FindByName<Label>("BarcodeLabel");
+            var HRILabel = this.FindByName<Label>("HRILabel");
+            var modelLabel = this.FindByName<Label>("ModelLabel");
+            var widthLabel = this.FindByName<Label>("WidthLabel");
+            var heightLabel = this.FindByName<Label>("HeightLabel");
+            var cutLabel = this.FindByName<Switch>("CutLabel");
+
+            var barcodeFormat = BarcodeModels.Find(model => model.Name == modelLabel.Text);
+            var width = Int32.Parse(widthLabel.Text);
+            var height = Int32.Parse(heightLabel.Text);
+
+            return new Barcode(contentLabel.Text, HRILabel.Text, barcodeFormat, width, height, cutLabel.IsToggled);
+        }
+
+        private async void OnPrint(object sender, EventArgs e)
+        {
+            
+            var wasSuccessful = BarcodeService.Execute(GetBarcodeEntity());
+            if (!wasSuccessful) await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
         }
     }
 }
