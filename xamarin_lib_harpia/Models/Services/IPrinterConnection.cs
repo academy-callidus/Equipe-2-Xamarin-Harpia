@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Models.Services
 {
     public interface IPrinterConnection
     {
+
+        DeviceInfo GetCurrentDevice();
+        List<DeviceInfo> GetAvailableDevices();
+        Task SendRawData(byte[] data);
+        bool SetCurrentDevice(string printerName);
+        void PrintText(string content);
+        void PrintQR(string content);
         bool InitConnection();
+        bool CloseConnection();
         // PrinterInfo getStatus();
         bool IsConnected();
         bool PrintBarcode(Barcode barcode);
@@ -19,6 +25,5 @@ namespace xamarin_lib_harpia.Models.Services
         void SetAlignment(AlignmentEnum alignment);
         //bool PrintBoldText(Text text);
         bool CutPaper();
-        bool Print3Line();
     }
 }
