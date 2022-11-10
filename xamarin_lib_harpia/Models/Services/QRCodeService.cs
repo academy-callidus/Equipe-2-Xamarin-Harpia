@@ -43,7 +43,7 @@ namespace xamarin_lib_harpia.Models.Services
         }*/
         public void SetAlignment(AlignmentEnum alignment)
         {
-            return true;
+
         }
 
         /*public bool PrintBoldText(Text text)

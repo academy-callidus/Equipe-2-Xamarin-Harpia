@@ -1,26 +1,23 @@
 ﻿using System;
 using ZXing.Net.Mobile.Forms;
 using Xamarin.Forms;
-using xamarin_lib_harpia.Utils;
-using xamarin_lib_harpia.Models.Entities;
-using System.Collections.Generic;
 using Xamarin.Forms.Internals;
-using xamarin_lib_harpia.Models.Services;
+using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Views
 {
     public partial class QrcodePage : ContentPage
     {
-        private string[] QrcodeQtd = { "QrCode", "Dois QrCode"};
-        private string[] QrcodeSize = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
-        private string[] QrcodeLevel = { "Correção L (7%)", "Correção M (15%)", "Correção Q (25%)", "Correção H (30%)"};
-        private string[] QrcodeAlign = { "Esquerda", "Centro", "Direita" };
+        private string[] QrcodeQtdList = { "QrCode", "Dois QrCode"};
+        private string[] QrcodeSizeList = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+        private string[] QrcodeLevelList = { "Correção L (7%)", "Correção M (15%)", "Correção Q (25%)", "Correção H (30%)"};
+        private string[] QrcodeAlignList = { "Esquerda", "Centro", "Direita" };
+        private QrCodeCorrectionEnum QrcodeLevel;
+        private AlignmentEnum QrcodeAlign;
         private bool HasCut;
         private int print_num = 0;
         private int print_size = 8;
         private int error_level = 3;
-
-        //QRcode qrcode = new QRcode("www.tectoySunmi.com.br", 0, 8, 3, CORRECTION_H, CENTER);
 
         public QrcodePage()
         {
@@ -35,12 +32,13 @@ namespace xamarin_lib_harpia.Views
             var SizeLabel = this.FindByName<Label>("SizeLabel");
             var LevelLabel = this.FindByName<Label>("LevelLabel");
             var AlignLabel = this.FindByName<Label>("AlignLabel");
+
             QrcodeLabelZxing.BarcodeValue = "www.tectoySunmi.com.br";
             QrcodeLabel.Text = "www.tectoySunmi.com.br";
-            QtdLabel.Text = QrcodeQtd[0];
-            SizeLabel.Text = QrcodeSize[0];
-            LevelLabel.Text = QrcodeLevel[0];
-            AlignLabel.Text = QrcodeAlign[0];
+            QtdLabel.Text = QrcodeQtdList[0];
+            SizeLabel.Text = QrcodeSizeList[0];
+            LevelLabel.Text = QrcodeLevelList[0];
+            AlignLabel.Text = QrcodeAlignList[0];
         }
 
         private void OnWidthChange(object sender, ValueChangedEventArgs e)
@@ -61,7 +59,7 @@ namespace xamarin_lib_harpia.Views
         {
             var qrcodeLabel = this.FindByName<Label>("QrcodeLabel");
             var qrcodeLabelZxing = this.FindByName<ZXingBarcodeImageView>("BarcodeImageView");
-            var qrcodeContent = await DisplayPromptAsync(null, "Digite o conteúdo do Qrcode", placeholder:"www.tectoySunmi.com.br");
+            var qrcodeContent = await DisplayPromptAsync(null, "Digite o conteúdo do Qrcode", placeholder: "www.tectoySunmi.com.br");
             if (qrcodeContent != null && qrcodeContent != "")
             {
                 qrcodeLabelZxing.BarcodeValue = qrcodeContent;
@@ -69,11 +67,11 @@ namespace xamarin_lib_harpia.Views
             }
         }
 
-        
+
         private async void OnQtdChange(object sender, EventArgs e)
         {
             var qtdLabel = this.FindByName<Label>("QtdLabel");
-            var qrcodeQtd = await DisplayActionSheet("Qtd. Impressão", "Cancelar", null, QrcodeQtd);
+            var qrcodeQtd = await DisplayActionSheet("Qtd. Impressão", "Cancelar", null, QrcodeQtdList);
             if (qrcodeQtd != "Cancelar")
             {
                 qtdLabel.Text = qrcodeQtd;
@@ -83,29 +81,30 @@ namespace xamarin_lib_harpia.Views
         private async void OnSizeChange(object sender, EventArgs e)
         {
             var sizeLabel = this.FindByName<Label>("SizeLabel");
-            var qrcodeSize = await DisplayActionSheet("QR-Code tamanho", "Cancelar", null, QrcodeSize);
-            if (qrcodeSize!= "Cancelar")
+            var qrcodeSize = await DisplayActionSheet("QR-Code tamanho", "Cancelar", null, QrcodeSizeList);
+            if (qrcodeSize != "Cancelar")
             {
-                print_size = QrcodeSize.IndexOf(qrcodeSize);
+                print_size = QrcodeSizeList.IndexOf(qrcodeSize);
                 sizeLabel.Text = qrcodeSize;
             }
         }
         private async void OnLevelChange(object sender, EventArgs e)
         {
             var levelLabel = this.FindByName<Label>("LevelLabel");
-            var qrcodeLevel = await DisplayActionSheet("Nível de correção", "Cancelar", null, QrcodeLevel);
+            var qrcodeLevel = await DisplayActionSheet("Nível de correção", "Cancelar", null, QrcodeLevelList);
             if (qrcodeLevel != "Cancelar")
             {
-                error_level = QrcodeLevel.IndexOf(qrcodeLevel);
+                error_level = QrcodeLevelList.IndexOf(qrcodeLevel);
                 levelLabel.Text = qrcodeLevel;
             }
         }
         private async void OnAlignChange(object sender, EventArgs e)
         {
             var alignLabel = this.FindByName<Label>("AlignLabel");
-            var qrcodeAlign = await DisplayActionSheet("Alinhamento", "Cancelar", null, QrcodeAlign);
-            if(qrcodeAlign != "Cancelar")
+            var qrcodeAlign = await DisplayActionSheet("Alinhamento", "Cancelar", null, QrcodeAlignList);
+            if (qrcodeAlign != "Cancelar")
             {
+                QrcodeAlign = (AlignmentEnum)Enum.Parse(typeof(AlignmentEnum), qrcodeAlign);
                 alignLabel.Text = qrcodeAlign;
             }
         }
