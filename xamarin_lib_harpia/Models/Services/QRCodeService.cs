@@ -28,16 +28,7 @@ namespace xamarin_lib_harpia.Models.Services
             }
         }
 
-        public bool InitConnection()
-        {
-            return true;
-        }
-        public bool IsConnected()
-        {
-            return true;
-        }
-
-        public async Task<bool> PrintQRCode(QRcode qrcode) 
+        /*public async Task<bool> PrintQRCode(QRcode qrcode) 
         {
             if (!IsConnected()) return false;
             InitConnection();
@@ -74,6 +65,7 @@ namespace xamarin_lib_harpia.Models.Services
         {
             return true;
         }
+        */
     }
 
 }

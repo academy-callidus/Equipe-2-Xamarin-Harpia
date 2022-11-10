@@ -25,5 +25,15 @@ namespace xamarin_lib_harpia.Models.Entities
             CutPaper = cutPaper;
         }
 
+        public bool IsValid()
+        {
+            if(Content == null) return false;
+        }
+
+        public override string ToString()
+        {
+            return $"Qrcode[Content={Content}, Imp. Quantity={ImpQuant}, Imp. Size={ImpSize}, Correction Level={Correction}, Alignment={Alignment}, CutPaper={CutPaper}"
+        }
+
     }
 }
