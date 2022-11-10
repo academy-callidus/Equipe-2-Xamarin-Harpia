@@ -25,15 +25,15 @@ namespace BluetoothPrinter.Droid
         }
 
         // método através do qual uma lista de bytes será utilizada para enviar comandos à impressora
-        public async Task SendRawData(byte[] data)
+        public void SendRawData(byte[] data)
         {
             var socket = _connectedDevice.CreateRfcommSocketToServiceRecord(
                 UUID.FromString("00001101-0000-1000-8000-00805f9b34fb")
             );
             try
             { 
-                await socket.ConnectAsync();
-                await socket.OutputStream.WriteAsync(data.ToArray(), 0, data.Length);
+                socket.Connect();
+                socket.OutputStream.Write(data, 0, data.Length);
                 socket.Close();
             }
             catch (Exception exception)
@@ -154,14 +154,15 @@ namespace BluetoothPrinter.Droid
             return _connectedDevice != null;
         }
 
-        public async Task<bool> PrintBarcode(Barcode barcode)
+        public bool PrintBarcode(Barcode barcode)
         {
             InitConnection();
             if(!IsConnected()) return false;
             byte[] barcodeCommands = CommandUtils.GetBarcodeBytes(barcode);
             try
             {
-                await SendRawData(barcodeCommands);
+                SendRawData(barcodeCommands);
+                SendRawData(new byte[] { 0x0A });
                 CloseConnection();
                 return true;
             }

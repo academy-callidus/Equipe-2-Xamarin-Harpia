@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Utils
@@ -19,7 +21,7 @@ namespace xamarin_lib_harpia.Utils
         public static byte FF = 0x0C;// Carriage control (print and return to the standard mode (in page mode))
         public static byte CAN = 0x18;// Canceled (cancel print data in page mode)
 
-        private static byte[] GetBytesFromDecString(String decstring)
+        private static byte[] GetBytesFromDecString(string decstring)
         {
             if (decstring == null || decstring.Equals("")) return null;
             decstring = decstring.Replace(" ", "");
@@ -59,12 +61,13 @@ namespace xamarin_lib_harpia.Utils
             if (barcode.Model.ID > 7)
                 model = new byte[] { 0x1D, 0x6B, 0x49, (byte)(barcodeByteArray.Length + 2), 0x7B, (byte)(0x41 + barcode.Model.ID - 8)};
             else
-                model = new byte[] { 0x1D, 0x6B, (byte)barcodeByteArray.Length, (byte)(barcode.Model.ID + 0x41) };
+                model = new byte[] { 0x1D, 0x6B, (byte)(barcode.Model.ID + 0x41), (byte)barcodeByteArray.Length };
 
-            MemoryStream stream = new MemoryStream();
-            stream.Write(dimensions, 0, dimensions.Length); // Setting barcode dimensions (width, height, alingment)
-            stream.Write(model, 0, model.Length); // Setting the barcode model
-            stream.Write(barcodeByteArray, 0, barcodeByteArray.Length); // Setting the barcode content
+            var stream = new List<byte>();
+            stream.AddRange(dimensions); // Setting barcode dimensions (width, height, alingment)
+            stream.AddRange(model); // Setting the barcode model
+            stream.AddRange(barcodeByteArray); // Setting the barcode content
+            if (barcode.CutPaper) stream.AddRange(CutPaper());
             return stream.ToArray();
         }
 

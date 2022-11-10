@@ -13,12 +13,12 @@ namespace xamarin_lib_harpia.Models.Services
             Connection = connection;
         }
 
-        public async Task<bool> Execute(Barcode barcode)
+        public bool Execute(Barcode barcode)
         {
             if (!barcode.IsValid()) return false;
             try
             {
-                var response = await Connection.PrintBarcode(barcode);
+                var response = Connection.PrintBarcode(barcode);
                 return response;
             }
             catch (Exception exception)

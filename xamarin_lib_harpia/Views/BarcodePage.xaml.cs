@@ -13,6 +13,7 @@ namespace xamarin_lib_harpia.Views
     public partial class BarcodePage : ContentPage
     {
         private List<BarcodeModel> BarcodeModels;
+        private BarcodeService BarcodeService;
         private readonly string[] BarcodeHRIs = { "Acima do QRCode", "Abaixo do QRCode", "Acima e abaixo do QRCode" };
         private readonly string CANCEL_OPTION_TEXT = "Cancelar";
         private readonly string DEFAULT_BARCODE_VALUE = "201705070507";
@@ -22,6 +23,8 @@ namespace xamarin_lib_harpia.Views
             InitializeComponent();
             InitializeModels();
             InitializeValues();
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            BarcodeService = new BarcodeService(connection);
         }
 
         private void InitializeModels()
@@ -131,14 +134,9 @@ namespace xamarin_lib_harpia.Views
 
         private async void OnPrint(object sender, EventArgs e)
         {
-            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
-            var wasSuccessful = await new BarcodeService(connection).Execute(GetBarcodeEntity());
-
-            if (!wasSuccessful)
-            {
-                await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
-            }
-
+            
+            var wasSuccessful = BarcodeService.Execute(GetBarcodeEntity());
+            if (!wasSuccessful) await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
             Console.WriteLine(GetBarcodeEntity());
         }
     }

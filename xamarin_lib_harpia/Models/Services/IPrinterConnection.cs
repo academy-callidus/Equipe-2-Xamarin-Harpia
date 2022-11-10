@@ -9,7 +9,7 @@ namespace xamarin_lib_harpia.Models.Services
 
         DeviceInfo GetCurrentDevice();
         List<DeviceInfo> GetAvailableDevices();
-        Task SendRawData(byte[] data);
+        void SendRawData(byte[] data);
         bool SetCurrentDevice(string printerName);
         void PrintText(string content);
         void PrintQR(string content);
@@ -17,10 +17,10 @@ namespace xamarin_lib_harpia.Models.Services
         bool CloseConnection();
         // PrinterInfo getStatus();
         bool IsConnected();
-        Task<bool> PrintBarcode(Barcode barcode);
-        //Task<bool> PrintQRCode(QRCode qrcode);
-        //Task<bool> PrintDoubleQRCode(QRCode qrcode);
-        //Task<bool> PrintText(Text text);
+        bool PrintBarcode(Barcode barcode);
+        //bool PrintQRCode(QRCode qrcode);
+        //bool PrintDoubleQRCode(QRCode qrcode);
+        //bool PrintText(Text text);
         void SetAlignment(AlignmentEnum alignment);
         //bool PrintBoldText(Text text);
         bool CutPaper();
