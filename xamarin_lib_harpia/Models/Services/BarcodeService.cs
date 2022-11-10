@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Models.Services
@@ -16,8 +15,17 @@ namespace xamarin_lib_harpia.Models.Services
 
         public bool Execute(Barcode barcode)
         {
-            Connection.PrintBarcode(barcode);
-            return true;
+            if (!barcode.IsValid()) return false;
+            try
+            {
+                var response = Connection.PrintBarcode(barcode);
+                return response;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return false;
+            }
         }
     }
 }
