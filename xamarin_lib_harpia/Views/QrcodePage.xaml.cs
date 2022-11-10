@@ -105,8 +105,15 @@ namespace xamarin_lib_harpia.Views
 
         private QRcode GetQrcodeEntity()
         {
+            var qrcodeLabel = this.FindByName<Label>("QrcodeLabel");
 
-            return new QRcode();
+            return new QRcode(
+                content: qrcodeLabel.Text,
+                impquant: print_num,
+                impsize: print_size,
+                correction: QrcodeLevel,
+                alignment: QrcodeAlign,
+                cutPaper: HasCut);
         }
 
         private void OnPrint(object sender, EventArgs e)
