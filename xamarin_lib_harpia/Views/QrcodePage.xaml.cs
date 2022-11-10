@@ -18,8 +18,7 @@ namespace xamarin_lib_harpia.Views
         private QrCodeCorrectionEnum QrcodeLevel;
         private AlignmentEnum QrcodeAlign;
         private bool HasCut;
-        private int print_num = 0;
-        private int print_size = 8;
+        private int print_num = 1;
         private int error_level = 3;
 
         public QrcodePage()
@@ -62,6 +61,7 @@ namespace xamarin_lib_harpia.Views
             var qrcodeQtd = await DisplayActionSheet("Qtd. Impressão", "Cancelar", null, QrcodeQtdList);
             if (qrcodeQtd != "Cancelar")
             {
+                print_num = QrcodeLevelList.IndexOf(qrcodeQtd) + 1;
                 qtdLabel.Text = qrcodeQtd;
             }
         }
@@ -72,7 +72,6 @@ namespace xamarin_lib_harpia.Views
             var qrcodeSize = await DisplayActionSheet("QR-Code tamanho", "Cancelar", null, QrcodeSizeList);
             if (qrcodeSize!= "Cancelar")
             {
-                print_size = QrcodeSizeList.IndexOf(qrcodeSize);
                 sizeLabel.Text = qrcodeSize;
             }
         }
@@ -106,11 +105,14 @@ namespace xamarin_lib_harpia.Views
         private QRcode GetQrcodeEntity()
         {
             var qrcodeLabel = this.FindByName<Label>("QrcodeLabel");
+            var sizeLabel = this.FindByName<Label>("SizeLabel");
+
+            var size = Int32.Parse(sizeLabel.Text);
 
             return new QRcode(
                 content: qrcodeLabel.Text,
                 impquant: print_num,
-                impsize: print_size,
+                impsize: size,
                 correction: QrcodeLevel,
                 alignment: QrcodeAlign,
                 cutPaper: HasCut);
