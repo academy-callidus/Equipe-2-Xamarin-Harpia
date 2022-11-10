@@ -59,7 +59,7 @@ namespace xamarin_lib_harpia.Utils
             if (barcode.Model.ID > 7)
                 model = new byte[] { 0x1D, 0x6B, 0x49, (byte)(barcodeByteArray.Length + 2), 0x7B, (byte)(0x41 + barcode.Model.ID - 8)};
             else
-                model = new byte[] { 0x1D, 0x6B, (byte)(barcode.Model.ID + 0x41), (byte)barcodeByteArray.Length };
+                model = new byte[] { 0x1D, 0x6B, (byte)barcodeByteArray.Length, (byte)(barcode.Model.ID + 0x41) };
 
             MemoryStream stream = new MemoryStream();
             stream.Write(dimensions, 0, dimensions.Length); // Setting barcode dimensions (width, height, alingment)
