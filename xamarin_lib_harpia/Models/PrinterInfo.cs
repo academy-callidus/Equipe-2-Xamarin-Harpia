@@ -6,11 +6,11 @@ namespace xamarin_lib_harpia.Models
 {
     internal class PrinterInfo
     {
-        public string serialNo { get; }
-        public string deviceModel { get; }
-        public string firmwareVersion { get; }
-        public string head { get; }
-        public string printedDistance { get; }
-        public string paper { get; }
+        public string SerialNo { get; }
+        public string DeviceModel { get; }
+        public string FirmwareVersion { get; }
+        public string Head { get; }
+        public string PrintedDistance { get; }
+        public string Paper { get; }
     }
 }

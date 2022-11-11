@@ -23,7 +23,6 @@ namespace xamarin_lib_harpia.Views
         {
             base.OnAppearing();
             LoadDemoDetails();
-
         }
 
         public string BluetoothConnection()
@@ -38,7 +37,7 @@ namespace xamarin_lib_harpia.Views
             return action;
         }
 
-        private void AddDemo(string nome, string path, string navigateTo)
+        private void AddDemo(string nome, string path, Func<Task> onTap)
         {
             int itens = Pages.Children.Count();
             int row;
@@ -63,12 +62,10 @@ namespace xamarin_lib_harpia.Views
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
-            if (navigateTo != null)
-            {
-                tapGestureRecognizer.Tapped += async (s, e) => {
-                    await Shell.Current.GoToAsync(navigateTo);
-                };
-            }
+            tapGestureRecognizer.Tapped += async (s, e) => {
+                await onTap();
+            };
+            
 
             flexLayout.GestureRecognizers.Add(tapGestureRecognizer);
             Image image = new Image
@@ -93,10 +90,22 @@ namespace xamarin_lib_harpia.Views
         public void LoadDemoDetails()
         {
             Pages.Children.Clear();
-            AddDemo("Teste", "tesImg.png", null);
-            AddDemo("QrCode", "function_qr.png", nameof(QrcodePage));
-            AddDemo("BarCode", "function_barcode.png", nameof(BarcodePage));
-            AddDemo("Text", "function_text.png", nameof(TextPage));
+            AddDemo("Teste", "tesImg.png", RunFullTest());
+            AddDemo("QrCode", "function_qr.png", NavigateTo(nameof(QrcodePage)));
+            AddDemo("BarCode", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
+            AddDemo("Text", "function_text.png", NavigateTo(nameof(TextPage)));
+        }
+
+        private Func<Task> RunFullTest()
+        {
+            var service = new FullTestService();
+
+            return new Func<Task>(async () => await Task.Run(() => service.RunAllTests()));
+        }
+
+        private Func<Task> NavigateTo(string url)
+        {
+            return new Func<Task>(async () => await Shell.Current.GoToAsync(url));
         }
 
         async void OnSettingsClicked(object sender, EventArgs e)
