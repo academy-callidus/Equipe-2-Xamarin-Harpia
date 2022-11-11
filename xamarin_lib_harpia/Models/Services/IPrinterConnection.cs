@@ -9,7 +9,7 @@ namespace xamarin_lib_harpia.Models.Services
 
         DeviceInfo GetCurrentDevice();
         List<DeviceInfo> GetAvailableDevices();
-        Task SendRawData(byte[] data);
+        void SendRawData(byte[] data);
         bool SetCurrentDevice(string printerName);
         void PrintText(string content);
         void PrintQR(string content);

@@ -13,6 +13,7 @@ namespace xamarin_lib_harpia.Views
     public partial class BarcodePage : ContentPage
     {
         private List<BarcodeModel> BarcodeModels;
+        private BarcodeService BarcodeService;
         private readonly string[] BarcodeHRIs = { "Acima do QRCode", "Abaixo do QRCode", "Acima e abaixo do QRCode" };
         private readonly string CANCEL_OPTION_TEXT = "Cancelar";
         private readonly string DEFAULT_BARCODE_VALUE = "201705070507";
