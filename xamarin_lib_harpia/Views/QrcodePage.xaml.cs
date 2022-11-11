@@ -15,7 +15,6 @@ namespace xamarin_lib_harpia.Views
         private readonly string[] QrcodeSizeList = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
         private readonly string[] QrcodeLevelList = { "Correção L (7%)", "Correção M (15%)", "Correção Q (25%)", "Correção H (30%)" };
         private readonly string[] QrcodeAlignList = { "Esquerda", "Centro", "Direita" };
-        private bool HasCut;
 
         public QrcodePage()
         {
