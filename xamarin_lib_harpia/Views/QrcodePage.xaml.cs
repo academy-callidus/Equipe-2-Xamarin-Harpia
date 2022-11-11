@@ -98,7 +98,7 @@ namespace xamarin_lib_harpia.Views
 
             // Quantity OK
             var qtdLabel = this.FindByName<Label>("QtdLabel");
-            var quantity = QrcodeLevelList.IndexOf(qtdLabel.Text);
+            var quantity = QrcodeQtdList.IndexOf(qtdLabel.Text);
 
             // Size OK
             var sizeLabel = this.FindByName<Label>("SizeLabel");
