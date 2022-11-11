@@ -50,8 +50,7 @@ namespace xamarin_lib_harpia.Models.Services
                 new CODE128C()
         };
 
-        private readonly string[] QrcodeQtdList = { "QrCode", "Dois QrCode" };
-        private readonly int[] QrcodeSizeList = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        private readonly int[] QrcodeSizeList = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         private readonly QrCodeCorrectionEnum[] QrcodeLevelList = 
         { 
             QrCodeCorrectionEnum.CORRECTION_L,  
@@ -75,16 +74,13 @@ namespace xamarin_lib_harpia.Models.Services
             int FontSize = 12;
                         
             // Test bold Text
-            text.Execute(new Text("Testa bold", true, false, charSetOption, FontSize, record));
+            text.Execute(new Text("Test Bold", true, false, charSetOption, FontSize, record));
             // Test underline Text
-            text.Execute(new Text("Testa underline", false, true, charSetOption, FontSize, record));
+            text.Execute(new Text("Test Underline", false, true, charSetOption, FontSize, record));
             // Test Bold e Underline
-            text.Execute(new Text("Testa bold e underline", true, true, charSetOption, FontSize, record));
+            text.Execute(new Text("Test Bold + Underline", true, true, charSetOption, FontSize, record));
             // Test Text Size
-            text.Execute(new Text("Testa tamanho do Texto igual a 16", false, false, charSetOption, 16, record));
-            text.Execute(new Text("Testa tamanho do Texto igual a 24", false, false, charSetOption, 24, record));
-            
-
+            text.Execute(new Text("Test Fonte 16", false, false, charSetOption, 16, record));
         }
 
         private void PrintQRcodeTest()
