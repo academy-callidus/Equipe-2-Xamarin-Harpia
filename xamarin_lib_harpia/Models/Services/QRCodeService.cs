@@ -14,12 +14,12 @@ namespace xamarin_lib_harpia.Models.Services
         {
             Connection = connection;
         }
-        public async Task<bool> Execute(QRcode qrcode)
+        public bool Execute(QRcode qrcode)
         {
             if (!qrcode.IsValid()) return false;
             try
             {
-                var response = await Connection.PrintQRCode(qrcode);
+                var response = Connection.PrintQRCode(qrcode);
                 return response;
             }
             catch(Exception exception)

@@ -83,46 +83,44 @@ namespace xamarin_lib_harpia.Utils
             byte[] errorlevel = new byte[] { GS, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x45, (byte)(48 + (int)qrcode.Correction) };
 
             // code 
+            var stream_code = new List<byte>();
             byte[] d = TextToByte(qrcode.Content);
             int len = d.Length + 3;
-            byte[] code = new byte[] { 0x1D, 0x28, 0x6B, (byte)len, (byte)(len >> 8), 0x31, 0x50, 0x30 };
+            byte[] c = new byte[] { 0x1D, 0x28, 0x6B, (byte)len, (byte)(len >> 8), 0x31, 0x50, 0x30 };
+            stream_code.AddRange(c);
             for (int i = 0; i < d.Length && i < len; i++)
             {
-                code.addRange
+                stream_code.Add(d[i]);
             }
+            var code = stream_code.ToArray();
+
 
             if (qrcode.ImpQuant == 1)
             {
-                MemoryStream stream = new MemoryStream();
-                stream.Write(TextToByte("QrCode\n"), 0, TextToByte("QrCode\n").Length);
-                stream.Write(TextToByte("--------------------------------\n"), 0, TextToByte("--------------------------------\n").Length);
-                stream.Write(modulesize, 0, modulesize.Length);
-                stream.Write(errorlevel, 0, errorlevel.Length);
-                stream.Write(code, 0, code.Length);
-                stream.Write(getBytesForPrintQRCode(true), 0, getBytesForPrintQRCode(true).Length);
-                if (qrcode.CutPaper)
-                {
-                    stream.Write(CutPaper(), 0, CutPaper().Length);
-                }
+                var stream = new List<byte>();
+                stream.AddRange(TextToByte("QrCode\n"));
+                stream.AddRange(TextToByte("--------------------------------\n"));
+                stream.AddRange(modulesize);
+                stream.AddRange(errorlevel);
+                stream.AddRange(code);
+                stream.AddRange(getBytesForPrintQRCode(true));
+                if (qrcode.CutPaper) stream.AddRange(CutPaper());
                 return stream.ToArray();
             }
             else
             {
                 byte[] double_qr = new byte[] { 0x1B, 0x5C, 0x18, 0x00 };
-                MemoryStream stream = new MemoryStream();
-                stream.Write(TextToByte("QrCode\n"), 0, TextToByte("QrCode\n").Length);
-                stream.Write(TextToByte("--------------------------------\n"), 0, TextToByte("--------------------------------\n").Length);
-                stream.Write(modulesize, 0, modulesize.Length);
-                stream.Write(errorlevel, 0, errorlevel.Length);
-                stream.Write(code, 0, code.Length);
-                stream.Write(getBytesForPrintQRCode(false), 0, getBytesForPrintQRCode(false).Length);
-                stream.Write(code, 0, code.Length);
-                stream.Write(double_qr, 0, double_qr.Length);
-                stream.Write(getBytesForPrintQRCode(true), 0, getBytesForPrintQRCode(true).Length);
-                if (qrcode.CutPaper)
-                {
-                    stream.Write(CutPaper(), 0, CutPaper().Length);
-                }
+                var stream = new List<byte>();
+                stream.AddRange(TextToByte("QrCode\n"));
+                stream.AddRange(TextToByte("--------------------------------\n"));
+                stream.AddRange(modulesize);
+                stream.AddRange(errorlevel);
+                stream.AddRange(code);
+                stream.AddRange(getBytesForPrintQRCode(false));
+                stream.AddRange(code);
+                stream.AddRange(double_qr);
+                stream.AddRange(getBytesForPrintQRCode(true));
+                if (qrcode.CutPaper) stream.AddRange(CutPaper());
                 return stream.ToArray();
             }
 

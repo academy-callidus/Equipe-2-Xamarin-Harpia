@@ -175,14 +175,15 @@ namespace BluetoothPrinter.Droid
             }
         }
 
-        public async Task<bool> PrintQrcode(QRcode qrcode)
+        public bool PrintQrcode(QRcode qrcode)
         {
             InitConnection();
             if (!IsConnected()) return false;
             byte[] qrcodeCommands = CommandUtils.GetQrcodeBytes(qrcode);
             try
             {
-                await SendRawData(qrcodeCommands);
+                SendRawData(qrcodeCommands);
+                SendRawData(new byte[] { 0x0A });
                 CloseConnection();
                 return true;
             }

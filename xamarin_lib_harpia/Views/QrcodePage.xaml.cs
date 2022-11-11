@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 using xamarin_lib_harpia.Utils;
-using System.Collections.Generic;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Models.Services;
-using xamarin_lib_harpia.Models.Services;
+using Xamarin.Forms.Internals;
 
 namespace xamarin_lib_harpia.Views
 {
-    public partial class QrcodePage : ContentPage
+    public partial class QrcodePage : ContentPage { 
         private string[] QrcodeQtdList = { "QrCode", "Dois QrCode" };
         private string[] QrcodeSizeList = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
         private string[] QrcodeLevelList = { "Correção L (7%)", "Correção M (15%)", "Correção Q (25%)", "Correção H (30%)" };
         private string[] QrcodeAlignList = { "Esquerda", "Centro", "Direita" };
         private QrCodeCorrectionEnum QrcodeLevel;
         private AlignmentEnum QrcodeAlign;
-        private string[] QrcodeAlign = { "Esquerda", "Centro", "Direita" };
         private bool HasCut;
 
         public QrcodePage()
@@ -67,10 +65,10 @@ namespace xamarin_lib_harpia.Views
 
         private async void OnSizeChange(object sender, EventArgs e)
         {
+            var sizeLabel = this.FindByName<Label>("SizeLabel");
             var qrcodeSize = await DisplayActionSheet("QR-Code tamanho", "Cancelar", null, QrcodeSizeList);
-            if (qrcodeSize!= "Cancelar")
-            if (qrcodeSize!= "Cancelar")
-                print_size = QrcodeSize.IndexOf(qrcodeSize);
+            if (qrcodeSize!= "Cancelar") 
+            {
                 sizeLabel.Text = qrcodeSize;
             }
         }
@@ -79,17 +77,16 @@ namespace xamarin_lib_harpia.Views
             var levelLabel = this.FindByName<Label>("LevelLabel");
             var qrcodeLevel = await DisplayActionSheet("Nível de correção", "Cancelar", null, QrcodeLevelList);
             if (qrcodeLevel != "Cancelar")
-                error_level = QrcodeLevel.IndexOf(qrcodeLevel);
+            { 
                 levelLabel.Text = qrcodeLevel;
             }
         }
         private async void OnAlignChange(object sender, EventArgs e)
         {
+            var alignLabel = this.FindByName<Label>("AlignLabel");
             var qrcodeAlign = await DisplayActionSheet("Alinhamento", "Cancelar", null, QrcodeAlignList);
             if(qrcodeAlign != "Cancelar")
-            if(qrcodeAlign != "Cancelar")
             {
-                QrcodeAlign = (AlignmentEnum)Enum.Parse(typeof(AlignmentEnum), qrcodeAlign);
                 alignLabel.Text = qrcodeAlign;
             }
         }
@@ -116,7 +113,7 @@ namespace xamarin_lib_harpia.Views
 
             // Correction
             var levelLabel = this.FindByName<Label>("LevelLabel");
-            QrCodeCorrectionEnum level = QrCodeCorrectionEnum.CORRECTION_L;
+            QrCodeCorrectionEnum level;
             if(levelLabel.Text == "Correção L(7 %)")
             {
                 level = QrCodeCorrectionEnum.CORRECTION_L;
@@ -136,7 +133,7 @@ namespace xamarin_lib_harpia.Views
 
             // Alignment
             var alignLabel = this.FindByName<Label>("AlignLabel");
-            AlignmentEnum align = AlignmentEnum.CENTER;
+            AlignmentEnum align;
             if(alignLabel.Text == "Esquerda")
             {
                 align = AlignmentEnum.LEFT;
