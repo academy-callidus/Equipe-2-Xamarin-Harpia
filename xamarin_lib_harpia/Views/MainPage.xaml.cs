@@ -94,7 +94,6 @@ namespace xamarin_lib_harpia.Views
             AddDemo("QrCode", "function_qr.png", NavigateTo(nameof(QrcodePage)));
             AddDemo("BarCode", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
             AddDemo("Text", "function_text.png", NavigateTo(nameof(TextPage)));
-            AddDemo("Blutest", "bluPrinter.png", NavigateTo(nameof(TestConnection)));
         }
 
         private Func<Task> RunFullTest()
