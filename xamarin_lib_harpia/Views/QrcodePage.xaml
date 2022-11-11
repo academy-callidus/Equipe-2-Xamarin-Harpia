@@ -162,7 +162,7 @@
                 >
                     <Label Text="Cortar Papel" TextColor="#FFF"/>
                     <StackLayout Orientation="Horizontal">
-                        <Switch ThumbColor="#E6e6e6" OnColor="#969696" />
+                        <Switch x:Name="CutLabel" ThumbColor="#E6e6e6" OnColor="#969696" />
                     </StackLayout>
                 </FlexLayout>
 
@@ -173,12 +173,12 @@
                         HorizontalOptions="FillAndExpand"  
                         VerticalOptions="StartAndExpand" 
                         BarcodeFormat="QR_CODE"
-                        WidthRequest="300" 
-                        HeightRequest="300">
+                        WidthRequest="100" 
+                        HeightRequest="100">
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
                         <zxingcommon:EncodingOptions 
-                        Height="300"
-                        Width="300"
+                        Height="100"
+                        Width="100"
                         PureBarcode="True"/>
                     </zxing:ZXingBarcodeImageView.BarcodeOptions>
                 </zxing:ZXingBarcodeImageView>
@@ -188,6 +188,7 @@
                 Text="Imprimir" 
                 TextColor="#FFF"
                 FontAttributes="Bold" 
+                Clicked="OnPrint"
                 BackgroundColor="#F00"
             />
         </FlexLayout>
