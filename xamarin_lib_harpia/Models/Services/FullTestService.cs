@@ -11,13 +11,13 @@ namespace xamarin_lib_harpia.Models.Services
     {
         private readonly IPrinterConnection Connection = DependencyService.Get<IPrinterConnection>();
 
-        //private readonly TextService text;
+        private readonly TextService text;
         private readonly QRCodeService qrcode;
         private readonly BarcodeService barcode;
 
         public FullTestService()
         {
-            //this.text = new TextService(Connection);
+            this.text = new TextService(Connection);
             this.qrcode = new QRCodeService(Connection);
             this.barcode = new BarcodeService(Connection);
         }
@@ -59,16 +59,36 @@ namespace xamarin_lib_harpia.Models.Services
             QrCodeCorrectionEnum.CORRECTION_Q,
             QrCodeCorrectionEnum.CORRECTION_H
         };
-        
+
+        private string[] encodeStrings = {
+            "CP437", "CP850", "CP860", "CP863", "CP865", 
+            "CP857", "CP737", "Windows-1252", "CP866", 
+            "CP852", "CP858", "CP874", "CP855", "CP862", 
+            "CP864", "GB18030", "BIG5", "KSC5601", "utf-8", 
+            "utf-16", "utf-32", "unicodeFFFE" };
+
 
         private void PrintTextTest()
         {
-            // TO-DO
+            int record = 21;
+            string charSetOption = encodeStrings[21];
+            int FontSize = 12;
+                        
+            // Test bold Text
+            text.Execute(new Text("Testa bold", true, false, charSetOption, FontSize, record));
+            // Test underline Text
+            text.Execute(new Text("Testa underline", false, true, charSetOption, FontSize, record));
+            // Test Bold e Underline
+            text.Execute(new Text("Testa bold e underline", true, true, charSetOption, FontSize, record));
+            // Test Text Size
+            text.Execute(new Text("Testa tamanho do Texto igual a 16", false, false, charSetOption, 16, record));
+            text.Execute(new Text("Testa tamanho do Texto igual a 24", false, false, charSetOption, 24, record));
+            
+
         }
 
         private void PrintQRcodeTest()
         {
-            // QRCode(string content, int impquant, int impsize, QrCodeCorrectionEnum correction, AlignmentEnum alignment, bool cutPaper)
             string content = "www.tectoySunmi.com.br";
 
             // Test Aligment 
@@ -83,31 +103,43 @@ namespace xamarin_lib_harpia.Models.Services
                     false
                     ));
             }
-            // Test Size QRCode
-            for(int i = 0; i < QrcodeSizeList.Length; i++)
-            {
-                qrcode.Execute(new QRcode(
+            // Test Size 3 QRCode
+            qrcode.Execute(new QRcode(
                     content,
                     0, //index do elemento
-                    QrcodeSizeList[i],
+                    QrcodeSizeList[2],
                     QrcodeLevelList[0],
                     Alignments[0],
                     false
                     ));
-            }
-
-            // Test QRCode Correction
-            for(int i = 0; i < QrcodeLevelList.Length; i++)
-            {
-                qrcode.Execute(new QRcode(
+            // Test Size 8 QRCode
+            qrcode.Execute(new QRcode(
                     content,
                     0, //index do elemento
-                    QrcodeSizeList[1],
-                    QrcodeLevelList[i],
+                    QrcodeSizeList[7],
+                    QrcodeLevelList[0],
                     Alignments[0],
                     false
                     ));
-            }
+
+            // Test QRCode Correction L
+            qrcode.Execute(new QRcode(
+                    content,
+                    0, //index do elemento
+                    QrcodeSizeList[1],
+                    QrcodeLevelList[0],
+                    Alignments[0],
+                    false
+                    ));
+            // Test QRCode Corretion H
+            qrcode.Execute(new QRcode(
+                    content,
+                    0, //index do elemento
+                    QrcodeSizeList[1],
+                    QrcodeLevelList[3],
+                    Alignments[0],
+                    false
+                    ));
 
             // Test Dois QRCode
             qrcode.Execute(new QRcode(content, 1, QrcodeSizeList[1], QrcodeLevelList[0], Alignments[0], false));
