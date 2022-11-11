@@ -94,7 +94,7 @@ namespace xamarin_lib_harpia.Utils
             var code = stream_code.ToArray();
 
 
-            if (qrcode.ImpQuant == 1)
+            if (qrcode.ImpQuant == 0)
             {
                 var stream = new List<byte>();
                 stream.AddRange(TextToByte("QrCode\n"));
