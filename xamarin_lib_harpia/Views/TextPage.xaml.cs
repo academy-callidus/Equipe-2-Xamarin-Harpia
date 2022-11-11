@@ -94,7 +94,7 @@ namespace xamarin_lib_harpia.Views
             {
                 System.Text.Encoding.GetEncoding(encode).GetBytes("teste");
             }
-        
+            System.Text.Encoding.UTF8.GetBytes("teste");
             DisplayAlert("Teste", "teste", "ok");
         }
     }

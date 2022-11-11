@@ -243,6 +243,7 @@ namespace xamarin_lib_harpia.Utils
 
         public static byte[] TextToByteEncoding(string content, string encoding)
         {
+            if (encoding.Equals("utf-8")) return System.Text.Encoding.UTF8.GetBytes(content);
             return System.Text.Encoding.GetEncoding(encoding).GetBytes(content);
         }
     }
