@@ -12,15 +12,22 @@ namespace xamarin_lib_harpia.Models.Services
         private readonly IPrinterConnection Connection = DependencyService.Get<IPrinterConnection>();
 
         //private readonly TextService text;
-        //private readonly QRcodeService qrcode;
+        private readonly QRCodeService qrcode;
         private readonly BarcodeService barcode;
 
         public FullTestService()
         {
             //this.text = new TextService(Connection);
-            //this.qrcode = new QRcodeService(Connection);
+            this.qrcode = new QRCodeService(Connection);
             this.barcode = new BarcodeService(Connection);
         }
+
+        private readonly AlignmentEnum[] Alignments =
+        {
+            AlignmentEnum.LEFT,
+            AlignmentEnum.RIGHT,
+            AlignmentEnum.CENTER
+        };
 
         private readonly string[] BarcodeHRIs =
         { 
@@ -43,6 +50,17 @@ namespace xamarin_lib_harpia.Models.Services
                 new CODE128C()
         };
 
+        private readonly string[] QrcodeQtdList = { "QrCode", "Dois QrCode" };
+        private readonly int[] QrcodeSizeList = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        private readonly QrCodeCorrectionEnum[] QrcodeLevelList = 
+        { 
+            QrCodeCorrectionEnum.CORRECTION_L,  
+            QrCodeCorrectionEnum.CORRECTION_M,
+            QrCodeCorrectionEnum.CORRECTION_Q,
+            QrCodeCorrectionEnum.CORRECTION_H
+        };
+        
+
         private void PrintTextTest()
         {
             // TO-DO
@@ -50,7 +68,51 @@ namespace xamarin_lib_harpia.Models.Services
 
         private void PrintQRcodeTest()
         {
-            // TO-DO
+            // QRCode(string content, int impquant, int impsize, QrCodeCorrectionEnum correction, AlignmentEnum alignment, bool cutPaper)
+            string content = "www.tectoySunmi.com.br";
+
+            // Test Aligment 
+            for (int i = 0; i < Alignments.Length; i++)
+            {
+                qrcode.Execute(new QRcode(
+                    content,
+                    0, //index do elemento
+                    QrcodeSizeList[1],
+                    QrcodeLevelList[0],
+                    Alignments[i],
+                    false
+                    ));
+            }
+            // Test Size QRCode
+            for(int i = 0; i < QrcodeSizeList.Length; i++)
+            {
+                qrcode.Execute(new QRcode(
+                    content,
+                    0, //index do elemento
+                    QrcodeSizeList[i],
+                    QrcodeLevelList[0],
+                    Alignments[0],
+                    false
+                    ));
+            }
+
+            // Test QRCode Correction
+            for(int i = 0; i < QrcodeLevelList.Length; i++)
+            {
+                qrcode.Execute(new QRcode(
+                    content,
+                    0, //index do elemento
+                    QrcodeSizeList[1],
+                    QrcodeLevelList[i],
+                    Alignments[0],
+                    false
+                    ));
+            }
+
+            // Test Dois QRCode
+            qrcode.Execute(new QRcode(content, 1, QrcodeSizeList[1], QrcodeLevelList[0], Alignments[0], false));
+
+
         }
 
         private void PrintBarcodeTest()
