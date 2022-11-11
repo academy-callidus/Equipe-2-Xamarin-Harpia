@@ -97,7 +97,6 @@ namespace xamarin_lib_harpia.Views
             AddDemo("QrCode", "function_qr.png", nameof(QrcodePage));
             AddDemo("BarCode", "function_barcode.png", nameof(BarcodePage));
             AddDemo("Text", "function_text.png", nameof(TextPage));
-            AddDemo("Blutest", "bluPrinter.png", nameof(TestConnection));
         }
 
         async void OnSettingsClicked(object sender, EventArgs e)
