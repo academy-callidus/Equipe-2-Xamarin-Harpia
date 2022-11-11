@@ -89,9 +89,10 @@ namespace xamarin_lib_harpia.Views
         void Teste(object sender, EventArgs e)
         {
             int[] encodes = { 437, 850, 860, 863, 865, 857, 737, 1252, 866, 852, 858, 874, 855, 862, 864, 54936, 950, 949, 65001 };
-            foreach(int i in encodes)
+            string[] encodeStrings = { "IBM437", "ibm850", "IBM860", "IBM863", "IBM865", "ibm857", "ibm737", "Windows-1252", "cp866", "ibm852", "IBM00858", "windows-874", "IBM855", "DOS-862", "IBM864", "GB18030", "big5", "ks_c_5601-1987", "utf-8" };
+            foreach(string encode in encodeStrings)
             {
-                System.Text.Encoding.GetEncoding(i).GetBytes("Teste");
+                System.Text.Encoding.GetEncoding(encode).GetBytes("teste");
             }
         
             DisplayAlert("Teste", "teste", "ok");
