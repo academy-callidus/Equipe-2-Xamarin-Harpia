@@ -25,7 +25,7 @@ namespace xamarin_lib_harpia.Views
 
         private void printTextButton_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IPrinterConnection>().PrintText(printBox.Text);
+            DependencyService.Get<IPrinterConnection>().PrintTextt(printBox.Text);
         }
 
         void SelectDevice(string printerName)

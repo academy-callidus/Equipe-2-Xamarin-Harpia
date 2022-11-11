@@ -14,10 +14,18 @@ namespace xamarin_lib_harpia.Models.Services
             Connection = connection;
         }
 
-        public bool execute(Text text)
+        public bool Execute(Text text)
         {
-
-            return true;
+            try
+            {
+                var response = Connection.PrintText(text);
+                return response;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                return false;
+            }
         }
     }
 }
