@@ -18,8 +18,6 @@ namespace xamarin_lib_harpia.Views
         private QrCodeCorrectionEnum QrcodeLevel;
         private AlignmentEnum QrcodeAlign;
         private bool HasCut;
-        private int print_num = 1;
-        private int error_level = 3;
 
         public QrcodePage()
         {
@@ -61,7 +59,6 @@ namespace xamarin_lib_harpia.Views
             var qrcodeQtd = await DisplayActionSheet("Qtd. Impressão", "Cancelar", null, QrcodeQtdList);
             if (qrcodeQtd != "Cancelar")
             {
-                print_num = QrcodeLevelList.IndexOf(qrcodeQtd) + 1;
                 qtdLabel.Text = qrcodeQtd;
             }
         }
@@ -81,7 +78,6 @@ namespace xamarin_lib_harpia.Views
             var qrcodeLevel = await DisplayActionSheet("Nível de correção", "Cancelar", null, QrcodeLevelList);
             if (qrcodeLevel != "Cancelar")
             {
-                error_level = QrcodeLevelList.IndexOf(qrcodeLevel);
                 levelLabel.Text = qrcodeLevel;
             }
         }
@@ -104,18 +100,63 @@ namespace xamarin_lib_harpia.Views
 
         private QRcode GetQrcodeEntity()
         {
+            // Content
             var qrcodeLabel = this.FindByName<Label>("QrcodeLabel");
-            var sizeLabel = this.FindByName<Label>("SizeLabel");
 
+            // Quantity
+            var qtdLabel = this.FindByName<Label>("QtdLabel");
+            var quantity = QrcodeLevelList.IndexOf(qtdLabel.Text) + 1;
+
+            // Size
+            var sizeLabel = this.FindByName<Label>("SizeLabel");
             var size = Int32.Parse(sizeLabel.Text);
+
+            // Correction
+            var levelLabel = this.FindByName<Label>("LevelLabel");
+            QrCodeCorrectionEnum level = QrCodeCorrectionEnum.CORRECTION_L;
+            if(levelLabel.Text == "Correção L(7 %)")
+            {
+                level = QrCodeCorrectionEnum.CORRECTION_L;
+            } 
+            else if(levelLabel.Text == "Correção M (15%)")
+            {
+                level = QrCodeCorrectionEnum.CORRECTION_M;
+            } 
+            else if(levelLabel.Text == "Correção Q (25%)")
+            {
+                level = QrCodeCorrectionEnum.CORRECTION_Q;
+            } 
+            else
+            {
+                level = QrCodeCorrectionEnum.CORRECTION_H;
+            }
+
+            // Alignment
+            var alignLabel = this.FindByName<Label>("AlignLabel");
+            AlignmentEnum align = AlignmentEnum.CENTER;
+            if(alignLabel.Text == "Esquerda")
+            {
+                align = AlignmentEnum.LEFT;
+            } 
+            else if(alignLabel.Text == "Centro")
+            {
+                align = AlignmentEnum.CENTER;
+            } 
+            else 
+            {
+                align = AlignmentEnum.RIGHT;
+            }
+
+            // Cut
+            var cutLabel = this.FindByName<Switch>("CutLabel");
 
             return new QRcode(
                 content: qrcodeLabel.Text,
-                impquant: print_num,
+                impquant: quantity,
                 impsize: size,
-                correction: QrcodeLevel,
-                alignment: QrcodeAlign,
-                cutPaper: HasCut);
+                correction: level,
+                alignment: align,
+                cutPaper: cutLabel.IsToggled);
         }
 
         private async void OnPrint(object sender, EventArgs e)

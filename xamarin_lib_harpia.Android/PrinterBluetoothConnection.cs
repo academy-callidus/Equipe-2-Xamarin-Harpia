@@ -12,6 +12,7 @@ using Java.Net;
 using System.Net.Sockets;
 using System.Linq;
 using System.Threading.Tasks;
+using ZXing.QrCode.Internal;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterBluetoothConnection))]
 namespace BluetoothPrinter.Droid
@@ -166,6 +167,25 @@ namespace BluetoothPrinter.Droid
                 return true;
             }
             catch(Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                CloseConnection();
+                return false;
+            }
+        }
+
+        public async Task<bool> PrintQrcode(QRcode qrcode)
+        {
+            InitConnection();
+            if (!IsConnected()) return false;
+            byte[] qrcodeCommands = CommandUtils.GetQrcodeBytes(qrcode);
+            try
+            {
+                await SendRawData(qrcodeCommands);
+                CloseConnection();
+                return true;
+            }
+            catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
                 CloseConnection();
