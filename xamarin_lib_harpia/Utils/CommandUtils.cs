@@ -67,6 +67,8 @@ namespace xamarin_lib_harpia.Utils
                 model = new byte[] { 0x1D, 0x6B, (byte)(barcode.Model.ID + 0x41), (byte)barcodeByteArray.Length };
 
             var stream = new List<byte>();
+            stream.AddRange(TextToByte("Barcode\n"));
+            stream.AddRange(TextToByte("--------------------------------\n"));
             stream.AddRange(dimensions); // Setting barcode dimensions (width, height, alingment)
             stream.AddRange(model); // Setting the barcode model
             stream.AddRange(barcodeByteArray); // Setting the barcode content
