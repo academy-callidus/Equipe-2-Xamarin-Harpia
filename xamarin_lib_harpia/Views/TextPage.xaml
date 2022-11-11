@@ -74,6 +74,7 @@
 
                     <Label
                         x:Name="TextSizeLabel"
+                        Text="12"
                         TextColor="Gray"
                         ></Label>
 
@@ -82,7 +83,7 @@
                     x:Name="Slider" 
                     Maximum="36" 
                     Minimum="12" 
-                    Value="24" 
+                    Value="12" 
                     ValueChanged="SliderChanged" 
                     ></Slider>
 
@@ -129,8 +130,8 @@
                 HeightRequest="250"
                 ></Editor>
             </StackLayout>
-
-            <Button Text="Imprimir" TextColor="White" BackgroundColor="Red"></Button>
+            
+            <Button Text="Imprimir" Clicked="OnPrint" TextColor="White" BackgroundColor="Red"></Button>
         </StackLayout>
 
     </ContentPage.Content>
