@@ -32,7 +32,7 @@ namespace xamarin_lib_harpia.Views
             charSetOption = mStrings[21];
             CharSetText.Text = charSetOption;
             Editor.Text = welcomeText;
-            TextSizeLabel.Text = "24";
+            TextSizeLabel.Text = "12";
 
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
             textService = new TextService(connection);

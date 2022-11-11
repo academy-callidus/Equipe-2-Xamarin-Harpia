@@ -82,19 +82,9 @@ namespace xamarin_lib_harpia.Utils
             if (text.IsUnderline) stream.AddRange(UnderlineWithOneDotWidthOn());
             else stream.AddRange(UnderlineOff());
 
-            if (text.Record < 17)
-            {
-                stream.AddRange(SingleByteOn());
-                stream.AddRange(SetCodeSystemSingle(CodeParse(text.Record)));
-            } 
-            else
-            {
-                stream.AddRange(SingleByteOff());
-                stream.AddRange(SetCodeSystem(CodeParse(text.Record)));
-            }
-
+            stream.AddRange(new byte[] { 0x1C,0x43,0xFF});
             stream.AddRange(SetFontSize(text.TextSize));
-            stream.AddRange(TextToByteEncoding(text.Content, text.Encoding));
+            stream.AddRange(TextToByteEncoding(text.Content, "utf-8"));
             stream.AddRange(NextLine(3));
 
             return stream.ToArray();
