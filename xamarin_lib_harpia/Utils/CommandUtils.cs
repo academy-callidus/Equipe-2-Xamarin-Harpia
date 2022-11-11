@@ -93,6 +93,7 @@ namespace xamarin_lib_harpia.Utils
                 stream.AddRange(SetCodeSystem(CodeParse(text.Record)));
             }
 
+            stream.AddRange(SetFontSize(text.TextSize));
             stream.AddRange(TextToByteEncoding(text.Content, text.Encoding));
             stream.AddRange(NextLine(3));
 
@@ -206,6 +207,12 @@ namespace xamarin_lib_harpia.Utils
             {
                 result[i] = LF;
             }
+            return result;
+        }
+
+        public static byte[] SetFontSize(int fontSize)
+        {
+            byte[] result = new byte[] { 0x1D, 0x21, (byte)fontSize };
             return result;
         }
 
