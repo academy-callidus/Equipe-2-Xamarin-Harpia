@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
-using xamarin_lib_harpia.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Models.Services
@@ -11,15 +8,10 @@ namespace xamarin_lib_harpia.Models.Services
     {
 
         DeviceInfo GetCurrentDevice();
-
         List<DeviceInfo> GetAvailableDevices();
-
         void SendRawData(byte[] data);
-
         bool SetCurrentDevice(string printerName);
-
         void PrintText(string content);
-
         void PrintQR(string content);
         bool InitConnection();
         bool CloseConnection();
@@ -33,6 +25,5 @@ namespace xamarin_lib_harpia.Models.Services
         void SetAlignment(AlignmentEnum alignment);
         //bool PrintBoldText(Text text);
         bool CutPaper();
-        bool Print3Line();
     }
 }
