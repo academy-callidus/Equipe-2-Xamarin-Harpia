@@ -22,6 +22,8 @@ namespace xamarin_lib_harpia.Views
             InitializeComponent();
             InitializeModels();
             InitializeValues();
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            BarcodeService = new BarcodeService(connection);
         }
 
         private void InitializeModels()
@@ -129,16 +131,27 @@ namespace xamarin_lib_harpia.Views
             return new Barcode(contentLabel.Text, HRILabel.Text, barcodeFormat, width, height, cutLabel.IsToggled);
         }
 
+        private Barcode GetBarcodeEntity()
+        {
+            var contentLabel = this.FindByName<Label>("BarcodeLabel");
+            var HRILabel = this.FindByName<Label>("HRILabel");
+            var modelLabel = this.FindByName<Label>("ModelLabel");
+            var widthLabel = this.FindByName<Label>("WidthLabel");
+            var heightLabel = this.FindByName<Label>("HeightLabel");
+            var cutLabel = this.FindByName<Switch>("CutLabel");
+
+            var barcodeFormat = BarcodeModels.Find(model => model.Name == modelLabel.Text);
+            var width = Int32.Parse(widthLabel.Text);
+            var height = Int32.Parse(heightLabel.Text);
+
+            return new Barcode(contentLabel.Text, HRILabel.Text, barcodeFormat, width, height, cutLabel.IsToggled);
+        }
+
         private async void OnPrint(object sender, EventArgs e)
         {
-            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
-            var wasSuccessful = await new BarcodeService(connection).Execute(GetBarcodeEntity());
-
-            if (!wasSuccessful)
-            {
-                await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
-            }
-
+            
+            var wasSuccessful = BarcodeService.Execute(GetBarcodeEntity());
+            if (!wasSuccessful) await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
             Console.WriteLine(GetBarcodeEntity());
         }
     }
