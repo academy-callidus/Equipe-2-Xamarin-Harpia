@@ -19,7 +19,6 @@ namespace xamarin_lib_harpia.Models.Services
         bool IsConnected();
         bool PrintBarcode(Barcode barcode);
         bool PrintQRCode(QRcode qrcode);
-        bool PrintDoubleQRCode(QRcode qrcode);
 
         //bool PrintText(Text text);
         void SetAlignment(AlignmentEnum alignment);

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using xamarin_lib_harpia.Models.Entities;
-using System.Collections.Generic;
 using System.Text;
 using ZXing.QrCode.Internal;
 using Xamarin.Forms.Xaml;

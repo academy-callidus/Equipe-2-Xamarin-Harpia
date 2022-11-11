@@ -9,19 +9,20 @@ using Xamarin.Forms.Internals;
 
 namespace xamarin_lib_harpia.Views
 {
-    public partial class QrcodePage : ContentPage { 
+    public partial class QrcodePage : ContentPage {
+        private QRCodeService QRCodeService;
         private string[] QrcodeQtdList = { "QrCode", "Dois QrCode" };
         private string[] QrcodeSizeList = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
         private string[] QrcodeLevelList = { "Correção L (7%)", "Correção M (15%)", "Correção Q (25%)", "Correção H (30%)" };
         private string[] QrcodeAlignList = { "Esquerda", "Centro", "Direita" };
-        private QrCodeCorrectionEnum QrcodeLevel;
-        private AlignmentEnum QrcodeAlign;
         private bool HasCut;
 
         public QrcodePage()
         {
             InitializeComponent();
             InitializeValues();
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            QRCodeService = new QRCodeService(connection);
         }
         private void InitializeValues()
         {
@@ -161,14 +162,8 @@ namespace xamarin_lib_harpia.Views
 
         private async void OnPrint(object sender, EventArgs e)
         {
-            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
-            var wasSuccessful = await new QRCodeService(connection).Execute(GetQrcodeEntity());
-
-            if (!wasSuccessful)
-            {
-                await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
-            }
-
+            var wasSuccessful = QRCodeService.Execute(GetQrcodeEntity());
+            if (!wasSuccessful) await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
             Console.WriteLine(GetQrcodeEntity());
         }
     }

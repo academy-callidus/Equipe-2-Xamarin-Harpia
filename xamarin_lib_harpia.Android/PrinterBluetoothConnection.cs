@@ -12,7 +12,6 @@ using Java.Net;
 using System.Net.Sockets;
 using System.Linq;
 using System.Threading.Tasks;
-using ZXing.QrCode.Internal;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterBluetoothConnection))]
 namespace BluetoothPrinter.Droid
@@ -32,7 +31,7 @@ namespace BluetoothPrinter.Droid
                 UUID.FromString("00001101-0000-1000-8000-00805f9b34fb")
             );
             try
-            { 
+            {
                 socket.Connect();
                 socket.OutputStream.Write(data, 0, data.Length);
                 socket.Close();
@@ -123,19 +122,20 @@ namespace BluetoothPrinter.Droid
         {
             try
             {
-                if(IsConnected()) return true;
+                if (IsConnected()) return true;
                 var availableDevices = GetAvailableDevices();
                 if (availableDevices.Count == 0) return false;
                 var device = availableDevices[0];
                 SetCurrentDevice(device.Title);
                 return true;
-            }catch (Exception exception)
+            }
+            catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
                 return false;
             }
         }
-        
+
         public bool CloseConnection()
         {
             try
@@ -143,7 +143,8 @@ namespace BluetoothPrinter.Droid
                 if (!IsConnected()) return false;
                 _connectedDevice = null;
                 return true;
-            }catch (Exception exception)
+            }
+            catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
                 return false;
@@ -158,7 +159,7 @@ namespace BluetoothPrinter.Droid
         public bool PrintBarcode(Barcode barcode)
         {
             InitConnection();
-            if(!IsConnected()) return false;
+            if (!IsConnected()) return false;
             byte[] barcodeCommands = CommandUtils.GetBarcodeBytes(barcode);
             try
             {
@@ -167,7 +168,7 @@ namespace BluetoothPrinter.Droid
                 CloseConnection();
                 return true;
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
                 CloseConnection();
@@ -175,7 +176,7 @@ namespace BluetoothPrinter.Droid
             }
         }
 
-        public bool PrintQrcode(QRcode qrcode)
+        public bool PrintQRCode(QRcode qrcode)
         {
             InitConnection();
             if (!IsConnected()) return false;
