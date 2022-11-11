@@ -173,12 +173,12 @@
                         HorizontalOptions="FillAndExpand"  
                         VerticalOptions="StartAndExpand" 
                         BarcodeFormat="QR_CODE"
-                        WidthRequest="200" 
-                        HeightRequest="200">
+                        WidthRequest="100" 
+                        HeightRequest="100">
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
                         <zxingcommon:EncodingOptions 
-                        Height="200"
-                        Width="200"
+                        Height="100"
+                        Width="100"
                         PureBarcode="True"/>
                     </zxing:ZXingBarcodeImageView.BarcodeOptions>
                 </zxing:ZXingBarcodeImageView>
