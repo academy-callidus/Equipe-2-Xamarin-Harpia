@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using Xamarin.Essentials;
 using xamarin_lib_harpia.Models.Entities;
+using System.Text;
+using ZXing.QrCode.Internal;
+using Xamarin.Forms.Xaml;
 
 namespace xamarin_lib_harpia.Utils
 {
@@ -40,7 +43,7 @@ namespace xamarin_lib_harpia.Utils
         public static byte[] GetBarcodeBytes(Barcode barcode)
         {
             int position = barcode.HRIPosition == "Acima do QRCode" ? 1 :
-                barcode.HRIPosition == "Abaixo do QRCode" ? 2 : 
+                barcode.HRIPosition == "Abaixo do QRCode" ? 2 :
                 barcode.HRIPosition == "Acima e abaixo do QRCode" ? 3 :
                 0;
             byte[] dimensions = new byte[]{0x1D,0x66,0x01,0x1D,0x48,
@@ -60,16 +63,110 @@ namespace xamarin_lib_harpia.Utils
 
             byte[] model;
             if (barcode.Model.ID > 7)
-                model = new byte[] { 0x1D, 0x6B, 0x49, (byte)(barcodeByteArray.Length + 2), 0x7B, (byte)(0x41 + barcode.Model.ID - 8)};
+                model = new byte[] { 0x1D, 0x6B, 0x49, (byte)(barcodeByteArray.Length + 2), 0x7B, (byte)(0x41 + barcode.Model.ID - 8) };
             else
                 model = new byte[] { 0x1D, 0x6B, (byte)(barcode.Model.ID + 0x41), (byte)barcodeByteArray.Length };
 
             var stream = new List<byte>();
+            stream.AddRange(TextToByte("Barcode\n"));
+            stream.AddRange(TextToByte("--------------------------------\n"));
             stream.AddRange(dimensions); // Setting barcode dimensions (width, height, alingment)
             stream.AddRange(model); // Setting the barcode model
             stream.AddRange(barcodeByteArray); // Setting the barcode content
             if (barcode.CutPaper) stream.AddRange(CutPaper());
             return stream.ToArray();
+        }
+        public static byte[] GetQrcodeBytes(QRcode qrcode)
+        {
+            //modulesize
+            byte[] modulesize = new byte[] { GS, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x43, (byte)qrcode.ImpSize};
+
+            //errorlevel
+            byte[] errorlevel = new byte[] { GS, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x45, (byte)(48 + (int)qrcode.Correction) };
+
+            // code 
+            var stream_code = new List<byte>();
+            byte[] d = TextToByte(qrcode.Content);
+            int len = d.Length + 3;
+            byte[] c = new byte[] { 0x1D, 0x28, 0x6B, (byte)len, (byte)(len >> 8), 0x31, 0x50, 0x30 };
+            stream_code.AddRange(c);
+            for (int i = 0; i < d.Length && i < len; i++)
+            {
+                stream_code.Add(d[i]);
+            }
+            var code = stream_code.ToArray();
+
+
+            if (qrcode.ImpQuant == 0)
+            {
+                var stream = new List<byte>();
+                stream.AddRange(TextToByte("QrCode\n"));
+                stream.AddRange(TextToByte("--------------------------------\n"));
+                stream.AddRange(modulesize);
+                stream.AddRange(errorlevel);
+                stream.AddRange(code);
+                if (qrcode.Alignment == AlignmentEnum.CENTER)
+                {
+                    stream.AddRange(AlignCenter());
+                }
+                else if (qrcode.Alignment == AlignmentEnum.RIGHT)
+                {
+                    stream.AddRange(AlignRight());
+                }
+                else
+                {
+                    stream.AddRange(AlignLeft());
+                }
+                stream.AddRange(getBytesForPrintQRCode(true));
+                if (qrcode.CutPaper) stream.AddRange(CutPaper());
+                return stream.ToArray();
+            }
+            else
+            {
+                byte[] double_qr = new byte[] { 0x1B, 0x5C, 0x18, 0x00 };
+                var stream = new List<byte>();
+                stream.AddRange(TextToByte("QrCode\n"));
+                stream.AddRange(TextToByte("--------------------------------\n"));
+                stream.AddRange(modulesize);
+                stream.AddRange(errorlevel);
+                stream.AddRange(code);
+                if (qrcode.Alignment == AlignmentEnum.CENTER)
+                {
+                    stream.AddRange(AlignCenter());
+                } 
+                else if (qrcode.Alignment == AlignmentEnum.RIGHT)
+                {
+                    stream.AddRange(AlignRight());
+                }
+                else
+                {
+                    stream.AddRange(AlignLeft());
+                }
+                stream.AddRange(getBytesForPrintQRCode(false));
+                stream.AddRange(code);
+                stream.AddRange(double_qr);
+                stream.AddRange(getBytesForPrintQRCode(true));
+                if (qrcode.CutPaper) stream.AddRange(CutPaper());
+                return stream.ToArray();
+            }
+
+        }
+
+        public static byte[] getBytesForPrintQRCode(bool single)
+        {
+            byte[] bytesforprint;
+            if (single)
+            {
+                bytesforprint = new byte[9];
+                bytesforprint[8] = 0x0A;
+            }
+            else
+            {
+                bytesforprint = new byte[8];
+            }
+            bytesforprint = new byte[] { 0x1D, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x51, 0x30 };
+
+            return bytesforprint;
         }
 
         public static byte[] GetTextBytes(Text text)

@@ -11,7 +11,7 @@
             Direction="Column"
             JustifyContent="SpaceBetween"
         >
-            <StackLayout Orientation="Vertical" FlexLayout.Grow="2">
+            <StackLayout Orientation="Vertical">
 
                 <BoxView 
                     HeightRequest=".5" 
@@ -149,20 +149,18 @@
                 </FlexLayout>
             </StackLayout>
 
-            <FlexLayout FlexLayout.Grow="1" AlignContent="Center" JustifyContent="Center">
+            <FlexLayout AlignContent="Center" JustifyContent="Center">
                 <zxing:ZXingBarcodeImageView
                     x:Name="BarcodeImageView"
                     HorizontalOptions="FillAndExpand"  
                     VerticalOptions="FillAndExpand"
-                    WidthRequest="400"
-                    HeightRequest="200"
-                    FlexLayout.Grow="1"
+                    WidthRequest="100"
+                    HeightRequest="100"
                 >
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
                         <zxingcommon:EncodingOptions 
-                            Height="200"
-                            Width="200"
-                            Margin="0"
+                            Height="100"
+                            Width="100"
                         />
                     </zxing:ZXingBarcodeImageView.BarcodeOptions>
                 </zxing:ZXingBarcodeImageView>
