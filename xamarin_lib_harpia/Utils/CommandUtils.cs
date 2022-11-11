@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Xamarin.Essentials;
 using xamarin_lib_harpia.Models.Entities;
 using System.Text;
 using ZXing.QrCode.Internal;
@@ -168,6 +169,150 @@ namespace xamarin_lib_harpia.Utils
             return bytesforprint;
         }
 
+        public static byte[] GetTextBytes(Text text)
+        {
+            var stream = new List<byte>();
+
+            if (text.IsBold) stream.AddRange(BoldOn());
+            else stream.AddRange(BoldOff());
+
+            if (text.IsUnderline) stream.AddRange(UnderlineWithOneDotWidthOn());
+            else stream.AddRange(UnderlineOff());
+
+            if (text.Record < 17)
+            {
+                stream.AddRange(SingleByteOn());
+                stream.AddRange(SetCodeSystemSingle(CodeParse(text.Record)));
+            } 
+            else
+            {
+                stream.AddRange(SingleByteOff());
+                stream.AddRange(SetCodeSystem(CodeParse(text.Record)));
+            }
+
+            stream.AddRange(SetFontSize(text.TextSize));
+            stream.AddRange(TextToByteEncoding(text.Content, text.Encoding));
+            stream.AddRange(NextLine(3));
+
+            return stream.ToArray();
+        } 
+
+        public static byte[] BoldOn()
+        {
+            byte[] result = new byte[] { ESC, 69, 0xf };
+            return result;
+        }
+
+        public static byte[] BoldOff()
+        {
+            byte[] result = new byte[] { ESC, 69, 0 };
+            return result;
+        }
+
+        public static byte[] UnderlineWithOneDotWidthOn()
+        {
+            byte[] result = new byte[] { ESC, 45, 1 };
+            return result;
+        }
+
+        public static byte[] UnderlineOff()
+        {
+            byte[] result = new byte[] { ESC, 45, 0 };
+            return result;
+        }
+
+        public static byte[] SingleByteOn()
+        {
+            byte[] result = new byte[] { FS, 0x2E };
+            return result;
+        }
+
+        public static byte[] SingleByteOff()
+        {
+            byte[] result = new byte[] { FS, 0x26 };
+            return result;
+        }
+
+        public static byte CodeParse(int value)
+        {
+            byte res = 0x00;
+            switch(value)
+            {
+                case 0:
+                    res = 0x00;
+                    break;
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    res = (byte)(value + 1);
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                    res = (byte)(value + 8);
+                    break;
+                case 12:
+                    res = 21;
+                    break;
+                case 13:
+                    res = 33;
+                    break;
+                case 14:
+                    res = 34;
+                    break;
+                case 15:
+                    res = 36;
+                    break;
+                case 16:
+                    res = 37;
+                    break;
+                case 17:
+                case 18:
+                case 19:
+                    res = (byte)(value - 17);
+                    break;
+                case 20:
+                    res = (byte)0xff;
+                    break;
+                default:
+                    break;
+            }
+            return (byte)res;
+        }
+
+        public static byte[] SetCodeSystemSingle(byte charset)
+        {
+            byte[] result = new byte[] { ESC, 0x74, charset };
+            return result;
+        }
+
+        public static byte[] SetCodeSystem(byte charset)
+        {
+            byte[] result = new byte[] { FS, 0x43, charset };
+            return result;
+        }
+
+        public static byte[] NextLine(int lineNum)
+        {
+            byte[] result = new byte[lineNum];
+            for (int i = 0; i < lineNum; i++)
+            {
+                result[i] = LF;
+            }
+            return result;
+        }
+
+        public static byte[] SetFontSize(int fontSize)
+        {
+            byte[] result = new byte[] { 0x1D, 0x21, (byte)(fontSize - 12) };
+            return result;
+        }
+
         public static byte[] AlignLeft()
         {
             return new byte[] { ESC, 97, 0 };
@@ -191,6 +336,12 @@ namespace xamarin_lib_harpia.Utils
         public static byte[] TextToByte(string content)
         {
             return System.Text.Encoding.ASCII.GetBytes(content);
+        }
+
+        public static byte[] TextToByteEncoding(string content, string encoding)
+        {
+            if (encoding.Equals("utf-8")) return System.Text.Encoding.UTF8.GetBytes(content);
+            return System.Text.Encoding.GetEncoding(encoding).GetBytes(content);
         }
     }
 }

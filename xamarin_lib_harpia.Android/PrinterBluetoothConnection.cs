@@ -97,11 +97,13 @@ namespace BluetoothPrinter.Droid
             SendCommandToPrinter("qr", content, _connectedDevice);
         }
 
+        
         // TODO Remove after sprint 2
-        public void PrintText(string content)
+        public void PrintTextt(string content)
         {
             SendCommandToPrinter("plain", content, _connectedDevice);
         }
+        
 
         // TODO Remove after sprint 2
         async void SendCommandToPrinter(string type, string content, BluetoothDevice device)
@@ -189,6 +191,25 @@ namespace BluetoothPrinter.Droid
                 return true;
             }
             catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                CloseConnection();
+                return false;
+            }
+        }
+
+        public bool PrintText(Text text)
+        {
+            InitConnection();
+            if (!IsConnected()) return false;
+            byte[] textCommands = CommandUtils.GetTextBytes(text);
+            try
+            {
+                SendRawData(textCommands);
+                CloseConnection();
+                return true;
+            }
+            catch(Exception exception)
             {
                 Console.WriteLine(exception.Message);
                 CloseConnection();
