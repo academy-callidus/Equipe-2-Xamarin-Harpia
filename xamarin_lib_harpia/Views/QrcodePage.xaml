@@ -162,7 +162,7 @@
                 >
                     <Label Text="Cortar Papel" TextColor="#FFF"/>
                     <StackLayout Orientation="Horizontal">
-                        <Switch Toggled="OnCutPaper" ThumbColor="#E6e6e6" OnColor="#969696" />
+                        <Switch x:Name="CutLabel" ThumbColor="#E6e6e6" OnColor="#969696" />
                     </StackLayout>
                 </FlexLayout>
 

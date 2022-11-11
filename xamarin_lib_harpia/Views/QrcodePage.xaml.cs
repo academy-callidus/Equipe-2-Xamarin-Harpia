@@ -11,10 +11,10 @@ namespace xamarin_lib_harpia.Views
 {
     public partial class QrcodePage : ContentPage {
         private QRCodeService QRCodeService;
-        private string[] QrcodeQtdList = { "QrCode", "Dois QrCode" };
-        private string[] QrcodeSizeList = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
-        private string[] QrcodeLevelList = { "Correção L (7%)", "Correção M (15%)", "Correção Q (25%)", "Correção H (30%)" };
-        private string[] QrcodeAlignList = { "Esquerda", "Centro", "Direita" };
+        private readonly string[] QrcodeQtdList = { "QrCode", "Dois QrCode" };
+        private readonly string[] QrcodeSizeList = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+        private readonly string[] QrcodeLevelList = { "Correção L (7%)", "Correção M (15%)", "Correção Q (25%)", "Correção H (30%)" };
+        private readonly string[] QrcodeAlignList = { "Esquerda", "Centro", "Direita" };
         private bool HasCut;
 
         public QrcodePage()
@@ -92,30 +92,23 @@ namespace xamarin_lib_harpia.Views
             }
         }
 
-        private void OnCutPaper(object sender, ToggledEventArgs e)
-        {
-            if (HasCut) HasCut = false;
-            else HasCut = true;
-
-        }
-
         private QRcode GetQrcodeEntity()
         {
-            // Content
+            // Content OK
             var qrcodeLabel = this.FindByName<Label>("QrcodeLabel");
 
-            // Quantity
+            // Quantity OK
             var qtdLabel = this.FindByName<Label>("QtdLabel");
             var quantity = QrcodeLevelList.IndexOf(qtdLabel.Text) + 1;
 
-            // Size
+            // Size OK
             var sizeLabel = this.FindByName<Label>("SizeLabel");
             var size = Int32.Parse(sizeLabel.Text);
 
-            // Correction
+            // Correction OK
             var levelLabel = this.FindByName<Label>("LevelLabel");
             QrCodeCorrectionEnum level;
-            if(levelLabel.Text == "Correção L(7 %)")
+            if(levelLabel.Text == "Correção L (7%)")
             {
                 level = QrCodeCorrectionEnum.CORRECTION_L;
             } 
@@ -132,7 +125,7 @@ namespace xamarin_lib_harpia.Views
                 level = QrCodeCorrectionEnum.CORRECTION_H;
             }
 
-            // Alignment
+            // Alignment 
             var alignLabel = this.FindByName<Label>("AlignLabel");
             AlignmentEnum align;
             if(alignLabel.Text == "Esquerda")
@@ -163,7 +156,7 @@ namespace xamarin_lib_harpia.Views
         private async void OnPrint(object sender, EventArgs e)
         {
             var wasSuccessful = QRCodeService.Execute(GetQrcodeEntity());
-            if (!wasSuccessful) await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
+            if (!wasSuccessful) await DisplayAlert("Impressão de Qrcode", "Erro ao realizar impressão!", "OK");
             Console.WriteLine(GetQrcodeEntity());
         }
     }
