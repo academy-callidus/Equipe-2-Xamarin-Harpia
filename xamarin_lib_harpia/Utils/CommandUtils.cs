@@ -212,7 +212,7 @@ namespace xamarin_lib_harpia.Utils
 
         public static byte[] SetFontSize(int fontSize)
         {
-            byte[] result = new byte[] { 0x1D, 0x21, (byte)fontSize };
+            byte[] result = new byte[] { 0x1D, 0x21, (byte)(fontSize - 12) };
             return result;
         }
 
