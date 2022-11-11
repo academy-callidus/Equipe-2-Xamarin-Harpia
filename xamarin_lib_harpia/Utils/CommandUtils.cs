@@ -102,6 +102,18 @@ namespace xamarin_lib_harpia.Utils
                 stream.AddRange(modulesize);
                 stream.AddRange(errorlevel);
                 stream.AddRange(code);
+                if (qrcode.Alignment == AlignmentEnum.CENTER)
+                {
+                    stream.AddRange(AlignCenter());
+                }
+                else if (qrcode.Alignment == AlignmentEnum.RIGHT)
+                {
+                    stream.AddRange(AlignRight());
+                }
+                else
+                {
+                    stream.AddRange(AlignLeft());
+                }
                 stream.AddRange(getBytesForPrintQRCode(true));
                 if (qrcode.CutPaper) stream.AddRange(CutPaper());
                 return stream.ToArray();
@@ -115,6 +127,18 @@ namespace xamarin_lib_harpia.Utils
                 stream.AddRange(modulesize);
                 stream.AddRange(errorlevel);
                 stream.AddRange(code);
+                if (qrcode.Alignment == AlignmentEnum.CENTER)
+                {
+                    stream.AddRange(AlignCenter());
+                } 
+                else if (qrcode.Alignment == AlignmentEnum.RIGHT)
+                {
+                    stream.AddRange(AlignRight());
+                }
+                else
+                {
+                    stream.AddRange(AlignLeft());
+                }
                 stream.AddRange(getBytesForPrintQRCode(false));
                 stream.AddRange(code);
                 stream.AddRange(double_qr);
