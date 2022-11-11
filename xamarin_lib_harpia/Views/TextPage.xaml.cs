@@ -85,5 +85,16 @@ namespace xamarin_lib_harpia.Views
             var wasSuccessful = textService.Execute(GetTextEntity());
             if (!wasSuccessful) await DisplayAlert("Impressão de Texto", "Erro ao realizar impressão!", "OK");
         }
+
+        void Teste(object sender, EventArgs e)
+        {
+            int[] encodes = { 437, 850, 860, 863, 865, 857, 737, 1252, 866, 852, 858, 874, 855, 862, 864, 54936, 950, 949, 65001 };
+            foreach(int i in encodes)
+            {
+                System.Text.Encoding.GetEncoding(i).GetBytes("Teste");
+            }
+        
+            DisplayAlert("Teste", "teste", "ok");
+        }
     }
 }
