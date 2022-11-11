@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Xamarin.Essentials;
 using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Utils
@@ -91,6 +92,9 @@ namespace xamarin_lib_harpia.Utils
                 stream.AddRange(SingleByteOff());
                 stream.AddRange(SetCodeSystem(CodeParse(text.Record)));
             }
+
+            stream.AddRange(TextToByteEncoding(text.Content, text.Encoding));
+            stream.AddRange(NextLine(3));
 
             return stream.ToArray();
         } 
@@ -195,6 +199,16 @@ namespace xamarin_lib_harpia.Utils
             return result;
         }
 
+        public static byte[] NextLine(int lineNum)
+        {
+            byte[] result = new byte[lineNum];
+            for (int i = 0; i < lineNum; i++)
+            {
+                result[i] = LF;
+            }
+            return result;
+        }
+
         public static byte[] AlignLeft()
         {
             return new byte[] { ESC, 97, 0 };
@@ -218,6 +232,11 @@ namespace xamarin_lib_harpia.Utils
         public static byte[] TextToByte(string content)
         {
             return System.Text.Encoding.ASCII.GetBytes(content);
+        }
+
+        public static byte[] TextToByteEncoding(string content, string encoding)
+        {
+            return System.Text.Encoding.GetEncoding(encoding).GetBytes(content);
         }
     }
 }
