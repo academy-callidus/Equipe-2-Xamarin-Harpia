@@ -11,8 +11,9 @@ namespace xamarin_lib_harpia.Views
 
             Subtitle = false ? "Conectado" : "sem impressora";
 
-            NavTitle.SetBinding(Label.TextProperty, new Binding("Title", source: this));
-            NavSubtitle.SetBinding(Label.TextProperty, new Binding("Subtitle", source: this));
+            //NavTitle.SetBinding(Label.TextProperty, new Binding("Title", source: this));
+            //NavSubtitle.SetBinding(Label.TextProperty, new Binding("Subtitle", source: this));
+            
         }
 
         private async void OnConnectionClicked(object sender, System.EventArgs e)

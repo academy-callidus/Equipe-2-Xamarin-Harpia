@@ -6,7 +6,7 @@
 
     <Shell.TitleView>
         <StackLayout Spacing="0">
-            <Label x:Name="NavTitle"
+            <!--<Label x:Name="NavTitle"
                    FontAttributes="Bold"
                    FontSize="Large"
                    VerticalOptions="FillAndExpand"
@@ -14,7 +14,7 @@
             <Label x:Name="NavSubtitle"
                    FontSize="Small"
                    VerticalOptions="End"
-                   VerticalTextAlignment="Start"/>
+                   VerticalTextAlignment="Start"/>-->
         </StackLayout>
     </Shell.TitleView>
 
