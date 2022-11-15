@@ -10,11 +10,17 @@ using Xamarin.Forms.Xaml;
 namespace xamarin_lib_harpia.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TitleBar : ContentView
+    public partial class TitleBar : StackLayout
     {
+        public string Subtitle { get; }
         public TitleBar()
         {
             InitializeComponent();
+
+            Subtitle = false ? "Conectado" : "sem impressora";
+
+            NavTitle.SetBinding(Label.TextProperty, new Binding("Title", source: this));
+            NavSubtitle.SetBinding(Label.TextProperty, new Binding("Subtitle", source: this));
         }
     }
 }
