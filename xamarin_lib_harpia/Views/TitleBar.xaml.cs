@@ -13,11 +13,13 @@ namespace xamarin_lib_harpia.Views
     public partial class TitleBar : StackLayout
     {
         public string Subtitle { get; }
+        public string Title { get; }
         public TitleBar()
         {
             InitializeComponent();
 
-            Subtitle = false ? "Conectado" : "sem impressora";
+            Title = "Exemple";
+            Subtitle = true ? "Conectado" : "sem impressora";
 
             NavTitle.SetBinding(Label.TextProperty, new Binding("Title", source: this));
             NavSubtitle.SetBinding(Label.TextProperty, new Binding("Subtitle", source: this));

@@ -7,12 +7,12 @@
     x:DataType="models:TitleBar"
     Spacing="0">
     <Label x:Name="NavTitle"
-            FontAttributes="Bold"
-            FontSize="Large"
-            VerticalOptions="FillAndExpand"
-            VerticalTextAlignment="End"/>
+        FontAttributes="Bold"
+        FontSize="Large"
+        VerticalOptions="FillAndExpand"
+        VerticalTextAlignment="End"/>
     <Label x:Name="NavSubtitle"
-            FontSize="Small"
-            VerticalOptions="End"
-            VerticalTextAlignment="Start"/>
+        FontSize="Small"
+        VerticalOptions="End"
+        VerticalTextAlignment="Start"/>
 </StackLayout>
