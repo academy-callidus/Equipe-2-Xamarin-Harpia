@@ -42,6 +42,7 @@ namespace BluetoothPrinter.Droid
             }
         }
 
+        [Obsolete]
         public List<DeviceInfo> GetAvailableDevices()
         {
             // TODO Change deprecated methods to connect with bluetooth
@@ -74,8 +75,10 @@ namespace BluetoothPrinter.Droid
             return null;
         }
 
+        [Obsolete]
         public bool SetCurrentDevice(string printerName)
         {
+           
             // TODO Change deprecated methods to connect with bluetooth
             if (BluetoothAdapter.DefaultAdapter != null && BluetoothAdapter.DefaultAdapter.IsEnabled)
             {
@@ -120,6 +123,7 @@ namespace BluetoothPrinter.Droid
             }
         }
 
+        [Obsolete]
         public bool InitConnection()
         {
             try
@@ -158,6 +162,7 @@ namespace BluetoothPrinter.Droid
             return _connectedDevice != null;
         }
 
+        [Obsolete]
         public bool PrintBarcode(Barcode barcode)
         {
             InitConnection();
@@ -178,6 +183,7 @@ namespace BluetoothPrinter.Droid
             }
         }
 
+        [Obsolete]
         public bool PrintQRCode(QRcode qrcode)
         {
             InitConnection();
@@ -198,6 +204,7 @@ namespace BluetoothPrinter.Droid
             }
         }
 
+        [Obsolete]
         public bool PrintText(Text text)
         {
             InitConnection();
