@@ -131,7 +131,6 @@
                 ></Editor>
             </StackLayout>
 
-            <Button Text="Teste" Clicked="Teste" TextColor="White" BackgroundColor="Red"></Button>
             <Button Text="Imprimir" Clicked="OnPrint" TextColor="White" BackgroundColor="Red"></Button>
         </StackLayout>
 
