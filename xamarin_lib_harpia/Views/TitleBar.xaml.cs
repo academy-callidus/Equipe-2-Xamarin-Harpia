@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_lib_harpia.Models.Services;
 
 namespace xamarin_lib_harpia.Views
 {
@@ -17,9 +18,12 @@ namespace xamarin_lib_harpia.Views
         public TitleBar()
         {
             InitializeComponent();
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            ConnectionStatusService Status = new ConnectionStatusService(connection);
+            
 
-            Title = "Exemple";
-            Subtitle = true ? "Conectado" : "sem impressora";
+            Title = "Example";
+            Subtitle = Status.ConnectionStatus();
 
             NavTitle.SetBinding(Label.TextProperty, new Binding("Title", source: this));
             NavSubtitle.SetBinding(Label.TextProperty, new Binding("Subtitle", source: this));
