@@ -8,6 +8,7 @@ namespace xamarin_lib_harpia.Models.Services
     {
         private readonly IPrinterConnection Connection;
         private string Subtititle {get;set;}
+        private bool isConnected {get;set;}
 
         public ConnectionStatusService(IPrinterConnection connection)
         {
@@ -16,7 +17,10 @@ namespace xamarin_lib_harpia.Models.Services
 
         public bool Execute()
         {
-            return Connection.IsConnected();
+            Connection.InitConnection();
+            isConnected = Connection.IsConnected();
+            Connection.CloseConnection();
+            return isConnected;
         }
 
         public string ConnectionStatus()

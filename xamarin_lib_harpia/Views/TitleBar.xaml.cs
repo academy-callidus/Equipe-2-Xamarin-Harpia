@@ -14,18 +14,39 @@ namespace xamarin_lib_harpia.Views
     public partial class TitleBar : StackLayout
     {
         public string Subtitle { get; }
-        public string Title { get; }
+
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(TitleText),
+            typeof(string),
+            typeof(TitleBar),
+            defaultValue: string.Empty,
+            defaultBindingMode: BindingMode.OneWay,
+            propertyChanged: TitleTextPropertyChanged);
+
+        private static void TitleTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (TitleBar)bindable;
+            control.NavTitle.Text = newValue?.ToString();
+        }
+
+        public string TitleText
+        {
+            get
+            {
+                return base.GetValue(TitleProperty)?.ToString();
+            }
+
+            set
+            {
+                base.SetValue(TitleProperty, value);
+            }
+        }
         public TitleBar()
         {
             InitializeComponent();
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
             ConnectionStatusService Status = new ConnectionStatusService(connection);
-            
 
-            Title = "Example";
             Subtitle = Status.ConnectionStatus();
-
-            NavTitle.SetBinding(Label.TextProperty, new Binding("Title", source: this));
             NavSubtitle.SetBinding(Label.TextProperty, new Binding("Subtitle", source: this));
         }
     }

@@ -5,7 +5,7 @@
              x:Class="xamarin_lib_harpia.Views.TextPage">
 
     <Shell.TitleView>
-        <titlebar:TitleBar/>
+        <titlebar:TitleBar TitleText="Impressão deTexto"/>
     </Shell.TitleView>
 
     <ContentPage.Content>

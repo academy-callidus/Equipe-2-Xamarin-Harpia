@@ -6,7 +6,7 @@
              Title="Configuração">
 
     <Shell.TitleView>
-        <titlebar:TitleBar/>
+        <titlebar:TitleBar TitleText="Configurações"/>
     </Shell.TitleView>
 
     <ContentPage.Content>

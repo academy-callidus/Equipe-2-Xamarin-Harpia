@@ -5,7 +5,7 @@
     xmlns:models="clr-namespace:xamarin_lib_harpia.Views"
     x:Class="xamarin_lib_harpia.Views.TitleBar"
     x:DataType="models:TitleBar"
-    Spacing="0">
+    Spacing="1">
     <Label x:Name="NavTitle"
         FontAttributes="Bold"
         FontSize="Large"
