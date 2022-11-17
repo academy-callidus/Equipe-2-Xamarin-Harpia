@@ -8,20 +8,22 @@ using BluetoothPrinter.Droid;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Utils;
 using Java.Util;
+using Android.Content;
+using Android.Runtime;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterBluetoothConnection))]
 namespace BluetoothPrinter.Droid
 {
     public class PrinterBluetoothConnection : IPrinterConnection
     {
-        private BluetoothManager bluetoothManager;
+        private BluetoothManager BluetoothManager;
         private BluetoothDevice _connectedDevice;
         public PrinterBluetoothConnection()
         {
+            BluetoothManager = Android.App.Application.Context.GetSystemService(Context.BluetoothService).JavaCast<BluetoothManager>();
             _connectedDevice = null;
         }
 
-        // método através do qual uma lista de bytes será utilizada para enviar comandos à impressora
         public void SendRawData(byte[] data)
         {
             var socket = _connectedDevice.CreateRfcommSocketToServiceRecord(
@@ -41,11 +43,10 @@ namespace BluetoothPrinter.Droid
 
         public List<DeviceInfo> GetAvailableDevices()
         {
-            // TODO Change deprecated methods to connect with bluetooth
-            if (bluetoothManager.Adapter != null && bluetoothManager.Adapter.IsEnabled)
+            if (BluetoothManager.Adapter != null && BluetoothManager.Adapter.IsEnabled)
             {
                 List<DeviceInfo> result = new List<DeviceInfo>();
-                foreach (var pairedDevice in bluetoothManager.Adapter.BondedDevices)
+                foreach (var pairedDevice in BluetoothManager.Adapter.BondedDevices)
                 {
                     result.Add(new DeviceInfo
                     {
@@ -74,10 +75,9 @@ namespace BluetoothPrinter.Droid
         public bool SetCurrentDevice(string printerName)
         {
            
-            // TODO Change deprecated methods to connect with bluetooth
-            if (bluetoothManager.Adapter != null && bluetoothManager.Adapter.IsEnabled)
+            if (BluetoothManager.Adapter != null && BluetoothManager.Adapter.IsEnabled)
             {
-                foreach (var pairedDevice in bluetoothManager.Adapter.BondedDevices)
+                foreach (var pairedDevice in BluetoothManager.Adapter.BondedDevices)
                 {
                     if (pairedDevice.Name == printerName)
                     {
