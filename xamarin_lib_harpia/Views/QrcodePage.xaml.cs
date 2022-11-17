@@ -57,7 +57,7 @@ namespace xamarin_lib_harpia.Views
         {
             var qtdLabel = this.FindByName<Label>("QtdLabel");
             var qrcodeQtd = await DisplayActionSheet("Qtd. Impressão", "Cancelar", null, QrcodeQtdList);
-            if (qrcodeQtd != "Cancelar")
+            if ((qrcodeQtd != "Cancelar") && (qrcodeQtd!= null))
             {
                 qtdLabel.Text = qrcodeQtd;
             }
@@ -67,7 +67,7 @@ namespace xamarin_lib_harpia.Views
         {
             var sizeLabel = this.FindByName<Label>("SizeLabel");
             var qrcodeSize = await DisplayActionSheet("QR-Code tamanho", "Cancelar", null, QrcodeSizeList);
-            if (qrcodeSize!= "Cancelar") 
+            if ((qrcodeSize != "Cancelar") && (qrcodeSize != null)) 
             {
                 sizeLabel.Text = qrcodeSize;
             }
@@ -76,7 +76,7 @@ namespace xamarin_lib_harpia.Views
         {
             var levelLabel = this.FindByName<Label>("LevelLabel");
             var qrcodeLevel = await DisplayActionSheet("Nível de correção", "Cancelar", null, QrcodeLevelList);
-            if (qrcodeLevel != "Cancelar")
+            if ((qrcodeLevel != "Cancelar") && (qrcodeLevel != null))
             { 
                 levelLabel.Text = qrcodeLevel;
             }
@@ -85,7 +85,7 @@ namespace xamarin_lib_harpia.Views
         {
             var alignLabel = this.FindByName<Label>("AlignLabel");
             var qrcodeAlign = await DisplayActionSheet("Alinhamento", "Cancelar", null, QrcodeAlignList);
-            if(qrcodeAlign != "Cancelar")
+            if((qrcodeAlign != "Cancelar") && (qrcodeAlign != null))
             {
                 alignLabel.Text = qrcodeAlign;
             }

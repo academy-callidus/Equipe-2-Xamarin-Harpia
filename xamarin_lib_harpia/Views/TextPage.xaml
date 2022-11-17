@@ -50,7 +50,7 @@
 
                 <StackLayout Orientation="Horizontal" Padding="4">
                     <Label 
-                        x:Name="CharSetText" 
+                        x:Name="CharSetLabel" 
                         TextColor="Gray"
                         FontSize="15"
                         ></Label>
@@ -85,7 +85,7 @@
 
                 </FlexLayout>
                 <Slider 
-                    x:Name="Slider" 
+                    x:Name="TextSizeSlider" 
                     Maximum="36" 
                     Minimum="12" 
                     Value="12" 
@@ -107,9 +107,9 @@
                     FontSize="15"
                     ></Label>
                     <CheckBox 
+                    x:Name="isBoldCheckBox"
                     Color="White" 
                     IsChecked="False"
-                    CheckedChanged="BoldChanged"
                     ></CheckBox>
                     <Label
                     Text="underline"
@@ -118,16 +118,16 @@
                     FontSize="15"
                     ></Label>
                     <CheckBox 
+                    x:Name="isUnderlineCheckBox"
                     Color="White"
                     IsChecked="False"
-                    CheckedChanged="UnderlineChanged"
                     ></CheckBox>
                 </FlexLayout>
             </StackLayout>
 
             <StackLayout Padding="10, 0, 10, 5">
                 <Editor 
-                x:Name="Editor"
+                x:Name="EditorLabel"
                 TextColor="Black"
                 BackgroundColor="White"
                 IsSpellCheckEnabled="True"
@@ -135,7 +135,8 @@
                 HeightRequest="250"
                 ></Editor>
             </StackLayout>
-            
+
+            <Button Text="Teste" Clicked="Teste" TextColor="White" BackgroundColor="Red"></Button>
             <Button Text="Imprimir" Clicked="OnPrint" TextColor="White" BackgroundColor="Red"></Button>
         </StackLayout>
 

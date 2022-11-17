@@ -15,10 +15,11 @@ namespace xamarin_lib_harpia.Views
     {
         public string Subtitle { get; }
 
-        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(TitleText),
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(
+            nameof(TitleText),
             typeof(string),
             typeof(TitleBar),
-            defaultValue: string.Empty,
+            defaultValue:"Título",
             defaultBindingMode: BindingMode.OneWay,
             propertyChanged: TitleTextPropertyChanged);
 
@@ -30,15 +31,9 @@ namespace xamarin_lib_harpia.Views
 
         public string TitleText
         {
-            get
-            {
-                return base.GetValue(TitleProperty)?.ToString();
-            }
+            get => GetValue(TitleProperty)?.ToString();
 
-            set
-            {
-                base.SetValue(TitleProperty, value);
-            }
+            set => SetValue(TitleProperty, value);
         }
         public TitleBar()
         {
