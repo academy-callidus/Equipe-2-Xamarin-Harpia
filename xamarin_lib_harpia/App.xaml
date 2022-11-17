@@ -12,6 +12,7 @@
 
             <Color x:Key="SettingsButton">#FF1B1B</Color>
             <Color x:Key="foregroundColorDisabled">#3FFF</Color>
+            <Color x:Key="borderColor">#2F303B</Color>
         </ResourceDictionary>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource foregroundColor}"/>
