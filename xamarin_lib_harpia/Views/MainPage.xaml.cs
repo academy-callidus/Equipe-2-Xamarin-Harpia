@@ -20,8 +20,13 @@ namespace xamarin_lib_harpia.Views
             LoadDemoDetails();
 
         }
-
-        private void AddDemo(string nome, string path, Func<Task> onTap)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nome">Nome a ser exibido no ícone da Homepage</param>
+        /// <param name="path">Caminho onde se encontra o ícone</param>
+        /// <param name="onTap">Função que será executada ao clicar no ícone</param>
+        private void AddDemo(string nome, string iconPath, Func<Task> onTap)
         {
 
             Frame page = new Frame
@@ -39,7 +44,7 @@ namespace xamarin_lib_harpia.Views
                     {
                         new Image
                         {
-                            Source = path,
+                            Source = iconPath,
                             Margin = new Thickness(5, 0, 5, 0),
                         },
                         new Label
@@ -64,7 +69,9 @@ namespace xamarin_lib_harpia.Views
         }
 
 
-
+        /// <summary>
+        /// Carrega todos os botões que serão exibidos na Homepage
+        /// </summary>
         public void LoadDemoDetails()
         {
             Pages.Children.Clear();
@@ -74,13 +81,21 @@ namespace xamarin_lib_harpia.Views
             AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
         }
 
+        /// <summary>
+        /// Cria uma nova instância de FullTestService e retorna uma função assíncrona
+        /// </summary>
+        /// <returns>Função assíncrona que executa todos os tipos de impressão da aplicação</returns>
         private Func<Task> RunFullTest()
         {
             var service = new FullTestService();
 
             return new Func<Task>(async () => await Task.Run(() => service.RunAllTests()));
         }
-
+        /// <summary>
+        /// Navega para a página especificada, convertendo implicitamente string para uri
+        /// </summary>
+        /// <param name="url">Próxima página</param>
+        /// <returns>Função que navage assincronamente para uma nova página</returns>
         private Func<Task> NavigateTo(string url)
         {
             return new Func<Task>(async () => await Shell.Current.GoToAsync(url));
