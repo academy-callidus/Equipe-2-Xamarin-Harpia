@@ -21,13 +21,6 @@ namespace xamarin_lib_harpia.Views
 
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            
-
-        }
-
         public string BluetoothConnection()
         {
             var devices = DependencyService.Get<IPrinterConnection>().GetAvailableDevices();
@@ -48,6 +41,7 @@ namespace xamarin_lib_harpia.Views
                 BackgroundColor = (Color)Application.Current.Resources["backgroundColor"],
                 WidthRequest = 153,
                 HeightRequest = 140,
+                HasShadow = false,
                 BorderColor = (Color)Application.Current.Resources["borderColor"],
                 Margin = new Thickness(-1),
                 Content = new StackLayout
