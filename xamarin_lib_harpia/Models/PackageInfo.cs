@@ -6,7 +6,7 @@ namespace xamarin_lib_harpia.Models
 {
     internal class PackageInfo
     {
-        public string versionName { get; }
-        public string versionCode { get; }
+        public string versionName { get; set; }
+        public string versionCode { get; set; }
     }
 }

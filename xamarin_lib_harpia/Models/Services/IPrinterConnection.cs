@@ -15,5 +15,23 @@ namespace xamarin_lib_harpia.Models.Services
         bool PrintBarcode(Barcode barcode);
         bool PrintQRCode(QRcode qrcode);
         bool PrintText(Text text);
+
+        string GetPrinterSerialNo();
+
+        string GetPrinterModel();
+        
+        string GetFirmwareVersion();
+        
+        string GetServiceVersion();
+        
+        int GetPrinterPaper();
+
+        int GetPrintedLength();
+
+        string GetServiceVersionName();
+
+        string GetServiceVersionCode();
+
+
     }
 }
