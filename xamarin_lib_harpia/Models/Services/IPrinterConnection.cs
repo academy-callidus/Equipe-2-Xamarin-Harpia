@@ -11,8 +11,6 @@ namespace xamarin_lib_harpia.Models.Services
         List<DeviceInfo> GetAvailableDevices();
         void SendRawData(byte[] data);
         bool SetCurrentDevice(string printerName);
-        void PrintTextt(string content);
-        void PrintQR(string content);
         bool InitConnection();
         bool CloseConnection();
         // PrinterInfo getStatus();

@@ -91,35 +91,6 @@ namespace BluetoothPrinter.Droid
             return false;
         }
 
-        // TODO Remove after sprint 2
-        public void PrintQR(string content)
-        {
-            SendCommandToPrinter("qr", content, _connectedDevice);
-        }
-
-        
-        // TODO Remove after sprint 2
-        public void PrintTextt(string content)
-        {
-            SendCommandToPrinter("plain", content, _connectedDevice);
-        }
-        
-
-        // TODO Remove after sprint 2
-        async void SendCommandToPrinter(string type, string content, BluetoothDevice device)
-        {
-            if (string.IsNullOrEmpty(content)) return;
-            Printer print = new Printer();
-            if (device != null)
-            {
-                await print.Print(type, content, device);
-            }
-            else
-            {
-                throw new Exception("No selected device.");
-            }
-        }
-
         public bool InitConnection()
         {
             try
