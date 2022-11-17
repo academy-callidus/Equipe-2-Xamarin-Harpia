@@ -18,7 +18,8 @@
             HorizontalOptions="Start"
             JustifyContent="Center"
             AlignItems="Start"
-            Margin="0, 12, 0, 0">
+            Margin="0, 15, 0, 0"
+            >
             </FlexLayout>
        </StackLayout>
     </ContentPage.Content>
