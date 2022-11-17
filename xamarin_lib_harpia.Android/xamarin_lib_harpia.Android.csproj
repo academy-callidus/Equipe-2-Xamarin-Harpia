@@ -64,11 +64,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="PrinterConnection.cs" />
     <Compile Include="PrinterBluetoothConnection.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidInterfaceDescription Include="ICallback.aidl" />
+    <AndroidInterfaceDescription Include="IWoyouService.aidl" />
+    <AndroidInterfaceDescription Include="IYmodemSPI.aidl" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

@@ -68,9 +68,7 @@ namespace xamarin_lib_harpia.Utils
                 model = new byte[] { 0x1D, 0x6B, (byte)(barcode.Model.ID + 0x41), (byte)barcodeByteArray.Length };
 
             var stream = new List<byte>();
-            stream.AddRange(TextToByte("Barcode\n"));
-            stream.AddRange(TextToByte("--------------------------------\n"));
-            stream.AddRange(dimensions); // Setting barcode dimensions (width, height, alingment)
+            stream.AddRange(dimensions); // Setting barcode dimensions (width, height, alignment)
             stream.AddRange(model); // Setting the barcode model
             stream.AddRange(barcodeByteArray); // Setting the barcode content
             if (barcode.CutPaper) stream.AddRange(CutPaper());
@@ -100,23 +98,9 @@ namespace xamarin_lib_harpia.Utils
             if (qrcode.ImpQuant == 0)
             {
                 var stream = new List<byte>();
-                stream.AddRange(TextToByte("QrCode\n"));
-                stream.AddRange(TextToByte("--------------------------------\n"));
                 stream.AddRange(modulesize);
                 stream.AddRange(errorlevel);
                 stream.AddRange(code);
-                if (qrcode.Alignment == AlignmentEnum.CENTER)
-                {
-                    stream.AddRange(AlignCenter());
-                }
-                else if (qrcode.Alignment == AlignmentEnum.RIGHT)
-                {
-                    stream.AddRange(AlignRight());
-                }
-                else
-                {
-                    stream.AddRange(AlignLeft());
-                }
                 stream.AddRange(getBytesForPrintQRCode(true));
                 if (qrcode.CutPaper) stream.AddRange(CutPaper());
                 return stream.ToArray();
@@ -125,23 +109,9 @@ namespace xamarin_lib_harpia.Utils
             {
                 byte[] double_qr = new byte[] { 0x1B, 0x5C, 0x18, 0x00 };
                 var stream = new List<byte>();
-                stream.AddRange(TextToByte("QrCode\n"));
-                stream.AddRange(TextToByte("--------------------------------\n"));
                 stream.AddRange(modulesize);
                 stream.AddRange(errorlevel);
                 stream.AddRange(code);
-                if (qrcode.Alignment == AlignmentEnum.CENTER)
-                {
-                    stream.AddRange(AlignCenter());
-                } 
-                else if (qrcode.Alignment == AlignmentEnum.RIGHT)
-                {
-                    stream.AddRange(AlignRight());
-                }
-                else
-                {
-                    stream.AddRange(AlignLeft());
-                }
                 stream.AddRange(getBytesForPrintQRCode(false));
                 stream.AddRange(code);
                 stream.AddRange(double_qr);

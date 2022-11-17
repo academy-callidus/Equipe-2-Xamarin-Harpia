@@ -7,10 +7,7 @@ namespace xamarin_lib_harpia.Models.Services
     public interface IPrinterConnection
     {
 
-        DeviceInfo GetCurrentDevice();
-        List<DeviceInfo> GetAvailableDevices();
         void SendRawData(byte[] data);
-        bool SetCurrentDevice(string printerName);
         bool InitConnection();
         bool CloseConnection();
         // PrinterInfo getStatus();
@@ -18,8 +15,5 @@ namespace xamarin_lib_harpia.Models.Services
         bool PrintBarcode(Barcode barcode);
         bool PrintQRCode(QRcode qrcode);
         bool PrintText(Text text);
-        void SetAlignment(AlignmentEnum alignment);
-        //bool PrintBoldText(Text text);
-        bool CutPaper();
     }
 }

@@ -20,7 +20,6 @@ namespace xamarin_lib_harpia.Models.Services
             {
                 Connection.InitConnection();
                 isConnected = Connection.IsConnected();
-                Connection.CloseConnection();
                 return isConnected;
             }
             catch (Exception exp)

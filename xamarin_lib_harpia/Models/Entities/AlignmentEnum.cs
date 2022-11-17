@@ -6,8 +6,8 @@ namespace xamarin_lib_harpia.Models.Entities
 {
     public enum AlignmentEnum
     {
-        RIGHT,
-        LEFT,
-        CENTER
+        LEFT = 0,
+        CENTER = 1,
+        RIGHT = 2
     }
 }

@@ -21,18 +21,6 @@ namespace xamarin_lib_harpia.Views
 
         }
 
-        public string BluetoothConnection()
-        {
-            var devices = DependencyService.Get<IPrinterConnection>().GetAvailableDevices();
-            string action = "";
-            if (devices != null && devices.Count > 0)
-            {
-                var choices = devices.Select(d => d.Title).ToArray();
-                action = choices[0];
-            }
-            return action;
-        }
-
         private void AddDemo(string nome, string path, Func<Task> onTap)
         {
 

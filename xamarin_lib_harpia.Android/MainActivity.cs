@@ -4,6 +4,8 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Android.Content;
+using Woyou.Aidlservice.Jiuiv5;
 
 namespace xamarin_lib_harpia.Droid
 {
