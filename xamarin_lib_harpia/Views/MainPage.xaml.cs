@@ -39,21 +39,20 @@ namespace xamarin_lib_harpia.Views
             Frame page = new Frame
             {
                 BackgroundColor = (Color)Application.Current.Resources["backgroundColor"],
-                WidthRequest = 153,
-                HeightRequest = 140,
+               
                 HasShadow = false,
                 BorderColor = (Color)Application.Current.Resources["borderColor"],
                 Margin = new Thickness(-1),
                 Content = new StackLayout
                 {
+                    Padding = new Thickness(10, 0, 10, 0), //left top right bottom
                     
                     Children =
                     {
                         new Image
                         {
                             Source = path,
-                            WidthRequest = 110,
-                            HeightRequest = 110
+                            Margin = new Thickness(5, 0, 5, 0),
                         },
                         new Label
                         {
