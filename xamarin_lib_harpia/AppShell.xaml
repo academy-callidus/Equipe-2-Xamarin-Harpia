@@ -26,8 +26,6 @@
         <ShellContent Title="Text"
                       ContentTemplate="{DataTemplate views:TextPage}" />
         
-        <ShellContent Title="Blutest"
-                      ContentTemplate="{DataTemplate views:TestConnection}" />
 
     </TabBar>
 </Shell>
