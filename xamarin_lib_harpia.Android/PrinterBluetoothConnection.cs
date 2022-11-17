@@ -11,10 +11,9 @@ using Java.Util;
 using Android.Content;
 using Android.Runtime;
 
-[assembly: Xamarin.Forms.Dependency(typeof(PrinterBluetoothConnection))]
 namespace BluetoothPrinter.Droid
 {
-    public class PrinterBluetoothConnection : IPrinterConnection
+    public class PrinterBluetoothConnection
     {
         private BluetoothManager BluetoothManager;
         private BluetoothDevice _connectedDevice;
@@ -185,21 +184,6 @@ namespace BluetoothPrinter.Droid
                 CloseConnection();
                 return false;
             }
-        }
-
-        public void SetAlignment(AlignmentEnum alignment)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool CutPaper()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Print3Line()
-        {
-            throw new NotImplementedException();
         }
     }
 }

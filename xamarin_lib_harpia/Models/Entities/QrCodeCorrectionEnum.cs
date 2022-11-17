@@ -6,10 +6,10 @@ namespace xamarin_lib_harpia.Models.Entities
 {
     public enum QrCodeCorrectionEnum
     {
-        CORRECTION_L = 7,
-        CORRECTION_M = 15,
-        CORRECTION_Q = 25,
-        CORRECTION_H = 30,
+        CORRECTION_L = 0,
+        CORRECTION_M = 1,
+        CORRECTION_Q = 2,
+        CORRECTION_H = 3,
 
     }
 }
