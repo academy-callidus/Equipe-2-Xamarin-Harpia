@@ -8,16 +8,13 @@ using BluetoothPrinter.Droid;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Utils;
 using Java.Util;
-using Java.Net;
-using System.Net.Sockets;
-using System.Linq;
-using System.Threading.Tasks;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterBluetoothConnection))]
 namespace BluetoothPrinter.Droid
 {
     public class PrinterBluetoothConnection : IPrinterConnection
     {
+        private BluetoothManager bluetoothManager;
         private BluetoothDevice _connectedDevice;
         public PrinterBluetoothConnection()
         {
@@ -42,14 +39,13 @@ namespace BluetoothPrinter.Droid
             }
         }
 
-        [Obsolete]
         public List<DeviceInfo> GetAvailableDevices()
         {
             // TODO Change deprecated methods to connect with bluetooth
-            if (BluetoothAdapter.DefaultAdapter != null && BluetoothAdapter.DefaultAdapter.IsEnabled)
+            if (bluetoothManager.Adapter != null && bluetoothManager.Adapter.IsEnabled)
             {
                 List<DeviceInfo> result = new List<DeviceInfo>();
-                foreach (var pairedDevice in BluetoothAdapter.DefaultAdapter.BondedDevices)
+                foreach (var pairedDevice in bluetoothManager.Adapter.BondedDevices)
                 {
                     result.Add(new DeviceInfo
                     {
@@ -75,14 +71,13 @@ namespace BluetoothPrinter.Droid
             return null;
         }
 
-        [Obsolete]
         public bool SetCurrentDevice(string printerName)
         {
            
             // TODO Change deprecated methods to connect with bluetooth
-            if (BluetoothAdapter.DefaultAdapter != null && BluetoothAdapter.DefaultAdapter.IsEnabled)
+            if (bluetoothManager.Adapter != null && bluetoothManager.Adapter.IsEnabled)
             {
-                foreach (var pairedDevice in BluetoothAdapter.DefaultAdapter.BondedDevices)
+                foreach (var pairedDevice in bluetoothManager.Adapter.BondedDevices)
                 {
                     if (pairedDevice.Name == printerName)
                     {
@@ -123,7 +118,6 @@ namespace BluetoothPrinter.Droid
             }
         }
 
-        [Obsolete]
         public bool InitConnection()
         {
             try
@@ -162,7 +156,6 @@ namespace BluetoothPrinter.Droid
             return _connectedDevice != null;
         }
 
-        [Obsolete]
         public bool PrintBarcode(Barcode barcode)
         {
             InitConnection();
@@ -183,7 +176,7 @@ namespace BluetoothPrinter.Droid
             }
         }
 
-        [Obsolete]
+      
         public bool PrintQRCode(QRcode qrcode)
         {
             InitConnection();
@@ -204,7 +197,6 @@ namespace BluetoothPrinter.Droid
             }
         }
 
-        [Obsolete]
         public bool PrintText(Text text)
         {
             InitConnection();
