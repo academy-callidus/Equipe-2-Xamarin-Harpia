@@ -2,8 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:zxingcommon="clr-namespace:ZXing.Common;assembly=zxing"
+             xmlns:titlebar="clr-namespace:xamarin_lib_harpia.Views"
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              x:Class="xamarin_lib_harpia.Views.QrcodePage">
+
+    <Shell.TitleView>
+        <titlebar:TitleBar TitleText="QRCode"/>
+    </Shell.TitleView>
+    
     <ContentPage.Content>
 
         <FlexLayout 

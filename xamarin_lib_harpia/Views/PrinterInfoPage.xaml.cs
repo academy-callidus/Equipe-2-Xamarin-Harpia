@@ -15,17 +15,9 @@ namespace xamarin_lib_harpia.Views
 {
     public partial class PrinterInfoPage : ContentPage
     {
-
-        public string Subtitle { get; }
-
         public PrinterInfoPage()
         {
             InitializeComponent();
-
-            Subtitle = false ? "Conectado" : "Sem impressora";
-
-            NavTitle.SetBinding(Label.TextProperty, new Binding("Title", source: this));
-            NavSubtitle.SetBinding(Label.TextProperty, new Binding("Subtitle", source: this));
         }
 
         private void DisplayPrinterInfo(object printer)
