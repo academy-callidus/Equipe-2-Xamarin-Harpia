@@ -15,7 +15,8 @@ namespace xamarin_lib_harpia.Views
     {
         public string Subtitle { get; }
         /// <summary>
-        /// Cria uma propriedade própria do elemento Titlebar que pode ser acessada no arquivo xaml
+        /// Creates a Titlebar element's own property that can be used and changed
+        /// directly in the xaml file where the Titlebar element is used
         /// </summary>
         public static readonly BindableProperty TitleProperty = BindableProperty.Create(
             nameof(TitleText),
@@ -25,10 +26,8 @@ namespace xamarin_lib_harpia.Views
             defaultBindingMode: BindingMode.OneWay,
             propertyChanged: TitleTextPropertyChanged);
         /// <summary>
-        /// Função que realiza as alterações da nova propriedade no elemento alvo
+        /// Performs the new property changes on the target element
         /// </summary>
-        /// <param name="bindable">Elemento que receberá as alterações da nova propriedade</param>
-        /// <param name="newValue">Novo texto que irá ser exibido</param>
         private static void TitleTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (TitleBar)bindable;

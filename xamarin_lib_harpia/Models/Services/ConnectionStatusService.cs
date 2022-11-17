@@ -13,9 +13,8 @@ namespace xamarin_lib_harpia.Models.Services
             Connection = connection;
         }
         /// <summary>
-        /// Função que tenta iniciar uma conexão com a impressora e checa se foi bem sucessido ou não
+        /// Try to start a connection with the printer and check whether it was successful or not
         /// </summary>
-        /// <returns>Se a conexão foi bem sucedida ou não</returns>
         public bool Execute()
         {
             bool isConnected;
@@ -32,9 +31,8 @@ namespace xamarin_lib_harpia.Models.Services
             } 
         }
         /// <summary>
-        /// Executa a função de teste de conexão e verifica o resultado, retornando a string a ser exibida na Titlebar
+        /// Checks the result of the connection and returns the string to be displayed in the Titlebar
         /// </summary>
-        /// <returns>Textos equivalentes a conexão bem sucessidade ou não</returns>
         public string ConnectionStatus()
         {
             Subtitle = Execute() ? "Conectado" : "Sem impressora";

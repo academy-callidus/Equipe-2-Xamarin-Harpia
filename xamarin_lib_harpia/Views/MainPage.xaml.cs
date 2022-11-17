@@ -21,16 +21,15 @@ namespace xamarin_lib_harpia.Views
 
         }
         /// <summary>
-        /// 
+        /// Adds a new icon to Homepage (Frame containing image and text)
+        /// Adds to the new icon a function that will be executed when clicking it
         /// </summary>
-        /// <param name="nome">Nome a ser exibido no ícone da Homepage</param>
-        /// <param name="path">Caminho onde se encontra o ícone</param>
-        /// <param name="onTap">Função que será executada ao clicar no ícone</param>
         private void AddDemo(string nome, string iconPath, Func<Task> onTap)
         {
 
             Frame page = new Frame
             {
+                // Looks up in the dictionary of App.xaml the color corresponding to "backgroundColor"
                 BackgroundColor = (Color)Application.Current.Resources["backgroundColor"],
                
                 HasShadow = false,
@@ -38,7 +37,7 @@ namespace xamarin_lib_harpia.Views
                 Margin = new Thickness(-1),
                 Content = new StackLayout
                 {
-                    Padding = new Thickness(10, 0, 10, 0), //left top right bottom
+                    Padding = new Thickness(10, 0, 10, 0), //left, top, right, bottom
                     
                     Children =
                     {
@@ -70,7 +69,7 @@ namespace xamarin_lib_harpia.Views
 
 
         /// <summary>
-        /// Carrega todos os botões que serão exibidos na Homepage
+        /// Load all buttons that will be displayed on the Homepage
         /// </summary>
         public void LoadDemoDetails()
         {
@@ -82,9 +81,9 @@ namespace xamarin_lib_harpia.Views
         }
 
         /// <summary>
-        /// Cria uma nova instância de FullTestService e retorna uma função assíncrona
+        /// Creates a new instance of FullTestService and returns an asynchronous 
+        /// function that performs all types of printing in the application
         /// </summary>
-        /// <returns>Função assíncrona que executa todos os tipos de impressão da aplicação</returns>
         private Func<Task> RunFullTest()
         {
             var service = new FullTestService();
@@ -92,10 +91,8 @@ namespace xamarin_lib_harpia.Views
             return new Func<Task>(async () => await Task.Run(() => service.RunAllTests()));
         }
         /// <summary>
-        /// Navega para a página especificada, convertendo implicitamente string para uri
+        /// Return a function that navigates to the specified page, implicitly converting string to uri
         /// </summary>
-        /// <param name="url">Próxima página</param>
-        /// <returns>Função que navage assincronamente para uma nova página</returns>
         private Func<Task> NavigateTo(string url)
         {
             return new Func<Task>(async () => await Shell.Current.GoToAsync(url));

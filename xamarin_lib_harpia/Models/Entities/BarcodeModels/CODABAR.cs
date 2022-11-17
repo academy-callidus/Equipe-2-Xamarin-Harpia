@@ -4,6 +4,7 @@ using ZXing;
 
 namespace xamarin_lib_harpia.Models.BarcodeModels
 {
+
     internal class CODABAR : BarcodeModel
     {
         public CODABAR() : base(6, "CODABAR", BarcodeFormat.CODABAR)
