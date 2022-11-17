@@ -13,6 +13,11 @@
   <ItemGroup>
     <Compile Remove="Class1.cs" />
     <Compile Remove="IPrinterConnection.cs" />
+    <Compile Remove="Views\TestConnection.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\TestConnection.xaml" />
   </ItemGroup>
 
   <ItemGroup>

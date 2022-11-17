@@ -17,12 +17,8 @@ namespace xamarin_lib_harpia.Views
         public MainPage()
         {
             InitializeComponent();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
             LoadDemoDetails();
+
         }
 
         public string BluetoothConnection()
@@ -39,50 +35,45 @@ namespace xamarin_lib_harpia.Views
 
         private void AddDemo(string nome, string path, Func<Task> onTap)
         {
-            int itens = Pages.Children.Count();
-            int row;
-            int col = itens % 2 == 0 ? 1 : 0;
 
-
-            if (itens % 2 == 0)
+            Frame page = new Frame
             {
-                row = itens > 1 ? itens - 1 : 0;
-            }
-            else
-            {
-                row = itens > 1 ? itens - 2 : 0;
-            }
-
-
-            FlexLayout flexLayout = new FlexLayout
-            {
-                Direction = FlexDirection.Column,
                 BackgroundColor = (Color)Application.Current.Resources["backgroundColor"],
-                AlignItems = FlexAlignItems.Center
+                WidthRequest = 153,
+                HeightRequest = 140,
+                HasShadow = false,
+                BorderColor = (Color)Application.Current.Resources["borderColor"],
+                Margin = new Thickness(-1),
+                Content = new StackLayout
+                {
+                    
+                    Children =
+                    {
+                        new Image
+                        {
+                            Source = path,
+                            WidthRequest = 110,
+                            HeightRequest = 110
+                        },
+                        new Label
+                        {
+                            Text = nome,
+                            TextColor = Color.Red,
+                            HorizontalOptions = LayoutOptions.Center,
+                            
+                        },
+                    },
+                }
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += async (s, e) => {
                 await onTap();
             };
-            
 
-            flexLayout.GestureRecognizers.Add(tapGestureRecognizer);
-            Image image = new Image
-            {
-                Source = path,
-                WidthRequest = 110,
-                HeightRequest = 110
-            };
-            flexLayout.Children.Add(image);
+            page.GestureRecognizers.Add(tapGestureRecognizer);
 
-            flexLayout.Children.Add(new Label
-            {
-                Text = nome,
-                TextColor = Color.Red
-            });
-
-            Pages.Children.Add(flexLayout, col, row);
+            Pages.Children.Add(page);
         }
 
 
@@ -90,10 +81,10 @@ namespace xamarin_lib_harpia.Views
         public void LoadDemoDetails()
         {
             Pages.Children.Clear();
-            AddDemo("Teste", "tesImg.png", RunFullTest());
-            AddDemo("QrCode", "function_qr.png", NavigateTo(nameof(QrcodePage)));
-            AddDemo("BarCode", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
-            AddDemo("Text", "function_text.png", NavigateTo(nameof(TextPage)));
+            AddDemo("Teste Completo", "tesImg.png", RunFullTest());
+            AddDemo("QR Code", "function_qr.png", NavigateTo(nameof(QrcodePage)));
+            AddDemo("Bar Code", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
+            AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
         }
 
         private Func<Task> RunFullTest()

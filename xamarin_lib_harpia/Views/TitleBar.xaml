@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:models="clr-namespace:xamarin_lib_harpia.Views"
+    x:Class="xamarin_lib_harpia.Views.TitleBar"
+    x:DataType="models:TitleBar"
+    Spacing="1">
+    <Label x:Name="NavTitle"
+        FontAttributes="Bold"
+        FontSize="Large"
+        VerticalOptions="FillAndExpand"
+        VerticalTextAlignment="End"/>
+    <Label x:Name="NavSubtitle"
+        FontSize="Small"
+        VerticalOptions="End"
+        VerticalTextAlignment="Start"/>
+</StackLayout>

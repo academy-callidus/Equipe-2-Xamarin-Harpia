@@ -10,13 +10,16 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <Grid x:Name="Pages" BackgroundColor="{StaticResource homepageBackground}" Padding="0.3">
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="140" />
-                <RowDefinition Height="140"/>
-                <RowDefinition Height="140" />
-            </Grid.RowDefinitions>
-        </Grid>
+        <StackLayout BackgroundColor="{StaticResource backgroundColor}" >
+            <FlexLayout 
+            Direction="Row" 
+            x:Name="Pages" 
+            Wrap="Wrap"
+            HorizontalOptions="Start"
+            JustifyContent="Center"
+            AlignItems="Start"
+            Margin="0, 12, 0, 0">
+            </FlexLayout>
+       </StackLayout>
     </ContentPage.Content>
 </ContentPage>

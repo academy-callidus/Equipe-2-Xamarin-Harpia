@@ -4,15 +4,9 @@ namespace xamarin_lib_harpia.Views
 {
     public partial class SettingsPage : ContentPage
     {
-        public string Subtitle { get; }
         public SettingsPage()
         {
             InitializeComponent();
-
-            Subtitle = false ? "Conectado" : "sem impressora";
-
-            NavTitle.SetBinding(Label.TextProperty, new Binding("Title", source: this));
-            NavSubtitle.SetBinding(Label.TextProperty, new Binding("Subtitle", source: this));
         }
 
         private async void OnConnectionClicked(object sender, System.EventArgs e)
