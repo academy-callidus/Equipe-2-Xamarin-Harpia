@@ -74,15 +74,15 @@ namespace xamarin_lib_harpia.Utils
             if (barcode.CutPaper) stream.AddRange(CutPaper());
             return stream.ToArray();
         }
+        /// <summary>
+        /// Recives a QRcode object and translates it to bytecode
+        /// </summary>
         public static byte[] GetQrcodeBytes(QRcode qrcode)
         {
-            //modulesize
             byte[] modulesize = new byte[] { GS, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x43, (byte)qrcode.ImpSize};
 
-            //errorlevel
             byte[] errorlevel = new byte[] { GS, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x45, (byte)(48 + (int)qrcode.Correction) };
 
-            // code 
             var stream_code = new List<byte>();
             byte[] d = TextToByte(qrcode.Content);
             int len = d.Length + 3;
@@ -121,7 +121,9 @@ namespace xamarin_lib_harpia.Utils
             }
 
         }
-
+        /// <summary>
+        /// Return bytes to the GetQrcodeBytes method depending if the QRcode is single or double
+        /// </summary>
         public static byte[] getBytesForPrintQRCode(bool single)
         {
             byte[] bytesforprint;
