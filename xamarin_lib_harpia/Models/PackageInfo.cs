@@ -8,5 +8,11 @@ namespace xamarin_lib_harpia.Models
     {
         public string versionName { get; set; }
         public string versionCode { get; set; }
+
+        public PackageInfo(string versionName, string versionCode)
+        {
+            this.versionName = versionName;
+            this.versionCode = versionCode;
+        }
     }
 }

@@ -23,27 +23,28 @@ namespace xamarin_lib_harpia.ViewModels
             service = new InfoService(connection);
 
             // Carregar dados da impressora atualmente conectada
-            printerInfo = new PrinterInfo();
             LoadPrinterInfo();
 
             // Carregar dados da dependência da Sunmi
-            packageInfo = new PackageInfo();
             LoadPackageInfo();
         }
 
         public async void LoadPrinterInfo()
         {
-            printerInfo.SerialNo = service.GetSerialNo();
-            printerInfo.FirmwareVersion = service.GetFirmwareVersion();
-            printerInfo.Head = service.GetHead();
-            printerInfo.PrintedDistance = await service.GetPrintedDistanceAsync() + "mm";
-            printerInfo.Paper = service.GetPaper() == 1 ? "58mm" : "80mm";
+            var SerialNo = service.GetSerialNo();
+            var DeviceModel = service.GetDeviceModel();
+            var FirmwareVersion = service.GetFirmwareVersion();
+            var Head = service.GetHead();
+            var PrintedDistance = await service.GetPrintedDistanceAsync() + "mm";
+            var Paper = service.GetPaper() == 1 ? "58mm" : "80mm";
+            printerInfo = new PrinterInfo(SerialNo, DeviceModel, FirmwareVersion, Head, PrintedDistance, Paper);
         }
 
         public void LoadPackageInfo()
         {
-            packageInfo.versionName = service.GetVersionName();
-            packageInfo.versionCode = service.GetVersionCode();
+            var versionName = service.GetVersionName();
+            var versionCode = service.GetVersionCode();
+            packageInfo = new PackageInfo(versionName, versionCode);
         }
 
         public PrinterInfo PrinterInfo { get { return printerInfo; } }

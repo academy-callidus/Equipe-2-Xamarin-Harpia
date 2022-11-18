@@ -12,5 +12,15 @@ namespace xamarin_lib_harpia.Models
         public string Head { get; set; }
         public string PrintedDistance { get; set; }
         public string Paper { get; set; }
+
+        public PrinterInfo(string serialNo, string deviceModel, string firmwareVersion, string head, string printedDistance, string paper)
+        {
+            SerialNo = serialNo;
+            DeviceModel = deviceModel;
+            FirmwareVersion = firmwareVersion;
+            Head = head;
+            PrintedDistance = printedDistance;
+            Paper = paper;
+        }
     }
 }
