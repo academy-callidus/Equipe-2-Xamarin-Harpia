@@ -69,9 +69,9 @@ namespace BluetoothPrinter.Droid
         public bool PrintBarcode(Barcode barcode)
         {
             if (!IsConnected()) return false;
-
             try
             {
+                SunmiPrinterService.Service.SetFontSize(16, null);
                 int position = barcode.HRIPosition == "Acima do QRCode" ? 1 :
                 barcode.HRIPosition == "Abaixo do QRCode" ? 2 :
                 barcode.HRIPosition == "Acima e abaixo do QRCode" ? 3 :
@@ -96,7 +96,8 @@ namespace BluetoothPrinter.Droid
             if (!IsConnected()) return false;
             try
             {
-                
+                SunmiPrinterService.Service.SetFontSize(16, null);
+
                 SunmiPrinterService.Service.SetAlignment((int) qrcode.Alignment, null);
                 SunmiPrinterService.Service.PrintText("QR Code\n", null);
                 SunmiPrinterService.Service.PrintText("--------------------------------\n", null);
