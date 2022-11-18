@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using xamarin_lib_harpia.Models.Entities;
 
@@ -37,10 +38,10 @@ namespace xamarin_lib_harpia.Models.Services
             return response;
         }
 
-        public int GetPrintedDistance()
+        public async Task<int> GetPrintedDistanceAsync()
         {
-            var response = Connection.GetPrintedLength();
-            return response;
+            var response = await Connection.GetPrintedLength();
+            return int.Parse(response);
         }
 
         public int GetPaper()
@@ -51,7 +52,7 @@ namespace xamarin_lib_harpia.Models.Services
 
         public string GetVersionName()
         {
-            var response = Connection.GetServiceVersionName();
+            var response = Connection.GetServiceVersion();
             return response;
         }
 

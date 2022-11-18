@@ -31,12 +31,12 @@ namespace xamarin_lib_harpia.ViewModels
             LoadPackageInfo();
         }
 
-        public void LoadPrinterInfo()
+        public async void LoadPrinterInfo()
         {
             printerInfo.SerialNo = service.GetSerialNo();
             printerInfo.FirmwareVersion = service.GetFirmwareVersion();
             printerInfo.Head = service.GetHead();
-            printerInfo.PrintedDistance = service.GetPrintedDistance() + "mm";
+            printerInfo.PrintedDistance = await service.GetPrintedDistanceAsync() + "mm";
             printerInfo.Paper = service.GetPaper() == 1 ? "58mm" : "80mm";
         }
 

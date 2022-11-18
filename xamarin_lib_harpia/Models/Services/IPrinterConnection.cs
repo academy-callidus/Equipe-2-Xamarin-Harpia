@@ -26,7 +26,7 @@ namespace xamarin_lib_harpia.Models.Services
         
         int GetPrinterPaper();
 
-        int GetPrintedLength();
+        Task<string> GetPrintedLength();
 
         string GetServiceVersionName();
 

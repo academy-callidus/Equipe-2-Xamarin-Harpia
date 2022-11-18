@@ -8,6 +8,7 @@ using Android.OS;
 using Woyou.Aidlservice.Jiuiv5;
 using System.Runtime.Remoting.Messaging;
 using Java.Interop;
+using System.Threading.Tasks;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -161,12 +162,13 @@ namespace BluetoothPrinter.Droid
             return 1;
         }
 
-        public int GetPrintedLength()
+        public Task<string> GetPrintedLength()
         {
             var cb = new Callback();
             SunmiPrinterService.Service.GetPrintedLength(cb);
 
-            return int.Parse(cb.Result);
+
+            return cb.Result.Task;
         }
 
         public string GetServiceVersionName()
@@ -200,7 +202,12 @@ namespace BluetoothPrinter.Droid
 
     class Callback: ICallbackStub
     {
-        public string Result { get; set; }
+        public TaskCompletionSource<String> Result;
+
+        public Callback()
+        {
+            Result = new TaskCompletionSource<string>();
+        }
 
         public override void OnRunResult(bool isSuccess)
         {
@@ -209,7 +216,7 @@ namespace BluetoothPrinter.Droid
 
         public override void OnReturnString(string result)
         {
-            Result = result;
+            Result.TrySetResult(result);
         }
 
         public override void OnRaiseException(int code, string msg)
