@@ -141,6 +141,9 @@ namespace xamarin_lib_harpia.Utils
             return bytesforprint;
         }
 
+        /// <summary>
+        /// Send bytecode command to printer depending on the text object attributes received
+        /// </summary>
         public static byte[] GetTextBytes(Text text)
         {
             var stream = new List<byte>();
@@ -151,7 +154,7 @@ namespace xamarin_lib_harpia.Utils
             if (text.IsUnderline) stream.AddRange(UnderlineWithOneDotWidthOn());
             else stream.AddRange(UnderlineOff());
 
-            stream.AddRange(new byte[] { 0x1C,0x43,0xFF});
+            stream.AddRange(new byte[] { 0x1C,0x43,0xFF });
             stream.AddRange(SetFontSize(text.TextSize));
             stream.AddRange(TextToByteEncoding(text.Content, "utf-8"));
             stream.AddRange(NextLine(3));
@@ -159,24 +162,36 @@ namespace xamarin_lib_harpia.Utils
             return stream.ToArray();
         } 
 
+        /// <summary>
+        /// bytecode command to set bold text on
+        /// </summary>
         public static byte[] BoldOn()
         {
             byte[] result = new byte[] { ESC, 69, 0xf };
             return result;
         }
 
+        /// <summary>
+        /// bytecode command to set bold text off
+        /// </summary>
         public static byte[] BoldOff()
         {
             byte[] result = new byte[] { ESC, 69, 0 };
             return result;
         }
 
+        /// <summary>
+        /// bytecode command to set underline text on
+        /// </summary>
         public static byte[] UnderlineWithOneDotWidthOn()
         {
             byte[] result = new byte[] { ESC, 45, 1 };
             return result;
         }
 
+        /// <summary>
+        /// bytecode command to set underline text off
+        /// </summary>
         public static byte[] UnderlineOff()
         {
             byte[] result = new byte[] { ESC, 45, 0 };
@@ -269,6 +284,9 @@ namespace xamarin_lib_harpia.Utils
             return result;
         }
 
+        /// <summary>
+        /// bytecode commant to set text size 
+        /// </summary>
         public static byte[] SetFontSize(int fontSize)
         {
             byte[] result = new byte[] { 0x1D, 0x21, (byte)(fontSize - 12) };
