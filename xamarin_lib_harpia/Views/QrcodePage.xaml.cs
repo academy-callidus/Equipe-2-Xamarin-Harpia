@@ -40,6 +40,9 @@ namespace xamarin_lib_harpia.Views
             AlignLabel.Text = QrcodeAlignList[0];
         }
 
+        /// <summary>
+        /// Changes the QRcode content taking the input from the QRcode screen
+        /// </summary>
         private async void OnQrcodeChange(object sender, EventArgs e)
         {
             var qrcodeLabel = this.FindByName<Label>("QrcodeLabel");
@@ -52,7 +55,9 @@ namespace xamarin_lib_harpia.Views
             }
         }
 
-
+        /// <summary>
+        /// Changes the QRcode quantity (one or two) taking the input from the QRcode screen
+        /// </summary>
         private async void OnQtdChange(object sender, EventArgs e)
         {
             var qtdLabel = this.FindByName<Label>("QtdLabel");
@@ -63,6 +68,9 @@ namespace xamarin_lib_harpia.Views
             }
         }
 
+        /// <summary>
+        /// Changes the QRcode size taking the input from the QRcode screen
+        /// </summary>
         private async void OnSizeChange(object sender, EventArgs e)
         {
             var sizeLabel = this.FindByName<Label>("SizeLabel");
@@ -72,6 +80,9 @@ namespace xamarin_lib_harpia.Views
                 sizeLabel.Text = qrcodeSize;
             }
         }
+        /// <summary>
+        /// Changes the QRcode correction level taking the input from the QRcode screen
+        /// </summary>
         private async void OnLevelChange(object sender, EventArgs e)
         {
             var levelLabel = this.FindByName<Label>("LevelLabel");
@@ -81,6 +92,9 @@ namespace xamarin_lib_harpia.Views
                 levelLabel.Text = qrcodeLevel;
             }
         }
+        /// <summary>
+        /// Changes the QRcode alignment taking the input from the QRcode screen
+        /// </summary>
         private async void OnAlignChange(object sender, EventArgs e)
         {
             var alignLabel = this.FindByName<Label>("AlignLabel");
@@ -91,20 +105,23 @@ namespace xamarin_lib_harpia.Views
             }
         }
 
+        /// <summary>
+        /// Instantiates a QRcode with the data setted
+        /// </summary>
         private QRcode GetQrcodeEntity()
         {
-            // Content OK
+            // Content 
             var qrcodeLabel = this.FindByName<Label>("QrcodeLabel");
 
-            // Quantity OK
+            // Quantity 
             var qtdLabel = this.FindByName<Label>("QtdLabel");
             var quantity = QrcodeQtdList.IndexOf(qtdLabel.Text);
 
-            // Size OK
+            // Size
             var sizeLabel = this.FindByName<Label>("SizeLabel");
             var size = Int32.Parse(sizeLabel.Text);
 
-            // Correction OK
+            // Correction
             var levelLabel = this.FindByName<Label>("LevelLabel");
             QrCodeCorrectionEnum level;
             if(levelLabel.Text == "Correção L (7%)")
@@ -151,7 +168,9 @@ namespace xamarin_lib_harpia.Views
                 alignment: align,
                 cutPaper: cutLabel.IsToggled);
         }
-
+        /// <summary>
+        /// Send the QRcode entity to the QRcodeService class
+        /// </summary>
         private async void OnPrint(object sender, EventArgs e)
         {
             var wasSuccessful = QRCodeService.Execute(GetQrcodeEntity());

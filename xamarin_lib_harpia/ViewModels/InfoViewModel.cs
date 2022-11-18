@@ -30,6 +30,10 @@ namespace xamarin_lib_harpia.ViewModels
             LoadPackageInfo();
         }
 
+        /// <summary>
+        /// Asynchronously loads all printer data and instantiates a new PrinterInfo model object, 
+        /// firing a PropertyChanged event to update the view.
+        /// </summary>
         public async void LoadPrinterInfo()
         {
             var SerialNo = service.GetSerialNo();
@@ -41,6 +45,10 @@ namespace xamarin_lib_harpia.ViewModels
             PrinterInfo = new PrinterInfo(SerialNo, DeviceModel, FirmwareVersion, Head, PrintedDistance, Paper);
         }
 
+        /// <summary>
+        /// Synchronously loads all package data and instantiates a new PackageInfo model object,
+        /// firing a PropertyChanged event to update the view.
+        /// </summary>
         public void LoadPackageInfo()
         {
             var versionName = service.GetVersionName();
@@ -48,6 +56,10 @@ namespace xamarin_lib_harpia.ViewModels
             PackageInfo = new PackageInfo(versionName, versionCode);
         }
 
+        /// <summary>
+        /// Helper method to fire PropertyChange events on class member setter methods.
+        /// </summary>
+        /// <param name="propertyName">String representation of the property being set.</param>
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

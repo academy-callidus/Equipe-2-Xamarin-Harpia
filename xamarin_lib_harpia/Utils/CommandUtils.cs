@@ -40,6 +40,9 @@ namespace xamarin_lib_harpia.Utils
             return rv;
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to print a barcode
+        /// </summary>
         public static byte[] GetBarcodeBytes(Barcode barcode)
         {
             int position = barcode.HRIPosition == "Acima do QRCode" ? 1 :
@@ -74,15 +77,15 @@ namespace xamarin_lib_harpia.Utils
             if (barcode.CutPaper) stream.AddRange(CutPaper());
             return stream.ToArray();
         }
+        /// <summary>
+        /// Recives a QRcode object and translates it to bytecode
+        /// </summary>
         public static byte[] GetQrcodeBytes(QRcode qrcode)
         {
-            //modulesize
             byte[] modulesize = new byte[] { GS, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x43, (byte)qrcode.ImpSize};
 
-            //errorlevel
             byte[] errorlevel = new byte[] { GS, 0x28, 0x6B, 0x03, 0x00, 0x31, 0x45, (byte)(48 + (int)qrcode.Correction) };
 
-            // code 
             var stream_code = new List<byte>();
             byte[] d = TextToByte(qrcode.Content);
             int len = d.Length + 3;
@@ -121,7 +124,9 @@ namespace xamarin_lib_harpia.Utils
             }
 
         }
-
+        /// <summary>
+        /// Return bytes to the GetQrcodeBytes method depending if the QRcode is single or double
+        /// </summary>
         public static byte[] getBytesForPrintQRCode(bool single)
         {
             byte[] bytesforprint;
@@ -139,6 +144,9 @@ namespace xamarin_lib_harpia.Utils
             return bytesforprint;
         }
 
+        /// <summary>
+        /// Send bytecode command to printer depending on the text object attributes received
+        /// </summary>
         public static byte[] GetTextBytes(Text text)
         {
             var stream = new List<byte>();
@@ -149,7 +157,7 @@ namespace xamarin_lib_harpia.Utils
             if (text.IsUnderline) stream.AddRange(UnderlineWithOneDotWidthOn());
             else stream.AddRange(UnderlineOff());
 
-            stream.AddRange(new byte[] { 0x1C,0x43,0xFF});
+            stream.AddRange(new byte[] { 0x1C,0x43,0xFF });
             stream.AddRange(SetFontSize(text.TextSize));
             stream.AddRange(TextToByteEncoding(text.Content, "utf-8"));
             stream.AddRange(NextLine(3));
@@ -157,106 +165,45 @@ namespace xamarin_lib_harpia.Utils
             return stream.ToArray();
         } 
 
+        /// <summary>
+        /// bytecode command to set bold text on
+        /// </summary>
         public static byte[] BoldOn()
         {
             byte[] result = new byte[] { ESC, 69, 0xf };
             return result;
         }
 
+        /// <summary>
+        /// bytecode command to set bold text off
+        /// </summary>
         public static byte[] BoldOff()
         {
             byte[] result = new byte[] { ESC, 69, 0 };
             return result;
         }
 
+        /// <summary>
+        /// bytecode command to set underline text on
+        /// </summary>
         public static byte[] UnderlineWithOneDotWidthOn()
         {
             byte[] result = new byte[] { ESC, 45, 1 };
             return result;
         }
 
+        /// <summary>
+        /// bytecode command to set underline text off
+        /// </summary>
         public static byte[] UnderlineOff()
         {
             byte[] result = new byte[] { ESC, 45, 0 };
             return result;
         }
 
-        public static byte[] SingleByteOn()
-        {
-            byte[] result = new byte[] { FS, 0x2E };
-            return result;
-        }
-
-        public static byte[] SingleByteOff()
-        {
-            byte[] result = new byte[] { FS, 0x26 };
-            return result;
-        }
-
-        public static byte CodeParse(int value)
-        {
-            byte res = 0x00;
-            switch(value)
-            {
-                case 0:
-                    res = 0x00;
-                    break;
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    res = (byte)(value + 1);
-                    break;
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                    res = (byte)(value + 8);
-                    break;
-                case 12:
-                    res = 21;
-                    break;
-                case 13:
-                    res = 33;
-                    break;
-                case 14:
-                    res = 34;
-                    break;
-                case 15:
-                    res = 36;
-                    break;
-                case 16:
-                    res = 37;
-                    break;
-                case 17:
-                case 18:
-                case 19:
-                    res = (byte)(value - 17);
-                    break;
-                case 20:
-                    res = (byte)0xff;
-                    break;
-                default:
-                    break;
-            }
-            return (byte)res;
-        }
-
-        public static byte[] SetCodeSystemSingle(byte charset)
-        {
-            byte[] result = new byte[] { ESC, 0x74, charset };
-            return result;
-        }
-
-        public static byte[] SetCodeSystem(byte charset)
-        {
-            byte[] result = new byte[] { FS, 0x43, charset };
-            return result;
-        }
-
+        /// <summary>
+        /// Return ESC/POS commands to break lines
+        /// </summary>
         public static byte[] NextLine(int lineNum)
         {
             byte[] result = new byte[lineNum];
@@ -267,37 +214,58 @@ namespace xamarin_lib_harpia.Utils
             return result;
         }
 
+        /// <summary>
+        /// bytecode commant to set text size 
+        /// </summary>
         public static byte[] SetFontSize(int fontSize)
         {
             byte[] result = new byte[] { 0x1D, 0x21, (byte)(fontSize - 12) };
             return result;
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to set left alignment
+        /// </summary>
         public static byte[] AlignLeft()
         {
             return new byte[] { ESC, 97, 0 };
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to set center alignment
+        /// </summary>
         public static byte[] AlignCenter()
         {
             return new byte[] { ESC, 97, 1 };
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to set right alignment
+        /// </summary>
         public static byte[] AlignRight()
         {
             return new byte[] { ESC, 97, 2 };
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to cut paper
+        /// </summary>
         public static byte[] CutPaper()
         {
             return new byte[] { 0x1d, 0x56, 0x01 };
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to transform text to byte (ASCII)
+        /// </summary>
         public static byte[] TextToByte(string content)
         {
             return System.Text.Encoding.ASCII.GetBytes(content);
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to transform text to byte (Others)
+        /// </summary>
         public static byte[] TextToByteEncoding(string content, string encoding)
         {
             if (encoding.Equals("utf-8")) return System.Text.Encoding.UTF8.GetBytes(content);

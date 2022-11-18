@@ -20,12 +20,16 @@ namespace xamarin_lib_harpia.Views
             LoadDemoDetails();
 
         }
-
-        private void AddDemo(string nome, string path, Func<Task> onTap)
+        /// <summary>
+        /// Adds a new icon to Homepage (Frame containing image and text)
+        /// Adds to the new icon a function that will be executed when clicking it
+        /// </summary>
+        private void AddDemo(string nome, string iconPath, Func<Task> onTap)
         {
 
             Frame page = new Frame
             {
+                // Looks up in the dictionary of App.xaml the color corresponding to "backgroundColor"
                 BackgroundColor = (Color)Application.Current.Resources["backgroundColor"],
                
                 HasShadow = false,
@@ -33,13 +37,13 @@ namespace xamarin_lib_harpia.Views
                 Margin = new Thickness(-1),
                 Content = new StackLayout
                 {
-                    Padding = new Thickness(10, 0, 10, 0), //left top right bottom
+                    Padding = new Thickness(10, 0, 10, 0), //left, top, right, bottom
                     
                     Children =
                     {
                         new Image
                         {
-                            Source = path,
+                            Source = iconPath,
                             Margin = new Thickness(5, 0, 5, 0),
                         },
                         new Label
@@ -64,7 +68,9 @@ namespace xamarin_lib_harpia.Views
         }
 
 
-
+        /// <summary>
+        /// Load all buttons that will be displayed on the Homepage
+        /// </summary>
         public void LoadDemoDetails()
         {
             Pages.Children.Clear();
@@ -74,13 +80,19 @@ namespace xamarin_lib_harpia.Views
             AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
         }
 
+        /// <summary>
+        /// Creates a new instance of FullTestService and returns an asynchronous 
+        /// function that performs all types of printing in the application
+        /// </summary>
         private Func<Task> RunFullTest()
         {
             var service = new FullTestService();
 
             return new Func<Task>(async () => await Task.Run(() => service.RunAllTests()));
         }
-
+        /// <summary>
+        /// Return a function that navigates to the specified page, implicitly converting string to uri
+        /// </summary>
         private Func<Task> NavigateTo(string url)
         {
             return new Func<Task>(async () => await Shell.Current.GoToAsync(url));

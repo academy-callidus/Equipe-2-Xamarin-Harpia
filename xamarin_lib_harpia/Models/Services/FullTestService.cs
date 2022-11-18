@@ -99,19 +99,19 @@ namespace xamarin_lib_harpia.Models.Services
                     false
                     ));
             }
-            // Test Size 3 QRCode
+            // Test Size 3 of QRCode
             qrcode.Execute(new QRcode(
                     content,
-                    0, //index do elemento
+                    0, //element index
                     QrcodeSizeList[2],
                     QrcodeLevelList[0],
                     Alignments[0],
                     false
                     ));
-            // Test Size 8 QRCode
+            // Test Size 8 of QRCode
             qrcode.Execute(new QRcode(
                     content,
-                    0, //index do elemento
+                    0, //element index
                     QrcodeSizeList[7],
                     QrcodeLevelList[0],
                     Alignments[0],
@@ -121,7 +121,7 @@ namespace xamarin_lib_harpia.Models.Services
             // Test QRCode Correction L
             qrcode.Execute(new QRcode(
                     content,
-                    0, //index do elemento
+                    0, //element index
                     QrcodeSizeList[1],
                     QrcodeLevelList[0],
                     Alignments[0],
@@ -130,14 +130,14 @@ namespace xamarin_lib_harpia.Models.Services
             // Test QRCode Corretion H
             qrcode.Execute(new QRcode(
                     content,
-                    0, //index do elemento
+                    0, //element index
                     QrcodeSizeList[1],
                     QrcodeLevelList[3],
                     Alignments[0],
                     false
                     ));
 
-            // Test Dois QRCode
+            // Test printing 2 QRCodes
             qrcode.Execute(new QRcode(content, 1, QrcodeSizeList[1], QrcodeLevelList[0], Alignments[0], false));
 
 

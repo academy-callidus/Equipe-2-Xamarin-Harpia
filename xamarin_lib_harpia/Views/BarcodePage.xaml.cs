@@ -27,6 +27,9 @@ namespace xamarin_lib_harpia.Views
             BarcodeService = new BarcodeService(connection);
         }
 
+        /// <summary>
+        /// Load all models that will be displayed on the BarcodeView.
+        /// </summary>
         private void InitializeModels()
         {
             BarcodeModels = new List<BarcodeModel>
@@ -45,6 +48,9 @@ namespace xamarin_lib_harpia.Views
             };
         }
 
+        /// <summary>
+        /// Load all initial values that will be displayed on the BarcodeView.
+        /// </summary>
         private void InitializeValues()
         {
             var barcodePreview = this.FindByName<ZXingBarcodeImageView>("BarcodeImageView");
@@ -59,18 +65,27 @@ namespace xamarin_lib_harpia.Views
             barcodePreview.BarcodeValue = DEFAULT_BARCODE_VALUE;
         }
 
+        /// <summary>
+        /// Set event to run on width change.
+        /// </summary>
         private void OnWidthChange(object sender, ValueChangedEventArgs e)
         {
             var label = this.FindByName<Label>("WidthLabel");
             label.Text = Math.Round(e.NewValue).ToString();
         }
 
+        /// <summary>
+        /// Set event to run on height change.
+        /// </summary>
         private void OnHeightChange(object sender, ValueChangedEventArgs e)
         {
             var label = this.FindByName<Label>("HeightLabel");
             label.Text = Math.Round(e.NewValue).ToString();
         }
 
+        /// <summary>
+        /// Set event to run on barcode change.
+        /// </summary>
         private async void OnBarcodeChange(object sender, EventArgs e)
         {
             var barcodeLabel = this.FindByName<Label>("BarcodeLabel");
@@ -86,6 +101,9 @@ namespace xamarin_lib_harpia.Views
             barcodePreview.BarcodeValue = barcodeContent;
         }
 
+        /// <summary>
+        /// Set event to run on model change.
+        /// </summary>
         private async void OnModelChange(object sender, EventArgs e)
         {
             var modelLabel = this.FindByName<Label>("ModelLabel");
@@ -103,6 +121,9 @@ namespace xamarin_lib_harpia.Views
             barcodePreview.BarcodeFormat = barcodeFormat.Format;
         }
 
+        /// <summary>
+        /// Set event to run on HRI position change.
+        /// </summary>
         private async void OnHRIChange(object sender, EventArgs e)
         {
             var HRILabel = this.FindByName<Label>("HRILabel");
@@ -116,6 +137,9 @@ namespace xamarin_lib_harpia.Views
             HRILabel.Text = barcodeHRI;
         }
 
+        /// <summary>
+        /// Build a barcode entity from the view values.
+        /// </summary>
         private Barcode GetBarcodeEntity()
         {
             var contentLabel = this.FindByName<Label>("BarcodeLabel");
@@ -132,6 +156,9 @@ namespace xamarin_lib_harpia.Views
             return new Barcode(contentLabel.Text, HRILabel.Text, barcodeFormat, width, height, cutLabel.IsToggled);
         }
 
+        /// <summary>
+        /// Set event to run on print.
+        /// </summary>
         private async void OnPrint(object sender, EventArgs e)
         {
             

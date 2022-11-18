@@ -20,12 +20,15 @@ namespace xamarin_lib_harpia.Views
         private int record = 21;
 
         private TextService textService;
-
+        
+        /// <summary>
+        /// Initializing text of the labels and TextService object
+        /// </summary>
         public TextPage()
         {
             InitializeComponent();
             
-            charSetOption = mStrings[record];
+            charSetOption = mStrings[record]; // receiving the charset type 
 
             CharSetLabel.Text = charSetOption;
             EditorLabel.Text = welcomeText;
@@ -35,6 +38,9 @@ namespace xamarin_lib_harpia.Views
             textService = new TextService(connection);
         }
 
+        /// <summary>
+        /// Changes the charset option taking the input from TextPage
+        /// </summary>
         async void OnClickCharSet(object sender, EventArgs e)
         {
             string option = await DisplayActionSheet("char set", "cancelar", null, mStrings);
@@ -51,11 +57,17 @@ namespace xamarin_lib_harpia.Views
             }
         }
 
+        /// <summary>
+        /// Slider method to change the value of TextSize with a slider
+        /// </summary>
         void SliderChanged(object sender, EventArgs e)
         {
             TextSizeLabel.Text = Math.Round(TextSizeSlider.Value).ToString();
         }
 
+        /// <summary>
+        /// Method to catch all values and instantiate a Text object 
+        /// </summary>
         public Text GetTextEntity()
         {
             var charsetLabel = this.FindByName<Label>("CharSetLabel");
@@ -73,6 +85,9 @@ namespace xamarin_lib_harpia.Views
             return new Text(content, isBold, isUnderline, charsetOption, textSize, this.record); ;
         }
 
+        /// <summary>
+        /// Send the Text object to TextService
+        /// </summary>
         async void OnPrint(object sender, EventArgs e)
         {
             var wasSuccessful = textService.Execute(GetTextEntity());

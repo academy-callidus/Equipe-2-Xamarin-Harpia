@@ -13,6 +13,9 @@ namespace xamarin_lib_harpia.Models.Services
             Connection = connection;
         }
 
+        /// <summary>
+        /// Try printing a barcode if it has a valid format
+        /// </summary>
         public bool Execute(Barcode barcode)
         {
             if (!barcode.IsValid()) return false;

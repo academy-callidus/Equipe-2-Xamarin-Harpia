@@ -14,6 +14,10 @@ namespace xamarin_lib_harpia.Models.Services
             Connection = connection;
         }
 
+        /// <summary>
+        /// Try to start a connection with the printer, check whether it was successful or not and 
+        /// if was sucessful return the bytecode reponse from the PrintText method
+        /// </summary>
         public bool Execute(Text text)
         {
             try
