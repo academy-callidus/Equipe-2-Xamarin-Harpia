@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
 using xamarin_lib_harpia.Models;
@@ -37,17 +38,36 @@ namespace xamarin_lib_harpia.ViewModels
             var Head = service.GetHead();
             var PrintedDistance = await service.GetPrintedDistanceAsync() + "mm";
             var Paper = service.GetPaper() == 1 ? "58mm" : "80mm";
-            printerInfo = new PrinterInfo(SerialNo, DeviceModel, FirmwareVersion, Head, PrintedDistance, Paper);
+            PrinterInfo = new PrinterInfo(SerialNo, DeviceModel, FirmwareVersion, Head, PrintedDistance, Paper);
         }
 
         public void LoadPackageInfo()
         {
             var versionName = service.GetVersionName();
             var versionCode = service.GetVersionCode();
-            packageInfo = new PackageInfo(versionName, versionCode);
+            PackageInfo = new PackageInfo(versionName, versionCode);
         }
 
-        public PrinterInfo PrinterInfo { get { return printerInfo; } }
-        public PackageInfo PackageInfo { get { return packageInfo; } }
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public PrinterInfo PrinterInfo { 
+            get { return printerInfo; }
+            set 
+            {
+                printerInfo = value;
+                OnPropertyChanged();
+            }
+        }
+        public PackageInfo PackageInfo {
+            get { return packageInfo; }
+            set
+            {
+                packageInfo = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

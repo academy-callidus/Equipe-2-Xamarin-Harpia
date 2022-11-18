@@ -9,6 +9,7 @@ using Woyou.Aidlservice.Jiuiv5;
 using System.Runtime.Remoting.Messaging;
 using Java.Interop;
 using System.Threading.Tasks;
+using Android.App;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -159,7 +160,7 @@ namespace BluetoothPrinter.Droid
         public int GetPrinterPaper()
         {
             // TO-DO
-            return 1;
+            return SunmiPrinterService.Service.;
         }
 
         public Task<string> GetPrintedLength()
@@ -180,9 +181,10 @@ namespace BluetoothPrinter.Droid
 
         public string GetServiceVersionCode()
         {
-            var versionCode = SysProp.GetProp("ro.version.sunmi_versioncode");
+            var packageInfo = Application.Context.ApplicationContext.PackageManager.GetPackageInfo("woyou.aidlservice.jiuiv5", 0);
+            var versionCode = AndroidX.Core.Content.PM.PackageInfoCompat.GetLongVersionCode(packageInfo);
 
-            return versionCode != null ? versionCode : string.Empty;
+            return versionCode.ToString();
         }
     }
 
