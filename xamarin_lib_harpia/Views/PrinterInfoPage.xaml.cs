@@ -19,10 +19,5 @@ namespace xamarin_lib_harpia.Views
         {
             InitializeComponent();
         }
-
-        private void DisplayPrinterInfo(object printer)
-        {
-
-        }
     }
 }
