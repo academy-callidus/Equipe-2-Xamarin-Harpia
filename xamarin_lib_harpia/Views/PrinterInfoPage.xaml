@@ -26,7 +26,7 @@
                        VerticalOptions="CenterAndExpand"/>
                 <Label Grid.Row="0"
                        Grid.Column="1"
-                       Text="{Binding PrinterInfo.serialNo}"
+                       Text="{Binding PrinterInfo.SerialNo}"
                        VerticalOptions="CenterAndExpand"/>
 
                 <Label Grid.Row="1" 
@@ -35,7 +35,7 @@
                        VerticalOptions="CenterAndExpand"/>
                 <Label Grid.Row="1" 
                        Grid.Column="1" 
-                       Text="{Binding PrinterInfo.deviceModel}"
+                       Text="{Binding PrinterInfo.DeviceModel}"
                        VerticalOptions="CenterAndExpand"/>
 
                 <Label Grid.Row="2" 
@@ -44,7 +44,7 @@
                        VerticalOptions="CenterAndExpand"/>
                 <Label Grid.Row="2" 
                        Grid.Column="1" 
-                       Text="{Binding PrinterInfo.head}"
+                       Text="{Binding PrinterInfo.Head}"
                        VerticalOptions="CenterAndExpand"/>
 
                 <Label Grid.Row="3" 
@@ -53,7 +53,7 @@
                        VerticalOptions="CenterAndExpand"/>
                 <Label Grid.Row="3" 
                        Grid.Column="1" 
-                       Text="{Binding PrinterInfo.firmwareVersion}"
+                       Text="{Binding PrinterInfo.FirmwareVersion}"
                        VerticalOptions="CenterAndExpand"/>
 
                 <Label Grid.Row="4" 
@@ -62,7 +62,7 @@
                        VerticalOptions="CenterAndExpand"/>
                 <Label Grid.Row="4" 
                        Grid.Column="1" 
-                       Text="{Binding PrinterInfo.paper}"
+                       Text="{Binding PrinterInfo.Paper}"
                        VerticalOptions="CenterAndExpand"/>
 
                 <Label Grid.Row="5" 
@@ -71,7 +71,7 @@
                        VerticalOptions="CenterAndExpand"/>
                 <Label Grid.Row="5" 
                        Grid.Column="1" 
-                       Text="{Binding PrinterInfo.printedDistance}"
+                       Text="{Binding PrinterInfo.PrintedDistance}"
                        VerticalOptions="CenterAndExpand"/>
 
                 <BoxView Grid.Row="6"
