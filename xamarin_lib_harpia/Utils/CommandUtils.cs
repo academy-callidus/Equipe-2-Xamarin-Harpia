@@ -40,6 +40,9 @@ namespace xamarin_lib_harpia.Utils
             return rv;
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to print a barcode
+        /// </summary>
         public static byte[] GetBarcodeBytes(Barcode barcode)
         {
             int position = barcode.HRIPosition == "Acima do QRCode" ? 1 :
@@ -198,82 +201,9 @@ namespace xamarin_lib_harpia.Utils
             return result;
         }
 
-        public static byte[] SingleByteOn()
-        {
-            byte[] result = new byte[] { FS, 0x2E };
-            return result;
-        }
-
-        public static byte[] SingleByteOff()
-        {
-            byte[] result = new byte[] { FS, 0x26 };
-            return result;
-        }
-
-        public static byte CodeParse(int value)
-        {
-            byte res = 0x00;
-            switch(value)
-            {
-                case 0:
-                    res = 0x00;
-                    break;
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    res = (byte)(value + 1);
-                    break;
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                    res = (byte)(value + 8);
-                    break;
-                case 12:
-                    res = 21;
-                    break;
-                case 13:
-                    res = 33;
-                    break;
-                case 14:
-                    res = 34;
-                    break;
-                case 15:
-                    res = 36;
-                    break;
-                case 16:
-                    res = 37;
-                    break;
-                case 17:
-                case 18:
-                case 19:
-                    res = (byte)(value - 17);
-                    break;
-                case 20:
-                    res = (byte)0xff;
-                    break;
-                default:
-                    break;
-            }
-            return (byte)res;
-        }
-
-        public static byte[] SetCodeSystemSingle(byte charset)
-        {
-            byte[] result = new byte[] { ESC, 0x74, charset };
-            return result;
-        }
-
-        public static byte[] SetCodeSystem(byte charset)
-        {
-            byte[] result = new byte[] { FS, 0x43, charset };
-            return result;
-        }
-
+        /// <summary>
+        /// Return ESC/POS commands to break lines
+        /// </summary>
         public static byte[] NextLine(int lineNum)
         {
             byte[] result = new byte[lineNum];
@@ -293,31 +223,49 @@ namespace xamarin_lib_harpia.Utils
             return result;
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to set left alignment
+        /// </summary>
         public static byte[] AlignLeft()
         {
             return new byte[] { ESC, 97, 0 };
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to set center alignment
+        /// </summary>
         public static byte[] AlignCenter()
         {
             return new byte[] { ESC, 97, 1 };
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to set right alignment
+        /// </summary>
         public static byte[] AlignRight()
         {
             return new byte[] { ESC, 97, 2 };
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to cut paper
+        /// </summary>
         public static byte[] CutPaper()
         {
             return new byte[] { 0x1d, 0x56, 0x01 };
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to transform text to byte (ASCII)
+        /// </summary>
         public static byte[] TextToByte(string content)
         {
             return System.Text.Encoding.ASCII.GetBytes(content);
         }
 
+        /// <summary>
+        /// Return ESC/POS commands to transform text to byte (Others)
+        /// </summary>
         public static byte[] TextToByteEncoding(string content, string encoding)
         {
             if (encoding.Equals("utf-8")) return System.Text.Encoding.UTF8.GetBytes(content);
