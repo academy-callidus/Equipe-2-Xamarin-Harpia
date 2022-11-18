@@ -6,6 +6,10 @@ using xamarin_lib_harpia.Utils;
 using Android.Content;
 using Android.OS;
 using Woyou.Aidlservice.Jiuiv5;
+using System.Runtime.Remoting.Messaging;
+using Java.Interop;
+using System.Threading.Tasks;
+using Android.App;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -131,6 +135,57 @@ namespace BluetoothPrinter.Droid
             SunmiPrinterService.Service.LineWrap(lines, null);
         }
 
+        public string GetPrinterSerialNo()
+        {
+            return IsConnected() ? SunmiPrinterService.Service.GetPrinterSerialNo() : string.Empty;
+        }
+
+        public string GetPrinterModel()
+        {
+            var model = SysProp.GetProp("ro.product.model");
+
+            return model != null ? model : string.Empty;
+        }
+
+        public string GetFirmwareVersion()
+        {
+            return IsConnected() ? SunmiPrinterService.Service.GetPrinterVersion() : string.Empty;
+        }
+
+        public string GetServiceVersion()
+        {
+            return IsConnected() ? SunmiPrinterService.Service.GetServiceVersion() : string.Empty;
+        }
+
+        public int GetPrinterPaper()
+        {
+            // TO-DO
+            return 1;
+        }
+
+        public Task<string> GetPrintedLength()
+        {
+            var cb = new Callback();
+            SunmiPrinterService.Service.GetPrintedLength(cb);
+
+
+            return cb.Result.Task;
+        }
+
+        public string GetServiceVersionName()
+        {
+            var versionName = SysProp.GetProp("ro.version.sunmi_versionname");
+
+            return versionName != null ? versionName : string.Empty;
+        }
+
+        public string GetServiceVersionCode()
+        {
+            var packageInfo = Application.Context.ApplicationContext.PackageManager.GetPackageInfo("woyou.aidlservice.jiuiv5", 0);
+            var versionCode = AndroidX.Core.Content.PM.PackageInfoCompat.GetLongVersionCode(packageInfo);
+
+            return versionCode.ToString();
+        }
     }
 
     public class SunmiPrinterService : Java.Lang.Object, IServiceConnection
@@ -145,5 +200,93 @@ namespace BluetoothPrinter.Droid
         {
             Service = null;
         }
+    }
+
+    class Callback: ICallbackStub
+    {
+        public TaskCompletionSource<String> Result;
+
+        public Callback()
+        {
+            Result = new TaskCompletionSource<string>();
+        }
+
+        public override void OnRunResult(bool isSuccess)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public override void OnReturnString(string result)
+        {
+            Result.TrySetResult(result);
+        }
+
+        public override void OnRaiseException(int code, string msg)
+        {
+            //throw new NotImplementedException();
+        }
+    }
+
+    static class SysProp
+    {
+        // Lazy load the SystemProperties class
+        private static Lazy<Java.Lang.Class> _class =
+            new Lazy<Java.Lang.Class>(() =>
+                Java.Lang.Class.ForName("android.os.SystemProperties")
+            );
+
+        // Get the set method when we need it
+        private static Lazy<Java.Lang.Reflect.Method> _SetMethod =
+            new Lazy<Java.Lang.Reflect.Method>(() =>
+                _class.Value.GetDeclaredMethod("set",
+                    Java.Lang.Class.FromType(typeof(Java.Lang.String)),
+                    Java.Lang.Class.FromType(typeof(Java.Lang.String)))
+                );
+
+        // Get the get method when we need it
+        private static Lazy<Java.Lang.Reflect.Method> _GetMethod =
+            new Lazy<Java.Lang.Reflect.Method>(() =>
+                _class.Value.GetDeclaredMethod("get",
+                    Java.Lang.Class.FromType(typeof(Java.Lang.String)))
+                );
+
+        private static Java.Lang.Reflect.Method SetMethod
+        {
+            get { return _SetMethod.Value; }
+        }
+        private static Java.Lang.Reflect.Method GetMethod
+        {
+            get { return _GetMethod.Value; }
+        }
+
+        /// <summary>
+        /// Calls the get method of the android.os.SystemProperties class
+        /// </summary>
+        /// <param name="PropertyName">The name of the system property to get the value for</param>
+        /// <returns>The value of the specified property or null if it does not exists</returns>
+        public static string GetProp(string PropertyName)
+        {
+            // Invoking a static method, first parameter is null
+            var r = GetMethod.Invoke(null, new Java.Lang.String(PropertyName));
+
+            return r.ToString();
+        }
+
+        /// <summary>
+        /// Calls the set method of the android.os.SystemProperties class
+        /// </summary>
+        /// <param name="PropertyName">The name of the system property to get the value for</param>
+        /// <param name="PropertyValue">The value to set for the system property</param>
+        /// <returns>The previous value of the specified property or null if it does not exists</returns>
+        public static string SetProp(string PropertyName, string PropertyValue)
+        {
+            // Invoking a static method, first parameter is null
+            var r = SetMethod.Invoke(null,
+                new Java.Lang.String(PropertyName),
+                new Java.Lang.String(PropertyValue));
+
+            return r.ToString();
+        }
+
     }
 }
