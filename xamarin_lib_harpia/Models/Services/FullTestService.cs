@@ -147,7 +147,7 @@ namespace xamarin_lib_harpia.Models.Services
         {
             // Test HRI Positions
             for (int i = 0; i < BarcodeHRIs.Length; i++)
-                barcode.Execute(new Barcode("7894900700046", BarcodeHRIs[i], BarcodeModels[0], 2, 162, false));
+                barcode.Execute(new Barcode("789490070046", BarcodeHRIs[i], BarcodeModels[0], 2, 162, false));
 
             string[] testContent = {
                 "123456",
