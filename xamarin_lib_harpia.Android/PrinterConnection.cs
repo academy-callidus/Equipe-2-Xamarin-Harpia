@@ -160,7 +160,7 @@ namespace BluetoothPrinter.Droid
         public int GetPrinterPaper()
         {
             // TO-DO
-            return SunmiPrinterService.Service.;
+            return 1;
         }
 
         public Task<string> GetPrintedLength()
