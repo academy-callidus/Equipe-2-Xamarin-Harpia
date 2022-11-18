@@ -50,7 +50,7 @@ namespace xamarin_lib_harpia.Models.Services
                 new CODE128C()
         };
 
-        private readonly int[] QrcodeSizeList = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        private readonly int[] QrcodeSizeList = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         private readonly QrCodeCorrectionEnum[] QrcodeLevelList = 
         { 
             QrCodeCorrectionEnum.CORRECTION_L,  
@@ -150,12 +150,12 @@ namespace xamarin_lib_harpia.Models.Services
                 barcode.Execute(new Barcode("7894900700046", BarcodeHRIs[i], BarcodeModels[0], 2, 162, false));
 
             string[] testContent = {
-                "0123456",
-                "978020137962",
-                "9031101",
+                "123456",
+                "9780201379621",
+                "90311012",
                 "ABC-1234", 
                 "123457",
-                "a1bcd2/",
+                "a12-34d",
                 "92781330",
                 "harpia/2022",
                 "PJJ123C"
