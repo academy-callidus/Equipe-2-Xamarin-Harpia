@@ -34,7 +34,7 @@ namespace xamarin_lib_harpia.ViewModels
         {
             var SerialNo = service.GetSerialNo();
             var DeviceModel = service.GetDeviceModel();
-            var FirmwareVersion = service.GetFirmwareVersion();
+            var FirmwareVersion = service.GetFirmwareVersion().Trim();
             var Head = service.GetHead();
             var PrintedDistance = await service.GetPrintedDistanceAsync() + "mm";
             var Paper = service.GetPaper() == 1 ? "58mm" : "80mm";
