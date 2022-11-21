@@ -10,6 +10,7 @@ using System.Runtime.Remoting.Messaging;
 using Java.Interop;
 using System.Threading.Tasks;
 using Android.App;
+using static System.Net.Mime.MediaTypeNames;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -133,7 +134,17 @@ namespace BluetoothPrinter.Droid
 
         public bool PrintTable(Table table)
         {
-            return true;
+            if (!IsConnected()) return false;
+            try
+            {
+                SunmiPrinterService.Service.PrintColumnsText(table.ColumnsText, table.ColumnsWidth, table.GetAlignmentsAsInteger(), null);
+                LineWrap();
+                return true;
+            }
+            catch (Exception _)
+            {
+                return false;
+            }
         }
 
         private void LineWrap(int lines = 3)

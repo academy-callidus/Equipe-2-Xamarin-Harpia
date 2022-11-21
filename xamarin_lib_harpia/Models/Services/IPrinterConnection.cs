@@ -43,9 +43,8 @@ namespace xamarin_lib_harpia.Models.Services
         bool PrintText(Text text);
 
         /// <summary>
-        /// Get the serial number from the connected printer.
+        /// Send ESC/POS for the printer to print a table.
         /// </summary>
-
         bool PrintTable(Table table);
 
         string GetPrinterSerialNo();
@@ -84,7 +83,5 @@ namespace xamarin_lib_harpia.Models.Services
         /// Get the service version code from the application context.
         /// </summary>
         string GetServiceVersionCode();
-
-
     }
 }

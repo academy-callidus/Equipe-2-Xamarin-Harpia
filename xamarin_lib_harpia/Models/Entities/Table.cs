@@ -19,5 +19,14 @@ namespace xamarin_lib_harpia.Models.Entities
             ColumnsWidth = columnsWidth;
         }
 
+        public int[] GetAlignmentsAsInteger()
+        {
+            List<int> alignments = new List<int>();
+            foreach(var alignment in ColumnsAlign)
+            {
+                alignments.Add((int)alignment);
+            }
+            return alignments.ToArray();
+        }
     }
 }
