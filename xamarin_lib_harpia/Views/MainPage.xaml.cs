@@ -13,11 +13,14 @@ namespace xamarin_lib_harpia.Views
 {
     public partial class MainPage : ContentPage
     {
+        private AdvancePaperService AdvancePaperService;
 
         public MainPage()
         {
             InitializeComponent();
             LoadDemoDetails();
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            AdvancePaperService = new AdvancePaperService(connection);
 
         }
         /// <summary>
@@ -78,6 +81,7 @@ namespace xamarin_lib_harpia.Views
             AddDemo("QR Code", "function_qr.png", NavigateTo(nameof(QrcodePage)));
             AddDemo("Bar Code", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
             AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
+            AddDemo("Avançar Papel", "function_threeline.png", OnAdvancePaper());
         }
 
         /// <summary>
@@ -98,11 +102,18 @@ namespace xamarin_lib_harpia.Views
             return new Func<Task>(async () => await Shell.Current.GoToAsync(url));
         }
 
+
+
         async void OnSettingsClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 
-
+        private Func<Task> OnAdvancePaper()
+        {
+            var wasSuccessful = AdvancePaperService.Execute();
+            if (!wasSuccessful) return new Func<Task>(async () => await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK"));
+            return null;
+        }
     }
 }

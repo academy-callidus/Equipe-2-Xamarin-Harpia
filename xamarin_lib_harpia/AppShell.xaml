@@ -25,5 +25,8 @@
 
         <ShellContent Title="Text"
                       ContentTemplate="{DataTemplate views:TextPage}" />
+        
+        <ShellContent Title="AdvancePaper"
+                      ContentTemplate="{DataTemplate views:TextPage}" />
     </TabBar>
 </Shell>

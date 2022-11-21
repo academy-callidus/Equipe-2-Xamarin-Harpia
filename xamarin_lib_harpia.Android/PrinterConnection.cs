@@ -10,6 +10,7 @@ using System.Runtime.Remoting.Messaging;
 using Java.Interop;
 using System.Threading.Tasks;
 using Android.App;
+using ZXing.QrCode.Internal;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -122,6 +123,20 @@ namespace BluetoothPrinter.Droid
                 SunmiPrinterService.Service.PrintText(text.Content, null);
                 SendRawData(CommandUtils.UnderlineOff());
                 SendRawData(CommandUtils.BoldOff());
+                LineWrap();
+                return true;
+            }
+            catch (Exception _)
+            {
+                return false;
+            }
+        }
+
+        public bool AdvancePaper()
+        {
+            if (!IsConnected()) return false;
+            try
+            {
                 LineWrap();
                 return true;
             }
