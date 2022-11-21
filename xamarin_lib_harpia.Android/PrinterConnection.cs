@@ -10,7 +10,6 @@ using System.Runtime.Remoting.Messaging;
 using Java.Interop;
 using System.Threading.Tasks;
 using Android.App;
-using static System.Net.Mime.MediaTypeNames;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
