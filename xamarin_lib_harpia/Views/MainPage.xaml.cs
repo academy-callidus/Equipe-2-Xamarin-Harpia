@@ -81,7 +81,7 @@ namespace xamarin_lib_harpia.Views
             AddDemo("QR Code", "function_qr.png", NavigateTo(nameof(QrcodePage)));
             AddDemo("Bar Code", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
             AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
-            AddDemo("Avançar Papel", "function_threeline.png", OnAdvancePaper());
+            AddDemo("Avançar Papel", "function_threeline.png", RunAdvancePaper());
         }
 
         /// <summary>
@@ -109,11 +109,10 @@ namespace xamarin_lib_harpia.Views
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 
-        private Func<Task> OnAdvancePaper()
+        private Func<Task> RunAdvancePaper()
         {
-            var wasSuccessful = AdvancePaperService.Execute();
-            if (!wasSuccessful) return new Func<Task>(async () => await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK"));
-            return null;
+
+            return new Func<Task>(async () => await Task.Run(() => AdvancePaperService.Execute()));
         }
     }
 }
