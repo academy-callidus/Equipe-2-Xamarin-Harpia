@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_lib_harpia.Models.Services;
 
 namespace xamarin_lib_harpia.Views
 {
@@ -51,10 +52,10 @@ namespace xamarin_lib_harpia.Views
         /// <summary>
         /// This function is used to print the image
         /// </summary>
-        
-        void OnPrint(object sender, EventArgs e)
-        {
 
+        async void OnPrint(object sender, EventArgs e)
+        {
+            await DisplayAlert("Impressão de imagem", "A imagem será impressa", "cancelar");
         }
 
     }

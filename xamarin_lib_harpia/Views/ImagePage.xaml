@@ -5,14 +5,14 @@
              x:Class="xamarin_lib_harpia.Views.ImagePage"
              BackgroundColor="#181a26">
 
-    <!--block concerned on the title and the navigation-->
+    <!--block concerning on the title and the navigation-->
     <Shell.TitleView>
         <titlebar:TitleBar TitleText="Imagem"/>
     </Shell.TitleView>
 
     <ContentPage.Content>
         <StackLayout>
-            <!--block concerned on the separation between options-->
+            <!--block concerning on the separation between options-->
             <BoxView 
                 HorizontalOptions="Center" 
                 HeightRequest="1" 
@@ -20,7 +20,7 @@
                 Opacity=".1" 
                 WidthRequest="350"/>
 
-            <!--block concerned on the alignment option-->
+            <!--block concerning on the alignment option-->
             <!--when the user clicks on the arrow, it's possible to select the alignment type-->
             <FlexLayout 
                 JustifyContent="SpaceBetween"
@@ -54,13 +54,13 @@
                 </StackLayout>
             </FlexLayout>
 
-            <!--block concerned on the separation between options-->
+            <!--block concerning on the separation between options-->
             <BoxView 
                     HeightRequest=".5" 
                     Margin="16,4,16,0" 
                     BackgroundColor="#FFF" Opacity=".1" TranslationY="0"/>
 
-            <!--block concerned on the cutting paper option-->
+            <!--block concerning on the cutting paper option-->
             <!--when the user clicks on the button, it's possible to select if the printer must to cut paper or not-->
             <FlexLayout 
                     AlignContent="Center" 
@@ -72,7 +72,7 @@
                 </StackLayout>
             </FlexLayout>
 
-            <!--block concerned on the image's displaying-->
+            <!--block concerning on the image's displaying-->
             <Image 
                 Source="test1" 
                 WidthRequest="70"
@@ -80,7 +80,7 @@
                 Opacity="50" 
                 Margin="0,210,0,0" 
                 HorizontalOptions="Center"/>
-            <!--block concerned on the printing button-->
+            <!--block concerning on the printing button-->
             <!--when the user clicks on the button, an image will be print on the paper-->
             <Button Text="Imprimir" 
                     Clicked="OnPrint" 
