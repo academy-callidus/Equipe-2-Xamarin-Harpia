@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:titlebar="clr-namespace:xamarin_lib_harpia.Views"
+             x:Class="xamarin_lib_harpia.Views.TablePage">
+    
+    <Shell.TitleView>
+        <titlebar:TitleBar TitleText="Formulário"/>
+    </Shell.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#181A26">
+            
+            
+            
+            <Button Text="Imprimir" TextColor="White" BackgroundColor="Red" ></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
