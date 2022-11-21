@@ -85,7 +85,7 @@
             <Button Text="Imprimir" 
                     Clicked="OnPrint" 
                     TextColor="White" 
-                    BackgroundColor="Red" Margin="0,260,0,0">
+                    BackgroundColor="Red" Margin="0,126,0,0">
             </Button>
         </StackLayout>
     </ContentPage.Content>
