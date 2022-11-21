@@ -131,6 +131,11 @@ namespace BluetoothPrinter.Droid
             }
         }
 
+        public bool PrintTable(Table table)
+        {
+            return true;
+        }
+
         private void LineWrap(int lines = 3)
         {
             SunmiPrinterService.Service.LineWrap(lines, null);

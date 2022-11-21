@@ -45,6 +45,9 @@ namespace xamarin_lib_harpia.Models.Services
         /// <summary>
         /// Get the serial number from the connected printer.
         /// </summary>
+
+        bool PrintTable(Table table);
+
         string GetPrinterSerialNo();
 
         /// <summary>

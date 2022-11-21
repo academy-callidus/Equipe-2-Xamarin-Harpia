@@ -165,11 +165,17 @@ namespace xamarin_lib_harpia.Models.Services
                 barcode.Execute(new Barcode(testContent[i], BarcodeHRIs[i%3], BarcodeModels[i], 2, 162, false));
         }
 
+        void PrintTable()
+        {
+
+        }
+
         public void RunAllTests()
         {
             PrintTextTest();
             PrintQRcodeTest();
             PrintBarcodeTest();
+            PrintTable();
         }
     }
 }
