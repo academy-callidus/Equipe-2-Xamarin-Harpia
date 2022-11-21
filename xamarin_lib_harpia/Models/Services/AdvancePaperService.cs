@@ -12,6 +12,10 @@ namespace xamarin_lib_harpia.Models.Services
         {
             Connection = connection;
         }
+
+        /// <summary>
+        /// Advances the machine`s paper in three lines
+        /// </summary>
         public bool Execute()
         {
             try
@@ -21,7 +25,6 @@ namespace xamarin_lib_harpia.Models.Services
             }
             catch (Exception exception)
             {
-                Console.WriteLine("Here");
                 Console.WriteLine(exception.Message);
                 return false;
             }

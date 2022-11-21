@@ -137,7 +137,6 @@ namespace BluetoothPrinter.Droid
             if (!IsConnected()) return false;
             try
             {
-                Console.WriteLine("Here 2");
                 LineWrap();
                 return true;
             }
