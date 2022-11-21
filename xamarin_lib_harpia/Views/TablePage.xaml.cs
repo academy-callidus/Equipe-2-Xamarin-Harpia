@@ -18,9 +18,10 @@ namespace xamarin_lib_harpia.Views
         public TablePage()
         {
             InitializeComponent();
+            InitList(datalist);
         }
 
-        void initList(ArrayList data)
+        void InitList(ArrayList data)
         {
             TableItem ti = new TableItem();
             data.Add(ti);
@@ -30,7 +31,7 @@ namespace xamarin_lib_harpia.Views
      class TableItem
     {
         public string[] Text { get; set; }
-        public int[] Weigth { get; set; }
+        public int[] Weight { get; set; }
         public string[] Align { get; set; }
 
         public TableItem()
