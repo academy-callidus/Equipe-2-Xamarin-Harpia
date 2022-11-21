@@ -78,6 +78,7 @@ namespace xamarin_lib_harpia.Views
             AddDemo("QR Code", "function_qr.png", NavigateTo(nameof(QrcodePage)));
             AddDemo("Bar Code", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
             AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
+            AddDemo("Imagem", "function_pic.png", NavigateTo(nameof(ImagePage)));
         }
 
         /// <summary>
