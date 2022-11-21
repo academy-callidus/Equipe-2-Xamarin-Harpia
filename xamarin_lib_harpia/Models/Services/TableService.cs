@@ -11,6 +11,7 @@ namespace xamarin_lib_harpia.Models.Services
 
         public TableService(IPrinterConnection connection)
         {
+     
             Connection = connection;
         }
 

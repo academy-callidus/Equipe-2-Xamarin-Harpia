@@ -8,16 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Views;
 using xamarin_lib_harpia.Models.Services;
+using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Views
 {
     public partial class MainPage : ContentPage
     {
-
+        IPrinterConnection connection;
         public MainPage()
         {
             InitializeComponent();
+            connection = DependencyService.Get<IPrinterConnection>();
             LoadDemoDetails();
+            
+
 
         }
         /// <summary>
@@ -78,6 +82,7 @@ namespace xamarin_lib_harpia.Views
             AddDemo("QR Code", "function_qr.png", NavigateTo(nameof(QrcodePage)));
             AddDemo("Bar Code", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
             AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
+            AddDemo("Formulário", "function_tab.png", onClickPrint());
         }
 
         /// <summary>
@@ -103,6 +108,16 @@ namespace xamarin_lib_harpia.Views
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 
+        private Func<Task> onClickPrint()
+        {
+            
+            var service = new TableService(connection);
+            string[] txt = { "teste", "teste", "teste" };
+            int[] width = { 10, 10, 10 };
+            AlignmentEnum[] align = { AlignmentEnum.CENTER, AlignmentEnum.RIGHT, AlignmentEnum.LEFT};
+            Table tab = new Table(txt, width, align);
 
+            return new Func<Task>(async () => await Task.Run(() => service.Execute(tab)));
+        }
     }
 }

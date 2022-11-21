@@ -136,6 +136,7 @@ namespace BluetoothPrinter.Droid
             if (!IsConnected()) return false;
             try
             {
+                SunmiPrinterService.Service.SetFontSize(24, null);
                 SunmiPrinterService.Service.PrintColumnsText(table.ColumnsText, table.ColumnsWidth, table.GetAlignmentsAsInteger(), null);
                 LineWrap();
                 return true;
