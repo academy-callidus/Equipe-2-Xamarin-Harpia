@@ -10,79 +10,85 @@
     
     <ContentPage.Content>
         <StackLayout BackgroundColor="#181A26">
-            <FlexLayout 
-                VerticalOptions="Center"
-                BackgroundColor="Gray"
-                HeightRequest="30"
-                >
-                <Label Text="Row.1" FontSize="16"></Label>
-            </FlexLayout>
+            <ListView x:Name="TableListView" ItemsSource="{Binding Datalist}" HasUnevenRows="True" VerticalScrollBarVisibility="Always">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell IsEnabled="False">
+                            <StackLayout>
+                                <FlexLayout
+                                    BackgroundColor="Gray"
+                                    HeightRequest="30"
+                                    >
+                                    <Label Text="{Binding RowText}" FontSize="16" Padding="0, 4, 0, 0"></Label>
+                                </FlexLayout>
 
-            <FlexLayout JustifyContent="SpaceAround">
-                <StackLayout Orientation="Vertical" VerticalOptions="Center">
-                    <Label Text="Conteúdo" FontSize="20"></Label>
-                </StackLayout>
-                
-                <Entry 
-                    Text="texto" 
-                    TextColor="White"
-                    WidthRequest="70"
-                    ></Entry>
-                <Entry 
-                    Text="texto" 
-                    TextColor="White"
-                    WidthRequest="70"
-                    ></Entry>
-                <Entry 
-                    Text="texto" 
-                    TextColor="White"
-                    WidthRequest="70"
-                    ></Entry>
-            </FlexLayout>
+                                <FlexLayout JustifyContent="SpaceAround">
+                                    <Label Text="Conteúdo" FontSize="20" Padding="0, 8, 0, 0"></Label>
 
-            <FlexLayout JustifyContent="SpaceAround">
-                <StackLayout Orientation="Vertical" VerticalOptions="Center">
-                    <Label Text="weight%" FontSize="20"></Label>
-                </StackLayout>
+                                    <Entry
+                                        Text="texto"
+                                        TextColor="White"
+                                        WidthRequest="70"
+                                        ></Entry>
 
-                <Entry 
-                    Text="1" 
-                    TextColor="White"
-                    Keyboard="Numeric"
-                    WidthRequest="70"
-                    ></Entry>
-                <Entry 
-                    Text="1" 
-                    TextColor="White"
-                    Keyboard="Numeric"
-                    WidthRequest="70"
-                    ></Entry>
-                <Entry 
-                    Text="1 " 
-                    TextColor="White"
-                    Keyboard="Numeric"
-                    WidthRequest="70"
-                    ></Entry>
-            </FlexLayout>
+                                    <Entry
+                                        Text="texto"
+                                        TextColor="White"
+                                        WidthRequest="70"
+                                        ></Entry>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
-                <Label Text="Alinhamento" FontSize="20"></Label>
-                
-                <FlexLayout>
-                    <Label Text="Esquerda" TextColor="Red" FontSize="18"></Label>
-                </FlexLayout>
-                
-                <FlexLayout>
-                    <Label Text="Esquerda" TextColor="Red" FontSize="18"></Label>
-                </FlexLayout>
-                
-                <FlexLayout>
-                    <Label Text="Esquerda" TextColor="Red" FontSize="18"></Label>
-                </FlexLayout>
+                                    <Entry
+                                        Text="texto"
+                                        TextColor="White"
+                                        WidthRequest="70"
+                                        ></Entry>
+                                </FlexLayout>
 
-            </StackLayout>
+                                <FlexLayout JustifyContent="SpaceAround">
+                                    <Label Text="weight%" FontSize="20" Padding="0, 8, 0, 0"></Label>
 
-            <Button Text="Adicionar" TextColor="Gray" BackgroundColor="White" HeightRequest="70"></Button>
+                                    <Entry
+                                        Text="1"
+                                        TextColor="White"
+                                        WidthRequest="70"
+                                        ></Entry>
+
+                                    <Entry
+                                        Text="1"
+                                        TextColor="White"
+                                        WidthRequest="70"
+                                        ></Entry>
+
+                                    <Entry
+                                        Text="1"
+                                        TextColor="White"
+                                        WidthRequest="70"
+                                        ></Entry>
+                                </FlexLayout>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                    <Label Text="Alinhamento" TextColor="White" FontSize="20"></Label>
+
+                                    <FlexLayout>
+                                        <Label x:Name="Align1" Text="Esquerda" TextColor="Red" FontSize="17" Padding="0, 4, 0, 0"></Label>
+                                    </FlexLayout>
+
+                                    <FlexLayout>
+                                        <Label x:Name="Align2" Text="Esquerda" TextColor="Red" FontSize="17" Padding="0, 4, 0, 0"></Label>
+                                    </FlexLayout>
+
+                                    <FlexLayout>
+                                        <Label x:Name="Align3" Text="Esquerda" TextColor="Red" FontSize="17" Padding="0, 4, 0, 0"></Label>
+                                    </FlexLayout>
+                                    
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="Adicionar" TextColor="Gray" BackgroundColor="White" HeightRequest="70" Clicked="AddItem"></Button>
 
             <Button Text="Imprimir" TextColor="White" BackgroundColor="Red" ></Button>
         </StackLayout>

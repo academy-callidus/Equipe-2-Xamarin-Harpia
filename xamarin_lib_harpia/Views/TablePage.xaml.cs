@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,32 +14,35 @@ namespace xamarin_lib_harpia.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TablePage : ContentPage
     {
-        ArrayList datalist = new ArrayList();
+        ObservableCollection<TableItem> datalist = new ObservableCollection<TableItem>();
+        public ObservableCollection<TableItem> Datalist { get { return datalist; } }
 
         public TablePage()
         {
             InitializeComponent();
-            InitList(datalist);
+            InitList(Datalist);
+            TableListView.ItemsSource = Datalist;
         }
 
-        void InitList(ArrayList data)
+        void InitList(ObservableCollection<TableItem> data)
         {
-            TableItem ti = new TableItem();
+            TableItem ti = new TableItem(data);
             data.Add(ti);
+        }
+
+        void AddItem(object sender, EventArgs e)
+        {
+            Datalist.Add(new TableItem(Datalist));
         }
     }
 
-     class TableItem
+     public class TableItem
     {
-        public string[] Text { get; set; }
-        public int[] Weight { get; set; }
-        public string[] Align { get; set; }
+        public string RowText { get; set; }
 
-        public TableItem()
+        public TableItem(ObservableCollection<TableItem> data)
         {
-            Text = new string[] { "texto" , "texto", "texto" };
-            Weight = new int[] { 1, 1, 1 };
-            Align = new string[] { "Esquerda", "Esquerda", "Esquerda" };
+            RowText = "Row." + (data.Count + 1).ToString();
         }
     }
 }
