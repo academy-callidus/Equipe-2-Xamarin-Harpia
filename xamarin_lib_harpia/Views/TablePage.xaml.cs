@@ -76,9 +76,9 @@ namespace xamarin_lib_harpia.Views
                 Children =
                 {
                     new Label() { Text="weight%", TextColor=Color.White, FontSize=20, Padding=new Thickness(0, 8, 0, 0) },
-                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=70 },
-                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=70 },
-                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=70 }
+                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=70, Keyboard=Keyboard.Numeric },
+                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=70, Keyboard=Keyboard.Numeric },
+                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=70, Keyboard=Keyboard.Numeric }
                 }
             };
 
@@ -96,7 +96,7 @@ namespace xamarin_lib_harpia.Views
                 }
             };
 
-            Label alignLabel1 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 17 };
+            Label alignLabel1 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 15, WidthRequest=70, Padding=new Thickness(0, 4, 0, 0) };
 
             FlexLayout flex1 = new FlexLayout()
             {
@@ -106,7 +106,7 @@ namespace xamarin_lib_harpia.Views
                 }
             };
 
-            Label alignLabel2 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 17 };
+            Label alignLabel2 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 15, WidthRequest = 70, Padding=new Thickness(0, 4, 0, 0) };
 
             FlexLayout flex2 = new FlexLayout()
             {
@@ -116,7 +116,7 @@ namespace xamarin_lib_harpia.Views
                 }
             };
 
-            Label alignLabel3 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 17 };
+            Label alignLabel3 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 15, WidthRequest = 70, Padding=new Thickness(0, 4, 0, 0) };
 
             FlexLayout flex3 = new FlexLayout()
             {
