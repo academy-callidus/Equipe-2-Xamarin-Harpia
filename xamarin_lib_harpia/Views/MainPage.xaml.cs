@@ -83,6 +83,7 @@ namespace xamarin_lib_harpia.Views
             AddDemo("Bar Code", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
             AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
             AddDemo("Formulário", "function_tab.png", onClickPrint());
+            AddDemo("Imagem", "function_pic.png", NavigateTo(nameof(ImagePage)));
         }
 
         /// <summary>
