@@ -38,16 +38,16 @@ namespace xamarin_lib_harpia.Models.Services
 
         private readonly BarcodeModel[] BarcodeModels =
         {
-                new UPCA(),
-                new UPCE(),
-                new EAN13(),
-                new EAN8(),
+                // new UPCA(),
+                // new UPCE(),
+                // new EAN13(),
+                // new EAN8(),
                 new CODE39(),
                 new ITF(),
                 new CODABAR(),
                 new CODE128A(),
                 new CODE128B(),
-                new CODE128C()
+                // new CODE128C()
         };
 
         private readonly int[] QrcodeSizeList = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
@@ -146,23 +146,23 @@ namespace xamarin_lib_harpia.Models.Services
         private void PrintBarcodeTest()
         {
             // Test HRI Positions
-            for (int i = 0; i < BarcodeHRIs.Length; i++)
-                barcode.Execute(new Barcode("7894900700046", BarcodeHRIs[i], BarcodeModels[0], 2, 162, false));
+            //for (int i = 0; i < BarcodeHRIs.Length; i++)
+            //    barcode.Execute(new Barcode("789490070046", BarcodeHRIs[i], BarcodeModels[0], 2, 162, false));
 
             string[] testContent = {
-                "123456",
-                "9780201379621",
-                "90311012",
-                "ABC-1234", 
+                //"123456",
+                //"9780201379621",
+                //"90311012",
+                "ABC-1234",
                 "123457",
                 "a12-34d",
                 "92781330",
                 "harpia/2022",
-                "PJJ123C"
+                //"PJJ123C"
             };
             // Test Barcode Models
             for (int i = 1; i < BarcodeModels.Length; i++)
-                barcode.Execute(new Barcode(testContent[i-1], BarcodeHRIs[2], BarcodeModels[i], 2, 162, false));   
+                barcode.Execute(new Barcode(testContent[i], BarcodeHRIs[i%3], BarcodeModels[i], 2, 162, false));
         }
 
         public void RunAllTests()
