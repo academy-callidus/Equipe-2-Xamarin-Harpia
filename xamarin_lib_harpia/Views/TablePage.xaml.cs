@@ -203,5 +203,15 @@ namespace xamarin_lib_harpia.Views
 
             return stack;
         }
+
+        private void GetTableEntity()
+        {
+
+        }
+
+        private async void OnPrint(object sender, EventArgs e)
+        {
+            await DisplayAlert("Alerta", "Imprimindo formulátio...", "Cancelar");
+        }
     }
 }

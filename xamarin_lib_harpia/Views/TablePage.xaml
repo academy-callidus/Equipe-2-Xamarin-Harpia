@@ -17,7 +17,7 @@
             </StackLayout>
         </ScrollView>
         
-        <Button Text="Imprimir" TextColor="White" BackgroundColor="Red"></Button>
+        <Button Clicked="OnPrint" Text="Imprimir" TextColor="White" BackgroundColor="Red"></Button>
         
     </StackLayout>
 </ContentPage>
