@@ -26,7 +26,7 @@ namespace xamarin_lib_harpia.Views
 
         StackLayout InitTable()
         {
-            StackLayout stack = new StackLayout() { BackgroundColor = Color.FromHex("#181A26") };
+            StackLayout stack = new StackLayout() { BackgroundColor = Color.FromHex("#181A26"), Padding=new Thickness(0, 5, 0, 5) };
 
             stack.Children.Add(RowFlex());
             stack.Children.Add(ContentFlex());
@@ -58,10 +58,10 @@ namespace xamarin_lib_harpia.Views
                 JustifyContent = FlexJustify.SpaceAround,
                 Children =
                 {
-                    new Label() { Text="Conteúdo", TextColor=Color.White, FontSize=20, Padding=new Thickness(0, 8, 0, 0) },
-                    new Entry() { Text="texto", TextColor=Color.White, WidthRequest=70 },
-                    new Entry() { Text="texto", TextColor=Color.White, WidthRequest=70 },
-                    new Entry() { Text="texto", TextColor=Color.White, WidthRequest=70 },
+                    new Label() { Text="Conteúdo", TextColor=Color.White, FontSize=18, Padding=new Thickness(10, 8, 0, 0) },
+                    new Entry() { Text="texto", TextColor=Color.White, WidthRequest=60 },
+                    new Entry() { Text="texto", TextColor=Color.White, WidthRequest=60 },
+                    new Entry() { Text="texto", TextColor=Color.White, WidthRequest=60 },
                 }
             };
 
@@ -75,10 +75,10 @@ namespace xamarin_lib_harpia.Views
                 JustifyContent = FlexJustify.SpaceAround,
                 Children =
                 {
-                    new Label() { Text="weight%", TextColor=Color.White, FontSize=20, Padding=new Thickness(0, 8, 0, 0) },
-                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=70, Keyboard=Keyboard.Numeric },
-                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=70, Keyboard=Keyboard.Numeric },
-                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=70, Keyboard=Keyboard.Numeric }
+                    new Label() { Text="weight%", TextColor=Color.White, FontSize=18, Padding=new Thickness(20, 8, 0, 0), HorizontalOptions=LayoutOptions.End },
+                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=60, Keyboard=Keyboard.Numeric, HorizontalTextAlignment=TextAlignment.Center },
+                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=60, Keyboard=Keyboard.Numeric, HorizontalTextAlignment=TextAlignment.Center },
+                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=60, Keyboard=Keyboard.Numeric, HorizontalTextAlignment=TextAlignment.Center }
                 }
             };
 
@@ -90,36 +90,45 @@ namespace xamarin_lib_harpia.Views
             StackLayout stackAlign = new StackLayout()
             {
                 Orientation = StackOrientation.Horizontal,
+                Padding = new Thickness(13, 0, 0, 0),
                 Children =
                 {
-                    new Label() { Text="Alinhamento", TextColor=Color.White, FontSize=20 },
+                    new Label() { Text="Alinhamento", TextColor=Color.White, FontSize=18 },
                 }
             };
 
-            Label alignLabel1 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 15, WidthRequest=70, Padding=new Thickness(0, 4, 0, 0) };
+            Label alignLabel1 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 15, Padding=new Thickness(0, 4, 0, 0) };
 
             FlexLayout flex1 = new FlexLayout()
             {
+                JustifyContent = FlexJustify.Center,
+                WidthRequest = 70,
+                Padding = new Thickness(0, 0, 5, 0),
                 Children =
                 {
                     alignLabel1
                 }
             };
 
-            Label alignLabel2 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 15, WidthRequest = 70, Padding=new Thickness(0, 4, 0, 0) };
+            Label alignLabel2 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 15, Padding=new Thickness(0, 4, 0, 0) };
 
             FlexLayout flex2 = new FlexLayout()
             {
+                JustifyContent = FlexJustify.Center,
+                WidthRequest = 70,
+                Padding=new Thickness(0, 0, 5, 0),
                 Children =
                 {
                     alignLabel2
                 }
             };
 
-            Label alignLabel3 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 15, WidthRequest = 70, Padding=new Thickness(0, 4, 0, 0) };
+            Label alignLabel3 = new Label { Text = "Esquerda", TextColor = Color.Red, FontSize = 15, Padding=new Thickness(0, 4, 0, 0) };
 
             FlexLayout flex3 = new FlexLayout()
             {
+                JustifyContent = FlexJustify.Center,
+                WidthRequest = 70,
                 Children =
                 {
                     alignLabel3
@@ -182,7 +191,7 @@ namespace xamarin_lib_harpia.Views
                 Text = "Adicionar",
                 TextColor = Color.Gray,
                 BackgroundColor = Color.White,
-                HeightRequest = 70
+                HeightRequest = 60
             };
 
             tableButton.Clicked += (sender, e) =>
@@ -190,16 +199,7 @@ namespace xamarin_lib_harpia.Views
                 rows++;
                 TableStack.Children.Add(InitTable());
             };
-
-            Button printButton = new Button()
-            {
-                Text = "Imprimir",
-                TextColor = Color.White,
-                BackgroundColor = Color.Red
-            };
-
             stack.Children.Add(tableButton);
-            stack.Children.Add(printButton);
 
             return stack;
         }

@@ -8,14 +8,16 @@
         <titlebar:TitleBar TitleText="Formulário"/>
     </Shell.TitleView>
 
-    <StackLayout BackgroundColor="#181A26">
-        <ScrollView>
+    <StackLayout BackgroundColor="#181A26" Orientation="Vertical">
+        <ScrollView VerticalOptions="FillAndExpand">
             <StackLayout x:Name="MainStack">
                 <StackLayout x:Name="TableStack">
 
                 </StackLayout>
             </StackLayout>
         </ScrollView>
+        
+        <Button Text="Imprimir" TextColor="White" BackgroundColor="Red"></Button>
+        
     </StackLayout>
-    
 </ContentPage>
