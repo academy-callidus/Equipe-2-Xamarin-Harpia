@@ -7,90 +7,15 @@
     <Shell.TitleView>
         <titlebar:TitleBar TitleText="Formulário"/>
     </Shell.TitleView>
+
+    <StackLayout BackgroundColor="#181A26">
+        <ScrollView>
+            <StackLayout x:Name="MainStack">
+                <StackLayout x:Name="TableStack">
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
     
-    <ContentPage.Content>
-        <StackLayout BackgroundColor="#181A26">
-            <ListView x:Name="TableListView" ItemsSource="{Binding Datalist}" HasUnevenRows="True" VerticalScrollBarVisibility="Always">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell IsEnabled="False">
-                            <StackLayout>
-                                <FlexLayout
-                                    BackgroundColor="Gray"
-                                    HeightRequest="30"
-                                    >
-                                    <Label Text="{Binding RowText}" FontSize="16" Padding="0, 4, 0, 0"></Label>
-                                </FlexLayout>
-
-                                <FlexLayout JustifyContent="SpaceAround">
-                                    <Label Text="Conteúdo" FontSize="20" Padding="0, 8, 0, 0"></Label>
-
-                                    <Entry
-                                        Text="texto"
-                                        TextColor="White"
-                                        WidthRequest="70"
-                                        ></Entry>
-
-                                    <Entry
-                                        Text="texto"
-                                        TextColor="White"
-                                        WidthRequest="70"
-                                        ></Entry>
-
-                                    <Entry
-                                        Text="texto"
-                                        TextColor="White"
-                                        WidthRequest="70"
-                                        ></Entry>
-                                </FlexLayout>
-
-                                <FlexLayout JustifyContent="SpaceAround">
-                                    <Label Text="weight%" FontSize="20" Padding="0, 8, 0, 0"></Label>
-
-                                    <Entry
-                                        Text="1"
-                                        TextColor="White"
-                                        WidthRequest="70"
-                                        ></Entry>
-
-                                    <Entry
-                                        Text="1"
-                                        TextColor="White"
-                                        WidthRequest="70"
-                                        ></Entry>
-
-                                    <Entry
-                                        Text="1"
-                                        TextColor="White"
-                                        WidthRequest="70"
-                                        ></Entry>
-                                </FlexLayout>
-
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                                    <Label Text="Alinhamento" TextColor="White" FontSize="20"></Label>
-
-                                    <FlexLayout>
-                                        <Label x:Name="Align1" Text="Esquerda" TextColor="Red" FontSize="17" Padding="0, 4, 0, 0"></Label>
-                                    </FlexLayout>
-
-                                    <FlexLayout>
-                                        <Label x:Name="Align2" Text="Esquerda" TextColor="Red" FontSize="17" Padding="0, 4, 0, 0"></Label>
-                                    </FlexLayout>
-
-                                    <FlexLayout>
-                                        <Label x:Name="Align3" Text="Esquerda" TextColor="Red" FontSize="17" Padding="0, 4, 0, 0"></Label>
-                                    </FlexLayout>
-                                    
-                                </StackLayout>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Button Text="Adicionar" TextColor="Gray" BackgroundColor="White" HeightRequest="70" Clicked="AddItem"></Button>
-
-            <Button Text="Imprimir" TextColor="White" BackgroundColor="Red" ></Button>
-        </StackLayout>
-    </ContentPage.Content>
 </ContentPage>
