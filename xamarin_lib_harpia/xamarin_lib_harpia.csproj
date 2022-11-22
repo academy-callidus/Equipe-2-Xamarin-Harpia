@@ -51,6 +51,9 @@
     <EmbeddedResource Update="Views\BarcodePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\ImagePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:titlebar="clr-namespace:xamarin_lib_harpia.Views"
+             x:Class="xamarin_lib_harpia.Views.ImagePage"
+             BackgroundColor="#181a26">
+
+    <!--block concerning on the title and the navigation-->
+    <Shell.TitleView>
+        <titlebar:TitleBar TitleText="Imagem"/>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <!--block concerning on the separation between options-->
+            <BoxView 
+                HorizontalOptions="Center" 
+                HeightRequest="1" 
+                BackgroundColor="#FFF" 
+                Opacity=".1" 
+                WidthRequest="350"/>
+
+            <!--block concerning on the alignment option-->
+            <!--when the user clicks on the arrow, it's possible to select the alignment type-->
+            <FlexLayout 
+                JustifyContent="SpaceBetween"
+                Padding="5, 0 ,10, 5"
+                >
+                <FlexLayout.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Tapped="OnAlignment"
+                        ></TapGestureRecognizer>
+                </FlexLayout.GestureRecognizers>
+
+                <Label 
+                    Text="Alinhamento" 
+                    TextColor="White" 
+                    FontSize="15" Margin="0" TranslationX="12" TranslationY="9"
+                    ></Label>
+
+                <StackLayout Orientation="Horizontal" Padding="4">
+                    <Label 
+                        x:Name="AlignLabel" 
+                        TextColor="Gray"
+                        FontSize="15" TranslationY="3"
+                        ></Label>
+                    <Image
+                        Source="back.png" 
+                        Rotation="180"
+                        WidthRequest="20"
+                        BackgroundColor="#181A26" TranslationY="4"
+                        
+                        ></Image>
+                </StackLayout>
+            </FlexLayout>
+
+            <!--block concerning on the separation between options-->
+            <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,4,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1" TranslationY="0"/>
+
+            <!--block concerning on the cutting paper option-->
+            <!--when the user clicks on the button, it's possible to select if the printer must to cut paper or not-->
+            <FlexLayout 
+                    AlignContent="Center" 
+                    Padding="16" 
+                    JustifyContent="SpaceBetween">
+                <Label Text="Cortar Papel" TextColor="#FFF"/>
+                <StackLayout Orientation="Horizontal">
+                    <Switch x:Name="CutLabel" ThumbColor="#E6e6e6" OnColor="#969696" />
+                </StackLayout>
+            </FlexLayout>
+
+            <!--block concerning on the image's displaying-->
+            <Image 
+                Source="test1" 
+                WidthRequest="70"
+                BackgroundColor="#181a26" 
+                Opacity="50" 
+                Margin="0,210,0,0" 
+                HorizontalOptions="Center"/>
+            <!--block concerning on the printing button-->
+            <!--when the user clicks on the button, an image will be print on the paper-->
+            <Button Text="Imprimir" 
+                    Clicked="OnPrint" 
+                    TextColor="White" 
+                    BackgroundColor="Red" Margin="0,126,0,0">
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

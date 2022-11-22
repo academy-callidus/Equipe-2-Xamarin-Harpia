@@ -13,11 +13,14 @@ namespace xamarin_lib_harpia.Views
 {
     public partial class MainPage : ContentPage
     {
+        private AdvancePaperService AdvancePaperService;
 
         public MainPage()
         {
             InitializeComponent();
             LoadDemoDetails();
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            AdvancePaperService = new AdvancePaperService(connection);
 
         }
         /// <summary>
@@ -79,6 +82,8 @@ namespace xamarin_lib_harpia.Views
             AddDemo("Bar Code", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
             AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
             AddDemo("Formulário", "function_tab.png", NavigateTo(nameof(TablePage)));
+            AddDemo("Imagem", "function_pic.png", NavigateTo(nameof(ImagePage)));
+            AddDemo("Avançar Papel", "function_threeline.png", RunAdvancePaper());
         }
 
         /// <summary>
@@ -104,6 +109,13 @@ namespace xamarin_lib_harpia.Views
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 
+        /// <summary>
+        /// Returns an asynchronous function that advances the machine`s paper
+        /// </summary>
+        private Func<Task> RunAdvancePaper()
+        {
 
+            return new Func<Task>(async () => await Task.Run(() => AdvancePaperService.Execute()));
+        }
     }
 }
