@@ -103,13 +103,14 @@ namespace xamarin_lib_harpia.Views
             return new Func<Task>(async () => await Shell.Current.GoToAsync(url));
         }
 
-
-
         async void OnSettingsClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 
+        /// <summary>
+        /// Returns an asynchronous function that advances the machine`s paper
+        /// </summary>
         private Func<Task> RunAdvancePaper()
         {
 
