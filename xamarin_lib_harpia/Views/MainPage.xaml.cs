@@ -14,12 +14,11 @@ namespace xamarin_lib_harpia.Views
 {
     public partial class MainPage : ContentPage
     {
-        private AdvancePaperService AdvancePaperService;
+        private readonly AdvancePaperService AdvancePaperService;
 
         public MainPage()
         {
             InitializeComponent();
-            connection = DependencyService.Get<IPrinterConnection>();
             LoadDemoDetails();
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
             AdvancePaperService = new AdvancePaperService(connection);
