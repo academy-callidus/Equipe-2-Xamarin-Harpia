@@ -25,6 +25,7 @@
 
         <ShellContent Title="Text"
                       ContentTemplate="{DataTemplate views:TextPage}" />
+        
         <ShellContent Title="Image"
                       ContentTemplate="{DataTemplate views:ImagePage}" />
     </TabBar>

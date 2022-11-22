@@ -42,6 +42,11 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         bool PrintText(Text text);
 
+       /// <summary>
+        /// Get the serial number from the connected printer.
+        /// </summary>
+        bool AdvancePaper();
+
         /// <summary>
         /// Get the serial number from the connected printer.
         /// </summary>
