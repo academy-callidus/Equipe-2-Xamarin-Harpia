@@ -13,6 +13,7 @@ namespace xamarin_lib_harpia
             Routing.RegisterRoute(nameof(BarcodePage), typeof(BarcodePage));
             Routing.RegisterRoute(nameof(QrcodePage), typeof(QrcodePage));
             Routing.RegisterRoute(nameof(TextPage), typeof(TextPage));
+            Routing.RegisterRoute(nameof(TablePage), typeof(TablePage));
             Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
         }
     }

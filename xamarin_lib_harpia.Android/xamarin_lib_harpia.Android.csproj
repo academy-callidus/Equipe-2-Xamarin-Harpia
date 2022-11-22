@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\function_tab.png" />
+    <AndroidResource Include="Resources\drawable\function_threeline.png" />
     <AndroidResource Include="Resources\drawable\test1.jpg" />
   </ItemGroup>
   <ItemGroup>

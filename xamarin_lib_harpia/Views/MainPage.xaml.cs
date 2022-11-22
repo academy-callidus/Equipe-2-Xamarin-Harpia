@@ -14,15 +14,15 @@ namespace xamarin_lib_harpia.Views
 {
     public partial class MainPage : ContentPage
     {
-        IPrinterConnection connection;
+        private AdvancePaperService AdvancePaperService;
+
         public MainPage()
         {
             InitializeComponent();
             connection = DependencyService.Get<IPrinterConnection>();
             LoadDemoDetails();
-            
-
-
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            AdvancePaperService = new AdvancePaperService(connection);
         }
         /// <summary>
         /// Adds a new icon to Homepage (Frame containing image and text)
@@ -82,8 +82,9 @@ namespace xamarin_lib_harpia.Views
             AddDemo("QR Code", "function_qr.png", NavigateTo(nameof(QrcodePage)));
             AddDemo("Bar Code", "function_barcode.png", NavigateTo(nameof(BarcodePage)));
             AddDemo("Texto", "function_text.png", NavigateTo(nameof(TextPage)));
-            AddDemo("Formulário", "function_tab.png", onClickPrint());
+            AddDemo("Formulário", "function_tab.png", NavigateTo(nameof(TablePage)));
             AddDemo("Imagem", "function_pic.png", NavigateTo(nameof(ImagePage)));
+            AddDemo("Avançar Papel", "function_threeline.png", RunAdvancePaper());
         }
 
         /// <summary>
@@ -109,16 +110,13 @@ namespace xamarin_lib_harpia.Views
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 
-        private Func<Task> onClickPrint()
+        /// <summary>
+        /// Returns an asynchronous function that advances the machine`s paper
+        /// </summary>
+        private Func<Task> RunAdvancePaper()
         {
-            
-            var service = new TableService(connection);
-            string[] txt = { "teste", "teste", "teste" };
-            int[] width = { 10, 10, 10 };
-            AlignmentEnum[] align = { AlignmentEnum.CENTER, AlignmentEnum.RIGHT, AlignmentEnum.LEFT};
-            Table tab = new Table(txt, width, align);
 
-            return new Func<Task>(async () => await Task.Run(() => service.Execute(tab)));
+            return new Func<Task>(async () => await Task.Run(() => AdvancePaperService.Execute()));
         }
     }
 }
