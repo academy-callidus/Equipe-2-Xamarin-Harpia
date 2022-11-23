@@ -9,14 +9,13 @@
     <Shell.TitleView>
         <titlebar:TitleBar TitleText="QRCode"/>
     </Shell.TitleView>
-    
+
     <ContentPage.Content>
 
         <FlexLayout 
             BackgroundColor="#181A26" 
             Direction="Column"
-            JustifyContent="SpaceBetween"
-        >
+            JustifyContent="SpaceBetween">
 
             <StackLayout Orientation="Vertical" FlexLayout.Grow="2">
 
