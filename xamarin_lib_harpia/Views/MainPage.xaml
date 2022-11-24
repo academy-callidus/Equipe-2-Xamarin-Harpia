@@ -19,7 +19,7 @@
             HorizontalOptions="Start"
             JustifyContent="Start"
             AlignItems="Start"
-            Margin="20, 15, 0, 0">
+            Margin="13, 15, 0, 0">
              <!-- Margin: left, top, right, bottom  -->    
             </FlexLayout>
        </StackLayout>
