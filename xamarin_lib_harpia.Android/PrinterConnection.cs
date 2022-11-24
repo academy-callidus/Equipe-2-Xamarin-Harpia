@@ -49,7 +49,7 @@ namespace BluetoothPrinter.Droid
                 Android.App.Application.Context.BindService(intent, SunmiPrinterService, Bind.AutoCreate);
                 return true;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -85,7 +85,7 @@ namespace BluetoothPrinter.Droid
                 SendRawData(CommandUtils.GetBarcodeBytes(barcode));
                 LineWrap();
                 return true;
-            }catch(Exception _)
+            }catch(Exception)
             {
                 return false;
             }
@@ -106,7 +106,7 @@ namespace BluetoothPrinter.Droid
                 LineWrap();
                 return true;
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 return false;
             }
@@ -126,12 +126,28 @@ namespace BluetoothPrinter.Droid
                 LineWrap();
                 return true;
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 return false;
             }
         }
 
+        public bool PrintTable(Table table)
+        {
+          if (!IsConnected()) return false;
+          try
+          {
+              SunmiPrinterService.Service.SetFontSize(24, null);
+              SunmiPrinterService.Service.PrintColumnsText(table.ColumnsText, table.ColumnsWidth, table.GetAlignmentsAsInteger(), null);
+              LineWrap();
+              return true;
+          }
+          catch (Exception)
+          {
+              return false;
+          }
+        }
+        
         public bool AdvancePaper()
         {
             if (!IsConnected()) return false;
@@ -160,7 +176,7 @@ namespace BluetoothPrinter.Droid
         {
             var model = SysProp.GetProp("ro.product.model");
 
-            return model != null ? model : string.Empty;
+            return model ?? string.Empty;
         }
 
         public string GetFirmwareVersion()
@@ -192,7 +208,7 @@ namespace BluetoothPrinter.Droid
         {
             var versionName = SysProp.GetProp("ro.version.sunmi_versionname");
 
-            return versionName != null ? versionName : string.Empty;
+            return versionName ?? string.Empty;
         }
 
         public string GetServiceVersionCode()
@@ -246,13 +262,13 @@ namespace BluetoothPrinter.Droid
     static class SysProp
     {
         // Lazy load the SystemProperties class
-        private static Lazy<Java.Lang.Class> _class =
+        private static readonly Lazy<Java.Lang.Class> _class =
             new Lazy<Java.Lang.Class>(() =>
                 Java.Lang.Class.ForName("android.os.SystemProperties")
             );
 
         // Get the set method when we need it
-        private static Lazy<Java.Lang.Reflect.Method> _SetMethod =
+        private static readonly Lazy<Java.Lang.Reflect.Method> _SetMethod =
             new Lazy<Java.Lang.Reflect.Method>(() =>
                 _class.Value.GetDeclaredMethod("set",
                     Java.Lang.Class.FromType(typeof(Java.Lang.String)),
@@ -260,7 +276,7 @@ namespace BluetoothPrinter.Droid
                 );
 
         // Get the get method when we need it
-        private static Lazy<Java.Lang.Reflect.Method> _GetMethod =
+        private static readonly Lazy<Java.Lang.Reflect.Method> _GetMethod =
             new Lazy<Java.Lang.Reflect.Method>(() =>
                 _class.Value.GetDeclaredMethod("get",
                     Java.Lang.Class.FromType(typeof(Java.Lang.String)))

@@ -14,6 +14,7 @@ namespace xamarin_lib_harpia.Models.Services
         private readonly TextService text;
         private readonly QRCodeService qrcode;
         private readonly BarcodeService barcode;
+        private readonly TableService tableService;
 
         public FullTestService()
         {
@@ -165,11 +166,28 @@ namespace xamarin_lib_harpia.Models.Services
                 barcode.Execute(new Barcode(testContent[i], BarcodeHRIs[i%3], BarcodeModels[i], 2, 162, false));
         }
 
+        void PrintTable()
+        {
+
+            AlignmentEnum[] alignments = { AlignmentEnum.LEFT, AlignmentEnum.CENTER, AlignmentEnum.RIGHT };
+            string[] contents = { "teste", "teste", "teste" };
+            int[] width = { 10, 11, 12 };
+            Table table = new Table(contents, width, alignments);
+            tableService.Execute(table);
+        }
+
+        void PrintImage()
+        {
+
+        }
+
         public void RunAllTests()
         {
             PrintTextTest();
             PrintQRcodeTest();
             PrintBarcodeTest();
+            PrintTable();
+            PrintImage();
         }
     }
 }
