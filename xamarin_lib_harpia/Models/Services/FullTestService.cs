@@ -14,6 +14,7 @@ namespace xamarin_lib_harpia.Models.Services
         private readonly TextService text;
         private readonly QRCodeService qrcode;
         private readonly BarcodeService barcode;
+        private readonly ImageService image;
 
         public FullTestService()
         {
@@ -165,11 +166,18 @@ namespace xamarin_lib_harpia.Models.Services
                 barcode.Execute(new Barcode(testContent[i], BarcodeHRIs[i%3], BarcodeModels[i], 2, 162, false));
         }
 
+        private void PrintImageTest()
+        {
+            // TO-DO
+            //image.Execute()
+        }
+
         public void RunAllTests()
         {
             PrintTextTest();
             PrintQRcodeTest();
             PrintBarcodeTest();
+            PrintImageTest();
         }
     }
 }

@@ -11,6 +11,7 @@ using Java.Interop;
 using System.Threading.Tasks;
 using Android.App;
 using ZXing.QrCode.Internal;
+using static System.Net.Mime.MediaTypeNames;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -123,6 +124,21 @@ namespace BluetoothPrinter.Droid
                 SunmiPrinterService.Service.PrintText(text.Content, null);
                 SendRawData(CommandUtils.UnderlineOff());
                 SendRawData(CommandUtils.BoldOff());
+                LineWrap();
+                return true;
+            }
+            catch (Exception _)
+            {
+                return false;
+            }
+        }
+
+        public bool PrintImage(string resource)
+        {
+            if (!IsConnected()) return false;
+            try
+            {
+                SendRawData(CommandUtils.GetImageBytes(resource));
                 LineWrap();
                 return true;
             }

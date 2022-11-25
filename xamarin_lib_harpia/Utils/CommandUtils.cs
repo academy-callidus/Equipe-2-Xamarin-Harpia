@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Xamarin.Essentials;
+using System.Reflection;
+using Xamarin.Forms;
 using xamarin_lib_harpia.Models.Entities;
-using System.Text;
-using ZXing.QrCode.Internal;
-using Xamarin.Forms.Xaml;
 
 namespace xamarin_lib_harpia.Utils
 {
@@ -24,6 +21,7 @@ namespace xamarin_lib_harpia.Utils
         public static byte CR = 0x0D;// Home key
         public static byte FF = 0x0C;// Carriage control (print and return to the standard mode (in page mode))
         public static byte CAN = 0x18;// Canceled (cancel print data in page mode)
+        public static byte V = 0x76;
 
         private static byte[] GetBytesFromDecString(string decstring)
         {
@@ -77,8 +75,9 @@ namespace xamarin_lib_harpia.Utils
             if (barcode.CutPaper) stream.AddRange(CutPaper());
             return stream.ToArray();
         }
+
         /// <summary>
-        /// Recives a QRcode object and translates it to bytecode
+        /// Receives a QRcode object and translates it to bytecode
         /// </summary>
         public static byte[] GetQrcodeBytes(QRcode qrcode)
         {
@@ -124,6 +123,7 @@ namespace xamarin_lib_harpia.Utils
             }
 
         }
+       
         /// <summary>
         /// Return bytes to the GetQrcodeBytes method depending if the QRcode is single or double
         /// </summary>
@@ -164,6 +164,37 @@ namespace xamarin_lib_harpia.Utils
 
             return stream.ToArray();
         } 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
+        public static byte[] GetImageBytes(string resource)
+        {
+            var assembly = typeof(CommandUtils).GetTypeInfo().Assembly;
+
+            byte[] imageContent = null;
+
+            // Get Leftmost and Rightmost bit of image integer width 
+            int msb = (int)(200 & 0x0000ff00) >> 8;
+            int lsb = (int)(200 & 0x000000ff);
+            byte msbByte = Convert.ToByte(msb);
+            byte lsbByte = Convert.ToByte(lsb);
+
+            // Get image content as byte array from embedded resource stream
+            using (var stream = assembly.GetManifestResourceStream(resource))
+            {
+                long length = stream.Length;
+                imageContent = new byte[length];
+                stream.Read(imageContent, 0, (int)length);
+            }
+
+            byte[] bytes = new byte[] { GS, V, 0x30, 0, msbByte, lsbByte};
+            
+            if (imageContent != null) return bytes.Concat(imageContent).ToArray();
+            else return bytes;
+        }
 
         /// <summary>
         /// bytecode command to set bold text on

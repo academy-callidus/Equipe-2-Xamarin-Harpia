@@ -13,11 +13,10 @@ namespace xamarin_lib_harpia.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ImagePage : ContentPage
     {
-        NavigationPage navigationPage;
+        private ImageService Service;
         private readonly string[] Alignments = { "Esquerda", "Centro", "Direita" };
         public ImagePage()
         {
-            navigationPage = new NavigationPage();
             InitializeComponent();
             DefaultOptions();
         }
@@ -52,10 +51,21 @@ namespace xamarin_lib_harpia.Views
         /// <summary>
         /// This function is used to print the image
         /// </summary>
-
         async void OnPrint(object sender, EventArgs e)
         {
-            await DisplayAlert("Impressão de imagem", "A imagem será impressa", "cancelar");
+            var source = ImagePrint.Source;
+
+            string resource = "";
+            // It may be necessary to implement other possible sources besides local files
+            if (source is FileImageSource)
+            {
+                Console.WriteLine("File Source");
+                resource = ((FileImageSource)source).File;
+            }
+
+            var wasSuccessful = Service.Execute(resource);
+            if(!wasSuccessful) await DisplayAlert("Impressão de imagem", "Erro ao realizar impressão!", "OK");
+
         }
 
     }

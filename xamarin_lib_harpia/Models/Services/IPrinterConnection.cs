@@ -38,11 +38,17 @@ namespace xamarin_lib_harpia.Models.Services
         bool PrintQRCode(QRcode qrcode);
 
         /// <summary>
-        /// Send ESC/POS for the printer to print a text.
+        /// Send ESC/POS for the printer to print text.
         /// </summary>
         bool PrintText(Text text);
 
-       /// <summary>
+        /// <summary>
+        /// Send ESC/POS for the printer to print an image.
+        /// </summary>
+        bool PrintImage(string resource);
+
+
+        /// <summary>
         /// Get the serial number from the connected printer.
         /// </summary>
         bool AdvancePaper();
