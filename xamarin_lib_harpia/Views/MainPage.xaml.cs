@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Views;
 using xamarin_lib_harpia.Models.Services;
+using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Views
 {
     public partial class MainPage : ContentPage
     {
-        private AdvancePaperService AdvancePaperService;
+        private readonly AdvancePaperService AdvancePaperService;
 
         public MainPage()
         {
@@ -21,7 +22,6 @@ namespace xamarin_lib_harpia.Views
             LoadDemoDetails();
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
             AdvancePaperService = new AdvancePaperService(connection);
-
         }
         /// <summary>
         /// Adds a new icon to Homepage (Frame containing image and text)
@@ -44,7 +44,7 @@ namespace xamarin_lib_harpia.Views
                     
                     Children =
                     {
-                        new Image
+                        new Xamarin.Forms.Image
                         {
                             Source = iconPath,
                             Margin = new Thickness(5, 0, 5, 0),

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Models.Services;
 
 namespace xamarin_lib_harpia.Views
@@ -13,13 +14,14 @@ namespace xamarin_lib_harpia.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ImagePage : ContentPage
     {
-        NavigationPage navigationPage;
+        private ImageService Service;
         private readonly string[] Alignments = { "Esquerda", "Centro", "Direita" };
         public ImagePage()
         {
-            navigationPage = new NavigationPage();
             InitializeComponent();
             DefaultOptions();
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            Service = new ImageService(connection);
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace xamarin_lib_harpia.Views
         private async void OnAlignment(object sender, EventArgs e)
         {
             var AlignLabel = this.FindByName<Label>("AlignLabel");
-            var AlignOption= await DisplayActionSheet(
+            var AlignOption = await DisplayActionSheet(
                 "Alinhamento",
                 "cancelar",
                 null,
@@ -49,13 +51,46 @@ namespace xamarin_lib_harpia.Views
             AlignLabel.Text = AlignOption;
         }
 
+        private Models.Entities.Image GetImageEntity()
+        {
+            var cutLabel = this.FindByName<Switch>("CutLabel");
+            var source = ImagePrint.Source;
+            var alignment = AlignLabel.Text;
+            AlignmentEnum align;
+            if (alignment == "Esquerda")
+            {
+                align = AlignmentEnum.LEFT;
+            }
+            else if (alignment == "Centro")
+            {
+                align = AlignmentEnum.CENTER;
+            }
+            else
+            {
+                align = AlignmentEnum.RIGHT;
+            }
+
+            string resource = "";
+            // It may be necessary to implement other possible sources besides local files
+            if (source is FileImageSource)
+            {
+                Console.WriteLine("File Source");
+                resource = ((FileImageSource)source).File;
+            }
+
+            return new Models.Entities.Image(resource, align, cutLabel.IsToggled);
+        }
+
+
         /// <summary>
         /// This function is used to print the image
         /// </summary>
-
         async void OnPrint(object sender, EventArgs e)
         {
-            await DisplayAlert("Impressão de imagem", "A imagem será impressa", "cancelar");
+
+            var wasSuccessful = Service.Execute(GetImageEntity());
+            if(!wasSuccessful) await DisplayAlert("Impressão de imagem", "Erro ao realizar impressão!", "OK");
+
         }
 
     }

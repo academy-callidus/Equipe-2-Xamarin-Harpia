@@ -79,16 +79,16 @@
             </StackLayout>
 
             <!--block concerning on the image's displaying-->
-            <StackLayout>
-                <Image
-                        Source="test1"
-                        WidthRequest="70"
-                        BackgroundColor="#181a26" 
-                        Opacity="50"
-                        Margin="0,0,0,250"
-                        HorizontalOptions="Center"/>
-            </StackLayout>
 
+            <Image 
+                Source="test1"
+                x:Name="ImagePrint"
+                WidthRequest="70"
+                BackgroundColor="#181a26" 
+                Opacity="50" 
+                Margin="0,210,0,0" 
+                HorizontalOptions="Center"/>
+                
             <!--block concerning on the printing button-->
             <!--when the user clicks on the button, an image will be print on the paper-->
             <Button Text="Imprimir" 
