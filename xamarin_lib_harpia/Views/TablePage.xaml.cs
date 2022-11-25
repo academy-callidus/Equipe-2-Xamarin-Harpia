@@ -23,6 +23,7 @@ namespace xamarin_lib_harpia.Views
         private List<List<Entry>> Widths;
         private List<List<Label>> Alignments;
         private TableService TableService;
+        private AdvancePaperService AdvancePaperService;
 
         public TablePage()
         {
@@ -37,6 +38,7 @@ namespace xamarin_lib_harpia.Views
 
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
             TableService = new TableService(connection);
+            AdvancePaperService = new AdvancePaperService(connection);
         }
 
         private StackLayout InitTable()
@@ -270,6 +272,7 @@ namespace xamarin_lib_harpia.Views
                 if (!wasSuccessful)
                     break;
             }
+            wasSuccessful = AdvancePaperService.Execute();
             if (!wasSuccessful)
                 if (!wasSuccessful) await DisplayAlert("Impressão de Formulário", "Erro ao realizar impressão!", "OK");
         }

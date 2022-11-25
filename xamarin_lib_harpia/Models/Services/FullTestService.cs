@@ -21,6 +21,7 @@ namespace xamarin_lib_harpia.Models.Services
             this.text = new TextService(Connection);
             this.qrcode = new QRCodeService(Connection);
             this.barcode = new BarcodeService(Connection);
+            this.tableService = new TableService(Connection);
         }
 
         private readonly AlignmentEnum[] Alignments =
