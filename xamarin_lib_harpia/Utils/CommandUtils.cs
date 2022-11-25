@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Xamarin.Essentials;
 using xamarin_lib_harpia.Models.Entities;
-using System.Text;
-using ZXing.QrCode.Internal;
-using Xamarin.Forms.Xaml;
 
 namespace xamarin_lib_harpia.Utils
 {
@@ -24,7 +19,8 @@ namespace xamarin_lib_harpia.Utils
         public static byte CR = 0x0D;// Home key
         public static byte FF = 0x0C;// Carriage control (print and return to the standard mode (in page mode))
         public static byte CAN = 0x18;// Canceled (cancel print data in page mode)
-
+        public static byte V = 0x76;
+       
         private static byte[] GetBytesFromDecString(string decstring)
         {
             if (decstring == null || decstring.Equals("")) return null;
@@ -77,8 +73,9 @@ namespace xamarin_lib_harpia.Utils
             if (barcode.CutPaper) stream.AddRange(CutPaper());
             return stream.ToArray();
         }
+
         /// <summary>
-        /// Recives a QRcode object and translates it to bytecode
+        /// Receives a QRcode object and translates it to bytecode
         /// </summary>
         public static byte[] GetQrcodeBytes(QRcode qrcode)
         {
@@ -124,6 +121,7 @@ namespace xamarin_lib_harpia.Utils
             }
 
         }
+       
         /// <summary>
         /// Return bytes to the GetQrcodeBytes method depending if the QRcode is single or double
         /// </summary>
@@ -270,6 +268,17 @@ namespace xamarin_lib_harpia.Utils
         {
             if (encoding.Equals("utf-8")) return System.Text.Encoding.UTF8.GetBytes(content);
             return System.Text.Encoding.GetEncoding(encoding).GetBytes(content);
+        }
+
+        /// <summary>
+        /// Return ESC/POS commands to align an item
+        /// </summary>
+        /// 
+        public static byte[] GetAlignmentBytes(AlignmentEnum alignment)
+        {
+            if (alignment == AlignmentEnum.LEFT) return AlignLeft();
+            if (alignment == AlignmentEnum.CENTER) return AlignCenter();
+            return AlignRight();
         }
     }
 }

@@ -74,7 +74,8 @@
 
             <!--block concerning on the image's displaying-->
             <Image 
-                Source="test1" 
+                Source="test1"
+                x:Name="ImagePrint"
                 WidthRequest="70"
                 BackgroundColor="#181a26" 
                 Opacity="50" 

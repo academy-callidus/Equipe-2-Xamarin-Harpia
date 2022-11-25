@@ -1,16 +1,19 @@
 ﻿using System;
-using xamarin_lib_harpia.Models.Services;
-using BluetoothPrinter.Droid;
-using xamarin_lib_harpia.Models.Entities;
-using xamarin_lib_harpia.Utils;
-using Android.Content;
-using Android.OS;
-using Woyou.Aidlservice.Jiuiv5;
-using System.Runtime.Remoting.Messaging;
-using Java.Interop;
 using System.Threading.Tasks;
 using Android.App;
+using Android.OS;
+using Android.Content;
+using BluetoothPrinter.Droid;
+using Woyou.Aidlservice.Jiuiv5;
+using xamarin_lib_harpia.Models.Services;
+using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Utils;
+using System.Reflection;
+using Android.Graphics.Drawables;
+using System.IO;
+using System.Runtime.Remoting.Contexts;
 using ZXing.QrCode.Internal;
+using Android.Graphics;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -132,6 +135,33 @@ namespace BluetoothPrinter.Droid
             }
         }
 
+        public bool PrintImage(Image image)
+        {
+            if (!IsConnected()) return false;
+            try
+            {
+                var context = Application.Context;
+
+                SunmiPrinterService.Service.SetAlignment((int)image.Alignment, null);
+                SunmiPrinterService.Service.PrintText("Imagem\n", null);
+                SunmiPrinterService.Service.PrintText("--------------------------------\n", null);
+
+                
+               using (var drawable = Xamarin.Forms.Platform.Android.ResourceManager.GetDrawable(context, image.Resource))
+                using (var bitmap = ((BitmapDrawable)drawable).Bitmap)
+                {
+                    SunmiPrinterService.Service.PrintBitmap(ScaleImage(bitmap), null);
+                }
+                if (image.CutPaper) SendRawData(CommandUtils.CutPaper());
+                LineWrap();
+                return true;
+            }
+            catch (Exception _)
+            {
+                return false;
+            }
+        }
+
         public bool PrintTable(Table table)
         {
           if (!IsConnected()) return false;
@@ -217,6 +247,13 @@ namespace BluetoothPrinter.Droid
             var versionCode = AndroidX.Core.Content.PM.PackageInfoCompat.GetLongVersionCode(packageInfo);
 
             return versionCode.ToString();
+        }
+
+        private Bitmap ScaleImage(Bitmap bitmap1)
+        {
+            int width =  (int)(bitmap1.Width * 0.5);
+            int height = (int)(bitmap1.Height * 0.5);
+            return Bitmap.CreateScaledBitmap(bitmap1, width, height, false);
         }
     }
 
