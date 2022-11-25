@@ -12,6 +12,7 @@ using System.Reflection;
 using Android.Graphics.Drawables;
 using System.IO;
 using System.Runtime.Remoting.Contexts;
+using ZXing.QrCode.Internal;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -133,12 +134,17 @@ namespace BluetoothPrinter.Droid
             }
         }
 
-        public bool PrintImage(string resource)
+        public bool PrintImage(AlignmentEnum align, string resource)
         {
             if (!IsConnected()) return false;
             try
             {
                 var context = Application.Context;
+
+                SunmiPrinterService.Service.SetAlignment((int) align, null);
+                SunmiPrinterService.Service.PrintText("Imagem\n", null);
+                SunmiPrinterService.Service.PrintText("--------------------------------\n", null);
+
                 using (var drawable = Xamarin.Forms.Platform.Android.ResourceManager.GetDrawable(context, resource))
                 using (var bitmap = ((BitmapDrawable)drawable).Bitmap)
                 SunmiPrinterService.Service.PrintBitmap(bitmap, null);

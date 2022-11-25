@@ -1,4 +1,5 @@
 ﻿using System;
+using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Models.Services
 {
@@ -14,11 +15,11 @@ namespace xamarin_lib_harpia.Models.Services
         /// <summary>
         /// Try printing an image resource based on it's string name
         /// </summary>
-        public bool Execute(string resource)
+        public bool Execute(AlignmentEnum align, string resource)
         {
             try
             {
-                var response = Connection.PrintImage(resource);
+                var response = Connection.PrintImage(align, resource);
                 return response;
             }
             catch(Exception exception)

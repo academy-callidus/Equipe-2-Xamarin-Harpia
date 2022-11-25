@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Models.Services;
 
 namespace xamarin_lib_harpia.Views
@@ -40,7 +41,7 @@ namespace xamarin_lib_harpia.Views
         private async void OnAlignment(object sender, EventArgs e)
         {
             var AlignLabel = this.FindByName<Label>("AlignLabel");
-            var AlignOption= await DisplayActionSheet(
+            var AlignOption = await DisplayActionSheet(
                 "Alinhamento",
                 "cancelar",
                 null,
@@ -56,6 +57,20 @@ namespace xamarin_lib_harpia.Views
         async void OnPrint(object sender, EventArgs e)
         {
             var source = ImagePrint.Source;
+            var alignment = AlignLabel.Text;
+            AlignmentEnum align;
+            if (alignment == "Esquerda")
+            {
+                align = AlignmentEnum.LEFT;
+            }
+            else if (alignment == "Centro")
+            {
+                align = AlignmentEnum.CENTER;
+            }
+            else
+            {
+                align = AlignmentEnum.RIGHT;
+            }
 
             string resource = "";
             // It may be necessary to implement other possible sources besides local files
@@ -65,7 +80,7 @@ namespace xamarin_lib_harpia.Views
                 resource = ((FileImageSource)source).File;
             }
 
-            var wasSuccessful = Service.Execute(resource);
+            var wasSuccessful = Service.Execute(align, resource);
             if(!wasSuccessful) await DisplayAlert("Impressão de imagem", "Erro ao realizar impressão!", "OK");
 
         }
