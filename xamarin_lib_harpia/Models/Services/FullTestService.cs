@@ -14,7 +14,7 @@ namespace xamarin_lib_harpia.Models.Services
         private readonly TextService text;
         private readonly QRCodeService qrcode;
         private readonly BarcodeService barcode;
-        private readonly ImageService image;
+        private readonly ImageService imageService;
         private readonly TableService tableService;
 
         public FullTestService()
@@ -23,7 +23,7 @@ namespace xamarin_lib_harpia.Models.Services
             this.qrcode = new QRCodeService(Connection);
             this.barcode = new BarcodeService(Connection);
             this.tableService = new TableService(Connection);
-            this.image = new ImageService(Connection);
+            this.imageService = new ImageService(Connection);
         }
 
         private readonly AlignmentEnum[] Alignments =
@@ -181,6 +181,8 @@ namespace xamarin_lib_harpia.Models.Services
 
         void PrintImage()
         {
+            Entities.Image image = new Entities.Image("test1", AlignmentEnum.CENTER, true);
+            imageService.Execute(image);
         }
 
         public void RunAllTests()

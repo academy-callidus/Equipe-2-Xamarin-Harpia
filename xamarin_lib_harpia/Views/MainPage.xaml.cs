@@ -44,7 +44,7 @@ namespace xamarin_lib_harpia.Views
                     
                     Children =
                     {
-                        new Image
+                        new Xamarin.Forms.Image
                         {
                             Source = iconPath,
                             Margin = new Thickness(5, 0, 5, 0),
