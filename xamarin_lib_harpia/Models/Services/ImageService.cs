@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Models.Services
 {
@@ -17,7 +14,7 @@ namespace xamarin_lib_harpia.Models.Services
         /// <summary>
         /// Try printing an image resource based on it's string name
         /// </summary>
-        public bool Execute(String resource)
+        public bool Execute(string resource)
         {
             try
             {

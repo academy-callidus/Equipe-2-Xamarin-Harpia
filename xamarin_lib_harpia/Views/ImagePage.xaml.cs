@@ -19,6 +19,8 @@ namespace xamarin_lib_harpia.Views
         {
             InitializeComponent();
             DefaultOptions();
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            Service = new ImageService(connection);
         }
 
         /// <summary>

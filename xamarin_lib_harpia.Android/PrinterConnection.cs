@@ -1,17 +1,14 @@
 ﻿using System;
-using xamarin_lib_harpia.Models.Services;
-using BluetoothPrinter.Droid;
-using xamarin_lib_harpia.Models.Entities;
-using xamarin_lib_harpia.Utils;
-using Android.Content;
-using Android.OS;
-using Woyou.Aidlservice.Jiuiv5;
-using System.Runtime.Remoting.Messaging;
-using Java.Interop;
 using System.Threading.Tasks;
 using Android.App;
-using ZXing.QrCode.Internal;
-using static System.Net.Mime.MediaTypeNames;
+using Android.OS;
+using Android.Content;
+using BluetoothPrinter.Droid;
+using Woyou.Aidlservice.Jiuiv5;
+using xamarin_lib_harpia.Models.Services;
+using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Utils;
+using System.Reflection;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -138,7 +135,9 @@ namespace BluetoothPrinter.Droid
             if (!IsConnected()) return false;
             try
             {
-                SendRawData(CommandUtils.GetImageBytes(resource));
+                //SunmiPrinterService.Service.SetAlignment((int)qrcode.Alignment, null);
+                var imageContent = GetDrawableContent(resource);
+                SendRawData(CommandUtils.GetImageBytes(imageContent));
                 LineWrap();
                 return true;
             }
@@ -146,6 +145,22 @@ namespace BluetoothPrinter.Droid
             {
                 return false;
             }
+        }
+
+        public byte[] GetDrawableContent(string resource)
+        {
+            byte[] content;
+            var assembly = this.GetType().GetTypeInfo().Assembly;
+
+            // Get image content as byte array from embedded resource stream
+            using (var stream = assembly.GetManifestResourceStream(resource))
+            {
+                long length = stream.Length;
+                content = new byte[length];
+                stream.Read(content, 0, (int)length);
+            }
+
+            return content;
         }
 
         public bool AdvancePaper()

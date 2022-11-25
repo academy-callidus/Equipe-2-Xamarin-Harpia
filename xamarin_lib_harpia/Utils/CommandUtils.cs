@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Xamarin.Forms;
 using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.Utils
@@ -170,29 +168,18 @@ namespace xamarin_lib_harpia.Utils
         /// </summary>
         /// <param name="image"></param>
         /// <returns></returns>
-        public static byte[] GetImageBytes(string resource)
+        public static byte[] GetImageBytes(byte[] content)
         {
-            var assembly = typeof(CommandUtils).GetTypeInfo().Assembly;
-
-            byte[] imageContent = null;
-
+        
             // Get Leftmost and Rightmost bit of image integer width 
-            int msb = (int)(200 & 0x0000ff00) >> 8;
-            int lsb = (int)(200 & 0x000000ff);
+            int msb = (200 & 0x0000ff00) >> 8;
+            int lsb = (200 & 0x000000ff);
             byte msbByte = Convert.ToByte(msb);
             byte lsbByte = Convert.ToByte(lsb);
 
-            // Get image content as byte array from embedded resource stream
-            using (var stream = assembly.GetManifestResourceStream(resource))
-            {
-                long length = stream.Length;
-                imageContent = new byte[length];
-                stream.Read(imageContent, 0, (int)length);
-            }
-
             byte[] bytes = new byte[] { GS, V, 0x30, 0, msbByte, lsbByte};
             
-            if (imageContent != null) return bytes.Concat(imageContent).ToArray();
+            if (content != null) return bytes.Concat(content).ToArray();
             else return bytes;
         }
 
