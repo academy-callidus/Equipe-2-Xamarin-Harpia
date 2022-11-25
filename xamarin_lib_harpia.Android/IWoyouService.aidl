@@ -7,6 +7,7 @@ package woyou.aidlservice.jiuiv5;
 
 import woyou.aidlservice.jiuiv5.ICallback;
 import woyou.aidlservice.jiuiv5.IYmodemSPI;
+import android.graphics.Bitmap;
 
 interface IWoyouService
 {	
@@ -130,7 +131,7 @@ interface IWoyouService
 	* 打印图片
 	* @param bitmap: 	图片bitmap对象(最大宽度384像素，超过无法打印并且回调callback异常函数)
 	*/
-	//void printBitmap(in Bitmap bitmap, in ICallback callback);
+	void printBitmap(in Bitmap bitmap, in ICallback callback);
 	// we have to remove Bitmap parameter but keep the function define.
 	// void printBitmap(in ICallback callback);
 	

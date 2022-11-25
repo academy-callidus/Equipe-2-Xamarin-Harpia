@@ -9,6 +9,9 @@ using xamarin_lib_harpia.Models.Services;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Utils;
 using System.Reflection;
+using Android.Graphics.Drawables;
+using System.IO;
+using System.Runtime.Remoting.Contexts;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -135,9 +138,10 @@ namespace BluetoothPrinter.Droid
             if (!IsConnected()) return false;
             try
             {
-                //SunmiPrinterService.Service.SetAlignment((int)qrcode.Alignment, null);
-                var imageContent = GetDrawableContent(resource);
-                SendRawData(CommandUtils.GetImageBytes(imageContent));
+                var context = Application.Context;
+                using (var drawable = Xamarin.Forms.Platform.Android.ResourceManager.GetDrawable(context, resource))
+                using (var bitmap = ((BitmapDrawable)drawable).Bitmap)
+                SunmiPrinterService.Service.PrintBitmap(bitmap, null);
                 LineWrap();
                 return true;
             }
@@ -145,22 +149,6 @@ namespace BluetoothPrinter.Droid
             {
                 return false;
             }
-        }
-
-        public byte[] GetDrawableContent(string resource)
-        {
-            byte[] content;
-            var assembly = this.GetType().GetTypeInfo().Assembly;
-
-            // Get image content as byte array from embedded resource stream
-            using (var stream = assembly.GetManifestResourceStream(resource))
-            {
-                long length = stream.Length;
-                content = new byte[length];
-                stream.Read(content, 0, (int)length);
-            }
-
-            return content;
         }
 
         public bool AdvancePaper()
