@@ -20,7 +20,7 @@ namespace xamarin_lib_harpia.Utils
         public static byte FF = 0x0C;// Carriage control (print and return to the standard mode (in page mode))
         public static byte CAN = 0x18;// Canceled (cancel print data in page mode)
         public static byte V = 0x76;
-
+       
         private static byte[] GetBytesFromDecString(string decstring)
         {
             if (decstring == null || decstring.Equals("")) return null;
@@ -162,26 +162,6 @@ namespace xamarin_lib_harpia.Utils
 
             return stream.ToArray();
         } 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="image"></param>
-        /// <returns></returns>
-        public static byte[] GetImageBytes(byte[] content)
-        {
-        
-            // Get Leftmost and Rightmost bit of image integer width 
-            int msb = (200 & 0x0000ff00) >> 8;
-            int lsb = (200 & 0x000000ff);
-            byte msbByte = Convert.ToByte(msb);
-            byte lsbByte = Convert.ToByte(lsb);
-
-            byte[] bytes = new byte[] { GS, V, 0x30, 0, msbByte, lsbByte};
-            
-            if (content != null) return bytes.Concat(content).ToArray();
-            else return bytes;
-        }
 
         /// <summary>
         /// bytecode command to set bold text on

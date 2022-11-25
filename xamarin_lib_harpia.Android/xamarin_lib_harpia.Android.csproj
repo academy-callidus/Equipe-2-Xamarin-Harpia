@@ -73,6 +73,7 @@
     <AndroidInterfaceDescription Include="ICallback.aidl" />
     <AndroidInterfaceDescription Include="IWoyouService.aidl" />
     <AndroidInterfaceDescription Include="IYmodemSPI.aidl" />
+    <AndroidInterfaceDescription Include="Bitmap.aidl" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
