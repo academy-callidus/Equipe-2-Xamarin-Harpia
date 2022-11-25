@@ -10,17 +10,19 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{StaticResource backgroundColor}" >
+        <ScrollView>
+            <StackLayout BackgroundColor="{StaticResource backgroundColor}" >
             <FlexLayout 
             Direction="Row" 
             x:Name="Pages" 
             Wrap="Wrap"
             HorizontalOptions="Start"
-            JustifyContent="Center"
+            JustifyContent="Start"
             AlignItems="Start"
-            Margin="0, 15, 0, 0"
-            >
+            Margin="13, 15, 0, 0">
+             <!-- Margin: left, top, right, bottom  -->    
             </FlexLayout>
        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

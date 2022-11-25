@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_lib_harpia.Models.Entities;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
+using xamarin_lib_harpia.Models.Services;
 
 namespace xamarin_lib_harpia.Views
 {
@@ -15,18 +19,34 @@ namespace xamarin_lib_harpia.Views
     public partial class TablePage : ContentPage
     {
         private int rows = 1;
+        private List<List<Entry>> Contents;
+        private List<List<Entry>> Widths;
+        private List<List<Label>> Alignments;
+        private TableService TableService;
+        private AdvancePaperService AdvancePaperService;
+
         public TablePage()
         {
             InitializeComponent();
+            Contents = new List<List<Entry>>();
+            Widths = new List<List<Entry>>();
+            Alignments = new List<List<Label>>();
 
             MainStack.BackgroundColor = Color.FromHex("#181A26");
             TableStack.Children.Add(InitTable());
             MainStack.Children.Add(Buttons());
+
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            TableService = new TableService(connection);
+            AdvancePaperService = new AdvancePaperService(connection);
         }
 
-        StackLayout InitTable()
+        private StackLayout InitTable()
         {
-            StackLayout stack = new StackLayout() { BackgroundColor = Color.FromHex("#181A26"), Padding=new Thickness(0, 5, 0, 5) };
+            StackLayout stack = new StackLayout() {
+                BackgroundColor = Color.FromHex("#181A26"), 
+                Padding=new Thickness(0, 5, 0, 5) 
+            };
 
             stack.Children.Add(RowFlex());
             stack.Children.Add(ContentFlex());
@@ -36,7 +56,7 @@ namespace xamarin_lib_harpia.Views
             return stack;
         }
 
-        FlexLayout RowFlex()
+        private FlexLayout RowFlex()
         {
             FlexLayout flexRow = new FlexLayout()
             {
@@ -51,41 +71,47 @@ namespace xamarin_lib_harpia.Views
             return flexRow;
         }
 
-        FlexLayout ContentFlex()
+        private FlexLayout ContentFlex()
         {
+            var content1 = new Entry() { Text = "texto", TextColor = Color.White, WidthRequest = 60 };
+            var content2 = new Entry() { Text = "texto", TextColor = Color.White, WidthRequest = 60 };
+            var content3 = new Entry() { Text = "texto", TextColor = Color.White, WidthRequest = 60 };
             FlexLayout flexConteudo = new FlexLayout()
             {
                 JustifyContent = FlexJustify.SpaceAround,
                 Children =
                 {
                     new Label() { Text="Conteúdo", TextColor=Color.White, FontSize=18, Padding=new Thickness(10, 8, 0, 0) },
-                    new Entry() { Text="texto", TextColor=Color.White, WidthRequest=60 },
-                    new Entry() { Text="texto", TextColor=Color.White, WidthRequest=60 },
-                    new Entry() { Text="texto", TextColor=Color.White, WidthRequest=60 },
+                    content1,
+                    content2,
+                    content3,
                 }
             };
-
+            Contents.Add(new List<Entry>() { content1, content2, content3 });
             return flexConteudo;
         }
 
-        FlexLayout WeightFlex()
+        private FlexLayout WeightFlex()
         {
+            var width1 = new Entry() { Text = "1", TextColor = Color.White, WidthRequest = 60, Keyboard = Keyboard.Numeric, HorizontalTextAlignment = TextAlignment.Center };
+            var width2 = new Entry() { Text = "1", TextColor = Color.White, WidthRequest = 60, Keyboard = Keyboard.Numeric, HorizontalTextAlignment = TextAlignment.Center };
+            var width3 = new Entry() { Text = "1", TextColor = Color.White, WidthRequest = 60, Keyboard = Keyboard.Numeric, HorizontalTextAlignment = TextAlignment.Center };
             FlexLayout flexWeight = new FlexLayout()
             {
                 JustifyContent = FlexJustify.SpaceAround,
                 Children =
                 {
                     new Label() { Text="weight%", TextColor=Color.White, FontSize=18, Padding=new Thickness(20, 8, 0, 0), HorizontalOptions=LayoutOptions.End },
-                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=60, Keyboard=Keyboard.Numeric, HorizontalTextAlignment=TextAlignment.Center },
-                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=60, Keyboard=Keyboard.Numeric, HorizontalTextAlignment=TextAlignment.Center },
-                    new Entry() { Text="1", TextColor=Color.White, WidthRequest=60, Keyboard=Keyboard.Numeric, HorizontalTextAlignment=TextAlignment.Center }
+                    width1,
+                    width2,
+                    width3
                 }
             };
-
+            Widths.Add(new List<Entry>() { width1, width2, width3 });
             return flexWeight;
         }
 
-        StackLayout AlignStack()
+        private StackLayout AlignStack()
         {
             StackLayout stackAlign = new StackLayout()
             {
@@ -135,6 +161,8 @@ namespace xamarin_lib_harpia.Views
                 }
             };
 
+            Alignments.Add(new List<Label>() { alignLabel1, alignLabel2, alignLabel3 });
+
             var tapGestureRecognizer1 = new TapGestureRecognizer();
             tapGestureRecognizer1.Tapped += async (s, e) =>
             {
@@ -182,7 +210,7 @@ namespace xamarin_lib_harpia.Views
             return stackAlign;
         }
 
-        StackLayout Buttons()
+        private StackLayout Buttons()
         {
             StackLayout stack = new StackLayout() { Orientation = StackOrientation.Vertical };
 
@@ -204,14 +232,49 @@ namespace xamarin_lib_harpia.Views
             return stack;
         }
 
-        private void GetTableEntity()
+        private List<Table> GetTablesEntity()
         {
+            List<Table> tables = new List<Table>();
+            for (int i = 0; i < rows; i++)
+            {
+                var content1 = Contents[i][0].Text;
+                var content2 = Contents[i][1].Text;
+                var content3 = Contents[i][2].Text;
 
+                var contents = new string[]{ content1, content2, content3 };
+
+                var width1 = Int32.Parse(Widths[i][0].Text) + 9;
+                var width2 = Int32.Parse(Widths[i][1].Text) + 9;
+                var width3 = Int32.Parse(Widths[i][2].Text) + 9;
+
+                var widths = new int[]{ width1, width2, width3};
+                
+                var align1 = Alignments[i][0].Text == "Esquerda" ? AlignmentEnum.LEFT :
+                    Alignments[i][0].Text == "Centro" ? AlignmentEnum.CENTER : AlignmentEnum.RIGHT;
+                var align2 = Alignments[i][1].Text == "Esquerda" ? AlignmentEnum.LEFT :
+                    Alignments[i][1].Text == "Centro" ? AlignmentEnum.CENTER : AlignmentEnum.RIGHT;
+                var align3 = Alignments[i][2].Text == "Esquerda" ? AlignmentEnum.LEFT :
+                    Alignments[i][2].Text == "Centro" ? AlignmentEnum.CENTER : AlignmentEnum.RIGHT;
+
+                var alignments = new AlignmentEnum[] { align1, align2, align3 };
+                tables.Add(new Table(contents, widths, alignments));
+            }
+            return tables;
         }
 
         private async void OnPrint(object sender, EventArgs e)
         {
-            await DisplayAlert("Alerta", "Imprimindo formulátio...", "Cancelar");
+            var tables = GetTablesEntity();
+            var wasSuccessful = true;
+            foreach (var table in tables)
+            {
+                wasSuccessful = TableService.Execute(table);
+                if (!wasSuccessful)
+                    break;
+            }
+            wasSuccessful = AdvancePaperService.Execute();
+            if (!wasSuccessful)
+                if (!wasSuccessful) await DisplayAlert("Impressão de Formulário", "Erro ao realizar impressão!", "OK");
         }
     }
 }
