@@ -51,11 +51,9 @@ namespace xamarin_lib_harpia.Views
             AlignLabel.Text = AlignOption;
         }
 
-        /// <summary>
-        /// This function is used to print the image
-        /// </summary>
-        async void OnPrint(object sender, EventArgs e)
+        private Models.Entities.Image GetImageEntity()
         {
+            var cutLabel = this.FindByName<Switch>("CutLabel");
             var source = ImagePrint.Source;
             var alignment = AlignLabel.Text;
             AlignmentEnum align;
@@ -80,7 +78,17 @@ namespace xamarin_lib_harpia.Views
                 resource = ((FileImageSource)source).File;
             }
 
-            var wasSuccessful = Service.Execute(align, resource);
+            return new Models.Entities.Image(resource, align, cutLabel.IsToggled);
+        }
+
+
+        /// <summary>
+        /// This function is used to print the image
+        /// </summary>
+        async void OnPrint(object sender, EventArgs e)
+        {
+
+            var wasSuccessful = Service.Execute(GetImageEntity());
             if(!wasSuccessful) await DisplayAlert("Impressão de imagem", "Erro ao realizar impressão!", "OK");
 
         }

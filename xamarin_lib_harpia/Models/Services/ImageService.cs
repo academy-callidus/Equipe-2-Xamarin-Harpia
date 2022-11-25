@@ -15,11 +15,11 @@ namespace xamarin_lib_harpia.Models.Services
         /// <summary>
         /// Try printing an image resource based on it's string name
         /// </summary>
-        public bool Execute(AlignmentEnum align, string resource)
+        public bool Execute(Image image)
         {
             try
             {
-                var response = Connection.PrintImage(align, resource);
+                var response = Connection.PrintImage(image);
                 return response;
             }
             catch(Exception exception)

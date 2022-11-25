@@ -269,5 +269,16 @@ namespace xamarin_lib_harpia.Utils
             if (encoding.Equals("utf-8")) return System.Text.Encoding.UTF8.GetBytes(content);
             return System.Text.Encoding.GetEncoding(encoding).GetBytes(content);
         }
+
+        /// <summary>
+        /// Return ESC/POS commands to align an item
+        /// </summary>
+        /// 
+        public static byte[] GetAlignmentBytes(AlignmentEnum alignment)
+        {
+            if (alignment == AlignmentEnum.LEFT) return AlignLeft();
+            if (alignment == AlignmentEnum.CENTER) return AlignCenter();
+            return AlignRight();
+        }
     }
 }

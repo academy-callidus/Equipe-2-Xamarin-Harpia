@@ -45,7 +45,7 @@ namespace xamarin_lib_harpia.Models.Services
         /// <summary>
         /// Send ESC/POS for the printer to print an image.
         /// </summary>
-        bool PrintImage(string resource);
+        bool PrintImage(Image image);
 
 
         /// <summary>
