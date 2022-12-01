@@ -15,6 +15,7 @@ namespace xamarin_lib_harpia
             Routing.RegisterRoute(nameof(TextPage), typeof(TextPage));
             Routing.RegisterRoute(nameof(TablePage), typeof(TablePage));
             Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
+            Routing.RegisterRoute(nameof(PaygoPage), typeof(PaygoPage));
         }
     }
 }
