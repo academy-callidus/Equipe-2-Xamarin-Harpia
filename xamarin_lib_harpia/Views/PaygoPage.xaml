@@ -85,6 +85,37 @@
                 </StackLayout>
             </FlexLayout>
 
+            <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="70" Padding="0 0 0 0">
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Confirmação Manual" TextColor="White" FontSize="16" Padding="22 0 0 0"></Label>
+                    <CheckBox Color="White"></CheckBox>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Via Completa" TextColor="White" FontSize="16" Padding="22 0 0 0"></Label>
+                    <CheckBox Color="White"></CheckBox>
+                </StackLayout>
+                
+            </FlexLayout>
+
+            <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="70" Padding="0 0 0 0">
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Via Loja e Cliente" TextColor="White" FontSize="16" Padding="22 0 0 0"></Label>
+                    <CheckBox Color="White"></CheckBox> 
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Interface Alternativa" TextColor="White" FontSize="16" Padding="22 0 0 0"></Label>
+                    <CheckBox Color="White"></CheckBox>
+                </StackLayout>
+
+            </FlexLayout>
+
+            <Button Text="Pagar" TextColor="White" BackgroundColor="Red"></Button>
+            <Button Text="Administrativo" TextColor="White" BackgroundColor="Red"></Button>
+            <Button Text="Cancelar" TextColor="White" BackgroundColor="Red"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
