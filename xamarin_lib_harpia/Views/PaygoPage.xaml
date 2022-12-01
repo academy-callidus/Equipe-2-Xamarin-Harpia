@@ -9,10 +9,11 @@
     </Shell.TitleView>
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#181A26">
-            <FlexLayout JustifyContent="SpaceBetween" Padding="10 10 0 10">
-                <Label Text="Valor" TextColor="White" FontSize="24"></Label>
-                <Entry 
+        <StackLayout BackgroundColor="#181A26" Orientation="Vertical">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
+                    <Label Text="Valor" TextColor="White" FontSize="24"></Label>
+                    <Entry 
                     Placeholder="R$0,00" 
                     PlaceholderColor="White"
                     TextColor="White" 
@@ -20,17 +21,17 @@
                     HorizontalTextAlignment="End"
                     Keyboard="Numeric"
                     ></Entry>
-                <Image 
+                    <Image 
                     WidthRequest="30" 
                     RotationY="180"
                     Source="back.png" 
                     BackgroundColor="#181A26" 
                     ></Image>
-            </FlexLayout>
+                </FlexLayout>
 
-            <FlexLayout JustifyContent="SpaceBetween" Padding="10 10 0 10">
-                <Label Text="Parcelas" TextColor="White" FontSize="24"></Label>
-                <Entry 
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
+                    <Label Text="Parcelas" TextColor="White" FontSize="24"></Label>
+                    <Entry 
                     Placeholder="R$0,00" 
                     PlaceholderColor="White"
                     TextColor="White" 
@@ -38,83 +39,87 @@
                     HorizontalTextAlignment="End"
                     Keyboard="Numeric"
                     ></Entry>
-                <Image 
+                    <Image 
                     WidthRequest="30" 
                     RotationY="180"
                     Source="back.png" 
                     BackgroundColor="#181A26" 
                     ></Image>
-            </FlexLayout>
+                </FlexLayout>
 
-            <FlexLayout JustifyContent="SpaceBetween" Padding="10 10 0 10">
-                <Label Text="Tipo de pagamento" TextColor="White" FontSize="24"></Label>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Não definido" TextColor="Red" Padding="5 0 0 0"></Label>
-                    <Image 
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
+                    <Label Text="Tipo de pagamento" TextColor="White" FontSize="24"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Não definido" TextColor="Red" Padding="0, 5, 0, 0"></Label>
+                        <Image 
                         WidthRequest="30" 
                         RotationY="180"
                         Source="back.png" 
                         BackgroundColor="#181A26" 
                         ></Image>
-                </StackLayout>
-            </FlexLayout>
+                    </StackLayout>
+                </FlexLayout>
 
-            <FlexLayout JustifyContent="SpaceBetween" Padding="10 10 0 10">
-                <Label Text="Adquirente" TextColor="White" FontSize="24"></Label>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Não definido" TextColor="Gray" Padding="5 0 0 0"></Label>
-                    <Image 
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
+                    <Label Text="Adquirente" TextColor="White" FontSize="24"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Não definido" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
+                        <Image 
                         WidthRequest="30" 
                         RotationY="180"
                         Source="back.png" 
                         BackgroundColor="#181A26" 
                         ></Image>
-                </StackLayout>
-            </FlexLayout>
+                    </StackLayout>
+                </FlexLayout>
 
-            <FlexLayout JustifyContent="SpaceBetween" Padding="10 10 0 10">
-                <Label Text="Tipo Parcelamento" TextColor="White" FontSize="24"></Label>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="À Vista" TextColor="Gray" Padding="5 0 0 0"></Label>
-                    <Image 
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
+                    <Label Text="Tipo Parcelamento" TextColor="White" FontSize="24"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="À Vista" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
+                        <Image 
                         WidthRequest="30" 
                         RotationY="180"
                         Source="back.png" 
                         BackgroundColor="#181A26" 
                         ></Image>
-                </StackLayout>
-            </FlexLayout>
+                    </StackLayout>
+                </FlexLayout>
 
-            <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="70" Padding="0 0 0 0">
-                
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Confirmação Manual" TextColor="White" FontSize="16" Padding="22 0 0 0"></Label>
-                    <CheckBox Color="White"></CheckBox>
-                </StackLayout>
+                <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="70" Padding="0, 0, 0, 0">
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Via Completa" TextColor="White" FontSize="16" Padding="22 0 0 0"></Label>
-                    <CheckBox Color="White"></CheckBox>
-                </StackLayout>
-                
-            </FlexLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Confirmação Manual" TextColor="White" FontSize="16" Padding="0, 22, 0, 0"></Label>
+                        <CheckBox Color="White"></CheckBox>
+                    </StackLayout>
 
-            <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="70" Padding="0 0 0 0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Via Completa" TextColor="White" FontSize="16" Padding="0, 22, 0, 0"></Label>
+                        <CheckBox Color="White"></CheckBox>
+                    </StackLayout>
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Via Loja e Cliente" TextColor="White" FontSize="16" Padding="22 0 0 0"></Label>
-                    <CheckBox Color="White"></CheckBox> 
-                </StackLayout>
+                </FlexLayout>
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Interface Alternativa" TextColor="White" FontSize="16" Padding="22 0 0 0"></Label>
-                    <CheckBox Color="White"></CheckBox>
-                </StackLayout>
+                <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="70" Padding="0, 0, 0, 0">
 
-            </FlexLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Via Loja e Cliente" TextColor="White" FontSize="16" Padding="0, 22, 0, 0"></Label>
+                        <CheckBox Color="White"></CheckBox>
+                    </StackLayout>
 
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Interface Alternativa" TextColor="White" FontSize="16" Padding="0, 22, 0, 0"></Label>
+                        <CheckBox Color="White"></CheckBox>
+                    </StackLayout>
+
+                </FlexLayout>
+
+            </StackLayout>
+            
             <Button Text="Pagar" TextColor="White" BackgroundColor="Red"></Button>
+            
             <Button Text="Administrativo" TextColor="White" BackgroundColor="Red"></Button>
+            
             <Button Text="Cancelar" TextColor="White" BackgroundColor="Red"></Button>
         </StackLayout>
     </ContentPage.Content>
