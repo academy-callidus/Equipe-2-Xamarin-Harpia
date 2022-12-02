@@ -10,105 +10,116 @@
 
     <ContentPage.Content>
         <StackLayout BackgroundColor="#181A26" Orientation="Vertical">
-            <StackLayout VerticalOptions="FillAndExpand">
-                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
-                    <Label Text="Valor" TextColor="White" FontSize="24"></Label>
+            <StackLayout>
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 0, 0, 10">
+                    <Label Text="Valor" TextColor="White" FontSize="20" Padding="0, 7, 0, 0"></Label>
                     <Entry 
-                    Placeholder="R$0,00" 
-                    PlaceholderColor="White"
-                    TextColor="White" 
-                    WidthRequest="280"
-                    HorizontalTextAlignment="End"
-                    Keyboard="Numeric"
-                    ></Entry>
+                        x:Name="ValueEntry"
+                        Placeholder="R$0,00" 
+                        PlaceholderColor="White"
+                        TextColor="White" 
+                        WidthRequest="250"
+                        HorizontalTextAlignment="End"
+                        Keyboard="Numeric"
+                        TextChanged="ValueEntryChangedToInt"
+                        ></Entry>
                     <Image 
-                    WidthRequest="30" 
-                    RotationY="180"
-                    Source="back.png" 
-                    BackgroundColor="#181A26" 
-                    ></Image>
-                </FlexLayout>
-
-                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
-                    <Label Text="Parcelas" TextColor="White" FontSize="24"></Label>
-                    <Entry 
-                    Placeholder="R$0,00" 
-                    PlaceholderColor="White"
-                    TextColor="White" 
-                    WidthRequest="250"
-                    HorizontalTextAlignment="End"
-                    Keyboard="Numeric"
-                    ></Entry>
-                    <Image 
-                    WidthRequest="30" 
-                    RotationY="180"
-                    Source="back.png" 
-                    BackgroundColor="#181A26" 
-                    ></Image>
-                </FlexLayout>
-
-                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
-                    <Label Text="Tipo de pagamento" TextColor="White" FontSize="24"></Label>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Não definido" TextColor="Red" Padding="0, 5, 0, 0"></Label>
-                        <Image 
                         WidthRequest="30" 
                         RotationY="180"
                         Source="back.png" 
                         BackgroundColor="#181A26" 
                         ></Image>
+                </FlexLayout>
+
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 0, 0, 10">
+                    <Label Text="Parcelas" TextColor="White" FontSize="20" Padding="0, 7, 0, 0"></Label>
+                    <Entry 
+                        x:Name="ParcelEntry"
+                        Placeholder="1" 
+                        PlaceholderColor="White"
+                        TextColor="White" 
+                        WidthRequest="210"
+                        HorizontalTextAlignment="End"
+                        Keyboard="Numeric"
+                        TextChanged="ParcelEntryChangedToInt"
+                        ></Entry>
+                    <Image 
+                        WidthRequest="30" 
+                        RotationY="180"
+                        Source="back.png" 
+                        BackgroundColor="#181A26" 
+                        ></Image>
+                </FlexLayout>
+
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 0, 0, 10">
+
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="PaymentTypeTapped"
+                            ></TapGestureRecognizer>
+                    </FlexLayout.GestureRecognizers>
+
+                    <Label Text="Tipo de pagamento" TextColor="White" FontSize="20"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="PaymentTypeLabel" Text="Não definido" TextColor="Red" Padding="0, 5, 0, 0"></Label>
+                        <Image 
+                            WidthRequest="30" 
+                            RotationY="180"
+                            Source="back.png" 
+                            BackgroundColor="#181A26" 
+                            ></Image>
                     </StackLayout>
                 </FlexLayout>
 
-                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
-                    <Label Text="Adquirente" TextColor="White" FontSize="24"></Label>
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 0, 0, 10">
+                    <Label Text="Adquirente" TextColor="White" FontSize="20"></Label>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Não definido" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
                         <Image 
-                        WidthRequest="30" 
-                        RotationY="180"
-                        Source="back.png" 
-                        BackgroundColor="#181A26" 
-                        ></Image>
+                            WidthRequest="30" 
+                            RotationY="180"
+                            Source="back.png" 
+                            BackgroundColor="#181A26" 
+                            ></Image>
                     </StackLayout>
                 </FlexLayout>
 
-                <FlexLayout JustifyContent="SpaceBetween" Padding="10, 10, 0, 10">
-                    <Label Text="Tipo Parcelamento" TextColor="White" FontSize="24"></Label>
+                <FlexLayout JustifyContent="SpaceBetween" Padding="10,  0, 0, 10">
+                    <Label Text="Tipo Parcelamento" TextColor="White" FontSize="20"></Label>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="À Vista" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
                         <Image 
-                        WidthRequest="30" 
-                        RotationY="180"
-                        Source="back.png" 
-                        BackgroundColor="#181A26" 
-                        ></Image>
+                            WidthRequest="30" 
+                            RotationY="180"
+                            Source="back.png" 
+                            BackgroundColor="#181A26" 
+                            ></Image>
                     </StackLayout>
                 </FlexLayout>
 
-                <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="70" Padding="0, 0, 0, 0">
+                <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="50" Padding="0, 0, 0, 0">
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Confirmação Manual" TextColor="White" FontSize="16" Padding="0, 22, 0, 0"></Label>
+                        <Label Text="Confirmação Manual" TextColor="White" FontSize="16" Padding="0, 13, 0, 0"></Label>
                         <CheckBox Color="White"></CheckBox>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Via Completa" TextColor="White" FontSize="16" Padding="0, 22, 0, 0"></Label>
+                        <Label Text="Via Completa" TextColor="White" FontSize="16" Padding="0, 13, 0, 0"></Label>
                         <CheckBox Color="White"></CheckBox>
                     </StackLayout>
 
                 </FlexLayout>
 
-                <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="70" Padding="0, 0, 0, 0">
+                <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="50" Padding="0, 0, 0, 0">
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Via Loja e Cliente" TextColor="White" FontSize="16" Padding="0, 22, 0, 0"></Label>
+                        <Label Text="Via Loja e Cliente" TextColor="White" FontSize="16" Padding="0, 13, 0, 0"></Label>
                         <CheckBox Color="White"></CheckBox>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Interface Alternativa" TextColor="White" FontSize="16" Padding="0, 22, 0, 0"></Label>
+                        <Label Text="Interface Alternativa" TextColor="White" FontSize="16" Padding="0, 13, 0, 0"></Label>
                         <CheckBox Color="White"></CheckBox>
                     </StackLayout>
 
