@@ -72,9 +72,16 @@
                 </FlexLayout>
 
                 <FlexLayout JustifyContent="SpaceBetween" Padding="10, 0, 0, 10">
+
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="PurchaserTapped"
+                            ></TapGestureRecognizer>
+                    </FlexLayout.GestureRecognizers>
+
                     <Label Text="Adquirente" TextColor="White" FontSize="20"></Label>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Não definido" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
+                        <Label x:Name="PurchaserOptionLabel" Text="Não definido" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
                         <Image 
                             WidthRequest="30" 
                             RotationY="180"
@@ -85,9 +92,16 @@
                 </FlexLayout>
 
                 <FlexLayout JustifyContent="SpaceBetween" Padding="10,  0, 0, 10">
+
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="InstallmentTypeTapped"
+                            ></TapGestureRecognizer>
+                    </FlexLayout.GestureRecognizers>
+
                     <Label Text="Tipo Parcelamento" TextColor="White" FontSize="20"></Label>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="À Vista" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
+                        <Label x:Name="InstallmentTypeLabel" Text="À Vista" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
                         <Image 
                             WidthRequest="30" 
                             RotationY="180"
