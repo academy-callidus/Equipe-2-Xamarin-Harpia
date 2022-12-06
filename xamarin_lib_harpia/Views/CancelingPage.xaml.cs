@@ -16,13 +16,13 @@ namespace xamarin_lib_harpia.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CancelingPage : ContentPage
     {
-        private CancelingService CancelingService;
+        //private CancelingService CancelingService;
         public CancelingPage()
         {
             InitializeComponent();
             InitializeValues();
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
-            CancelingService = new CancelingService(connection);
+            //CancelingService = new CancelingService(connection);
         }
 
         public void InitializeValues()
@@ -48,7 +48,7 @@ namespace xamarin_lib_harpia.Views
             var NSUContent = await DisplayPromptAsync(null, "Informe o NSU da transação", placeholder: "NSU");
             if (NSUContent != null && NSUContent != "")
             {
-                qrcodeLabel.Text = NSUContent;
+                NSULabel.Text = NSUContent;
             }
         }
 
@@ -91,6 +91,11 @@ namespace xamarin_lib_harpia.Views
             }
         }
 
+        private async void OnBackCancel(object sender, System.EventArgs e)
+        {
+            await Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
         private Canceling GetCancelingEntity()
         {
             var nsu = this.FindByName<Label>("NSULabel");
@@ -108,4 +113,4 @@ namespace xamarin_lib_harpia.Views
         }
 
     }
-}
+} 

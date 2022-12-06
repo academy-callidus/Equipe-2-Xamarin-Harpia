@@ -60,7 +60,7 @@
     <EmbeddedResource Update="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CancelingPage.xaml">
+    <EmbeddedResource Update="Views\PaygoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\PrinterInfoPage.xaml">
