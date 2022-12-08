@@ -14,6 +14,12 @@ using System.IO;
 using System.Runtime.Remoting.Contexts;
 using ZXing.QrCode.Internal;
 using Android.Graphics;
+using Android.Util;
+using Android.Widget;
+using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.Forms;
+using Image = xamarin_lib_harpia.Models.Entities.Image;
+using Application = Android.App.Application;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -177,7 +183,62 @@ namespace BluetoothPrinter.Droid
               return false;
           }
         }
-        
+
+        public string ShowPrinterStatus()
+        {
+            if (SunmiPrinterService.Service == null)
+            {
+                //TODO Service disconnection processing
+                return null;
+            }
+            String result = "Interface é muito baixa para implementar ";
+            try
+            {
+                int res = SunmiPrinterService.Service.UpdatePrinterState();
+                switch (res)
+                {
+                    case 1:
+                        result = "Impressora está funcionando";
+                        break;
+                    case 2:
+                        result = "Impressora encontrada, mas ainda inicializando";
+                        break;
+                    case 3:
+                        result = "Interface de hardware da impressora é anormal e precisa ser reimpressa";
+                        break;
+                    case 4:
+                        result = "Impressora está sem papel";
+                        break;
+                    case 5:
+                        result = "Impressora está superaquecendo";
+                        break;
+                    case 6:
+                        result = "A tampa da impressora não está fechada";
+                        break;
+                    case 7:
+                        result = "Corte da impressora esta com falha";
+                        break;
+                    case 8:
+                        result = "Cortador da impressora é normal";
+                        break;
+                    case 9:
+                        result = "Não encontrado papel de marca preta";
+                        break;
+                    case 505:
+                        result = "Impressora não existe";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (RemoteException e)
+            {
+                e.PrintStackTrace();
+                return null;
+            }
+            return result;
+        }
+
         public bool AdvancePaper()
         {
             if (!IsConnected()) return false;
@@ -249,12 +310,15 @@ namespace BluetoothPrinter.Droid
             return versionCode.ToString();
         }
 
-        private Bitmap ScaleImage(Bitmap bitmap1)
+            private Bitmap ScaleImage(Bitmap bitmap1)
         {
             int width =  (int)(bitmap1.Width * 0.5);
             int height = (int)(bitmap1.Height * 0.5);
             return Bitmap.CreateScaledBitmap(bitmap1, width, height, false);
         }
+
+       
+
     }
 
     public class SunmiPrinterService : Java.Lang.Object, IServiceConnection

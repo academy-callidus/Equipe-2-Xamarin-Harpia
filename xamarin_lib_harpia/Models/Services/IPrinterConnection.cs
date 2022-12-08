@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
 
@@ -94,5 +95,7 @@ namespace xamarin_lib_harpia.Models.Services
         /// Get the service version code from the application context.
         /// </summary>
         string GetServiceVersionCode();
+
+        string ShowPrinterStatus();
     }
 }

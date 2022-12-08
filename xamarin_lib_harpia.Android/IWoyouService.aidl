@@ -107,6 +107,9 @@ interface IWoyouService
 	* 打印文字，文字宽度满一行自动换行排版，不满一整行不打印除非强制换行
 	* @param text:	要打印的文字字符串
 	*/
+
+	int updatePrinterState();
+
 	void printText(String text, in ICallback callback);
 
 	/**
