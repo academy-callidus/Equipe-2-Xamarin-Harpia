@@ -9,143 +9,198 @@
     </Shell.TitleView>
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#181A26" Orientation="Vertical">
+        <StackLayout x:Name="TransactionInfo" BackgroundColor="#181A26" Orientation="Vertical">
             <StackLayout>
                 <FlexLayout JustifyContent="SpaceBetween" Padding="10, 0, 0, 10">
-                    <Label Text="Valor" TextColor="White" FontSize="20" Padding="0, 7, 0, 0"></Label>
-                    <Entry 
-                        x:Name="ValueEntry"
-                        Placeholder="R$0,00" 
+                    <Label
+                        Text="Valor"
+                        TextColor="White"
+                        FontSize="20"
+                        Padding="0, 7, 0, 0"/>
+                    <Entry
+                        Text="{Binding Value}"
                         PlaceholderColor="White"
                         TextColor="White" 
                         WidthRequest="250"
                         HorizontalTextAlignment="End"
-                        Keyboard="Numeric"
-                        TextChanged="ValueEntryChangedToInt"
-                        ></Entry>
+                        Keyboard="Numeric"/>
                     <Image 
                         WidthRequest="30" 
                         RotationY="180"
                         Source="back.png" 
-                        BackgroundColor="#181A26" 
-                        ></Image>
+                        BackgroundColor="#181A26" />
                 </FlexLayout>
 
                 <FlexLayout JustifyContent="SpaceBetween" Padding="10, 0, 0, 10">
-                    <Label Text="Parcelas" TextColor="White" FontSize="20" Padding="0, 7, 0, 0"></Label>
-                    <Entry 
-                        x:Name="ParcelEntry"
+                    <Label
+                        Text="Parcelas"
+                        TextColor="White"
+                        FontSize="20"
+                        Padding="0, 7, 0, 0" />
+                    <Entry
+                        Text="{Binding InstallmentNumber, Mode=TwoWay}"
                         Placeholder="1" 
                         PlaceholderColor="White"
                         TextColor="White" 
                         WidthRequest="210"
                         HorizontalTextAlignment="End"
-                        Keyboard="Numeric"
-                        TextChanged="ParcelEntryChangedToInt"
-                        ></Entry>
+                        Keyboard="Numeric" />
                     <Image 
                         WidthRequest="30" 
                         RotationY="180"
                         Source="back.png" 
-                        BackgroundColor="#181A26" 
-                        ></Image>
+                        BackgroundColor="#181A26" />
                 </FlexLayout>
 
                 <FlexLayout JustifyContent="SpaceBetween" Padding="10, 0, 0, 10">
-
                     <FlexLayout.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Tapped="PaymentTypeTapped"
-                            ></TapGestureRecognizer>
+                        <TapGestureRecognizer Tapped="PaymentTypeTapped"/>
                     </FlexLayout.GestureRecognizers>
 
-                    <Label Text="Tipo de pagamento" TextColor="White" FontSize="20"></Label>
+                    <Label
+                        Text="Tipo de pagamento"
+                        TextColor="White"
+                        FontSize="20"/>
+                    
                     <StackLayout Orientation="Horizontal">
-                        <Label x:Name="PaymentTypeLabel" Text="Não definido" TextColor="Red" Padding="0, 5, 0, 0"></Label>
+                        <Label
+                            Text="{Binding PaymentType}"
+                            TextColor="Red"
+                            Padding="0, 5, 0, 0" />
                         <Image 
                             WidthRequest="30" 
                             RotationY="180"
                             Source="back.png" 
-                            BackgroundColor="#181A26" 
-                            ></Image>
+                            BackgroundColor="#181A26" />
                     </StackLayout>
                 </FlexLayout>
 
                 <FlexLayout JustifyContent="SpaceBetween" Padding="10, 0, 0, 10">
-
                     <FlexLayout.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Tapped="PurchaserTapped"
-                            ></TapGestureRecognizer>
+                        <TapGestureRecognizer Tapped="PurchaserTapped" />
                     </FlexLayout.GestureRecognizers>
 
-                    <Label Text="Adquirente" TextColor="White" FontSize="20"></Label>
+                    <Label
+                        Text="Adquirente"
+                        TextColor="White"
+                        FontSize="20"/>
+                    
                     <StackLayout Orientation="Horizontal">
-                        <Label x:Name="PurchaserOptionLabel" Text="Não definido" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
+                        <Label
+                            Text="{Binding Purchaser}"
+                            TextColor="Gray"
+                            Padding="0, 5, 0, 0" />
                         <Image 
                             WidthRequest="30" 
                             RotationY="180"
                             Source="back.png" 
-                            BackgroundColor="#181A26" 
-                            ></Image>
+                            BackgroundColor="#181A26" />
                     </StackLayout>
                 </FlexLayout>
 
                 <FlexLayout JustifyContent="SpaceBetween" Padding="10,  0, 0, 10">
-
                     <FlexLayout.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Tapped="InstallmentTypeTapped"
-                            ></TapGestureRecognizer>
+                        <TapGestureRecognizer Tapped="InstallmentTypeTapped" />
                     </FlexLayout.GestureRecognizers>
 
-                    <Label Text="Tipo Parcelamento" TextColor="White" FontSize="20"></Label>
+                    <Label
+                        Text="Tipo Parcelamento"
+                        TextColor="White"
+                        FontSize="20"/>
+                    
                     <StackLayout Orientation="Horizontal">
-                        <Label x:Name="InstallmentTypeLabel" Text="À Vista" TextColor="Gray" Padding="0, 5, 0, 0"></Label>
+                        <Label
+                            Text="{Binding InstallmentType}"
+                            TextColor="Gray"
+                            Padding="0, 5, 0, 0" />
                         <Image 
                             WidthRequest="30" 
                             RotationY="180"
                             Source="back.png" 
-                            BackgroundColor="#181A26" 
-                            ></Image>
+                            BackgroundColor="#181A26" />
                     </StackLayout>
                 </FlexLayout>
 
-                <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="50" Padding="0, 0, 0, 0">
-
+                <FlexLayout
+                    BackgroundColor="#464851"
+                    JustifyContent="SpaceAround"
+                    HeightRequest="50"
+                    Padding="0">
+                    
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Confirmação Manual" TextColor="White" FontSize="16" Padding="0, 13, 0, 0"></Label>
-                        <CheckBox Color="White"></CheckBox>
+                        <Label
+                            Text="Confirmação Manual"
+                            TextColor="White"
+                            FontSize="16"
+                            Padding="0, 13, 0, 0" />
+                    
+                        <CheckBox
+                            IsChecked="{Binding Manual}"
+                            Color="White" />
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Via Completa" TextColor="White" FontSize="16" Padding="0, 13, 0, 0"></Label>
-                        <CheckBox Color="White"></CheckBox>
+                        <Label
+                            Text="Via Completa"
+                            TextColor="White"
+                            FontSize="16"
+                            Padding="0, 13, 0, 0" />
+
+                        <CheckBox
+                            IsChecked="{Binding Complete}"
+                            Color="White" />
                     </StackLayout>
 
                 </FlexLayout>
 
-                <FlexLayout BackgroundColor="#464851" JustifyContent="SpaceAround"  HeightRequest="50" Padding="0, 0, 0, 0">
+                <FlexLayout
+                    BackgroundColor="#464851"
+                    JustifyContent="SpaceAround"
+                    HeightRequest="50"
+                    Padding="0">
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Via Loja e Cliente" TextColor="White" FontSize="16" Padding="0, 13, 0, 0"></Label>
-                        <CheckBox Color="White"></CheckBox>
+                        <Label
+                            Text="Via Loja e Cliente"
+                            TextColor="White"
+                            FontSize="16"
+                            Padding="0, 13, 0, 0" />
+
+                        <CheckBox
+                            IsChecked="{Binding Client}"
+                            Color="White" />
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Interface Alternativa" TextColor="White" FontSize="16" Padding="0, 13, 0, 0"></Label>
-                        <CheckBox Color="White"></CheckBox>
+                        <Label
+                            Text="Interface Alternativa"
+                            TextColor="White"
+                            FontSize="16"
+                            Padding="0, 13, 0, 0" />
+
+                        <CheckBox
+                            IsChecked="{Binding AltInterface}"
+                            Color="White" />
                     </StackLayout>
 
                 </FlexLayout>
 
             </StackLayout>
-            
-            <Button Text="Pagar" TextColor="White" BackgroundColor="Red"></Button>
-            
-            <Button Text="Administrativo" TextColor="White" BackgroundColor="Red"></Button>
-            
-            <Button Text="Cancelar" TextColor="White" BackgroundColor="Red"></Button>
+
+            <Button
+                Text="Pagar"
+                TextColor="White"
+                BackgroundColor="Red" />
+
+            <Button
+                Text="Administrativo"
+                TextColor="White"
+                BackgroundColor="Red" />
+
+            <Button
+                Text="Cancelar"
+                TextColor="White"
+                BackgroundColor="Red" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
