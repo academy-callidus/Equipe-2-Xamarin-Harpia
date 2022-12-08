@@ -7,6 +7,7 @@ using BluetoothPrinter.Droid;
 using Woyou.Aidlservice.Jiuiv5;
 using xamarin_lib_harpia.Models.Services;
 using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Exceptions;
 using xamarin_lib_harpia.Utils;
 using System.Reflection;
 using Android.Graphics.Drawables;
@@ -14,6 +15,7 @@ using System.IO;
 using System.Runtime.Remoting.Contexts;
 using ZXing.QrCode.Internal;
 using Android.Graphics;
+using ZXing.OneD;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
@@ -54,7 +56,7 @@ namespace BluetoothPrinter.Droid
             }
             catch (Exception)
             {
-                return false;
+                throw new PrinterConnectionException();
             }
         }
 
@@ -117,7 +119,7 @@ namespace BluetoothPrinter.Droid
 
         public bool PrintText(Text text)
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 SendRawData(text.IsBold ? CommandUtils.BoldOn() : CommandUtils.BoldOff());
@@ -164,18 +166,18 @@ namespace BluetoothPrinter.Droid
 
         public bool PrintTable(Table table)
         {
-          if (!IsConnected()) return false;
-          try
-          {
-              SunmiPrinterService.Service.SetFontSize(24, null);
-              SunmiPrinterService.Service.PrintColumnsText(table.ColumnsText, table.ColumnsWidth, table.GetAlignmentsAsInteger(), null);
-              LineWrap(1);
-              return true;
-          }
-          catch (Exception)
-          {
-              return false;
-          }
+            if (!IsConnected()) return false;
+            try
+            {
+                SunmiPrinterService.Service.SetFontSize(24, null);
+                SunmiPrinterService.Service.PrintColumnsText(table.ColumnsText, table.ColumnsWidth, table.GetAlignmentsAsInteger(), null);
+                LineWrap(1);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         
         public bool AdvancePaper()
