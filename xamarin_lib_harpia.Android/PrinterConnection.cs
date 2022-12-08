@@ -56,7 +56,7 @@ namespace BluetoothPrinter.Droid
             }
             catch (Exception)
             {
-                throw new PrinterConnectionException();
+                return false;
             }
         }
 
