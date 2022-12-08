@@ -38,7 +38,7 @@
                         FontSize="20"
                         Padding="0, 7, 0, 0" />
                     <Entry
-                        Text="{Binding InstallmentNumber, Mode=TwoWay}"
+                        Text="{Binding InstallmentNumber}"
                         Placeholder="1" 
                         PlaceholderColor="White"
                         TextColor="White" 
