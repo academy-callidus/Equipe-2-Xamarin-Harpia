@@ -97,7 +97,11 @@ namespace xamarin_lib_harpia.Views
             }
             catch (PrinterConnectionException exception)
             {
-                DisplayAlert("Erro de conexão", exception.Message, "Ok");
+                DisplayAlert("Erro de conexão", exception.Message, "ok");
+            }
+            catch (PrintTextException exception)
+            {
+                DisplayAlert("Erro de impressão", exception.Message, "ok");
             }
         }
     }

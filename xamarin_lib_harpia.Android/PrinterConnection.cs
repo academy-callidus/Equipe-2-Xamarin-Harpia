@@ -122,6 +122,7 @@ namespace BluetoothPrinter.Droid
             if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
+                /*
                 SendRawData(text.IsBold ? CommandUtils.BoldOn() : CommandUtils.BoldOff());
                 SendRawData(text.IsUnderline ? CommandUtils.UnderlineWithOneDotWidthOn() : CommandUtils.UnderlineOff());
                 SunmiPrinterService.Service.SetFontSize(text.TextSize, null);
@@ -130,6 +131,8 @@ namespace BluetoothPrinter.Droid
                 SendRawData(CommandUtils.BoldOff());
                 LineWrap();
                 return true;
+                */
+                throw new PrintTextException();
             }
             catch (Exception)
             {
