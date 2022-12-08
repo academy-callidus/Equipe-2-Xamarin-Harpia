@@ -62,8 +62,8 @@ namespace xamarin_lib_harpia.ViewModels
                     && newValue != this.installmentNumber)
                 {
                     this.installmentNumber = newValue;
+                    OnPropertyChanged();
                 }
-                OnPropertyChanged();
             }
         }
 
