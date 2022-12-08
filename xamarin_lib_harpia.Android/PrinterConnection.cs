@@ -14,6 +14,7 @@ using System.IO;
 using System.Runtime.Remoting.Contexts;
 using ZXing.QrCode.Internal;
 using Android.Graphics;
+using BR.Com.Setis.Interfaceautomacao;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
 namespace BluetoothPrinter.Droid
