@@ -63,6 +63,10 @@ namespace xamarin_lib_harpia.Views
                 viewModel.InstallmentType = option;
             }
         }
+        private async void OnCancelClicked(object sender, System.EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(CancelingPage));
+        }
 
         private async void OnPay(object sender, EventArgs e)
         {
@@ -77,5 +81,6 @@ namespace xamarin_lib_harpia.Views
             var wasSuccessful = Service.Execute(new AdministrativeOperation(), transaction);
             if(!wasSuccessful) await DisplayAlert("Paygo", "Erro ao realizar pagamento (Admin)!", "OK");
         }
+
     }
 }
