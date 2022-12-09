@@ -4,7 +4,7 @@ using System.Text;
 
 namespace xamarin_lib_harpia.Models.Entities
 {
-    public enum QRCodeCorretionEnum
+    public enum QrCodeCorrectionEnum
     {
         CORRECTION_L = 0,
         CORRECTION_M = 1,

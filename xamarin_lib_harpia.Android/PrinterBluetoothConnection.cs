@@ -1,7 +1,10 @@
 ﻿using Android.Bluetooth;
 using System;
 using System.Collections.Generic;
+using xamarin_lib_harpia.Droid;
 using xamarin_lib_harpia.Models;
+using xamarin_lib_harpia.Models.Services;
+using BluetoothPrinter.Droid;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Utils;
 using Java.Util;
@@ -10,7 +13,6 @@ using Android.Runtime;
 
 namespace BluetoothPrinter.Droid
 {
-    [Obsolete("PrinterBluetoothConnection is deprecrated. Please use 'PrinterConnection' instead.", true)]
     public class PrinterBluetoothConnection
     {
         private BluetoothManager BluetoothManager;
