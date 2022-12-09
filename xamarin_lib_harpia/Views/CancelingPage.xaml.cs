@@ -21,11 +21,15 @@ namespace xamarin_lib_harpia.Views
 
         private PaymentService Service;
         private PaygoViewModel viewModel;
-        public CancelingPage()
+        private CancelingViewModel CancelingViewModel;
+        private PaygoTransaction transaction;
+
+        public CancelingPage(PaygoTransaction transaction)
         {
             InitializeComponent();
             InitializeValues();
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            this.transaction = transaction;
             //CancelingService = new CancelingService(connection);
         }
 
@@ -116,10 +120,9 @@ namespace xamarin_lib_harpia.Views
                 price: price);
         }
 
-        private async void OnAdmin(object sender, EventArgs e)
+        private async void OnCanceling(object sender, EventArgs e)
         {
-            PaygoTransaction transaction = viewModel.GetTransaction();
-            var wasSuccesful = Service.Execute(new CancellingOperation(), transaction);
+            var wasSuccesful = Service.Execute(new CancellingOperation(GetCancelingEntity()), transaction);
             if (!wasSuccesful) await DisplayAlert("Paygo", "Erro ao realizar pagamento (Admin)!", "OK");
         }
     }

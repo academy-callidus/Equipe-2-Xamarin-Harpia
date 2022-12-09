@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using xamarin_lib_harpia.Models.Entities;
 using Connection.Droid;
 using BR.Com.Setis.Interfaceautomacao;
+using Java.Text;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PaygoPayment))]
 namespace xamarin_lib_harpia.Droid
@@ -52,11 +53,22 @@ namespace xamarin_lib_harpia.Droid
             Confirmation = null;
         }
 
-        public List<Invoice> CancelPayment(PaygoTransaction transaction)
+        public List<Invoice> CancelPayment(PaygoTransaction transaction, PaygoCanceling canceling)
         {
             var id = GetRandomId();
             InitPaygoInterface(transaction);
+
+            SimpleDateFormat format = new SimpleDateFormat("dd / MM / yyyy");
+
             InputTransaction = new EntradaTransacao(Operacoes.Cancelamento, id);
+            InputTransaction.InformaValorTotal(transaction.Value.ToString());
+            InputTransaction.InformaNsuTransacaoOriginal(canceling.Nsu);
+            InputTransaction.InformaCodigoAutorizacaoOriginal(canceling.Code.ToString());
+            try
+            {
+                InputTransaction.InformaDataHoraTransacaoOriginal(format.Parse(canceling.Date));
+            }
+            catch (Exception) { }
             InputTransaction.InformaValorTotal(transaction.Value.ToString());
             return MakeTransition(transaction);
         }

@@ -147,6 +147,7 @@
                 
                 <Button 
                     Text="Confirmar"
+                    Clicked="OnCanceling"
                     Margin="0,5,0,5"
                     FontSize="Medium"
                     TextColor="#FFF" 
