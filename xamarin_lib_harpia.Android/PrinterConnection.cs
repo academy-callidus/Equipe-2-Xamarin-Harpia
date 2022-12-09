@@ -100,7 +100,7 @@ namespace BluetoothPrinter.Droid
       
         public bool PrintQRCode(QRcode qrcode)
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 SunmiPrinterService.Service.SetFontSize(16, null);
@@ -114,7 +114,7 @@ namespace BluetoothPrinter.Droid
             }
             catch (Exception)
             {
-                return false;
+                throw new PrintQrcodeException();
             }
         }
 

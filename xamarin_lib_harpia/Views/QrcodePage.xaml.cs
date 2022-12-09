@@ -6,6 +6,7 @@ using xamarin_lib_harpia.Utils;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Models.Services;
 using Xamarin.Forms.Internals;
+using xamarin_lib_harpia.Exceptions;
 
 namespace xamarin_lib_harpia.Views
 {
@@ -173,9 +174,26 @@ namespace xamarin_lib_harpia.Views
         /// </summary>
         private async void OnPrint(object sender, EventArgs e)
         {
-            var wasSuccessful = QRCodeService.Execute(GetQrcodeEntity());
-            if (!wasSuccessful) await DisplayAlert("Impressão de Qrcode", "Erro ao realizar impressão!", "OK");
-            Console.WriteLine(GetQrcodeEntity());
+            try
+            {
+                var wasSuccessful = QRCodeService.Execute(GetQrcodeEntity());
+            }
+            catch (QrcodeValidationException exception)
+            {
+                await DisplayAlert("Erro", exception.Message, "ok");
+            }
+            catch (PrinterConnectionException exception)
+            {
+                await DisplayAlert("Erro de conexão", exception.Message, "ok");
+            }
+            catch (PrintQrcodeException exception)
+            {
+                await DisplayAlert("Erro de impressão", exception.Message, "ok");
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Erro", "Algo deu errado.", "ok");
+            }
         }
     }
 }
