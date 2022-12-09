@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Exceptions;
 
 namespace xamarin_lib_harpia.Models.Services
 {
@@ -18,17 +19,9 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         public bool Execute(Barcode barcode)
         {
-            if (!barcode.IsValid()) return false;
-            try
-            {
-                var response = Connection.PrintBarcode(barcode);
-                return response;
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-                return false;
-            }
+            if (!barcode.IsValid()) throw new BarcodeValidationException();
+            var response = Connection.PrintBarcode(barcode);
+            return response;
         }
     }
 }

@@ -74,7 +74,7 @@ namespace BluetoothPrinter.Droid
 
         public bool PrintBarcode(Barcode barcode)
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 SunmiPrinterService.Service.SetFontSize(16, null);
@@ -90,9 +90,10 @@ namespace BluetoothPrinter.Droid
                 SendRawData(CommandUtils.GetBarcodeBytes(barcode));
                 LineWrap();
                 return true;
-            }catch(Exception)
+            }
+            catch (Exception)
             {
-                return false;
+                throw new PrintBarcodeException();
             }
         }
 

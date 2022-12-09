@@ -89,7 +89,7 @@ namespace xamarin_lib_harpia.Views
         /// <summary>
         /// Send the Text object to TextService
         /// </summary>
-        void OnPrint(object sender, EventArgs e)
+        async void OnPrint(object sender, EventArgs e)
         {
             try
             {
@@ -97,11 +97,15 @@ namespace xamarin_lib_harpia.Views
             }
             catch (PrinterConnectionException exception)
             {
-                DisplayAlert("Erro de conexão", exception.Message, "ok");
+                await DisplayAlert("Erro de conexão", exception.Message, "ok");
             }
             catch (PrintTextException exception)
             {
-                DisplayAlert("Erro de impressão", exception.Message, "ok");
+                await DisplayAlert("Erro de impressão", exception.Message, "ok");
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Erro", "Algo deu errado.", "ok");
             }
         }
     }
