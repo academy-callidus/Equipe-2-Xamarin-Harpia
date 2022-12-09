@@ -150,8 +150,10 @@ namespace xamarin_lib_harpia.Droid
             }
             else
             {
-                var invoice = OutputTransaction.ObtemComprovanteCompleto();
-                if (invoice == null) return invoices;
+                IList<string> invoice = OutputTransaction.ObtemComprovanteCompleto();
+                if (invoice == null)
+                    return invoices;
+
                 invoices.Add(new Invoice((List<string>)invoice));
             }
 
