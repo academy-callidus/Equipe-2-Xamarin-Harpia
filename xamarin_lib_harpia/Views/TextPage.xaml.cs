@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_lib_harpia.Exceptions;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Models.Services;
 
@@ -33,7 +34,7 @@ namespace xamarin_lib_harpia.Views
             CharSetLabel.Text = charSetOption;
             EditorLabel.Text = welcomeText;
             TextSizeLabel.Text = "12";
-
+            
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
             textService = new TextService(connection);
         }
@@ -90,8 +91,15 @@ namespace xamarin_lib_harpia.Views
         /// </summary>
         async void OnPrint(object sender, EventArgs e)
         {
-            var wasSuccessful = textService.Execute(GetTextEntity());
-            if (!wasSuccessful) await DisplayAlert("Impressão de Texto", "Erro ao realizar impressão!", "OK");
+            try
+            {
+                var wasSucessful = textService.Execute(GetTextEntity());
+            }
+            catch (Exception exception)
+            {
+                await DisplayAlert("Erro", exception.Message, "ok");
+            }
         }
+
     }
 }

@@ -20,16 +20,9 @@ namespace xamarin_lib_harpia.Models.Services
 
         public bool Execute(Table table)
         {
-            try
-            {
-                var response = Connection.PrintTable(table);
-                return response;
-            }
-            catch (Exception exception)
-            {
-                Logger.Warn($"Table - {exception.Message}");
-                return false;
-            }
+            var response = Connection.PrintTable(table);
+            return response;
+
         }
     }
 }

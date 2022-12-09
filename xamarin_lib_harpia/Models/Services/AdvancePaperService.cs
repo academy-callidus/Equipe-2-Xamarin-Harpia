@@ -8,7 +8,6 @@ namespace xamarin_lib_harpia.Models.Services
     public class AdvancePaperService
     {
         private IPrinterConnection Connection;
-        private readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
         public AdvancePaperService(IPrinterConnection connection)
         {
@@ -20,16 +19,9 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         public bool Execute()
         {
-            try
-            {
-                var response = Connection.AdvancePaper();
-                return response;
-            }
-            catch (Exception exception)
-            {
-                Logger.Warn($"Paper - {exception.Message}");
-                return false;
-            }
+            var response = Connection.AdvancePaper();
+            return response;
+
         }
     }
 }

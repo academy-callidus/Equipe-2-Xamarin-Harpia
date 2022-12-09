@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Exceptions;
 
 namespace xamarin_lib_harpia.Models.Services
 {
@@ -22,21 +23,12 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         public bool Execute(QRcode qrcode)
         {
-            if (!qrcode.IsValid()) {
+            if (!qrcode.IsValid()){ 
                 Logger.Info("QRCode inválido!");
-                return false;
-                };
-            try
-            {
-                var response = Connection.PrintQRCode(qrcode);
-                return response;
+                throw new BarcodeValidationException();
             }
-            catch(Exception exception)
-            {
-                Logger.Warn($"QRCode - {exception.Message}");
-                return false;
-            }
+            var response = Connection.PrintQRCode(qrcode);
+            return response;
         }
     }
-
 }

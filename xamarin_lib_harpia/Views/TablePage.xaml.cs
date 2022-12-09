@@ -265,16 +265,29 @@ namespace xamarin_lib_harpia.Views
         private async void OnPrint(object sender, EventArgs e)
         {
             var tables = GetTablesEntity();
-            var wasSuccessful = true;
             foreach (var table in tables)
             {
-                wasSuccessful = TableService.Execute(table);
-                if (!wasSuccessful)
+                try
+                {
+                    var wasSucessful = TableService.Execute(table);
+
+                }
+                catch (Exception exception)
+                {
+                    await DisplayAlert("Erro", exception.Message, "ok");
                     break;
+                }
+
             }
-            wasSuccessful = AdvancePaperService.Execute();
-            if (!wasSuccessful)
-                if (!wasSuccessful) await DisplayAlert("Impressão de Formulário", "Erro ao realizar impressão!", "OK");
+            try
+            {
+                var wasSucessful = AdvancePaperService.Execute();
+            }
+            catch (Exception exception)
+            {
+                await DisplayAlert("Erro", exception.Message, "ok");
+            }
+
         }
     }
 }
