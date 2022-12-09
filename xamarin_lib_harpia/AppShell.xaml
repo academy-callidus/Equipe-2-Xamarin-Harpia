@@ -31,8 +31,11 @@
                       
         <ShellContent Title="Image"
                       ContentTemplate="{DataTemplate views:ImagePage}" />
-        
+
         <ShellContent Title="PayGo"
                       ContentTemplate="{DataTemplate views:PaygoPage}" />
+        
+        <ShellContent Title="Canceling"
+                      ContentTemplate="{DataTemplate views:CancelingPage}" />
     </TabBar>
 </Shell>
