@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarin_lib_harpia.Models.Entities;
-using xamarin_lib_harpia.Models.Services;
+using xamarin_lib_harpia.Models.Entities.PaymentOperations;
+using xamarin_lib_harpia.Models.Service;
+using xamarin_lib_harpia.ViewModels;
 using ZXing.Net.Mobile.Forms;
 
 namespace xamarin_lib_harpia.Views
@@ -16,7 +18,9 @@ namespace xamarin_lib_harpia.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CancelingPage : ContentPage
     {
-        //private CancelingService CancelingService;
+
+        private PaymentService Service;
+        private PaygoViewModel viewModel;
         public CancelingPage()
         {
             InitializeComponent();
@@ -96,7 +100,7 @@ namespace xamarin_lib_harpia.Views
             await Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
-        private Canceling GetCancelingEntity()
+        private PaygoCanceling GetCancelingEntity()
         {
             var nsu = this.FindByName<Label>("NSULabel");
             var CodeLabel = this.FindByName<Label>("CodeLabel");
@@ -105,12 +109,18 @@ namespace xamarin_lib_harpia.Views
             var PriceLabel = this.FindByName<Label>("PriceLabel");
             var price = float.Parse(CodeLabel.Text);
 
-            return new Canceling(
+            return new PaygoCanceling(
                 nsu: nsu.Text,
                 code: code,
                 date: date.Text,
                 price: price);
         }
 
+        private async void OnAdmin(object sender, EventArgs e)
+        {
+            PaygoTransaction transaction = viewModel.GetTransaction();
+            var wasSuccesful = Service.Execute(new CancellingOperation(), transaction);
+            if (!wasSuccesful) await DisplayAlert("Paygo", "Erro ao realizar pagamento (Admin)!", "OK");
+        }
     }
-} 
+}
