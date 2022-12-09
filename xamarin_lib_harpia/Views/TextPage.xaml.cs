@@ -95,17 +95,9 @@ namespace xamarin_lib_harpia.Views
             {
                 var wasSucessful = textService.Execute(GetTextEntity());
             }
-            catch (PrinterConnectionException exception)
+            catch (Exception exception)
             {
-                await DisplayAlert("Erro de conexão", exception.Message, "ok");
-            }
-            catch (PrintTextException exception)
-            {
-                await DisplayAlert("Erro de impressão", exception.Message, "ok");
-            }
-            catch (Exception)
-            {
-                await DisplayAlert("Erro", "Algo deu errado.", "ok");
+                await DisplayAlert("Erro", exception.Message, "ok");
             }
         }
     }

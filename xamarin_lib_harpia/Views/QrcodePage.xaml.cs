@@ -178,21 +178,9 @@ namespace xamarin_lib_harpia.Views
             {
                 var wasSuccessful = QRCodeService.Execute(GetQrcodeEntity());
             }
-            catch (QrcodeValidationException exception)
+            catch (Exception exception)
             {
                 await DisplayAlert("Erro", exception.Message, "ok");
-            }
-            catch (PrinterConnectionException exception)
-            {
-                await DisplayAlert("Erro de conexão", exception.Message, "ok");
-            }
-            catch (PrintQrcodeException exception)
-            {
-                await DisplayAlert("Erro de impressão", exception.Message, "ok");
-            }
-            catch (Exception)
-            {
-                await DisplayAlert("Erro", "Algo deu errado.", "ok");
             }
         }
     }

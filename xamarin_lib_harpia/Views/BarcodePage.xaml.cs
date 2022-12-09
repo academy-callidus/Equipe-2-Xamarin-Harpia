@@ -166,21 +166,9 @@ namespace xamarin_lib_harpia.Views
             {
                 var wasSuccessful = BarcodeService.Execute(GetBarcodeEntity());
             }
-            catch (BarcodeValidationException exception)
+            catch (Exception exception)
             {
-                await DisplayAlert("Barcode", exception.Message, "ok");
-            }
-            catch (PrinterConnectionException exception)
-            {
-                await DisplayAlert("Erro de conexão", exception.Message, "ok");
-            }
-            catch (PrintBarcodeException exception)
-            {
-                await DisplayAlert("Erro de impressão", exception.Message, "ok");
-            }
-            catch (Exception)
-            {
-                await DisplayAlert("Erro", "Algo deu errado.", "ok");
+                await DisplayAlert("Erro", exception.Message, "ok");
             }
         }
     }

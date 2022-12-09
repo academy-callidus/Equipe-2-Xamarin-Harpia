@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
+using xamarin_lib_harpia.Exceptions;
 using xamarin_lib_harpia.Models.Entities;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace xamarin_lib_harpia.Models.Services
 {
