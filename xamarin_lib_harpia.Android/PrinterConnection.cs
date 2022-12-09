@@ -120,8 +120,6 @@ namespace BluetoothPrinter.Droid
         public bool PrintText(Text text)
         {
             if (!IsConnected()) throw new PrinterConnectionException();
-            throw new PrintTextException();
-            /*
             try
             {
                 SendRawData(text.IsBold ? CommandUtils.BoldOn() : CommandUtils.BoldOff());
@@ -135,9 +133,8 @@ namespace BluetoothPrinter.Droid
             }
             catch (Exception)
             {
-                return false;
+                throw new PrintTextException();
             }
-            */
         }
 
         public bool PrintImage(Image image)
