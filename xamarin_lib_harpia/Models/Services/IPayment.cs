@@ -9,6 +9,6 @@ namespace xamarin_lib_harpia.Models.Services
     {
         List<Invoice> MakeAdminTransition(PaygoTransaction transaction);
         List<Invoice> MakeSaleTransition(PaygoTransaction transaction);
-        List<Invoice> CancelPayment(PaygoTransaction transaction);
+        List<Invoice> CancelPayment(PaygoTransaction transaction, PaygoCanceling canceling);
     }
 }
