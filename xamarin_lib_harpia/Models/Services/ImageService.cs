@@ -17,16 +17,9 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         public bool Execute(Image image)
         {
-            try
-            {
-                var response = Connection.PrintImage(image);
-                return response;
-            }
-            catch(Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-                return false;
-            }
+            var response = Connection.PrintImage(image);
+            return response;
+
         }
     }
 }

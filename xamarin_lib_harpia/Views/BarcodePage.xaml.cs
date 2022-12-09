@@ -6,6 +6,7 @@ using ZXing.Net.Mobile.Forms;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Models.Services;
 using xamarin_lib_harpia.Models.BarcodeModels;
+using xamarin_lib_harpia.Exceptions;
 
 namespace xamarin_lib_harpia.Views
 
@@ -161,10 +162,14 @@ namespace xamarin_lib_harpia.Views
         /// </summary>
         private async void OnPrint(object sender, EventArgs e)
         {
-            
-            var wasSuccessful = BarcodeService.Execute(GetBarcodeEntity());
-            if (!wasSuccessful) await DisplayAlert("Impressão de Barcode", "Erro ao realizar impressão!", "OK");
-            Console.WriteLine(GetBarcodeEntity());
+            try
+            {
+                var wasSuccessful = BarcodeService.Execute(GetBarcodeEntity());
+            }
+            catch (Exception exception)
+            {
+                await DisplayAlert("Erro", exception.Message, "ok");
+            }
         }
     }
 }

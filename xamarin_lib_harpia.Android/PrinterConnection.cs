@@ -7,9 +7,11 @@ using Connection.Droid;
 using Woyou.Aidlservice.Jiuiv5;
 using xamarin_lib_harpia.Models.Services;
 using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Exceptions;
 using xamarin_lib_harpia.Utils;
 using Android.Graphics.Drawables;
 using Android.Graphics;
+using ZXing.OneD;
 using Android.Util;
 using Android.Widget;
 using Xamarin.CommunityToolkit.Extensions;
@@ -75,7 +77,7 @@ namespace Connection.Droid
 
         public bool PrintBarcode(Barcode barcode)
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 SunmiPrinterService.Service.SetFontSize(16, null);
@@ -91,16 +93,17 @@ namespace Connection.Droid
                 SendRawData(CommandUtils.GetBarcodeBytes(barcode));
                 LineWrap();
                 return true;
-            }catch(Exception)
+            }
+            catch (Exception)
             {
-                return false;
+                throw new PrintBarcodeException();
             }
         }
 
       
         public bool PrintQRCode(QRcode qrcode)
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 SunmiPrinterService.Service.SetFontSize(16, null);
@@ -114,13 +117,13 @@ namespace Connection.Droid
             }
             catch (Exception)
             {
-                return false;
+                throw new PrintQrcodeException();
             }
         }
 
         public bool PrintText(Text text)
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 SendRawData(text.IsBold ? CommandUtils.BoldOn() : CommandUtils.BoldOff());
@@ -134,13 +137,13 @@ namespace Connection.Droid
             }
             catch (Exception)
             {
-                return false;
+                throw new PrintTextException();
             }
         }
 
         public bool PrintImage(Image image)
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 var context = Application.Context;
@@ -161,24 +164,24 @@ namespace Connection.Droid
             }
             catch (Exception _)
             {
-                return false;
+                throw new PrintImageException();
             }
         }
 
         public bool PrintTable(Table table)
         {
-          if (!IsConnected()) return false;
-          try
-          {
-              SunmiPrinterService.Service.SetFontSize(24, null);
-              SunmiPrinterService.Service.PrintColumnsText(table.ColumnsText, table.ColumnsWidth, table.GetAlignmentsAsInteger(), null);
-              LineWrap(1);
-              return true;
-          }
-          catch (Exception)
-          {
-              return false;
-          }
+            if (!IsConnected()) throw new PrinterConnectionException();
+            try
+            {
+                SunmiPrinterService.Service.SetFontSize(24, null);
+                SunmiPrinterService.Service.PrintColumnsText(table.ColumnsText, table.ColumnsWidth, table.GetAlignmentsAsInteger(), null);
+                LineWrap(1);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw new PrintTableException();
+            }
         }
 
         public string ShowPrinterStatus()
@@ -262,7 +265,7 @@ namespace Connection.Droid
 
         public bool AdvancePaper()
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 LineWrap();
@@ -270,7 +273,7 @@ namespace Connection.Droid
             }
             catch (Exception)
             {
-                return false;
+                throw new AdvancePaperException();
             }
         }
 

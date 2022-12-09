@@ -87,10 +87,14 @@ namespace xamarin_lib_harpia.Views
         /// </summary>
         async void OnPrint(object sender, EventArgs e)
         {
-
-            var wasSuccessful = Service.Execute(GetImageEntity());
-            if(!wasSuccessful) await DisplayAlert("Impressão de imagem", "Erro ao realizar impressão!", "OK");
-
+            try
+            {
+                var wasSucessful = Service.Execute(GetImageEntity());
+            }
+            catch (Exception exception)
+            {
+                await DisplayAlert("Erro", exception.Message, "ok");
+            }
         }
 
     }
