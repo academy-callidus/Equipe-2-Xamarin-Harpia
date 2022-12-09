@@ -33,6 +33,9 @@
     <Compile Update="AppShell.xaml.cs">
       <DependentUpon>AppShell.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\CancelingPage.xaml.cs">
+      <DependentUpon>CancelingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\TextPage.xaml.cs">
       <DependentUpon>TextPage.xaml</DependentUpon>
     </Compile>

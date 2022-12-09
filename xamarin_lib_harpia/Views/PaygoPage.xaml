@@ -188,17 +188,20 @@
             </StackLayout>
 
             <Button
+                Clicked="OnPay"
                 Text="Pagar"
                 TextColor="White"
                 BackgroundColor="Red" />
 
             <Button
+                Clicked="OnAdmin"
                 Text="Administrativo"
                 TextColor="White"
                 BackgroundColor="Red" />
 
             <Button
                 Text="Cancelar"
+                Clicked="OnCancelClicked"
                 TextColor="White"
                 BackgroundColor="Red" />
         </StackLayout>

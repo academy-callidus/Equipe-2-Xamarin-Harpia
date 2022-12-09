@@ -3,16 +3,12 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
 using Android.Content;
-using BluetoothPrinter.Droid;
+using Connection.Droid;
 using Woyou.Aidlservice.Jiuiv5;
 using xamarin_lib_harpia.Models.Services;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Utils;
-using System.Reflection;
 using Android.Graphics.Drawables;
-using System.IO;
-using System.Runtime.Remoting.Contexts;
-using ZXing.QrCode.Internal;
 using Android.Graphics;
 using Android.Util;
 using Android.Widget;
@@ -20,9 +16,10 @@ using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 using Image = xamarin_lib_harpia.Models.Entities.Image;
 using Application = Android.App.Application;
+using System.Collections.Generic;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
-namespace BluetoothPrinter.Droid
+namespace Connection.Droid
 {
     public class PrinterConnection : IPrinterConnection
     {
@@ -158,8 +155,8 @@ namespace BluetoothPrinter.Droid
                 {
                     SunmiPrinterService.Service.PrintBitmap(ScaleImage(bitmap), null);
                 }
-                if (image.CutPaper) SendRawData(CommandUtils.CutPaper());
                 LineWrap();
+                if (image.CutPaper) SendRawData(CommandUtils.CutPaper());
                 return true;
             }
             catch (Exception _)
@@ -238,6 +235,30 @@ namespace BluetoothPrinter.Droid
             }
             return result;
         }
+        
+        public bool PrintInvoices(List<Invoice> invoices)
+        {
+            if (!IsConnected()) return false;
+            try
+            {
+                foreach(Invoice invoice in invoices)
+                {
+                    SunmiPrinterService.Service.SetAlignment((int)AlignmentEnum.CENTER, null);
+                    SendRawData(CommandUtils.BoldOn());
+                    SunmiPrinterService.Service.PrintText(
+                        String.Join("", invoice.Content.ToArray()), 
+                        null
+                    );
+                    LineWrap();
+                    SendRawData(CommandUtils.CutPaper());
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+          }
 
         public bool AdvancePaper()
         {
@@ -255,7 +276,14 @@ namespace BluetoothPrinter.Droid
 
         private void LineWrap(int lines = 3)
         {
-            SunmiPrinterService.Service.LineWrap(lines, null);
+            if (!IsConnected()) return;
+            try
+            {
+                SunmiPrinterService.Service.LineWrap(lines, null);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public string GetPrinterSerialNo()
@@ -282,7 +310,6 @@ namespace BluetoothPrinter.Droid
 
         public int GetPrinterPaper()
         {
-            // TO-DO
             return 1;
         }
 
@@ -290,8 +317,6 @@ namespace BluetoothPrinter.Droid
         {
             var cb = new Callback();
             SunmiPrinterService.Service.GetPrintedLength(cb);
-
-
             return cb.Result.Task;
         }
 
