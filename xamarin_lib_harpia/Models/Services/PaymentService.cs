@@ -21,11 +21,11 @@ namespace xamarin_lib_harpia.Models.Services
         {
             try
             {
+                Logger.Info($"PaymentService: Executed");
                 return operation.Execute(Payment, Connection, transaction);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                Logger.Warn(exception.Message);
                 return false;
             }
         }

@@ -6,6 +6,7 @@ using xamarin_lib_harpia.Models.Entities;
 using Connection.Droid;
 using BR.Com.Setis.Interfaceautomacao;
 using Java.Text;
+using NLog;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PaygoPayment))]
 namespace xamarin_lib_harpia.Droid
@@ -18,7 +19,7 @@ namespace xamarin_lib_harpia.Droid
         public EntradaTransacao InputTransaction { get; set; }
         public SaidaTransacao OutputTransaction { get; set; }
         public Confirmacoes Confirmation { get; set; }
-
+        private ILogger Logger = LogManager.GetCurrentClassLogger();
         public PaygoPayment()
         {
             ResetAll();
@@ -37,6 +38,7 @@ namespace xamarin_lib_harpia.Droid
                 transaction.Complete, 
                 null
             );
+            Logger.Info($"InitPaygoInterface");
             Transactions = Transacoes.ObtemInstancia(DataTransactions, Android.App.Application.Context);
         }
         private string GetRandomId()
@@ -69,6 +71,7 @@ namespace xamarin_lib_harpia.Droid
                 InputTransaction.InformaDataHoraTransacaoOriginal(format.Parse(canceling.Date));
             }
             catch (Exception) { }
+            Logger.Info($"CancelPayment: transaction null?{{transaction == null}} | tValue:{{transaction.Value");
             InputTransaction.InformaValorTotal(transaction.Value.ToString());
             return MakeTransition(transaction);
         }
@@ -78,6 +81,7 @@ namespace xamarin_lib_harpia.Droid
             var id = GetRandomId();
             InitPaygoInterface(transaction);
             InputTransaction = new EntradaTransacao(Operacoes.Administrativa, id);
+            Logger.Info($"MakeAdminTransaction: transaction null?{transaction == null} | tValue:{transaction.Value}");
             return MakeTransition(transaction);
         }
 
@@ -88,12 +92,13 @@ namespace xamarin_lib_harpia.Droid
             InputTransaction = new EntradaTransacao(Operacoes.Venda, id);
             InputTransaction.InformaDocumentoFiscal(id);
             InputTransaction.InformaValorTotal(transaction.Value.ToString());
+            Logger.Info($"MakeSaleTransition: transaction null?{transaction == null} | tValue:{transaction.Value}");
             return MakeTransition(transaction);
         }
 
         private List<Invoice> MakeTransition(PaygoTransaction transaction)
         {
-
+            Logger.Info("MakeTransition Executed");
             if (transaction.PaymentType == (int) PaymentEnum.UNDEFINED)
             {
                 InputTransaction.InformaModalidadePagamento(ModalidadesPagamento.PagamentoCartao);
@@ -131,6 +136,7 @@ namespace xamarin_lib_harpia.Droid
             );
 
             int status = OutputTransaction != null ? OutputTransaction.ObtemResultadoTransacao() : -999999;
+            
             if (status != 0) return new List<Invoice>();
 
             ViasImpressao vias = OutputTransaction.ObtemViasImprimir();
@@ -168,7 +174,6 @@ namespace xamarin_lib_harpia.Droid
 
                 invoices.Add(new Invoice((List<string>)invoice));
             }
-
             ResetAll();
             return invoices;
         }

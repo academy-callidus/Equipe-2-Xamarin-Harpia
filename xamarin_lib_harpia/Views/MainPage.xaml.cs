@@ -112,7 +112,6 @@ namespace xamarin_lib_harpia.Views
 
         async void OnSettingsClicked(object sender, EventArgs e)
         {
-            logger.Info("Settings clicado");
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 
