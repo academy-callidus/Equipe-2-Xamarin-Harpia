@@ -108,7 +108,6 @@ interface IWoyouService
 	* @param text:	要打印的文字字符串
 	*/
 
-	int updatePrinterState();
 
 	void printText(String text, in ICallback callback);
 
@@ -129,6 +128,7 @@ interface IWoyouService
 	*/
 	void printColumnsText(in String[] colsTextArr, in int[] colsWidthArr, in int[] colsAlign, in ICallback callback);
 
+	int updatePrinterState();
 	
 	/**
 	* 打印图片

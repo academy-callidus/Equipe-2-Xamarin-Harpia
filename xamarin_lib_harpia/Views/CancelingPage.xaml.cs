@@ -32,6 +32,8 @@ namespace xamarin_lib_harpia.Views
             InitializeComponent();
             InitializeValues();
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            IPayment payment = DependencyService.Get<IPayment>();
+            Service = new PaymentService(connection, payment);
             this.transaction = transaction;
             Logger.Info($"Transfer from Paygo to Canceling - transaction value: {transaction.Value} | is transaction null? {transaction == null}");
             //CancelingService = new CancelingService(connection);
@@ -45,9 +47,9 @@ namespace xamarin_lib_harpia.Views
             var PriceLabel = this.FindByName<Label>("PriceLabel");
 
             NSULabel.Text = "NSU";
-            CodeLabel.Text = "Código";
-            DateLabel.Text = "Código";
-            PriceLabel.Text = "Código";
+            CodeLabel.Text = "0";
+            DateLabel.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            PriceLabel.Text = "0.0";
 
         }
 
@@ -112,10 +114,10 @@ namespace xamarin_lib_harpia.Views
         {
             var nsu = this.FindByName<Label>("NSULabel");
             var CodeLabel = this.FindByName<Label>("CodeLabel");
-            var code = Int32.Parse(CodeLabel.Text);
+            var code = Int32.Parse(CodeLabel.Text.Length >= 1 ? CodeLabel.Text : "0");
             var date = this.FindByName<Label>("DateLabel");
             var PriceLabel = this.FindByName<Label>("PriceLabel");
-            var price = float.Parse(CodeLabel.Text);
+            var price = float.Parse(PriceLabel.Text);
 
             return new PaygoCanceling(
                 nsu: nsu.Text,
