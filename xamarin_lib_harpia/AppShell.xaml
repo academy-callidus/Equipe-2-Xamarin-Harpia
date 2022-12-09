@@ -37,5 +37,6 @@
         
         <ShellContent Title="Canceling"
                       ContentTemplate="{DataTemplate views:CancelingPage}" />
+
     </TabBar>
 </Shell>

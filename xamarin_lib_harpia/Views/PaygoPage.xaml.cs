@@ -65,7 +65,7 @@ namespace xamarin_lib_harpia.Views
         }
         private async void OnCancelClicked(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new CancelingPage());
+            await Shell.Current.GoToAsync(nameof(CancelingPage));
         }
 
         private async void OnPay(object sender, EventArgs e)

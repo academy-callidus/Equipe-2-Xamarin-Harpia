@@ -9,7 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Models.Entities.PaymentOperations;
-using xamarin_lib_harpia.Models.Service;
+using xamarin_lib_harpia.Models.Services;
 using xamarin_lib_harpia.ViewModels;
 using ZXing.Net.Mobile.Forms;
 
@@ -97,7 +97,7 @@ namespace xamarin_lib_harpia.Views
 
         private async void OnBackCancel(object sender, System.EventArgs e)
         {
-            await Application.Current.MainPage.Navigation.PopModalAsync();
+            await Application.Current.MainPage.Navigation.PopToRootAsync();
         }
 
         private PaygoCanceling GetCancelingEntity()
