@@ -18,16 +18,9 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         public bool Execute()
         {
-            try
-            {
-                var response = Connection.AdvancePaper();
-                return response;
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-                return false;
-            }
+            var response = Connection.AdvancePaper();
+            return response;
+
         }
     }
 }

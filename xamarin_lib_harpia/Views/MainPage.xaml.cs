@@ -125,8 +125,18 @@ namespace xamarin_lib_harpia.Views
         /// </summary>
         private Func<Task> RunAdvancePaper()
         {
+            return new Func<Task>(async () => await Task.Run(() =>
+            {
+                try
+                {
+                    AdvancePaperService.Execute();
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
+            }));
 
-            return new Func<Task>(async () => await Task.Run(() => AdvancePaperService.Execute()));
         }
     }
 }

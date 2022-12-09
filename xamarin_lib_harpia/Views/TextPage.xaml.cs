@@ -100,5 +100,6 @@ namespace xamarin_lib_harpia.Views
                 await DisplayAlert("Erro", exception.Message, "ok");
             }
         }
+
     }
 }

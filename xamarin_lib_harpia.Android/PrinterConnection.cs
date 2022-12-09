@@ -140,7 +140,7 @@ namespace BluetoothPrinter.Droid
 
         public bool PrintImage(Image image)
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 var context = Application.Context;
@@ -161,13 +161,13 @@ namespace BluetoothPrinter.Droid
             }
             catch (Exception _)
             {
-                return false;
+                throw new PrintImageException();
             }
         }
 
         public bool PrintTable(Table table)
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 SunmiPrinterService.Service.SetFontSize(24, null);
@@ -177,13 +177,13 @@ namespace BluetoothPrinter.Droid
             }
             catch (Exception)
             {
-                return false;
+                throw new PrintTableException();
             }
         }
         
         public bool AdvancePaper()
         {
-            if (!IsConnected()) return false;
+            if (!IsConnected()) throw new PrinterConnectionException();
             try
             {
                 LineWrap();
@@ -191,7 +191,7 @@ namespace BluetoothPrinter.Droid
             }
             catch (Exception)
             {
-                return false;
+                throw new AdvancePaperException();
             }
         }
 

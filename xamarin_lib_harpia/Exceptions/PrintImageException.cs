@@ -4,7 +4,7 @@ using System.Text;
 
 namespace xamarin_lib_harpia.Exceptions
 {
-    class PrintImageException : Exception
+    public class PrintImageException : Exception
     {
         public PrintImageException() : base("Erro na impressão de imagem.") { } 
     }
