@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms.Internals;
-using xamarin_lib_harpia.Models.Entities.PaygoModels;
+using xamarin_lib_harpia.Models.Entities;
 
 namespace xamarin_lib_harpia.ViewModels
 {
@@ -22,15 +22,59 @@ namespace xamarin_lib_harpia.ViewModels
         bool client = false;
         bool altInterface = false;
 
-        public readonly string[] paymentTypes = { "Não definido", "Crédito", "Débito", "Carteira Digital" };
-        public readonly string[] purchaserOptions = { "PROVEDOR DESCONHECIDO", "LIBERCARD", "ELAVON", "CIELO", "RV", "BIN", "FDCORBAN", "REDE", "INFOCARDS", "CREDSYSTEM", "NDDCARD", "VERO", "GLOBAL", "GAX", "STONE", "DMCARD", "CTF", "TICKETLOG", "GETNET", "VCMAIS", "SAFRA", "PAGSEGURO", "CONDUCTOR" };
-        public readonly string[] installmentTypes = { "Não definido", "À Vista", "Emissor", "Estabelecimento" };
+        public readonly string[] paymentTypes = { 
+            "Não definido", 
+            "Crédito", 
+            "Débito", 
+            "Carteira Digital" 
+        };
+        public readonly string[] purchaserOptions = { 
+            "PROVEDOR DESCONHECIDO", 
+            "LIBERCARD", 
+            "ELAVON", 
+            "CIELO", 
+            "RV", 
+            "BIN", 
+            "FDCORBAN", 
+            "REDE", 
+            "INFOCARDS", 
+            "CREDSYSTEM", 
+            "NDDCARD", 
+            "VERO", 
+            "GLOBAL", 
+            "GAX", 
+            "STONE", 
+            "DMCARD", 
+            "CTF", 
+            "TICKETLOG", 
+            "GETNET", 
+            "VCMAIS", 
+            "SAFRA", 
+            "PAGSEGURO", 
+            "CONDUCTOR" 
+        };
+        public readonly string[] installmentTypes = { 
+            "Não definido", 
+            "À Vista", 
+            "Emissor", 
+            "Estabelecimento" 
+        };
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public PaygoTransaction GetTransaction()
         {
-            return new PaygoTransaction(value, installmentNumber, installmentType, paymentType, purchaserOption, manual, complete, client, altInterface);
+            return new PaygoTransaction(
+                value, 
+                installmentNumber, 
+                installmentType, 
+                paymentType, 
+                purchaserOption, 
+                manual, 
+                complete, 
+                client, 
+                altInterface
+            );
         }
 
         public string Value
