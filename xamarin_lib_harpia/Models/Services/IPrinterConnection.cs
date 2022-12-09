@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
 
@@ -58,6 +59,11 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         bool PrintTable(Table table);
 
+        /// <summary>
+        /// Send ESC/POS for the printer to print a invoices.
+        /// </summary>
+        bool PrintInvoices(List<Invoice> invoices);
+
         string GetPrinterSerialNo();
 
         /// <summary>
@@ -94,5 +100,7 @@ namespace xamarin_lib_harpia.Models.Services
         /// Get the service version code from the application context.
         /// </summary>
         string GetServiceVersionCode();
+
+        string ShowPrinterStatus();
     }
 }

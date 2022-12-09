@@ -17,7 +17,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="PaygoPayment.cs" />
     <Compile Include="PrinterConnection.cs" />
     <Compile Include="PrinterBluetoothConnection.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -101,6 +102,10 @@
     <AndroidResource Include="Resources\Drawable\setting.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\payment\payment.csproj">
+      <Project>{4ea92839-0b1e-4655-a8fc-921362d7c504}</Project>
+      <Name>payment</Name>
+    </ProjectReference>
     <ProjectReference Include="..\xamarin_lib_harpia\xamarin_lib_harpia.csproj">
       <Project>{1FF9B82E-8909-4BAE-9CF8-71AAA7C77469}</Project>
       <Name>xamarin_lib_harpia</Name>
@@ -140,6 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\function_payment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\function_status.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

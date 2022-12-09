@@ -55,12 +55,12 @@ namespace xamarin_lib_harpia.Models.Services
         };
 
         private readonly int[] QrcodeSizeList = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-        private readonly QrCodeCorrectionEnum[] QrcodeLevelList = 
+        private readonly QRCodeCorretionEnum[] QrcodeLevelList = 
         { 
-            QrCodeCorrectionEnum.CORRECTION_L,  
-            QrCodeCorrectionEnum.CORRECTION_M,
-            QrCodeCorrectionEnum.CORRECTION_Q,
-            QrCodeCorrectionEnum.CORRECTION_H
+            QRCodeCorretionEnum.CORRECTION_L,  
+            QRCodeCorretionEnum.CORRECTION_M,
+            QRCodeCorretionEnum.CORRECTION_Q,
+            QRCodeCorretionEnum.CORRECTION_H
         };
 
         private string[] encodeStrings = {

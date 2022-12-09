@@ -124,22 +124,22 @@ namespace xamarin_lib_harpia.Views
 
             // Correction
             var levelLabel = this.FindByName<Label>("LevelLabel");
-            QrCodeCorrectionEnum level;
+            QRCodeCorretionEnum level;
             if(levelLabel.Text == "Correção L (7%)")
             {
-                level = QrCodeCorrectionEnum.CORRECTION_L;
+                level = QRCodeCorretionEnum.CORRECTION_L;
             } 
             else if(levelLabel.Text == "Correção M (15%)")
             {
-                level = QrCodeCorrectionEnum.CORRECTION_M;
+                level = QRCodeCorretionEnum.CORRECTION_M;
             } 
             else if(levelLabel.Text == "Correção Q (25%)")
             {
-                level = QrCodeCorrectionEnum.CORRECTION_Q;
+                level = QRCodeCorretionEnum.CORRECTION_Q;
             } 
             else
             {
-                level = QrCodeCorrectionEnum.CORRECTION_H;
+                level = QRCodeCorretionEnum.CORRECTION_H;
             }
 
             // Alignment 
