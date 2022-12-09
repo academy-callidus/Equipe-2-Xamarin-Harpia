@@ -6,47 +6,61 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using xamarin_lib_harpia.Models.Services;
+using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Models.Entities.PaymentOperations;
+using xamarin_lib_harpia.ViewModels;
 
 namespace xamarin_lib_harpia.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PaygoPage : ContentPage
     {
+
+        private PaymentService Service;
+        private PaygoViewModel viewModel;
+
         public PaygoPage()
         {
+            viewModel = new PaygoViewModel();
             InitializeComponent();
+            TransactionInfo.BindingContext = viewModel;
+
+            IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
+            IPayment payment = DependencyService.Get<IPayment>();
+            Service = new PaymentService(connection, payment);
         }
 
-        private async void PaymentTypeTapped(object sender, EventArgs e)
+        // Tipo de Pagamento
+        async void PaymentTypeTapped(object sender, EventArgs e)
         {
-            string[] paymentTypes = { "Não definido", "Crédito", "Débito", "Carteira Digital" };
-            string option = await DisplayActionSheet("Tipo de Pagamento", "cancelar", null, paymentTypes);
+            string option = await DisplayActionSheet("Tipo de Pagamento", "cancelar", null, viewModel.paymentTypes);
 
-            if ((option != "cancelar") && (option != null))
+            if (!string.IsNullOrEmpty(option) && option != "cancelar")
             {
-                PaymentTypeLabel.Text = option;
+                viewModel.PaymentType = option;
             }
         }
 
-        private async void PurchaserTapped(object sender, EventArgs e)
+        // Adquirente
+        async void PurchaserTapped(object sender, EventArgs e)
         {
-            string[] purchaserOptions = { "PROVEDOR DESCONHECIDO", "LIBERCARD", "ELAVON", "CIELO", "RV", "BIN", "FDCORBAN", "REDE", "INFOCARDS", "CREDSYSTEM", "NDDCARD", "VERO", "GLOBAL", "GAX", "STONE", "DMCARD", "CTF", "TICKETLOG", "GETNET", "VCMAIS", "SAFRA", "PAGSEGURO", "CONDUCTOR" };
-            string option = await DisplayActionSheet("Adquirentes habilitados", "cancelar", null, purchaserOptions);
+            string option = await DisplayActionSheet("Adquirentes habilitados", "cancelar", null, viewModel.purchaserOptions);
 
-            if ((option != "cancelar") && (option != null))
+            if (!string.IsNullOrEmpty(option) && option != "cancelar")
             {
-                PurchaserOptionLabel.Text = option;
+                viewModel.Purchaser = option;
             }
         }
 
-        private async void InstallmentTypeTapped(object sender, EventArgs e)
+        // Tipo de Parcelamento
+        async void InstallmentTypeTapped(object sender, EventArgs e)
         {
-            string[] installmentsOptions = { "Não definido", "À Vista", "Emissor", "Estabelecimento" };
-            string option = await DisplayActionSheet("Tipo de parcelamento", "cancelar", null, installmentsOptions);
+            string option = await DisplayActionSheet("Tipo de parcelamento", "cancelar", null, viewModel.installmentTypes);
 
-            if ((option != "cancelar") && (option != null))
+            if (!string.IsNullOrEmpty(option) && option != "cancelar")
             {
-                InstallmentTypeLabel.Text = option;
+                viewModel.InstallmentType = option;
             }
         }
         private async void OnCancelClicked(object sender, System.EventArgs e)
@@ -54,22 +68,18 @@ namespace xamarin_lib_harpia.Views
             await Navigation.PushAsync(new CancelingPage());
         }
 
-        void ValueEntryChangedToInt(object sender, EventArgs e)
+        private async void OnPay(object sender, EventArgs e)
         {
-            if ((ValueEntry.Text != "") && (ValueEntry.Text != null))
-            {
-                double num = Math.Truncate(Single.Parse(ValueEntry.Text.ToString()));
-                ValueEntry.Text = num.ToString();
-            }
+            PaygoTransaction transaction = viewModel.GetTransaction();
+            var wasSuccessful = Service.Execute(new SaleOperation(), transaction);
+            if(!wasSuccessful) await DisplayAlert("Paygo", "Erro ao realizar pagamento (Venda)!", "OK");
         }
 
-        void ParcelEntryChangedToInt(object sender, EventArgs e)
+        private async void OnAdmin(object sender, EventArgs e)
         {
-            if ((ValueEntry.Text != "") && (ValueEntry.Text != null))
-            {
-                double num = Math.Truncate(Single.Parse(ParcelEntry.Text.ToString()));
-                ParcelEntry.Text = num.ToString();
-            }
+            PaygoTransaction transaction = viewModel.GetTransaction();
+            var wasSuccessful = Service.Execute(new AdministrativeOperation(), transaction);
+            if(!wasSuccessful) await DisplayAlert("Paygo", "Erro ao realizar pagamento (Admin)!", "OK");
         }
 
     }
