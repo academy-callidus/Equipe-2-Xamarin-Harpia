@@ -120,9 +120,10 @@ namespace BluetoothPrinter.Droid
         public bool PrintText(Text text)
         {
             if (!IsConnected()) throw new PrinterConnectionException();
+            throw new PrintTextException();
+            /*
             try
             {
-                /*
                 SendRawData(text.IsBold ? CommandUtils.BoldOn() : CommandUtils.BoldOff());
                 SendRawData(text.IsUnderline ? CommandUtils.UnderlineWithOneDotWidthOn() : CommandUtils.UnderlineOff());
                 SunmiPrinterService.Service.SetFontSize(text.TextSize, null);
@@ -131,13 +132,12 @@ namespace BluetoothPrinter.Droid
                 SendRawData(CommandUtils.BoldOff());
                 LineWrap();
                 return true;
-                */
-                throw new PrintTextException();
             }
             catch (Exception)
             {
                 return false;
             }
+            */
         }
 
         public bool PrintImage(Image image)
