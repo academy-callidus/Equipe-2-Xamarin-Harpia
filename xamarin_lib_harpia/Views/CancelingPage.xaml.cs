@@ -108,10 +108,10 @@ namespace xamarin_lib_harpia.Views
         {
             var nsu = this.FindByName<Label>("NSULabel");
             var CodeLabel = this.FindByName<Label>("CodeLabel");
-            var code = Int32.Parse(CodeLabel.Text);
+            var code = Int32.Parse(CodeLabel.Text ?? "0");
             var date = this.FindByName<Label>("DateLabel");
             var PriceLabel = this.FindByName<Label>("PriceLabel");
-            var price = float.Parse(CodeLabel.Text);
+            var price = float.Parse(PriceLabel.Text);
 
             return new PaygoCanceling(
                 nsu: nsu.Text,

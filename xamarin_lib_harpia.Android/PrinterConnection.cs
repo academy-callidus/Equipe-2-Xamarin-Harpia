@@ -194,7 +194,7 @@ namespace Connection.Droid
             String result = "Interface é muito baixa para implementar ";
             try
             {
-                int res = SunmiPrinterService.Service.UpdatePrinterState();
+                int res = SunmiPrinterService.Service.UpdatePrinterState(null);
                 switch (res)
                 {
                     case 1:

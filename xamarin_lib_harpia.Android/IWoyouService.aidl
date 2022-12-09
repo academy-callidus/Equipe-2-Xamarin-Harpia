@@ -108,7 +108,7 @@ interface IWoyouService
 	* @param text:	要打印的文字字符串
 	*/
 
-	int updatePrinterState();
+	int updatePrinterState(in ICallback callback);
 
 	void printText(String text, in ICallback callback);
 
