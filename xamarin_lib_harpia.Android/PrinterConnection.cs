@@ -186,15 +186,11 @@ namespace Connection.Droid
 
         public string ShowPrinterStatus()
         {
-            if (SunmiPrinterService.Service == null)
-            {
-                //TODO Service disconnection processing
-                return null;
-            }
-            String result = "Interface é muito baixa para implementar ";
+            if (!IsConnected()) return "Impressora desconectada";
+            string result = "Interface é muito baixa para implementar";
             try
             {
-                int res = SunmiPrinterService.Service.UpdatePrinterState(null);
+                int res = SunmiPrinterService.Service.UpdatePrinterState();
                 switch (res)
                 {
                     case 1:
