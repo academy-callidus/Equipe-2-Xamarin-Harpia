@@ -58,11 +58,6 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         bool PrintTable(Table table);
 
-        /// <summary>
-        /// Send ESC/POS for the printer to print a invoices.
-        /// </summary>
-        bool PrintInvoices(List<Invoice> invoices);
-
         string GetPrinterSerialNo();
 
         /// <summary>
