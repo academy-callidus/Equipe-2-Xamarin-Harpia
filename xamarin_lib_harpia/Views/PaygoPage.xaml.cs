@@ -78,7 +78,8 @@ namespace xamarin_lib_harpia.Views
         private async void OnPay(object sender, EventArgs e)
         {
             PaygoTransaction transaction = viewModel.GetTransaction();
-            var wasSuccessful = Service.Execute(new SaleOperation(), transaction);
+            SaleOperation saleOperation = new SaleOperation();
+            var wasSuccessful = Service.Execute(saleOperation, transaction);
             if(!wasSuccessful) await DisplayAlert("Paygo", "Erro ao realizar pagamento (Venda)!", "OK");
         }
 

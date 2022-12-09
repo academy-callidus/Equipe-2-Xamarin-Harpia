@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
 

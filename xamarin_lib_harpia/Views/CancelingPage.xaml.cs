@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ namespace xamarin_lib_harpia.Views
         private PaygoViewModel viewModel;
         private CancelingViewModel CancelingViewModel;
         private PaygoTransaction transaction;
+        private readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
         public CancelingPage(PaygoTransaction transaction)
         {
@@ -30,6 +33,7 @@ namespace xamarin_lib_harpia.Views
             InitializeValues();
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
             this.transaction = transaction;
+            Logger.Info($"Transfer from Paygo to Canceling - transaction value: {transaction.Value} | is transaction null? {transaction == null}");
             //CancelingService = new CancelingService(connection);
         }
 
@@ -122,7 +126,9 @@ namespace xamarin_lib_harpia.Views
 
         private async void OnCanceling(object sender, EventArgs e)
         {
-            var wasSuccesful = Service.Execute(new CancellingOperation(GetCancelingEntity()), transaction);
+            CancellingOperation cancellingOperation = new CancellingOperation(GetCancelingEntity());
+            var wasSuccesful = Service.Execute(cancellingOperation, transaction);
+            //Logger.Info($"Canceling Op.: {cancellingOperation} - sucess? {wasSuccesful}");
             if (!wasSuccesful) await DisplayAlert("Paygo", "Erro ao realizar pagamento (Admin)!", "OK");
         }
     }

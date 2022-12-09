@@ -10,7 +10,6 @@ namespace xamarin_lib_harpia.Models.Services
     internal class InfoService
     {
         private IPrinterConnection Connection;
-
         public InfoService(IPrinterConnection connection)
         {
             Connection = connection;

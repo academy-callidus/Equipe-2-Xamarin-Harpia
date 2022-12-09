@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NLog;
+using System;
 using xamarin_lib_harpia.Models.Entities;
+using xamarin_lib_harpia.Models.Services.Log;
 
 namespace xamarin_lib_harpia.Models.Services
 {

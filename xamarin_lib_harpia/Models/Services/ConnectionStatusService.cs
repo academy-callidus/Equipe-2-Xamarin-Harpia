@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace xamarin_lib_harpia.Models.Services
     internal class ConnectionStatusService
     {
         private readonly IPrinterConnection Connection;
+        private readonly ILogger Logger = LogManager.GetCurrentClassLogger();
         private string Subtitle {get;set;}
         public ConnectionStatusService(IPrinterConnection connection)
         {
@@ -26,7 +28,7 @@ namespace xamarin_lib_harpia.Models.Services
             }
             catch (Exception exp)
             {
-                Console.WriteLine(exp.Message);
+                Logger.Warn($"Connection - {exp.Message}");
                 return false;
             } 
         }
