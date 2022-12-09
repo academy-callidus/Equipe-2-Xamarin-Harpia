@@ -3,17 +3,20 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
 using Android.Content;
-using Connection.Droid;
+using BluetoothPrinter.Droid;
 using Woyou.Aidlservice.Jiuiv5;
 using xamarin_lib_harpia.Models.Services;
 using xamarin_lib_harpia.Models.Entities;
 using xamarin_lib_harpia.Utils;
+using System.Reflection;
 using Android.Graphics.Drawables;
+using System.IO;
+using System.Runtime.Remoting.Contexts;
+using ZXing.QrCode.Internal;
 using Android.Graphics;
-using System.Collections.Generic;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PrinterConnection))]
-namespace Connection.Droid
+namespace BluetoothPrinter.Droid
 {
     public class PrinterConnection : IPrinterConnection
     {
@@ -149,8 +152,8 @@ namespace Connection.Droid
                 {
                     SunmiPrinterService.Service.PrintBitmap(ScaleImage(bitmap), null);
                 }
-                LineWrap();
                 if (image.CutPaper) SendRawData(CommandUtils.CutPaper());
+                LineWrap();
                 return true;
             }
             catch (Exception _)
@@ -174,31 +177,7 @@ namespace Connection.Droid
               return false;
           }
         }
-
-        public bool PrintInvoices(List<Invoice> invoices)
-        {
-            if (!IsConnected()) return false;
-            try
-            {
-                foreach(Invoice invoice in invoices)
-                {
-                    SunmiPrinterService.Service.SetAlignment((int)AlignmentEnum.CENTER, null);
-                    SendRawData(CommandUtils.BoldOn());
-                    SunmiPrinterService.Service.PrintText(
-                        String.Join("", invoice.Content.ToArray()), 
-                        null
-                    );
-                    LineWrap();
-                    SendRawData(CommandUtils.CutPaper());
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
+        
         public bool AdvancePaper()
         {
             if (!IsConnected()) return false;
@@ -215,14 +194,7 @@ namespace Connection.Droid
 
         private void LineWrap(int lines = 3)
         {
-            if (!IsConnected()) return;
-            try
-            {
-                SunmiPrinterService.Service.LineWrap(lines, null);
-            }
-            catch (Exception)
-            {
-            }
+            SunmiPrinterService.Service.LineWrap(lines, null);
         }
 
         public string GetPrinterSerialNo()
@@ -249,6 +221,7 @@ namespace Connection.Droid
 
         public int GetPrinterPaper()
         {
+            // TO-DO
             return 1;
         }
 
@@ -256,6 +229,8 @@ namespace Connection.Droid
         {
             var cb = new Callback();
             SunmiPrinterService.Service.GetPrintedLength(cb);
+
+
             return cb.Result.Task;
         }
 
