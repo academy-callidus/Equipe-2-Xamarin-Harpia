@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace xamarin_lib_harpia.Models.Services
     public class QRCodeService
     {
         private IPrinterConnection Connection;
+        private readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
         public QRCodeService(IPrinterConnection connection)
         {
@@ -20,7 +22,10 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         public bool Execute(QRcode qrcode)
         {
-            if (!qrcode.IsValid()) return false;
+            if (!qrcode.IsValid()) {
+                Logger.Info("QRCode inválido!");
+                return false;
+                };
             try
             {
                 var response = Connection.PrintQRCode(qrcode);
@@ -28,7 +33,7 @@ namespace xamarin_lib_harpia.Models.Services
             }
             catch(Exception exception)
             {
-                Console.WriteLine(exception.Message);
+                Logger.Warn($"QRCode - {exception.Message}");
                 return false;
             }
         }

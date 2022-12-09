@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
 
@@ -7,6 +8,7 @@ namespace xamarin_lib_harpia.Models.Services
     public class AdvancePaperService
     {
         private IPrinterConnection Connection;
+        private readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
         public AdvancePaperService(IPrinterConnection connection)
         {
@@ -25,7 +27,7 @@ namespace xamarin_lib_harpia.Models.Services
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception.Message);
+                Logger.Warn($"Paper - {exception.Message}");
                 return false;
             }
         }

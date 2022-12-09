@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Threading.Tasks;
 using xamarin_lib_harpia.Models.Entities;
 
@@ -7,6 +8,7 @@ namespace xamarin_lib_harpia.Models.Services
     public class BarcodeService
     {
         private IPrinterConnection Connection;
+        private readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
         public BarcodeService(IPrinterConnection connection)
         {
@@ -18,7 +20,11 @@ namespace xamarin_lib_harpia.Models.Services
         /// </summary>
         public bool Execute(Barcode barcode)
         {
-            if (!barcode.IsValid()) return false;
+            if (!barcode.IsValid())
+            {
+                Logger.Info("Barcode inválido!");
+                return false;
+            }
             try
             {
                 var response = Connection.PrintBarcode(barcode);
@@ -26,7 +32,7 @@ namespace xamarin_lib_harpia.Models.Services
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception.Message);
+                Logger.Warn($"Barcode - {exception.Message}");
                 return false;
             }
         }

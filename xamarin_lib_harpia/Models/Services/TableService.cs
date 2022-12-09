@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using xamarin_lib_harpia.Models.Entities;
@@ -8,6 +9,7 @@ namespace xamarin_lib_harpia.Models.Services
     public class TableService
     {
         private IPrinterConnection Connection;
+        private readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
         public TableService(IPrinterConnection connection)
         {
@@ -25,7 +27,7 @@ namespace xamarin_lib_harpia.Models.Services
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception.Message);
+                Logger.Warn($"Table - {exception.Message}");
                 return false;
             }
         }

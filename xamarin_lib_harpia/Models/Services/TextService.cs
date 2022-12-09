@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using xamarin_lib_harpia.Models.Entities;
@@ -8,6 +9,7 @@ namespace xamarin_lib_harpia.Models.Services
     public class TextService
     {
         private IPrinterConnection Connection;
+        private readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
         public TextService(IPrinterConnection connection)
         {
@@ -27,7 +29,7 @@ namespace xamarin_lib_harpia.Models.Services
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception.Message);
+                Logger.Warn($"Text - {exception.Message}");
                 return false;
             }
         }
