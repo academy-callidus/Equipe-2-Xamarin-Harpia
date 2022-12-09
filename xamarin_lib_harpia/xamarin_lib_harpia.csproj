@@ -13,6 +13,8 @@
   <ItemGroup>
     <Compile Remove="Class1.cs" />
     <Compile Remove="IPrinterConnection.cs" />
+    <Compile Remove="Models\Services\Class1.cs" />
+    <Compile Remove="Models\Services\Class2.cs" />
     <Compile Remove="Views\TestConnection.xaml.cs" />
   </ItemGroup>
 
@@ -21,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.3.2" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="3.1.0-beta2" />
