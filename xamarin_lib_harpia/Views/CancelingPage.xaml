@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:titlebar="clr-namespace:xamarin_lib_harpia.Views"
+             x:Class="xamarin_lib_harpia.Views.CancelingPage">
+
+    <Shell.TitleView>
+        <titlebar:TitleBar TitleText="Tectoy Sunmi Xamarin"/>
+    </Shell.TitleView>
+    
+    <ContentPage.Content>
+
+        <FlexLayout 
+            BackgroundColor="#181A26" 
+            Direction="Column"
+            JustifyContent="SpaceBetween"
+        >
+            <StackLayout Orientation="Vertical">
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+
+                <Label Text="Insira seus dados de cancelamento" 
+                       TextColor="#FFF"
+                       FontSize="Medium"
+                       HorizontalTextAlignment="Center"
+                       Margin="0, 9, 0, 9"/>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+
+                <FlexLayout 
+                    AlignContent="Center" 
+                    Padding="12" 
+                    JustifyContent="SpaceBetween"
+                >
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="OnNSUChange"
+                        />
+                    </FlexLayout.GestureRecognizers>
+                    <Label Text="Informe o NSU da Transação" TextColor="#FFF" FontSize="Medium"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="NSULabel" TextColor="#FFFFFF" Opacity=".5"/>
+                        <Image
+                            WidthRequest="20" 
+                            RotationY="180"
+                            Source="back.png"
+                            BackgroundColor="#181A26" 
+                        />
+                    </StackLayout>
+                </FlexLayout>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+
+                <FlexLayout 
+                    AlignContent="Center" 
+                    Padding="12" 
+                    JustifyContent="SpaceBetween"
+                >
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="OnCodeChange"
+                        />
+                    </FlexLayout.GestureRecognizers>
+                    <Label Text="Código de Autorização" TextColor="#FFF" FontSize="Medium"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="CodeLabel" TextColor="#FFFFFF" Opacity=".5"/>
+                        <Image
+                            WidthRequest="20" 
+                            RotationY="180"
+                            Source="back.png" 
+                            BackgroundColor="#181A26" 
+                        />
+                    </StackLayout>
+                </FlexLayout>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+
+                <FlexLayout 
+                    AlignContent="Center" 
+                    Padding="12" 
+                    JustifyContent="SpaceBetween"
+                >
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="OnDateChange"
+                        />
+                    </FlexLayout.GestureRecognizers>
+                    <Label Text="Data da Transação" TextColor="#FFF" FontSize="Medium"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="DateLabel" TextColor="#FFFFFF" Opacity=".5"/>
+                        <Image
+                            WidthRequest="20" 
+                            RotationY="180"
+                            Source="back.png" 
+                            BackgroundColor="#181A26" 
+                        />
+                    </StackLayout>
+                </FlexLayout>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+
+                <FlexLayout 
+                    AlignContent="Center" 
+                    Padding="12" 
+                    JustifyContent="SpaceBetween"
+                >
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="OnPriceChange"
+                        />
+                    </FlexLayout.GestureRecognizers>
+                    <Label Text="Valor da transação" TextColor="#FFF" FontSize="Medium"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="PriceLabel" TextColor="#FFFFFF" Opacity=".5"/>
+                        <Image
+                            WidthRequest="20" 
+                            RotationY="180"
+                            Source="back.png" 
+                            BackgroundColor="#181A26" 
+                        />
+                    </StackLayout>
+                </FlexLayout>
+
+                <BoxView 
+                    HeightRequest=".5" 
+                    Margin="16,0,16,0" 
+                    BackgroundColor="#FFF" Opacity=".1"/>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                
+                <Button 
+                    Text="Confirmar"
+                    Margin="0,5,0,5"
+                    FontSize="Medium"
+                    TextColor="#FFF" 
+                    FontAttributes="Bold" 
+                    BackgroundColor="#F00"/>
+
+                <Button 
+                    Text="Cancelar"
+                    Clicked="OnBackCancel"
+                    FontSize="Medium"
+                    Margin="0,5,0,5"
+                    TextColor="#FFF" 
+                    FontAttributes="Bold" 
+                    BackgroundColor="#F00"/>
+
+            </StackLayout>
+            
+        </FlexLayout>
+
+    </ContentPage.Content>
+</ContentPage>

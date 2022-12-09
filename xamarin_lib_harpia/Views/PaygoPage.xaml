@@ -201,6 +201,7 @@
 
             <Button
                 Text="Cancelar"
+                Clicked="OnCancelClicked"
                 TextColor="White"
                 BackgroundColor="Red" />
         </StackLayout>

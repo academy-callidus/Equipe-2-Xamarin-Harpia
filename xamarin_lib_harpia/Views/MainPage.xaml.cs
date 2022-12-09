@@ -17,12 +17,15 @@ namespace xamarin_lib_harpia.Views
     {
         private readonly AdvancePaperService AdvancePaperService;
         private readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private readonly GenerateStatusService GenerateStatusService;
+
         public MainPage()
         {
             InitializeComponent();
             LoadDemoDetails();
             IPrinterConnection connection = DependencyService.Get<IPrinterConnection>();
             AdvancePaperService = new AdvancePaperService(connection);
+            GenerateStatusService = new GenerateStatusService(connection);
         }
         /// <summary>
         /// Adds a new icon to Homepage (Frame containing image and text)
@@ -86,6 +89,7 @@ namespace xamarin_lib_harpia.Views
             AddDemo("Imagem", "function_pic.png", NavigateTo(nameof(ImagePage)));
             AddDemo("PayGo", "function_payment.png", NavigateTo(nameof(PaygoPage)));
             AddDemo("Avançar Papel", "function_threeline.png", RunAdvancePaper());
+            AddDemo("Exibe Status", "function_status.png", RunPrintStatus());
         }
 
         /// <summary>
@@ -119,6 +123,11 @@ namespace xamarin_lib_harpia.Views
         {
 
             return new Func<Task>(async () => await Task.Run(() => AdvancePaperService.Execute()));
+        }
+
+        private Func<Task> RunPrintStatus()
+        {
+            return new Func<Task>(async () => await Task.Run(() => GenerateStatusService.PrintStatus(this)));
         }
     }
 }
