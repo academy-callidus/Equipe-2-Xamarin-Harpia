@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using xamarin_lib_harpia.Views;
 using xamarin_lib_harpia.Models.Services;
 using xamarin_lib_harpia.Models.Entities;
+using NLog;
 
 namespace xamarin_lib_harpia.Views
 {
     public partial class MainPage : ContentPage
     {
         private readonly AdvancePaperService AdvancePaperService;
-
+        private readonly ILogger logger = LogManager.GetCurrentClassLogger();
         public MainPage()
         {
             InitializeComponent();
@@ -107,6 +108,7 @@ namespace xamarin_lib_harpia.Views
 
         async void OnSettingsClicked(object sender, EventArgs e)
         {
+            logger.Info("Settings clicado");
             await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 

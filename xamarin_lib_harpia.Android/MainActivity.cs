@@ -1,11 +1,12 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Android.Content;
 using Woyou.Aidlservice.Jiuiv5;
+using System.Reflection;
+using xamarin_lib_harpia.Models.Services.Log;
 
 namespace xamarin_lib_harpia.Droid
 {
@@ -18,8 +19,16 @@ namespace xamarin_lib_harpia.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            InitializeNLog();
             LoadApplication(new App());
         }
+        void InitializeNLog()
+        {
+            Assembly assembly = this.GetType().Assembly;
+            string assemblyName = assembly.GetName().Name;
+            new LogService().Initialize(assembly, assemblyName);
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
